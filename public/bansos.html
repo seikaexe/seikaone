@@ -876,10 +876,10 @@
   <header class="topbar">
     <div class="tb-inner">
       <div class="tb-l">
-        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Beranda">
+        <a href="/" class="ib raw" style="text-decoration:none;" title="Kembali ke Beranda">
           <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+        <a href="/" class="tb-brand" style="text-decoration:none;">
           <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
           <span>SeikaOne <span class="brand-api">ID</span></span>
         </a>
@@ -888,11 +888,11 @@
         <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
           <i class="fa-solid fa-moon"></i>
         </button>
-        <a href="cpanel.html" class="btn-top-auth" style="text-decoration:none;background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
+        <a href="/cpanel" class="btn-top-auth" style="text-decoration:none;background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
           <i class="fa-solid fa-gauge-high"></i>
           <span class="btn-top-auth-txt">CPanel</span>
         </a>
-        <a href="mypanel.html" class="btn-top-auth" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+        <a href="/mypanel" class="btn-top-auth" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
           <i class="fa-solid fa-server"></i>
           <span class="btn-top-auth-txt">Panel Saya</span>
         </a>
@@ -967,12 +967,12 @@
         <span class="tab-lbl-short">Buat Gratis</span>
         <span class="tab-lbl-full">Buat Panel Gratis</span>
       </button>
-      <a href="mypanel.html" class="bansos-tab-btn">
+      <a href="/mypanel" class="bansos-tab-btn">
         <i class="fa-solid fa-hard-drive"></i>
         <span class="tab-lbl-short">Panel Saya</span>
         <span class="tab-lbl-full">Kelola di Panel Saya</span>
       </a>
-      <a href="index.html" class="bansos-tab-btn">
+      <a href="/" class="bansos-tab-btn">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="tab-lbl-short">Toko Produk</span>
         <span class="tab-lbl-full">Toko Produk SeikaOne</span>
@@ -1030,7 +1030,7 @@
           <i class="fa-solid fa-user-lock" style="font-size:1.15rem;color:#0ea5e9;flex-shrink:0;"></i>
           <span><b>Wajib Masuk Akun:</b> Silakan login ke akun SeikaOne kamu untuk mengklaim bansos panel legal gratis.</span>
         </div>
-        <a href="login.html" class="btn-primary" style="padding:6px 14px;font-size:0.75rem;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+        <a href="/login" class="btn-primary" style="padding:6px 14px;font-size:0.75rem;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
           <i class="fa-solid fa-arrow-right-to-bracket"></i>
           <span>Masuk Sekarang</span>
         </a>
@@ -1147,10 +1147,10 @@
         </div>
 
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
-          <a href="#" class="btn-claim" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;font-size:0.88rem;background:#18181b;border:1px solid #18181b;box-shadow:0 1px 3px rgba(0,0,0,0.1);width:auto;">
+          <a href="/profile"  class="btn-claim" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;font-size:0.88rem;background:#18181b;border:1px solid #18181b;box-shadow:0 1px 3px rgba(0,0,0,0.1);width:auto;">
             <i class="fa-solid fa-user-plus"></i> Daftar Akun Member (Dapat 2GB)
           </a>
-          <a href="login.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;font-size:0.84rem;color:var(--t2);text-decoration:none;font-weight:700;">
+          <a href="/login" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;font-size:0.84rem;color:var(--t2);text-decoration:none;font-weight:700;">
             Sudah punya akun? Masuk
           </a>
         </div>
@@ -1226,7 +1226,7 @@
         <button class="btn-m-action secondary" onclick="copyModalCredentials()">
           <i class="fa-regular fa-copy"></i> Salin Semua Kredensial
         </button>
-        <a href="mypanel.html" class="btn-m-action secondary">
+        <a href="/mypanel" class="btn-m-action secondary">
           <i class="fa-solid fa-server"></i> Kelola di Panel Saya
         </a>
         <button class="btn-m-action secondary" onclick="closeSuccessModal()" style="border:none;background:transparent;color:var(--t3);font-size:0.78rem;">
@@ -1345,7 +1345,7 @@
           : (savedUser.avatar || '/assets/logo.png');
         const avFallback = `onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${escapeHtml(userDisplayName)}');else this.src='/assets/logo.png';"`;
         authContainer.innerHTML = `
-          <a href="profile.html" class="user-nav-pill" style="text-decoration:none;" title="${savedUser.email}">
+          <a href="/profile" class="user-nav-pill" style="text-decoration:none;" title="${savedUser.email}">
             <img src="${avatar}" class="user-nav-avatar" alt="Avatar" ${avFallback}>
             <span class="user-nav-name">${firstName}</span>
           </a>
@@ -1356,7 +1356,7 @@
         }
       } else {
         authContainer.innerHTML = `
-          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+          <a href="/login" class="btn-top-auth" style="text-decoration:none;">
             <i class="fa-solid fa-arrow-right-to-bracket"></i>
             <span class="btn-top-auth-txt">Masuk</span>
           </a>
@@ -1671,7 +1671,7 @@
               ` : `
                 <span style="font-size:0.78rem;color:#ef4444;display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-triangle-exclamation"></i> Server otomatis dihapus karena masa aktif telah berakhir.</span>
               `}
-              <a href="mypanel.html" class="ci-btn copy">
+              <a href="/mypanel" class="ci-btn copy">
                 <i class="fa-solid fa-sliders"></i> Kelola di Panel Saya
               </a>
             </div>
@@ -1839,23 +1839,23 @@ Simpan kredensial ini baik-baik!`;
 
   <!-- PERSISTENT MOBILE BOTTOM NAVIGATION (Instant render on frame 1) -->
   <nav class="zyro-bottom-nav" aria-label="Navigasi Cepat Mobile">
-    <a href="shop.html" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
+    <a href="/shop" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
       <i class="fa-solid fa-store"></i>
       <span>Toko</span>
     </a>
-    <a href="riwayat.html" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
+    <a href="/riwayat" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
       <i class="fa-solid fa-receipt"></i>
       <span>Transaksi</span>
     </a>
-    <a href="cpanel.html" draggable="false" class="zyro-bottom-nav-item" title="CPanel Server">
+    <a href="/cpanel" draggable="false" class="zyro-bottom-nav-item" title="CPanel Server">
       <i class="fa-solid fa-server"></i>
       <span>CPanel</span>
     </a>
-    <a href="bansos.html" draggable="false" class="zyro-bottom-nav-item active" title="Bansos Panel Free">
+    <a href="/bansos" draggable="false" class="zyro-bottom-nav-item active" title="Bansos Panel Free">
       <i class="fa-solid fa-gift"></i>
       <span>Bansos</span>
     </a>
-    <a href="profile.html" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
+    <a href="/profile" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
       <i class="fa-solid fa-user"></i>
       <span>Akun</span>
     </a>

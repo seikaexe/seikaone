@@ -5050,7 +5050,7 @@
       <button class="cp-burger-btn" onclick="toggleCpanelSidebar()" title="Buka Menu Sidebar">
         <i class="fa-solid fa-bars"></i>
       </button>
-      <a href="index.html" class="cp-brand">
+      <a href="/" class="cp-brand">
         <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
         <span>SeikaOne</span>
         <span class="cp-brand-badge">CPANEL</span>
@@ -5060,7 +5060,7 @@
       <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
         <i class="fa-solid fa-moon"></i>
       </button>
-      <a href="index.html" class="cp-btn" style="padding:7px 14px;font-size:0.8rem;" title="Kembali ke Toko">
+      <a href="/" class="cp-btn" style="padding:7px 14px;font-size:0.8rem;" title="Kembali ke Toko">
         <i class="fa-solid fa-store"></i> <span class="cp-tb-label">Toko</span>
       </a>
     </div>
@@ -5179,7 +5179,7 @@
         <!-- Admin Settings Link -->
         <div id="sbAdminSection" style="display:none;margin-top:6px;border-top:1px dashed var(--b1);padding-top:6px;">
           <div class="cp-sb-group-lbl" style="color:#f59e0b;"><i class="fa-solid fa-crown"></i> Admin Control</div>
-          <a href="#" class="cp-sb-item" style="color:#f59e0b;">
+          <a href="/login"  class="cp-sb-item" style="color:#f59e0b;">
             <i class="fa-solid fa-sliders" style="color:#f59e0b;"></i>
             <span>Kelola API Panel (Admin)</span>
           </a>
@@ -5213,7 +5213,7 @@
 
       <!-- Sidebar Footer -->
       <div class="cp-sb-footer">
-        <a href="profile.html" class="cp-btn" style="justify-content:flex-start;padding:9px 12px;font-size:0.82rem;">
+        <a href="/profile" class="cp-btn" style="justify-content:flex-start;padding:9px 12px;font-size:0.82rem;">
           <i class="fa-solid fa-user-gear"></i> Pengaturan Akun
         </a>
         <button class="cp-btn" onclick="userLogout()" style="justify-content:flex-start;padding:9px 12px;font-size:0.82rem;color:var(--cp-rose);">
@@ -5891,7 +5891,7 @@
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
                 <span class="cp-sb-role-badge" id="dashRoleBadge" style="background:#f59e0b;color:#fff;font-size:0.75rem;padding:4px 10px;">MEMBER</span>
                 <span class="cp-pill-live"><i class="fa-solid fa-infinity"></i> Permanen Selamanya</span>
-                <a href="#" id="dashAdminPteroBtn" class="cp-btn" style="display:none;padding:3px 10px;font-size:0.72rem;background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.35);color:#f59e0b;font-weight:700;border-radius:20px;text-decoration:none;" title="Konfigurasi API Pterodactyl di Admin">
+                <a href="/login"  id="dashAdminPteroBtn" class="cp-btn" style="display:none;padding:3px 10px;font-size:0.72rem;background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.35);color:#f59e0b;font-weight:700;border-radius:20px;text-decoration:none;" title="Konfigurasi API Pterodactyl di Admin">
                   <i class="fa-solid fa-server"></i> Kelola API Panel (Admin)
                 </a>
               </div>
@@ -7580,7 +7580,7 @@
             <p>Daftar kehormatan para penemu bug web, peneliti keamanan, dan pemenang top transaksi SeikaOne.</p>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="hall-of-fame.html" class="cp-btn" style="color:var(--cp-accent);">
+            <a href="/hall-of-fame" class="cp-btn" style="color:var(--cp-accent);">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Halaman Khusus
             </a>
             <button class="cp-btn" onclick="loadCpanelHallOfFame(true)">
@@ -7719,7 +7719,7 @@
         Server cloud Pterodactyl Anda telah aktif. Silakan simpan kredensial login berikut:
       </p>
       <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;margin-bottom:16px;">
-        <div><b>URL Panel:</b> <a href="#" id="resPanelUrl" target="_blank" style="color:var(--cp-accent);">https://...</a></div>
+        <div><b>URL Panel:</b> <span   id="resPanelUrl" target="_blank" style="color:var(--cp-accent);">https://...</span></div>
         <div><b>Username:</b> <span id="resUsername">-</span></div>
         <div><b>Email:</b> <span id="resEmail">-</span></div>
         <div><b>Password:</b> <span id="resPassword" style="color:#f59e0b;">-</span></div>
@@ -7728,7 +7728,7 @@
         <button class="cp-btn" style="flex:1;justify-content:center;" onclick="copyServerCreds()">
           <i class="fa-solid fa-copy"></i> Salin
         </button>
-        <a href="#" id="btnOpenPteroLogin" target="_blank" class="cp-btn cp-btn-primary" style="flex:1;justify-content:center;">
+        <a href="/mypanel"   id="btnOpenPteroLogin" target="_blank" class="cp-btn cp-btn-primary" style="flex:1;justify-content:center;">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Panel
         </a>
       </div>
@@ -7875,7 +7875,7 @@
           <div style="min-width:0;flex:1;">
             <div style="font-size:0.72rem;color:var(--t3);text-transform:uppercase;font-weight:700;">Target Member</div>
             <div style="font-size:0.92rem;font-weight:900;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="adminEditUserName">Nama User</div>
-            <div style="font-size:0.74rem;color:var(--t2);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="adminEditUserEmail"><a href="#" class="__cf_email__" data-cfemail="f89d95999194b89c9795999196d69b9795">[email&#160;protected]</a></div>
+            <div style="font-size:0.74rem;color:var(--t2);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="adminEditUserEmail"><a href="mailto:support@seikaone.id"  class="__cf_email__" data-cfemail="f89d95999194b89c9795999196d69b9795">support@seikaone.id</a></div>
           </div>
         </div>
 
@@ -8291,7 +8291,7 @@
         <div id="adminRolePrevProofBox" style="display:none;margin-bottom:8px;padding:8px 12px;background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.2);border-radius:8px;font-size:0.74rem;">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
             <span style="color:var(--t2);font-weight:700;"><i class="fa-solid fa-clock-rotate-left" style="color:#0ea5e9;"></i> Bukti Trx Sebelumnya:</span>
-            <a id="adminRolePrevProofLink" href="#" target="_blank" style="color:#0ea5e9;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
+            <a href="/garansi"  id="adminRolePrevProofLink"  target="_blank" style="color:#0ea5e9;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Foto Bukti
             </a>
           </div>
@@ -8368,15 +8368,15 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <a id="lightboxProofDirectLink" href="#" target="_blank" title="Klik untuk Buka Gambar Ukuran Asli">
+      <span  id="lightboxProofDirectLink"  target="_blank" title="Klik untuk Buka Gambar Ukuran Asli">
         <img id="lightboxProofImg" src="" alt="Bukti Pembayaran Penuh" style="max-width:92vw;max-height:70vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,0.85);object-fit:contain;border:1px solid rgba(255,255,255,0.15);cursor:zoom-in;">
-      </a>
+      </span>
 
       <div id="lightboxProofMeta" style="margin-top:12px;background:rgba(17,24,39,0.95);border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:12px;text-align:center;max-width:540px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,0.5);">
         <div id="lightboxProofTitle" style="font-weight:800;font-size:0.86rem;color:#fff;">Buyer: Member</div>
         <div id="lightboxProofNote" style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">No Invoice: -</div>
         <div style="display:flex;gap:10px;justify-content:center;align-items:center;margin-top:10px;">
-          <a id="lightboxProofDirectLinkBtn" href="#" target="_blank" class="cp-btn" style="padding:6px 14px;font-size:0.75rem;background:rgba(14,165,233,0.2);color:#38bdf8;border:1px solid rgba(14,165,233,0.4);">
+          <a href="/garansi"  id="lightboxProofDirectLinkBtn"  target="_blank" class="cp-btn" style="padding:6px 14px;font-size:0.75rem;background:rgba(14,165,233,0.2);color:#38bdf8;border:1px solid rgba(14,165,233,0.4);">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Ukuran Penuh
           </a>
           <button type="button" class="cp-btn" onclick="closeModal('modalProofImageLightbox')" style="padding:6px 14px;font-size:0.75rem;">
@@ -8450,7 +8450,7 @@
         <button type="button" class="cp-btn cp-btn-primary" style="flex:1.4;justify-content:center;padding:11px;font-weight:800;font-size:0.82rem;background:#059669;border-color:#059669;box-shadow:0 2px 8px rgba(5,150,105,0.25);" onclick="copyAllCadpModalCredentials()">
           <i class="fa-solid fa-paste"></i> Salin Semua
         </button>
-        <a id="cadpModalLoginLink" href="#" target="_blank" class="cp-btn cp-btn-primary" style="justify-content:center;padding:11px 16px;font-weight:800;font-size:0.82rem;">
+        <a href="/mypanel"  id="cadpModalLoginLink"  target="_blank" class="cp-btn cp-btn-primary" style="justify-content:center;padding:11px 16px;font-weight:800;font-size:0.82rem;">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Panel
         </a>
       </div>
@@ -8477,14 +8477,14 @@
       </div>
 
       <p style="font-size:0.79rem;color:var(--t2);margin:0 0 14px 0;line-height:1.45;">
-        Simulasikan pengiriman email otomatis ke pembeli (buyer) dengan tampilan HTML modern berdesain luxury, dark mode elegan, dan reputasi terpercaya dari <b><a href="#" class="__cf_email__" data-cfemail="bbdadfd6d2d5fbc1c2c9d4c8cfd4c9de95d2df">[email&#160;protected]</a></b>.
+        Simulasikan pengiriman email otomatis ke pembeli (buyer) dengan tampilan HTML modern berdesain luxury, dark mode elegan, dan reputasi terpercaya dari <b><a href="mailto:support@seikaone.id"  class="__cf_email__" data-cfemail="bbdadfd6d2d5fbc1c2c9d4c8cfd4c9de95d2df">support@seikaone.id</a></b>.
       </p>
 
       <!-- Target Email Input -->
       <div class="cp-fg" style="margin-bottom:14px;">
         <label class="cp-label" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
           <span><i class="fa-solid fa-at" style="color:var(--cp-accent);"></i> Alamat Email Target (Inbox Pengujian)</span>
-          <span style="font-size:0.68rem;color:var(--t3);font-weight:normal;">Sender: <a href="#" class="__cf_email__" data-cfemail="244540494d4a645e5d564b57504b56410a4d40">[email&#160;protected]</a></span>
+          <span style="font-size:0.68rem;color:var(--t3);font-weight:normal;">Sender: <a href="mailto:support@seikaone.id"  class="__cf_email__" data-cfemail="244540494d4a645e5d564b57504b56410a4d40">support@seikaone.id</a></span>
         </label>
         <div style="position:relative;">
           <input type="email" id="testEmailTargetInput" class="cp-input" placeholder="contoh: buyer@gmail.com" value="gilangx288@gmail.com" style="padding-left:36px;font-family:'JetBrains Mono',monospace;font-size:0.84rem;">
@@ -9886,10 +9886,10 @@
       const footer = document.querySelector('.cp-sb-footer');
       if (footer) {
         footer.innerHTML = `
-          <a href="login.html" class="cp-btn cp-btn-primary" style="justify-content:center;padding:9px 12px;font-size:0.82rem;font-weight:700;">
+          <a href="/login" class="cp-btn cp-btn-primary" style="justify-content:center;padding:9px 12px;font-size:0.82rem;font-weight:700;">
             <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk (Login)
           </a>
-          <a href="#" class="cp-btn" style="justify-content:center;padding:8px 12px;font-size:0.8rem;border:1px solid var(--b1);margin-top:6px;">
+          <a href="/profile"  class="cp-btn" style="justify-content:center;padding:8px 12px;font-size:0.8rem;border:1px solid var(--b1);margin-top:6px;">
             <i class="fa-solid fa-user-plus"></i> Daftar Akun
           </a>
         `;
@@ -9909,10 +9909,10 @@
               Anda sedang dalam mode <b>Pengunjung / Belum Login</b>. Untuk membuat panel atau mengelola server pribadi, silakan login ke akun SeikaOne Anda terlebih dahulu.
             </p>
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-              <a href="login.html" class="cp-btn cp-btn-primary" style="padding:10px 22px;font-weight:800;">
+              <a href="/login" class="cp-btn cp-btn-primary" style="padding:10px 22px;font-weight:800;">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Sekarang
               </a>
-              <a href="#" class="cp-btn" style="padding:10px 20px;border:1px solid var(--b1);">
+              <a href="/login"   class="cp-btn" style="padding:10px 20px;border:1px solid var(--b1);">
                 <i class="fa-solid fa-user-plus"></i> Daftar Gratis
               </a>
             </div>
@@ -10213,7 +10213,7 @@
                 <div style="font-size:0.78rem;color:var(--t2);line-height:1.45;margin-bottom:8px;word-break:break-word;">
                   Demi keamanan akun dan verifikasi kepemilikan server bot, Anda wajib menghubungkan ID Telegram di Profil sebelum deploy server.
                 </div>
-                <a href="profile.html" class="cp-btn cp-btn-primary" style="padding:6px 14px;font-size:0.75rem;font-weight:800;background:#0ea5e9;border-color:#0ea5e9;color:#fff;display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-radius:8px;">
+                <a href="/profile" class="cp-btn cp-btn-primary" style="padding:6px 14px;font-size:0.75rem;font-weight:800;background:#0ea5e9;border-color:#0ea5e9;color:#fff;display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-radius:8px;">
                   <i class="fa-brands fa-telegram"></i> Tautkan di Profil Sekarang
                 </a>
               </div>
@@ -11759,7 +11759,7 @@
           ZyroAlert(`Akun Anda belum terhubung dengan akun Telegram resmi.<br><br>
             Demi keamanan akun, verifikasi kepemilikan server, dan pengiriman notifikasi otomatis bot, setiap member <b>wajib menautkan ID Telegram</b> di menu Profil sebelum dapat membuat server Pterodactyl.<br><br>
             <div style="display:flex;gap:8px;flex-direction:column;margin-top:14px;">
-              <a href="profile.html" class="cp-btn cp-btn-primary" style="padding:11px 16px;background:#0284c7;color:#fff;border:none;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(2,132,199,0.35);">
+              <a href="/profile" class="cp-btn cp-btn-primary" style="padding:11px 16px;background:#0284c7;color:#fff;border:none;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(2,132,199,0.35);">
                 <i class="fa-brands fa-telegram" style="font-size:1.1rem;"></i> Tautkan ID Telegram di Profil Sekarang
               </a>
               <button type="button" class="cp-btn" onclick="closeZyroAlert()" style="padding:8px 14px;background:var(--surface);border:1px solid var(--b1);color:var(--t1);border-radius:8px;font-size:0.8rem;justify-content:center;">
@@ -11895,7 +11895,7 @@
             ZyroAlert(`Akun Anda belum terhubung dengan akun Telegram resmi.<br><br>
               ${escapeHtml(data.message || 'Anda wajib menautkan ID Telegram di menu Profil sebelum dapat membuat server.')}<br><br>
               <div style="display:flex;gap:8px;flex-direction:column;margin-top:14px;">
-                <a href="profile.html" class="cp-btn cp-btn-primary" style="padding:11px 16px;background:#0284c7;color:#fff;border:none;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(2,132,199,0.35);">
+                <a href="/profile" class="cp-btn cp-btn-primary" style="padding:11px 16px;background:#0284c7;color:#fff;border:none;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(2,132,199,0.35);">
                   <i class="fa-brands fa-telegram" style="font-size:1.1rem;"></i> Tautkan ID Telegram di Profil Sekarang
                 </a>
                 <button type="button" class="cp-btn" onclick="closeZyroAlert()" style="padding:8px 14px;background:var(--surface);border:1px solid var(--b1);color:var(--t1);border-radius:8px;font-size:0.8rem;justify-content:center;">
@@ -12470,7 +12470,7 @@
             <i class="fa-solid fa-shield-halved" style="color:var(--cp-accent);font-size:1.15rem;"></i>
             <span>Katalog Beli Kategori Baru — Pilih kategori yang belum Anda miliki. Untuk kategori yang sudah aktif silakan gunakan tab <b>Upgrade Role</b>.</span>
           </div>
-          <a href="#" class="rb-top-store-link">
+          <a href="/shop"  class="rb-top-store-link">
             <i class="fa-solid fa-store"></i> Toko Utama <i class="fa-solid fa-arrow-right" style="font-size:0.65rem;"></i>
           </a>
         </div>
@@ -18747,7 +18747,7 @@
           ZyroAlert(`Akun Anda belum terhubung dengan akun Telegram resmi.<br><br>
             Demi keamanan akun dan verifikasi kepemilikan akses admin, setiap member <b>wajib menautkan ID Telegram</b> di menu Profil sebelum dapat membuat akun Admin CADP.<br><br>
             <div style="display:flex;gap:8px;flex-direction:column;margin-top:14px;">
-              <a href="profile.html" class="cp-btn cp-btn-primary" style="padding:11px 16px;background:#0284c7;color:#fff;border:none;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(2,132,199,0.35);">
+              <a href="/profile" class="cp-btn cp-btn-primary" style="padding:11px 16px;background:#0284c7;color:#fff;border:none;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(2,132,199,0.35);">
                 <i class="fa-brands fa-telegram" style="font-size:1.1rem;"></i> Tautkan ID Telegram di Profil Sekarang
               </a>
               <button type="button" class="cp-btn" onclick="closeZyroAlert()" style="padding:8px 14px;background:var(--surface);border:1px solid var(--b1);color:var(--t1);border-radius:8px;font-size:0.8rem;justify-content:center;">
@@ -19107,23 +19107,23 @@
 
   <!-- PERSISTENT MOBILE BOTTOM NAVIGATION (Instant render on frame 1) -->
   <nav class="zyro-bottom-nav" aria-label="Navigasi Cepat Mobile">
-    <a href="shop.html" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
+    <a href="/shop" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
       <i class="fa-solid fa-store"></i>
       <span>Toko</span>
     </a>
-    <a href="riwayat.html" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
+    <a href="/riwayat" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
       <i class="fa-solid fa-receipt"></i>
       <span>Transaksi</span>
     </a>
-    <a href="cpanel.html" draggable="false" class="zyro-bottom-nav-item active" title="CPanel Server">
+    <a href="/cpanel" draggable="false" class="zyro-bottom-nav-item active" title="CPanel Server">
       <i class="fa-solid fa-server"></i>
       <span>CPanel</span>
     </a>
-    <a href="bansos.html" draggable="false" class="zyro-bottom-nav-item" title="Bansos Panel Free">
+    <a href="/bansos" draggable="false" class="zyro-bottom-nav-item" title="Bansos Panel Free">
       <i class="fa-solid fa-gift"></i>
       <span>Bansos</span>
     </a>
-    <a href="profile.html" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
+    <a href="/profile" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
       <i class="fa-solid fa-user"></i>
       <span>Akun</span>
     </a>

@@ -394,6 +394,12 @@ app.all('/api/*', (req, res) => {
 });
 
 // ---- Static files ----
+// ---- Clean URL page routes ----
+const PAGES = ['index','shop','docs','cpanel','api-key','profile','pengguna','riwayat','mypanel','addon','bansos','cek-pesanan','leaderboard','hall-of-fame','garansi','panduan','login'];
+PAGES.forEach(p => {
+  const file = p === 'index' ? 'index.html' : p + '.html';
+  app.get('/' + (p === 'index' ? '' : p), (req, res) => res.sendFile(path.join(__dirname, 'public', file)));
+});
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ---- SPA fallback ----
