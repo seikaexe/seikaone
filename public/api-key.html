@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Kelola API Key Reseller H2H – SeikaOne.id</title>
+  <meta name="description" content="Pusat kelola API Key dan Secret Host-to-Host (H2H) SeikaOne.id untuk integrasi reseller panel Pterodactyl dan produk digital.">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="vendor/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="vendor/fontawesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="vendor/fontawesome/all.min.css?v=6.5.0.3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link id="themeEngineStylesheet" rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <style>
+    /* RESET & MOBILE SAFETY */
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      touch-action: pan-y;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--t1);
+      font-family: 'Inter', -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* SIDEBAR DRAWER OVERRIDES (SMOOTH SLIDE & NO-CLIPPING) */
+    .sb-ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 9400;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    .sb-ov.on, .sb-ov.open {
+      opacity: 1 !important;
+      pointer-events: all !important;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 290px;
+      max-width: 86vw;
+      height: 100%;
+      max-height: 100dvh;
+      box-sizing: border-box;
+      background: var(--surface);
+      border-right: 1px solid var(--b1);
+      z-index: 9500;
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 12px;
+      gap: 2px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sidebar.on, .sidebar.open {
+      transform: translateX(0) !important;
+    }
+    .snav-group.collapsed .snav-collapse {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* TOPBAR OVERRIDES FOR UNIFORM SEIKAONE BRAND */
+    .topbar .tb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 60px;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 1px solid var(--b1);
+      backdrop-filter: blur(12px);
+    }
+    .tb-l { display: flex; align-items: center; gap: 10px; }
+    .tb-r { display: flex; align-items: center; gap: 8px; }
+    .ib {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .ib:hover {
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--a);
+      border-color: var(--a);
+    }
+    .tb-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--t1);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+    .brand-api {
+      background: linear-gradient(135deg, #0ea5e9, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 0.72rem;
+      font-weight: 900;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      padding: 1px 6px;
+      border-radius: 6px;
+      margin-left: 4px;
+    }
+    .btn-top-auth {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid var(--b1);
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .topbar .tb-inner {
+        padding: 0 12px;
+      }
+      .tb-brand span {
+        font-size: 0.92rem;
+      }
+      .tb-r .btn-top-auth {
+        display: none !important;
+      }
+      .tb-r {
+        gap: 6px;
+      }
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+    }
+    .page-header {
+      margin-bottom: 22px;
+    }
+    .page-title {
+      font-size: clamp(1.35rem, 5vw, 1.85rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--t1);
+      word-break: break-word;
+    }
+    .page-desc {
+      font-size: 0.88rem;
+      color: var(--t2);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* CARDS */
+    .card-box {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.02);
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 640px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .stat-val {
+      font-size: 1.15rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--t1);
+    }
+    .stat-lbl {
+      font-size: 0.74rem;
+      color: var(--t2);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    /* FORMS */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--t2);
+      margin-bottom: 6px;
+    }
+    .input-box {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: var(--t1);
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-box:focus {
+      border-color: var(--a);
+    }
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* BUTTONS */
+    .btn-act {
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--b1);
+      background: var(--surface);
+      color: var(--t1);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-act:hover {
+      background: rgba(14, 165, 233, 0.08);
+      border-color: var(--a);
+      color: var(--a);
+    }
+    .btn-act-primary {
+      background: var(--a);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+    .btn-act-primary:hover {
+      filter: brightness(1.1);
+      color: #fff;
+    }
+    .btn-act-danger {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-act-danger:hover {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: #ef4444;
+    }
+    .btn-act-warning {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .btn-act-warning:hover {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: #f59e0b;
+    }
+
+    /* TOAST */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast-item {
+      background: #0f172a;
+      color: #fff;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: auto;
+      animation: toastIn 0.3s ease forwards;
+    }
+    .toast-success { background: #064e3b; border-left: 4px solid #10b981; }
+    .toast-error { background: #7f1d1d; border-left: 4px solid #ef4444; }
+    .toast-info { background: #0c4a6e; border-left: 4px solid #0ea5e9; }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* BOTTOM NAV FOR MOBILE */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--b1);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 1000;
+    }
+    .bn-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--t3);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .bn-item i { font-size: 1.15rem; }
+    .bn-item.active { color: var(--a); }
+    @media (min-width: 769px) {
+      .bottom-nav { display: none; }
+      .container { padding-bottom: 40px; }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <!-- OFFCANVAS SIDEBAR (MATCHING INDEX.HTML) -->
+  <div class="sb-ov" id="sbOv" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="assets/logo-animated-dark.webp" width="32" height="32" alt="SeikaOne Logo" class="zyro-logo-animated" data-logo-type="full">
+      <span class="sb-brand-txt">SeikaOne <span class="brand-api">ID</span></span>
+      <button class="sb-x" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="snav">
+      <div id="sidebarUserBox" style="padding:10px 14px;background:var(--bg2);border-radius:12px;margin:0 12px 10px;display:none;align-items:center;gap:10px;cursor:pointer;" onclick="window.location.href='/profile'" title="Klik untuk Pengaturan Akun">
+        <script>
+          (function(){
+            try {
+              var raw = localStorage.getItem('seika_user_data');
+              if (raw) {
+                var u = JSON.parse(raw);
+                var cached = localStorage.getItem('seika_cached_avatar_b64');
+                var ava = cached || (u && u.avatar) || '/assets/logo.png';
+                var nm = (u && u.name) ? (u.name.split(' ')[0] || u.name) : 'Member';
+                document.getElementById('sidebarUserBox').style.display = 'flex';
+                document.write('<img src="' + ava + '" id="sbUserAvatar" width="36" height="36" alt="Avatar" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--a);object-fit:cover;">');
+                document.write('<div style="overflow:hidden;flex:1;">');
+                document.write('<b id="sbUserName" style="font-size:0.8rem;color:var(--t1);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + nm + '</b>');
+                document.write('<span style="font-size:0.65rem;color:#22c55e;font-weight:700;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Diskon 5% Aktif</span>');
+                document.write('</div>');
+                document.write('<i class="fa-solid fa-gear" style="font-size:0.8rem;color:var(--t3);"></i>');
+              }
+            } catch(_) {}
+          })();
+        </script>
+      </div>
+
+      <!-- KATEGORI 1: MENU UTAMA & BELANJA -->
+      <div class="snav-group" id="sbGroupShop">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupShop')">
+          <span class="snh-left"><i class="fa-solid fa-store" style="color:var(--a);"></i> Menu &amp; Belanja</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="index.html"><i class="fa-solid fa-cart-shopping"></i> SeikaOne</a>
+          <a href="cek-pesanan.html"><i class="fa-solid fa-magnifying-glass" style="color:var(--a);"></i> Cek Pesanan</a>
+          <a href="riwayat.html"><i class="fa-solid fa-receipt" style="color:#06b6d4;"></i> Riwayat Pesanan</a>
+          <a href="hall-of-fame.html"><i class="fa-solid fa-award" style="color:#10b981;"></i> Hall of Fame &amp; Bug Hunter <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">BOUNTY</span></a>
+          <a href="leaderboard.html"><i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Leaderboard Pembeli</a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 2: LAYANAN PANEL & BANSOS -->
+      <div class="snav-group" id="sbGroupServer">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupServer')">
+          <span class="snh-left"><i class="fa-solid fa-server" style="color:#10b981;"></i> Server &amp; Panel</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="cpanel.html"><i class="fa-solid fa-gauge-high" style="color:#0ea5e9;"></i> CPanel Control <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">CLOUD</span></a>
+          <a href="bansos.html"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free <span class="snav-badge" style="background:rgba(244,63,94,0.18);color:#f43f5e;">1GB FREE</span></a>
+          <a href="mypanel.html"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">PTERO</span></a>
+          <a href="addon.html"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">+SPEK</span></a>
+          <a href="api-key.html" class="act"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> Kelola API Key Reseller <span class="snav-badge" style="background:rgba(245,158,11,0.18);color:#f59e0b;">KEY</span></a>
+          <a href="docs.html"><i class="fa-solid fa-book-bookmark" style="color:#10b981;"></i> Dokumentasi API Docs <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">v1.0</span></a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 3: BANTUAN & CS (SUPPORT) -->
+      <div class="snav-group" id="sbGroupSupport">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupSupport')">
+          <span class="snh-left"><i class="fa-solid fa-headset" style="color:#06b6d4;"></i> Support &amp; Bantuan</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="https://t.me/SeikaOne" target="_blank" rel="noopener"><i class="fa-solid fa-comments" style="color:#a855f7;"></i> Hubungi CS Telegram</a>
+          <a href="garansi.html"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Klaim Garansi Panel</a>
+          <a href="panduan.html"><i class="fa-solid fa-book-open" style="color:#eab308;"></i> Panduan &amp; FAQ <span class="snav-badge">BACA</span></a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 4: AKUN & KOMUNITAS -->
+      <div class="snav-group" id="sbGroupAccount">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupAccount')">
+          <span class="snh-left"><i class="fa-solid fa-circle-user" style="color:var(--rose);"></i> Akun &amp; Komunitas</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="profile.html"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun &amp; Profil</a>
+          <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener"><i class="fa-brands fa-telegram" style="color:#0ea5e9;"></i> Channel Telegram Resmi</a>
+          <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> Saluran WhatsApp</a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <button class="ib raw" onclick="toggleSidebar()" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
+        <a href="index.html" class="tb-brand">
+          <img src="assets/logo-animated-dark.webp" width="30" height="30" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">API</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <a href="https://t.me/SeikaOne" target="_blank" rel="noopener" class="ib" title="Bantuan CS Telegram">
+          <i class="fa-solid fa-headset" style="color:var(--a);"></i>
+        </a>
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Mode Tampilan">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="docs.html" class="btn-top-auth" style="background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-book-bookmark"></i>
+          <span>Docs</span>
+        </a>
+        <a href="cpanel.html" class="btn-top-auth" style="background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span>CPanel</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container">
+    
+    <!-- HEADER -->
+    <div class="page-header">
+      <h1 class="page-title">
+        <i class="fa-solid fa-key" style="color:var(--a);"></i> API Key &amp; Reseller H2H
+      </h1>
+      <p class="page-desc">
+        Kelola kredensial API Host-to-Host (H2H), amankan pemanggilan endpoint dengan IP Whitelist, dan hubungkan sistem toko web Anda ke katalog produk SeikaOne secara otomatis.
+      </p>
+    </div>
+
+    <!-- GUEST AUTH REQUIRED CARD -->
+    <div id="guestBox" class="card-box" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="width:64px;height:64px;border-radius:20px;background:rgba(14,165,233,0.12);color:var(--a);display:inline-flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:16px;">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h2 style="font-size:1.3rem;font-weight:800;margin:0 0 8px;">Login Diperlukan</h2>
+      <p style="color:var(--t2);font-size:0.9rem;max-width:480px;margin:0 auto 20px;line-height:1.5;">
+        Silakan masuk ke akun SeikaOne Anda terlebih dahulu untuk membuat atau melihat kredensial API Key Reseller.
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="login.html" class="btn-act btn-act-primary" style="padding:10px 22px;font-size:0.92rem;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Sekarang
+        </a>
+        <a href="docs.html" class="btn-act" style="padding:10px 18px;">
+          <i class="fa-solid fa-book-bookmark"></i> Baca Dokumentasi API
+        </a>
+      </div>
+    </div>
+
+    <!-- AUTHENTICATED USER DASHBOARD -->
+    <div id="authBox" style="display:none;">
+      
+      <!-- STATS OVERVIEW -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div>
+            <div class="stat-val" id="apiKeyStatusLabel" style="color:#0ea5e9;">MEMUAT...</div>
+            <div class="stat-lbl">Status Kredensial API</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <div class="stat-val" id="apiKeyUserBalance" style="color:#10b981;">Rp 0</div>
+            <div class="stat-lbl">Saldo Tersedia (H2H)</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">
+            <i class="fa-solid fa-gauge"></i>
+          </div>
+          <div>
+            <div class="stat-val">60 Req / Mnt</div>
+            <div class="stat-lbl">Batas Kecepatan (Rate Limit)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN CREDENTIAL CARD -->
+      <div class="card-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+          <h2 style="font-size:1.15rem;font-weight:900;margin:0;display:flex;align-items:center;gap:8px;color:var(--t1);">
+            <i class="fa-solid fa-key" style="color:var(--a);"></i> Kredensial Otentikasi H2H
+          </h2>
+          <button class="btn-act" onclick="loadUserApiKey(true)">
+            <i class="fa-solid fa-arrows-rotate"></i> Refresh Data
+          </button>
+        </div>
+
+        <p style="font-size:0.85rem;color:var(--t2);margin:0 0 18px;line-height:1.5;">
+          Gunakan API Key dan Secret ini pada header setiap request HTTP ke server SeikaOne. Jaga kerahasiaan Secret Anda dan jangan pernah menyebarkannya ke frontend client.
+        </p>
+
+        <!-- UNSET BANNER -->
+        <div id="apiKeyUnsetBanner" style="display:none;background:rgba(14,165,233,0.06);border:1px dashed rgba(14,165,233,0.3);border-radius:14px;padding:30px 20px;text-align:center;">
+          <i class="fa-solid fa-key" style="font-size:2.6rem;color:var(--a);margin-bottom:12px;display:inline-block;"></i>
+          <h3 style="font-size:1.15rem;font-weight:800;margin:0 0 8px;color:var(--t1);">Belum Memiliki API Key</h3>
+          <p style="font-size:0.86rem;color:var(--t2);max-width:480px;margin:0 auto 18px;line-height:1.5;">
+            Aktifkan akses API sekarang untuk mulai menghubungkan sistem toko online Anda dengan katalog produk dan server SeikaOne secara otomatis.
+          </p>
+          <button type="button" class="btn-act btn-act-primary" style="padding:10px 24px;font-size:0.9rem;" onclick="generateUserApiKey()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Buat Kredensial API Sekarang
+          </button>
+        </div>
+
+        <!-- DETAILS BOX -->
+        <div id="apiKeyDetailsBox" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">API Key Publik (X-Zyro-Key)</label>
+            <div class="input-row">
+              <input type="text" id="displayApiKey" readonly class="input-box">
+              <button type="button" class="btn-act" onclick="copyText(document.getElementById('displayApiKey').value, 'API Key berhasil disalin!')">
+                <i class="fa-regular fa-copy"></i> Salin
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">API Secret (X-Zyro-Signature Key)</label>
+            <div class="input-row">
+              <input type="password" id="displayApiSecret" readonly value="••••••••••••••••••••••••••••••••••••••••" class="input-box">
+              <button type="button" class="btn-act" id="btnRevealSecret" onclick="toggleRevealSecret()">
+                <i class="fa-solid fa-eye" id="iconRevealSecret"></i>
+              </button>
+            </div>
+            <div style="font-size:0.75rem;color:var(--t2);margin-top:6px;">
+              <i class="fa-solid fa-lock" style="color:#f59e0b;"></i> Demi alasan keamanan, API Secret disamarkan. Jika Anda lupa API Secret lama, klik tombol Regenerate di bawah.
+            </div>
+          </div>
+
+          <!-- NEW SECRET ALERT -->
+          <div id="newSecretAlertBox" style="display:none;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.35);border-radius:12px;padding:16px;margin-bottom:18px;">
+            <div style="font-weight:800;color:#10b981;font-size:0.92rem;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+              <i class="fa-solid fa-circle-check"></i> Kredensial Baru Berhasil Dihasilkan!
+            </div>
+            <div style="font-size:0.84rem;color:var(--t1);margin-bottom:10px;line-height:1.4;">
+              Salin dan simpan <strong>API Secret</strong> ini sekarang. Secret tidak akan ditampilkan lagi setelah Anda meninggalkan halaman ini:
+            </div>
+            <div class="input-row">
+              <input type="text" id="newRawSecretValue" readonly class="input-box" style="border-color:#10b981;color:#10b981;font-weight:700;">
+              <button type="button" class="btn-act" style="background:#10b981;color:#fff;border:none;" onclick="copyText(document.getElementById('newRawSecretValue').value, 'API Secret baru berhasil disalin!')">
+                <i class="fa-regular fa-copy"></i> Salin Secret
+              </button>
+            </div>
+          </div>
+
+          <!-- ACTIONS -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--b1);padding-top:16px;">
+            <button type="button" class="btn-act btn-act-warning" onclick="confirmRegenerateApiKey()">
+              <i class="fa-solid fa-rotate"></i> Regenerate Key &amp; Secret
+            </button>
+            <button type="button" class="btn-act btn-act-danger" onclick="confirmRevokeApiKey()">
+              <i class="fa-solid fa-ban"></i> Nonaktifkan API Key
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IP WHITELIST & FIREWALL CARD -->
+      <div class="card-box">
+        <h2 style="font-size:1.15rem;font-weight:900;margin:0 0 8px;display:flex;align-items:center;gap:8px;color:var(--t1);">
+          <i class="fa-solid fa-shield-virus" style="color:#10b981;"></i> IP Whitelist Firewall
+        </h2>
+        <p style="font-size:0.85rem;color:var(--t2);margin:0 0 16px;line-height:1.5;">
+          Batasi pemanggilan API hanya dari alamat IP server web hosting atau VPS toko Anda. Jika daftar IP dibiarkan kosong, request diizinkan dari IP mana saja selama signature HMAC-SHA256 valid.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label">Daftar IP Server Diizinkan (Satu per baris atau pisahkan koma)</label>
+          <textarea id="inputIpWhitelist" rows="3" placeholder="Contoh:&#10;103.189.20.10&#10;159.223.45.12" class="input-box" style="resize:vertical;"></textarea>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div style="font-size:0.8rem;color:var(--t2);">
+            <i class="fa-solid fa-circle-info" style="color:var(--a);"></i> IP publik Anda saat ini: <strong id="currentDetectedIp" style="font-family:'JetBrains Mono',monospace;color:var(--t1);">...</strong>
+          </div>
+          <button type="button" class="btn-act btn-act-primary" onclick="saveUserIpWhitelist()">
+            <i class="fa-solid fa-floppy-disk"></i> Simpan IP Whitelist
+          </button>
+        </div>
+      </div>
+
+      <!-- QUICK GUIDE & INTEGRATION CARD -->
+      <div class="card-box" style="background:rgba(14,165,233,0.03);">
+        <h2 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:8px;color:var(--t1);">
+          <i class="fa-solid fa-rocket" style="color:var(--a);"></i> Panduan Cepat Menghubungkan Toko
+        </h2>
+        <ol style="font-size:0.85rem;color:var(--t2);margin:0 0 16px;padding-left:20px;line-height:1.7;">
+          <li>Gunakan <code>X-ZYRO-KEY</code> dan hitung signature HMAC-SHA256 dengan <code>X-ZYRO-SIGNATURE</code>.</li>
+          <li>Ambil daftar paket &amp; ID layanan via <code>GET /api/v1/services</code>.</li>
+          <li>Kirim pesanan otomatis via <code>POST /api/v1/order</code> saat pembeli membayar di web Anda.</li>
+        </ol>
+        <a href="docs.html" class="btn-act btn-act-primary">
+          <i class="fa-solid fa-book-bookmark"></i> Buka Dokumentasi Lengkap &amp; Live Calculator (/docs)
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MOBILE BOTTOM BAR -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bn-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="docs.html" class="bn-item">
+      <i class="fa-solid fa-book-bookmark"></i>
+      <span>Docs</span>
+    </a>
+    <a href="api-key.html" class="bn-item active">
+      <i class="fa-solid fa-key"></i>
+      <span>API Key</span>
+    </a>
+    <a href="cpanel.html" class="bn-item">
+      <i class="fa-solid fa-server"></i>
+      <span>CPanel</span>
+    </a>
+  </nav>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container"></div>
+
+  <script>
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const el = document.createElement('div');
+      el.className = 'toast-item toast-' + type;
+      let icon = 'fa-circle-info';
+      if (type === 'success') icon = 'fa-circle-check';
+      if (type === 'error') icon = 'fa-triangle-exclamation';
+      el.innerHTML = '<i class="fa-solid ' + icon + '"></i><span>' + message + '</span>';
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.3s';
+        setTimeout(() => el.remove(), 300);
+      }, 3500);
+    }
+
+    function copyText(text, successMsg = 'Teks disalin!') {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg, 'success');
+      }).catch(() => {
+        showToast('Gagal menyalin teks.', 'error');
+      });
+    }
+
+    // Sidebar Drawer Toggle
+    function toggleSidebar(forceState) {
+      const sb = document.getElementById('sidebar');
+      const ov = document.getElementById('sbOv');
+      if (!sb || !ov) return;
+      const isOpen = forceState !== undefined ? forceState : (!sb.classList.contains('on') && !sb.classList.contains('open'));
+      sb.classList.toggle('on', isOpen);
+      ov.classList.toggle('on', isOpen);
+      sb.classList.toggle('open', isOpen);
+      ov.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    // Sidebar Accordion Category Toggle
+    function toggleSidebarCategory(groupId) {
+      const g = document.getElementById(groupId);
+      if (g) g.classList.toggle('collapsed');
+    }
+
+    // Theme Switch & Icon Sync
+    function updateThemeIcon() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+          icon.style.color = isDark ? '#f59e0b' : '';
+        }
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const next = isDark ? 'cream' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('cream');
+        document.documentElement.style.backgroundColor = '#070e1b';
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('cream');
+        document.documentElement.style.backgroundColor = '#FAF8F5';
+      }
+      localStorage.setItem('seika_theme', next);
+      updateThemeIcon();
+    }
+
+    function getAuthToken() {
+      return localStorage.getItem('seika_user_token') || localStorage.getItem('user_token') || sessionStorage.getItem('seika_user_token');
+    }
+
+    function toggleRevealSecret() {
+      const displaySecret = document.getElementById('displayApiSecret');
+      const icon = document.getElementById('iconRevealSecret');
+      if (!displaySecret) return;
+
+      if (displaySecret.type === 'password') {
+        displaySecret.type = 'text';
+        if (icon) {
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        }
+      } else {
+        displaySecret.type = 'password';
+        if (icon) {
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      }
+    }
+
+    async function loadUserApiKey(isManualRefresh = false) {
+      const token = getAuthToken();
+      if (!token) return;
+
+      try {
+        // Detect IP
+        fetch('https://api.ipify.org?format=json')
+          .then(r => r.json())
+          .then(d => {
+            const el = document.getElementById('currentDetectedIp');
+            if (el && d.ip) el.textContent = d.ip;
+          })
+          .catch(() => {});
+
+        // Fetch User Data for Balance
+        try {
+          const rawUser = localStorage.getItem('seika_user_data');
+          if (rawUser) {
+            const u = JSON.parse(rawUser);
+            const balEl = document.getElementById('apiKeyUserBalance');
+            if (balEl && typeof u.balance !== 'undefined') {
+              balEl.textContent = 'Rp ' + Number(u.balance || 0).toLocaleString('id-ID');
+            }
+          }
+        } catch (_) {}
+
+        const res = await fetch('/api/user/api-key?token=' + encodeURIComponent(token));
+        const json = await res.json();
+
+        const statusLabel = document.getElementById('apiKeyStatusLabel');
+        const unsetBanner = document.getElementById('apiKeyUnsetBanner');
+        const detailsBox = document.getElementById('apiKeyDetailsBox');
+        const displayKey = document.getElementById('displayApiKey');
+        const displaySecret = document.getElementById('displayApiSecret');
+        const inputIps = document.getElementById('inputIpWhitelist');
+
+        if (json.status && json.hasKey && json.data) {
+          if (statusLabel) {
+            statusLabel.textContent = json.data.status || 'ACTIVE';
+            statusLabel.style.color = json.data.status === 'ACTIVE' ? '#10b981' : '#ef4444';
+          }
+          if (unsetBanner) unsetBanner.style.display = 'none';
+          if (detailsBox) detailsBox.style.display = 'block';
+
+          if (displayKey) displayKey.value = json.data.apiKey;
+          if (displaySecret) displaySecret.value = json.data.apiSecretMasked || '••••••••••••••••••••••••••••••••••••••••';
+          if (inputIps) inputIps.value = (json.data.ipWhitelist || []).join('\n');
+        } else {
+          if (statusLabel) {
+            statusLabel.textContent = 'BELUM AKTIF';
+            statusLabel.style.color = '#f59e0b';
+          }
+          if (unsetBanner) unsetBanner.style.display = 'block';
+          if (detailsBox) detailsBox.style.display = 'none';
+        }
+
+        if (isManualRefresh) {
+          showToast('Data API Key berhasil diperbarui!', 'success');
+        }
+      } catch (err) {
+        showToast('Gagal memuat API Key: ' + err.message, 'error');
+      }
+    }
+
+    async function generateUserApiKey() {
+      const token = getAuthToken();
+      if (!token) return;
+
+      try {
+        const res = await fetch('/api/user/api-key/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const json = await res.json();
+        if (!json.status) {
+          showToast(json.message || 'Gagal membuat API Key.', 'error');
+          return;
+        }
+
+        showToast(json.message, 'success');
+        await loadUserApiKey();
+
+        if (json.data && json.data.apiSecret) {
+          const alertBox = document.getElementById('newSecretAlertBox');
+          const rawVal = document.getElementById('newRawSecretValue');
+          if (alertBox && rawVal) {
+            rawVal.value = json.data.apiSecret;
+            alertBox.style.display = 'block';
+          }
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    function confirmRegenerateApiKey() {
+      if (confirm('PERINGATAN: Membuat ulang API Key akan membatalkan API Key & Secret lama Anda seketika. Web Anda yang sedang terhubung akan terputus sampai Anda memperbarui kredensial baru. Lanjutkan?')) {
+        generateUserApiKey();
+      }
+    }
+
+    async function confirmRevokeApiKey() {
+      if (!confirm('Apakah Anda yakin ingin menonaktifkan API Key ini? Akses H2H dari web Anda akan ditolak hingga Anda membuat API Key baru.')) {
+        return;
+      }
+
+      const token = getAuthToken();
+      if (!token) return;
+
+      try {
+        const res = await fetch('/api/user/api-key/revoke', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const json = await res.json();
+        if (json.status) {
+          showToast('API Key berhasil dinonaktifkan.', 'info');
+          loadUserApiKey();
+        } else {
+          showToast(json.message || 'Gagal menonaktifkan API Key.', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    async function saveUserIpWhitelist() {
+      const token = getAuthToken();
+      if (!token) return;
+
+      const inputIps = document.getElementById('inputIpWhitelist');
+      const rawText = inputIps ? inputIps.value : '';
+
+      try {
+        const res = await fetch('/api/user/api-key/ip-whitelist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, ipWhitelist: rawText })
+        });
+        const json = await res.json();
+        if (json.status) {
+          showToast('IP Whitelist berhasil disimpan!', 'success');
+          loadUserApiKey();
+        } else {
+          showToast(json.message || 'Gagal menyimpan IP Whitelist.', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    function handleLockedMenu() {
+      return true;
+    }
+
+    // Init Page Auth State
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = getAuthToken();
+      const guestBox = document.getElementById('guestBox');
+      const authBox = document.getElementById('authBox');
+
+      if (!token) {
+        if (guestBox) guestBox.style.display = 'block';
+        if (authBox) authBox.style.display = 'none';
+      } else {
+        if (guestBox) guestBox.style.display = 'none';
+        if (authBox) authBox.style.display = 'block';
+        loadUserApiKey();
+      }
+
+      updateThemeIcon();
+
+      // Auto close sidebar when clicking any anchor link inside sidebar
+      const sb = document.getElementById('sidebar');
+      if (sb) {
+        sb.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            toggleSidebar(false);
+          });
+        });
+      }
+
+      // Close sidebar on ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleSidebar(false);
+      });
+    });
+  </script>
+</body>
+</html>

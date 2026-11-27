@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>Tambah Spek / Add-On Server Panel – SeikaOne.id</title>
+  <meta name="description" content="Beli paket add-on spek server, upgrade RAM, CPU, dan kuota Pterodactyl hemat di SeikaOne.id.">
+  <link rel="canonical" href="https://zyrostore.id/addon">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.1"></script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .addon-wrap { max-width: 980px; margin: 0 auto; width: 100%; padding: 10px 16px 40px; }
+
+    /* HERO BANNER - ANTI AI-SLOP CLEAN CARD */
+    .addon-hero {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      border-radius: 18px;
+      padding: 26px 24px;
+      margin-bottom: 22px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .addon-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(14,165,233,0.18);
+      color: #0ea5e9;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(14,165,233,0.3);
+    }
+    .addon-hero-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .addon-hero-sub {
+      font-size: 0.86rem;
+      color: var(--t3);
+      max-width: 680px;
+      line-height: 1.55;
+    }
+
+    /* STEP CARDS */
+    .step-box {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      transition: all 0.25s ease;
+    }
+    .step-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--b1);
+    }
+    .step-num-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-badge {
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-weight: 800;
+    }
+
+    /* SERVERS LIST GRID */
+    .servers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .server-pick-card {
+      background: var(--bg2);
+      border: 2px solid var(--b1);
+      border-radius: 14px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .server-pick-card:hover {
+      border-color: #0ea5e9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14,165,233,0.1);
+    }
+    .server-pick-card.selected {
+      border-color: #10b981;
+      background: rgba(16,185,129,0.06);
+      box-shadow: 0 0 0 1px #10b981;
+    }
+    .spc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .spc-user {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .spc-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(14,165,233,0.12);
+      color: #0ea5e9;
+    }
+    .spc-specs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--t2);
+      margin-bottom: 12px;
+    }
+    .spc-spec-pill {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+    .btn-select-server {
+      width: 100%;
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-align: center;
+      border: none;
+      background: var(--surface);
+      color: var(--t1);
+      border: 1.5px solid var(--b2);
+      cursor: pointer;
+      transition: var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .server-pick-card.selected .btn-select-server {
+      background: #10b981;
+      color: #fff;
+      border-color: #10b981;
+    }
+
+    /* CURRENT SERVER SUMMARY */
+    .chosen-server-banner {
+      background: var(--surface);
+      border: 1.5px solid #10b981;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ADDON SELECTION CONTROLS */
+    .addon-group-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .addon-chips-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .addon-chip {
+      background: var(--bg2);
+      border: 1.5px solid var(--b1);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--t2);
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .addon-chip:hover:not(.disabled) {
+      border-color: #0ea5e9;
+      color: var(--t1);
+    }
+    .addon-chip.active {
+      background: rgba(14,165,233,0.12);
+      border-color: #0ea5e9;
+      color: #0ea5e9;
+      font-weight: 800;
+    }
+    .addon-chip.disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      border-style: dashed;
+    }
+    .addon-chip .chip-price {
+      font-size: 0.67rem;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    /* COMPARISON BOX */
+    .specs-diff-box {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 20px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .diff-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .diff-lbl { font-size: 0.72rem; color: var(--t3); font-weight: 700; text-transform: uppercase; }
+    .diff-val { font-size: 0.95rem; font-weight: 900; color: var(--t1); }
+    .diff-arrow { color: #10b981; margin: 0 4px; font-weight: 900; }
+
+    /* CHECKOUT ROW */
+    .checkout-row {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .total-price-val {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #10b981;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .btn-pay-addon {
+      padding: 14px 28px;
+      border-radius: var(--rsm);
+      background: #10b981;
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+      transition: var(--ease);
+      text-decoration: none;
+    }
+    .btn-pay-addon:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* COLLAPSIBLE MANUAL SEARCH */
+    .manual-search-box {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      display: none;
+    }
+    .server-search-in {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--b2);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--ease);
+    }
+    .server-search-in:focus {
+      border-color: #0284c7;
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+    }
+    html:not(.dark) .server-search-in:focus {
+      border-color: #18181b;
+      box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
+    }
+    .btn-search-srv {
+      padding: 12px 22px;
+      border-radius: 12px;
+      background: #18181b;
+      color: #fff;
+      border: 1px solid #18181b;
+      font-weight: 750;
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.16s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      white-space: nowrap;
+    }
+    html.dark .btn-search-srv {
+      background: #0284c7;
+      border-color: #0284c7;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+    .btn-search-srv:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    /* TOAST */
+    .toast-box {
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      background: var(--surface); color: var(--t1); padding: 12px 24px;
+      border-radius: 100px; border: 1px solid var(--b2); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 999999; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;
+    /* RESPONSIVE MOBILE STYLES */
+    @media (max-width: 640px) {
+      .addon-wrap { padding: 10px 12px 30px; }
+      .addon-hero { padding: 20px 16px; margin-bottom: 18px; border-radius: var(--r); }
+      .addon-hero-title { font-size: 1.25rem; }
+      .addon-hero-sub { font-size: 0.8rem; margin-bottom: 16px; }
+      .step-box { padding: 16px 14px; margin-bottom: 16px; border-radius: var(--r); }
+      .servers-grid { grid-template-columns: 1fr; gap: 10px; }
+      .server-pick-card { padding: 14px; }
+      .diff-preview-box { grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; }
+      .checkout-row { padding: 14px; flex-direction: column; align-items: stretch; gap: 12px; }
+      .btn-pay-addon { width: 100%; justify-content: center; }
+      .btn-top-auth-extra { display: none !important; }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <div class="toast-box" id="vToast">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <span id="vToastMsg">Pesan</span>
+  </div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Toko">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="riwayat.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);">
+          <i class="fa-solid fa-receipt"></i>
+          <span class="btn-top-auth-txt">Riwayat</span>
+        </a>
+        <a href="bansos.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(244,63,94,0.12);color:#f43f5e;border-color:rgba(244,63,94,0.3);">
+          <i class="fa-solid fa-gift"></i>
+          <span class="btn-top-auth-txt">Bansos 1GB</span>
+        </a>
+        <a href="mypanel.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span class="btn-top-auth-txt">Panel Saya</span>
+        </a>
+        <div id="authNavContainer"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div id="page">
+      <div class="addon-wrap">
+
+        <!-- HERO -->
+        <div class="addon-hero">
+          <div class="addon-hero-badge">
+            <i class="fa-solid fa-bolt"></i> Upgrade Server Panel Yang Sudah Aktif
+          </div>
+          <div class="addon-hero-title">
+            <i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Tambah Spek / Add-On Server Panel
+          </div>
+          <div class="addon-hero-sub">
+            Pilih server panel Pterodactyl yang sudah Anda miliki untuk langsung ditambah RAM, NVMe Disk, dan CPU Power secara instan tanpa perlu reinstall atau hapus data bot Anda!
+          </div>
+        </div>
+
+        <!-- LANGKAH 1: DAFTAR SERVER MILIK ANDA -->
+        <div class="step-box" id="step1Box">
+          <div class="step-head">
+            <div class="step-num-title">
+              <span style="width:26px;height:26px;border-radius:50%;background:#0ea5e9;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;">1</span>
+              <span>Pilih Server Panel yang Ingin Ditambah Spek</span>
+            </div>
+            <span class="step-badge" id="step1Badge" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">Mendeteksi Server...</span>
+          </div>
+
+          <!-- LIST SERVER CARDS -->
+          <div id="serversListContainer" class="servers-grid">
+            <div style="padding:30px;text-align:center;color:var(--t3);grid-column:1/-1;">
+              <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;"></i>
+              <p style="margin-top:8px;font-size:0.82rem;">Mendeteksi server panel Anda dari browser...</p>
+            </div>
+          </div>
+
+          <!-- OPTIONAL COLLAPSIBLE SEARCH (Hanya jika ingin ganti email/akun) -->
+          <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+            <button type="button" onclick="toggleManualSearch()" style="background:none;border:none;color:var(--t3);font-size:0.75rem;cursor:pointer;text-decoration:underline;">
+              <i class="fa-solid fa-magnifying-glass"></i> Cari server dari email / Order ID lain?
+            </button>
+          </div>
+          <div class="manual-search-box" id="manualSearchBox">
+            <div style="display:flex;gap:10px;">
+              <input type="text" id="srvSearchInput" class="server-search-in" placeholder="Ketik Email Pembeli atau Order ID (contoh: ZYRO-123456)..." onkeydown="if(event.key==='Enter') searchTargetServers()">
+              <button class="btn-search-srv" onclick="searchTargetServers()">
+                <i class="fa-solid fa-magnifying-glass"></i> Cari
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LANGKAH 2: KONFIGURASI TAMBAH SPEK (ADD-ON) -->
+        <div class="step-box" id="step2Box" style="opacity:0.6;pointer-events:none;">
+          <div class="step-head">
+            <div class="step-num-title">
+              <span style="width:26px;height:26px;border-radius:50%;background:#10b981;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;">2</span>
+              <span>Konfigurasi Tambahan Spesifikasi (Add-On)</span>
+            </div>
+            <span class="step-badge" id="step2Badge" style="background:rgba(16,185,129,0.12);color:#10b981;">Pilih Resource</span>
+          </div>
+
+          <!-- BANNER SERVER TERPILIH -->
+          <div class="chosen-server-banner" id="chosenServerBanner" style="display:none;">
+            <div>
+              <div style="font-size:0.75rem;color:var(--t3);font-weight:700;text-transform:uppercase;">Server Panel Terpilih:</div>
+              <div style="font-size:1.15rem;font-weight:900;color:var(--t1);" id="chosenServerTitle">User: -</div>
+              <div style="font-size:0.78rem;color:var(--t2);margin-top:3px;" id="chosenServerSub">Order ID: - • Kategori: -</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.72rem;color:var(--t3);font-weight:700;">SPEK SAAT INI:</div>
+              <div style="font-size:0.85rem;font-weight:800;color:#10b981;" id="chosenServerBaseSpecs">RAM - • Disk - • CPU -</div>
+            </div>
+          </div>
+
+          <!-- 1. Tambah RAM -->
+          <div class="addon-group-title">
+            <span><i class="fa-solid fa-memory" style="color:#0ea5e9;"></i> 1. Tambah RAM Ekstra</span>
+            <span style="font-size:0.74rem;color:var(--t3);" id="lblRateRam">+Rp 1.000 / GB</span>
+          </div>
+          <div class="addon-chips-row" id="chipsRam">
+            <div class="addon-chip active" onclick="setAddonRam(0)">
+              <span>+0 GB</span>
+              <span class="chip-price">+Rp 0</span>
+            </div>
+            <div class="addon-chip" onclick="setAddonRam(1)">
+              <span>+1 GB</span>
+              <span class="chip-price" id="p-ram-1">+Rp 1.000</span>
+            </div>
+            <div class="addon-chip" onclick="setAddonRam(2)">
+              <span>+2 GB</span>
+              <span class="chip-price" id="p-ram-2">+Rp 2.000</span>
+            </div>
+            <div class="addon-chip" onclick="setAddonRam(4)">
+              <span>+4 GB</span>
+              <span class="chip-price" id="p-ram-4">+Rp 4.000</span>
+            </div>
+          </div>
+
+          <!-- 2. Tambah NVMe Disk -->
+          <div class="addon-group-title">
+            <span><i class="fa-solid fa-hard-drive" style="color:#a855f7;"></i> 2. Tambah NVMe Disk Ekstra</span>
+            <span style="font-size:0.74rem;color:var(--t3);" id="lblRateDisk">+Rp 500 / GB</span>
+          </div>
+          <div class="addon-chips-row" id="chipsDisk">
+            <div class="addon-chip active" onclick="setAddonDisk(0)">
+              <span>+0 GB</span>
+              <span class="chip-price">+Rp 0</span>
+            </div>
+            <div class="addon-chip" onclick="setAddonDisk(2)">
+              <span>+2 GB</span>
+              <span class="chip-price" id="p-disk-2">+Rp 1.000</span>
+            </div>
+            <div class="addon-chip" onclick="setAddonDisk(5)">
+              <span>+5 GB</span>
+              <span class="chip-price" id="p-disk-5">+Rp 2.500</span>
+            </div>
+            <div class="addon-chip" onclick="setAddonDisk(10)">
+              <span>+10 GB</span>
+              <span class="chip-price" id="p-disk-10">+Rp 5.000</span>
+            </div>
+          </div>
+
+          <!-- 3. Tambah CPU Power -->
+          <div class="addon-group-title">
+            <span><i class="fa-solid fa-bolt" style="color:#eab308;"></i> 3. Tambah CPU Power (Batas Server Max 250%)</span>
+            <span style="font-size:0.74rem;color:var(--t3);" id="lblRateCpu">+Rp 1.000 / 25%</span>
+          </div>
+          <div class="addon-chips-row" id="chipsCpu">
+            <div class="addon-chip active" onclick="setAddonCpu(0)">
+              <span>+0%</span>
+              <span class="chip-price">+Rp 0</span>
+            </div>
+            <div class="addon-chip" id="chip-cpu-25" onclick="setAddonCpu(25)">
+              <span>+25%</span>
+              <span class="chip-price" id="p-cpu-25">+Rp 1.000</span>
+            </div>
+            <div class="addon-chip" id="chip-cpu-50" onclick="setAddonCpu(50)">
+              <span>+50%</span>
+              <span class="chip-price" id="p-cpu-50">+Rp 2.000</span>
+            </div>
+            <div class="addon-chip" id="chip-cpu-75" onclick="setAddonCpu(75)">
+              <span>+75%</span>
+              <span class="chip-price" id="p-cpu-75">+Rp 3.000</span>
+            </div>
+          </div>
+          <div id="cpuLimitNotice" style="display:none;font-size:0.74rem;color:#f59e0b;margin-bottom:18px;">
+            <i class="fa-solid fa-triangle-exclamation"></i> Opsi CPU tertentu dinonaktifkan karena total akumulasi CPU server akan melebihi batas kebijakan 250%.
+          </div>
+
+          <!-- PERBANDINGAN SPEK SEBELUM VS SESUDAH -->
+          <div class="specs-diff-box">
+            <div class="diff-item">
+              <span class="diff-lbl">RAM Server:</span>
+              <div class="diff-val">
+                <span id="diffBaseRam">1 GB</span>
+                <i class="fa-solid fa-arrow-right diff-arrow"></i>
+                <span id="diffFinalRam" style="color:#0ea5e9;">1 GB</span>
+              </div>
+            </div>
+            <div class="diff-item">
+              <span class="diff-lbl">NVMe Disk:</span>
+              <div class="diff-val">
+                <span id="diffBaseDisk">2 GB</span>
+                <i class="fa-solid fa-arrow-right diff-arrow"></i>
+                <span id="diffFinalDisk" style="color:#a855f7;">2 GB</span>
+              </div>
+            </div>
+            <div class="diff-item">
+              <span class="diff-lbl">CPU Power:</span>
+              <div class="diff-val">
+                <span id="diffBaseCpu">50%</span>
+                <i class="fa-solid fa-arrow-right diff-arrow"></i>
+                <span id="diffFinalCpu" style="color:#eab308;">50%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHECKOUT ROW -->
+          <div class="checkout-row">
+            <div>
+              <div style="font-size:0.75rem;font-weight:700;color:var(--t3);text-transform:uppercase;">Total Tambahan Biaya Add-On:</div>
+              <div class="total-price-val" id="totalAddonPriceDisplay">Rp 0</div>
+              <div style="font-size:0.74rem;color:var(--t3);margin-top:2px;" id="addonCalcBreakdown">Pilih spek tambahan di atas</div>
+            </div>
+            <button class="btn-pay-addon" id="btnGoToPay" onclick="proceedToAddonPayment()">
+              <i class="fa-solid fa-credit-card"></i>
+              <span>Bayar Add-On & Terapkan ke Server</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    const authToken = localStorage.getItem('seika_user_token');
+    const savedUser = localStorage.getItem('seika_user_data') ? JSON.parse(localStorage.getItem('seika_user_data')) : null;
+    
+    let loadedServers = [];
+    let selectedServer = null;
+
+    let selectedRam = 0;
+    let selectedDisk = 0;
+    let selectedCpu = 0;
+
+    // Rates based on Category
+    const CATEGORY_RATES = {
+      'publik': { ram: 1000, disk: 500, cpu: 1000, name: 'Legal Publik' },
+      'private': { ram: 1500, disk: 750, cpu: 1500, name: 'Legal Private' },
+      'enterprise': { ram: 2000, disk: 1000, cpu: 2000, name: 'Legal Enterprise' },
+      'premium': { ram: 2500, disk: 1250, cpu: 2500, name: 'Legal Premium' }
+    };
+
+    const CPU_MAP = { 1: 50, 2: 80, 3: 100, 4: 130, 5: 150, 6: 180, 7: 200, 8: 220, 9: 240, 10: 250 };
+
+    // Theme logic
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('vToast');
+      document.getElementById('vToastMsg').innerText = msg;
+      box.style.top = '20px';
+      setTimeout(() => { box.style.top = '-100px'; }, 3000);
+    }
+
+    function isEligibleAddonServer(o) {
+      if (!o) return false;
+      const st = String(o.status || '').toLowerCase();
+      // MUST be completed or paid! Cancelled, pending, expired, failed cannot receive add-on
+      if (st !== 'completed' && st !== 'paid') return false;
+
+      // Cannot be an addon order itself
+      if (o.orderType === 'addon' || String(o.productId || '').toLowerCase().includes('addon')) {
+        return false;
+      }
+
+      // Exclude non-panel categories and products
+      const cat = String(o.category || '').toLowerCase();
+      const name = String(o.productName || o.nama || '').toLowerCase();
+      const id = String(o.productId || o.id || '').toLowerCase();
+
+      if (cat.includes('account') || cat.includes('premku') || cat.includes('otp') ||
+          cat.includes('vps') || cat.includes('cloud') || cat.includes('role') ||
+          cat.includes('bot') || cat.includes('domain') || cat.includes('jasa')) {
+        return false;
+      }
+      if (name.includes('canva') || name.includes('netflix') || name.includes('spotify') ||
+          name.includes('youtube') || name.includes('role') || name.includes('otp') ||
+          name.includes('vps') || name.includes('cloud') || name.includes('diamond')) {
+        return false;
+      }
+
+      // Must match panel keywords or pterodactyl IDs
+      return cat.includes('panel') || name.includes('panel') || id.includes('ptero') || id.includes('panel');
+    }
+
+    function parseServerSpecs(p) {
+      let ram = 1;
+      let disk = 2;
+      let cpu = 50;
+
+      const name = String(p.productName || p.nama || '').toLowerCase();
+      const m = name.match(/(\d+)\s*gb/);
+      if (m) {
+        ram = parseInt(m[1]);
+        disk = ram * 2;
+        cpu = CPU_MAP[ram] || (ram >= 10 ? 250 : 50 + ram * 20);
+      }
+
+      // Add existing addons if already installed
+      if (p.addons) {
+        if (p.addons.ramGb) ram += p.addons.ramGb;
+        if (p.addons.diskGb) disk += p.addons.diskGb;
+        if (p.addons.cpuPercent) cpu = Math.min(250, cpu + p.addons.cpuPercent);
+      }
+
+      return { ram, disk, cpu: Math.min(250, cpu) };
+    }
+
+    function resolveCatKey(category) {
+      const c = String(category || '').toLowerCase();
+      if (c.includes('enterprise')) return 'enterprise';
+      if (c.includes('premium')) return 'premium';
+      if (c.includes('private')) return 'private';
+      return 'publik';
+    }
+
+    function toggleManualSearch() {
+      const box = document.getElementById('manualSearchBox');
+      box.style.display = box.style.display === 'none' || !box.style.display ? 'block' : 'none';
+      if (box.style.display === 'block') {
+        document.getElementById('srvSearchInput').focus();
+      }
+    }
+
+    async function initPage() {
+      initAuthTop();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramOrderId = urlParams.get('orderId');
+      const paramUser = urlParams.get('user');
+
+      if (authToken && savedUser) {
+        await loadMemberServers(paramOrderId, paramUser);
+      } else {
+        const savedEmail = localStorage.getItem('zyro_buyer_email') || '';
+        let savedOrders = [];
+        try { savedOrders = JSON.parse(localStorage.getItem('zyro_buyer_orders') || '[]'); } catch(e){}
+
+        if (savedEmail || savedOrders.length > 0 || paramOrderId) {
+          await loadGuestServers(savedEmail || paramOrderId || '', savedOrders, paramOrderId, paramUser);
+        } else {
+          renderNoServersPrompt("Belum ada server panel yang terdeteksi di browser ini. Jika pernah membeli, silakan cari menggunakan email/Order ID Anda.");
+          document.getElementById('manualSearchBox').style.display = 'block';
+        }
+      }
+    }
+
+    async function loadMemberServers(paramOrderId, paramUser) {
+      try {
+        const res = await fetch(`/api/user/orders?token=${encodeURIComponent(authToken)}`);
+        const data = await res.json();
+        if (data.status && Array.isArray(data.orders)) {
+          loadedServers = data.orders.filter(isEligibleAddonServer);
+          if (loadedServers.length > 0) {
+            renderServerCards(loadedServers, paramOrderId, paramUser);
+          } else {
+            const hasCancelledOrPending = data.orders.some(o => o.status === 'cancelled' || o.status === 'pending');
+            if (hasCancelledOrPending) {
+              renderNoServersPrompt("Tidak ada server panel aktif yang lunas. Pesanan yang dibatalkan atau belum dibayar tidak dapat ditambah spek.");
+            } else {
+              renderNoServersPrompt("Belum ada server panel aktif terdaftar di akun Anda.");
+            }
+          }
+        } else {
+          renderNoServersPrompt("Belum ada server panel terdaftar di akun Anda.");
+        }
+      } catch (e) {
+        renderNoServersPrompt("Gagal memuat daftar server panel.");
+      }
+    }
+
+    async function loadGuestServers(query, savedOrders = [], paramOrderId, paramUser) {
+      const container = document.getElementById('serversListContainer');
+      container.innerHTML = '<div style="padding:30px;text-align:center;color:var(--t3);grid-column:1/-1;"><i class="fa-solid fa-spinner fa-spin"></i><p style="margin-top:8px;">Mendeteksi server panel aktif Anda...</p></div>';
+
+      try {
+        const idsQuery = savedOrders.length > 0 ? `&ids=${encodeURIComponent(savedOrders.join(','))}` : '';
+        const res = await fetch(`/api/order/track?q=${encodeURIComponent(query || '')}${idsQuery}`);
+        const data = await res.json();
+        if (data.status) {
+          const raw = Array.isArray(data.orders) && data.orders.length ? data.orders : (data.order ? [data.order] : []);
+          loadedServers = raw.filter(isEligibleAddonServer);
+          if (loadedServers.length > 0) {
+            renderServerCards(loadedServers, paramOrderId, paramUser);
+          } else {
+            const hasCancelled = raw.some(o => o.status === 'cancelled' || o.status === 'expired');
+            const hasPending = raw.some(o => o.status === 'pending');
+            if (hasCancelled) {
+              renderNoServersPrompt("Pesanan yang Anda cari berstatus Dibatalkan / Expired. Add-on hanya dapat diterapkan pada server panel aktif yang sudah lunas.");
+            } else if (hasPending) {
+              renderNoServersPrompt("Pesanan masih berstatus Menunggu Pembayaran. Silakan selesaikan pembayaran terlebih dahulu untuk mengaktifkan server.");
+            } else {
+              renderNoServersPrompt("Belum ditemukan server panel Pterodactyl aktif di riwayat transaksi ini.");
+            }
+            document.getElementById('manualSearchBox').style.display = 'block';
+          }
+        } else {
+          renderNoServersPrompt(`Belum ditemukan server panel di riwayat browser ini.`);
+          document.getElementById('manualSearchBox').style.display = 'block';
+        }
+      } catch (e) {
+        renderNoServersPrompt("Gagal memuat data server.");
+        document.getElementById('manualSearchBox').style.display = 'block';
+      }
+    }
+
+    async function searchTargetServers() {
+      const q = document.getElementById('srvSearchInput').value.trim();
+      if (!q) return showToast("Masukkan Email atau Order ID!");
+      await loadGuestServers(q, [], q, null);
+    }
+
+    function renderNoServersPrompt(msg) {
+      document.getElementById('step1Badge').innerHTML = 'Belum Ada Server';
+      document.getElementById('step1Badge').style.background = 'rgba(244,63,94,0.12)';
+      document.getElementById('step1Badge').style.color = '#f43f5e';
+
+      document.getElementById('serversListContainer').innerHTML = `
+        <div style="background:var(--bg2);border:1px dashed var(--b2);border-radius:12px;padding:32px;text-align:center;grid-column:1/-1;">
+          <i class="fa-solid fa-server" style="font-size:2.2rem;color:var(--t3);opacity:0.4;margin-bottom:10px;display:block;"></i>
+          <b style="font-size:0.9rem;color:var(--t1);">${msg}</b>
+          <div style="margin-top:10px;">
+            <a href="index.html" style="font-size:0.8rem;color:var(--a);font-weight:700;">Belum punya server? Beli panel Pterodactyl baru</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderServerCards(servers, preselectOrderId, preselectUser) {
+      const container = document.getElementById('serversListContainer');
+      if (!servers || servers.length === 0) {
+        return renderNoServersPrompt("Tidak ada server panel aktif yang terdeteksi.");
+      }
+
+      const count = servers.length;
+      document.getElementById('step1Badge').innerHTML = `<i class="fa-solid fa-server"></i> ${count} Server Panel Aktif`;
+      document.getElementById('step1Badge').style.background = 'rgba(16,185,129,0.15)';
+      document.getElementById('step1Badge').style.color = '#10b981';
+
+      let html = '';
+      servers.forEach((s, idx) => {
+        const specs = parseServerSpecs(s);
+        let username = s.serverUser || s.username || '';
+        if (!username && s.accountDetails) {
+          const matchU = s.accountDetails.match(/Username\s*:\s*([^\s\n\r]+)/i);
+          if (matchU) username = matchU[1];
+        }
+        if (!username) username = `Server #${idx + 1}`;
+        const cat = s.category || 'Panel Legal Publik';
+        const egg = s.runtime || 'NodeJS';
+        const isPreselected = (preselectOrderId && s.orderId === preselectOrderId) || (preselectUser && username.toLowerCase() === preselectUser.toLowerCase()) || (servers.length === 1 && !selectedServer);
+
+        html += `
+          <div class="server-pick-card ${isPreselected ? 'selected' : ''}" id="card-srv-${s.orderId}" onclick="selectServer('${s.orderId}')">
+            <div class="spc-head">
+              <div class="spc-user">
+                <i class="fa-solid fa-server" style="color:#10b981;"></i>
+                <span>${username}</span>
+              </div>
+              <span class="spc-tag">${cat}</span>
+            </div>
+            <div style="font-size:0.75rem;color:var(--t3);margin-bottom:8px;">
+              Order ID: <b style="font-family:'JetBrains Mono',monospace;color:var(--t1);">${s.orderId}</b> • Egg: ${egg}
+            </div>
+            <div class="spc-specs">
+              <span class="spc-spec-pill"><i class="fa-solid fa-memory" style="color:#0ea5e9;"></i> ${specs.ram} GB</span>
+              <span class="spc-spec-pill"><i class="fa-solid fa-hard-drive" style="color:#a855f7;"></i> ${specs.disk} GB</span>
+              <span class="spc-spec-pill"><i class="fa-solid fa-bolt" style="color:#eab308;"></i> ${specs.cpu}%</span>
+            </div>
+            <button class="btn-select-server" type="button">
+              ${isPreselected ? '<i class="fa-solid fa-circle-check"></i> Server Terpilih' : '<i class="fa-solid fa-circle-dot"></i> Pilih Server Ini'}
+            </button>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+
+      // Auto select if single or preselected
+      if (preselectOrderId) {
+        const found = servers.find(s => s.orderId === preselectOrderId);
+        if (found) selectServer(found.orderId);
+      } else if (servers.length === 1) {
+        selectServer(servers[0].orderId);
+      }
+    }
+
+    function selectServer(orderId) {
+      selectedServer = loadedServers.find(s => s.orderId === orderId);
+      if (!selectedServer) return;
+
+      // Highlight selected card
+      document.querySelectorAll('.server-pick-card').forEach(c => {
+        c.classList.remove('selected');
+        const btn = c.querySelector('.btn-select-server');
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-circle-dot"></i> Pilih Server Ini';
+      });
+
+      const card = document.getElementById(`card-srv-${orderId}`);
+      if (card) {
+        card.classList.add('selected');
+        const btn = card.querySelector('.btn-select-server');
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Server Terpilih';
+      }
+
+      // Unlock Step 2
+      const step2 = document.getElementById('step2Box');
+      step2.style.opacity = '1';
+      step2.style.pointerEvents = 'auto';
+
+      // Populate chosen server banner
+      const specs = parseServerSpecs(selectedServer);
+      const username = selectedServer.serverUser || selectedServer.username || selectedServer.buyerName || 'Server';
+      
+      document.getElementById('chosenServerBanner').style.display = 'flex';
+      document.getElementById('chosenServerTitle').innerText = `User: ${username}`;
+      document.getElementById('chosenServerSub').innerText = `Order ID: ${selectedServer.orderId} • Kategori: ${selectedServer.category || 'Panel Legal'}`;
+      document.getElementById('chosenServerBaseSpecs').innerText = `RAM: ${specs.ram}GB • Disk: ${specs.disk}GB • CPU: ${specs.cpu}%`;
+
+      document.getElementById('diffBaseRam').innerText = `${specs.ram} GB`;
+      document.getElementById('diffBaseDisk').innerText = `${specs.disk} GB`;
+      document.getElementById('diffBaseCpu').innerText = `${specs.cpu}%`;
+
+      // Update rates based on tier
+      const catKey = resolveCatKey(selectedServer.category);
+      const rates = CATEGORY_RATES[catKey] || CATEGORY_RATES['publik'];
+
+      document.getElementById('lblRateRam').innerText = `+Rp ${rates.ram.toLocaleString('id-ID')} / GB`;
+      document.getElementById('lblRateDisk').innerText = `+Rp ${rates.disk.toLocaleString('id-ID')} / GB`;
+      document.getElementById('lblRateCpu').innerText = `+Rp ${rates.cpu.toLocaleString('id-ID')} / 25%`;
+
+      document.getElementById('p-ram-1').innerText = `+Rp ${(rates.ram * 1).toLocaleString('id-ID')}`;
+      document.getElementById('p-ram-2').innerText = `+Rp ${(rates.ram * 2).toLocaleString('id-ID')}`;
+      document.getElementById('p-ram-4').innerText = `+Rp ${(rates.ram * 4).toLocaleString('id-ID')}`;
+
+      document.getElementById('p-disk-2').innerText = `+Rp ${(rates.disk * 2).toLocaleString('id-ID')}`;
+      document.getElementById('p-disk-5').innerText = `+Rp ${(rates.disk * 5).toLocaleString('id-ID')}`;
+      document.getElementById('p-disk-10').innerText = `+Rp ${(rates.disk * 10).toLocaleString('id-ID')}`;
+
+      document.getElementById('p-cpu-25').innerText = `+Rp ${(rates.cpu * 1).toLocaleString('id-ID')}`;
+      document.getElementById('p-cpu-50').innerText = `+Rp ${(rates.cpu * 2).toLocaleString('id-ID')}`;
+      document.getElementById('p-cpu-75').innerText = `+Rp ${(rates.cpu * 3).toLocaleString('id-ID')}`;
+
+      // Reset options & check 250% limit
+      selectedRam = 0;
+      selectedDisk = 0;
+      selectedCpu = 0;
+      resetChips();
+
+      checkCpuLimits(specs.cpu);
+      updateCalculation();
+    }
+
+    function checkCpuLimits(baseCpu) {
+      const notice = document.getElementById('cpuLimitNotice');
+      let isAnyDisabled = false;
+
+      [25, 50, 75].forEach(addVal => {
+        const chip = document.getElementById(`chip-cpu-${addVal}`);
+        if (baseCpu + addVal > 250) {
+          chip.classList.add('disabled');
+          chip.title = 'Melebihi batas maksimal server 250%';
+          isAnyDisabled = true;
+        } else {
+          chip.classList.remove('disabled');
+          chip.title = '';
+        }
+      });
+
+      if (notice) notice.style.display = isAnyDisabled ? 'block' : 'none';
+    }
+
+    function resetChips() {
+      document.querySelectorAll('#chipsRam .addon-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+      document.querySelectorAll('#chipsDisk .addon-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+      document.querySelectorAll('#chipsCpu .addon-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+    }
+
+    function setAddonRam(gb) {
+      selectedRam = gb;
+      document.querySelectorAll('#chipsRam .addon-chip').forEach(c => c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      updateCalculation();
+    }
+
+    function setAddonDisk(gb) {
+      selectedDisk = gb;
+      document.querySelectorAll('#chipsDisk .addon-chip').forEach(c => c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      updateCalculation();
+    }
+
+    function setAddonCpu(pct) {
+      if (event.currentTarget.classList.contains('disabled')) {
+        return showToast('Opsi ini melebihi batas maksimal CPU 250%!');
+      }
+      selectedCpu = pct;
+      document.querySelectorAll('#chipsCpu .addon-chip').forEach(c => c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      updateCalculation();
+    }
+
+    function updateCalculation() {
+      if (!selectedServer) return;
+      const specs = parseServerSpecs(selectedServer);
+      const catKey = resolveCatKey(selectedServer.category);
+      const rates = CATEGORY_RATES[catKey] || CATEGORY_RATES['publik'];
+
+      const ramCost = selectedRam * rates.ram;
+      const diskCost = selectedDisk * rates.disk;
+      const cpuCost = (selectedCpu / 25) * rates.cpu;
+      const totalCost = ramCost + diskCost + cpuCost;
+
+      // Final specs
+      const finalRam = specs.ram + selectedRam;
+      const finalDisk = specs.disk + selectedDisk;
+      const finalCpu = Math.min(250, specs.cpu + selectedCpu);
+
+      document.getElementById('diffFinalRam').innerText = `${finalRam} GB`;
+      document.getElementById('diffFinalDisk').innerText = `${finalDisk} GB`;
+      document.getElementById('diffFinalCpu').innerText = `${finalCpu}%`;
+
+      document.getElementById('totalAddonPriceDisplay').innerText = 'Rp ' + totalCost.toLocaleString('id-ID');
+
+      const parts = [];
+      if (selectedRam > 0) parts.push(`+${selectedRam}GB RAM (Rp ${ramCost.toLocaleString('id-ID')})`);
+      if (selectedDisk > 0) parts.push(`+${selectedDisk}GB Disk (Rp ${diskCost.toLocaleString('id-ID')})`);
+      if (selectedCpu > 0) parts.push(`+${selectedCpu}% CPU (Rp ${cpuCost.toLocaleString('id-ID')})`);
+
+      const breakdown = document.getElementById('addonCalcBreakdown');
+      if (parts.length > 0) {
+        breakdown.innerText = parts.join(' • ');
+      } else {
+        breakdown.innerText = 'Pilih spesifikasi tambahan yang diinginkan di atas.';
+      }
+    }
+
+    function proceedToAddonPayment() {
+      if (!selectedServer) {
+        return showToast("Pilih server panel terlebih dahulu!");
+      }
+      if (selectedRam === 0 && selectedDisk === 0 && selectedCpu === 0) {
+        return showToast("Pilih minimal salah satu spesifikasi add-on (+RAM, +Disk, atau +CPU)!");
+      }
+
+      const catKey = resolveCatKey(selectedServer.category);
+      const rates = CATEGORY_RATES[catKey] || CATEGORY_RATES['publik'];
+      const totalCost = (selectedRam * rates.ram) + (selectedDisk * rates.disk) + ((selectedCpu / 25) * rates.cpu);
+      const targetUser = selectedServer.serverUser || selectedServer.username || selectedServer.buyerName || 'Server';
+
+      const checkoutUrl = `/payment?id=addon-spek&type=addon` +
+        `&targetOrderId=${encodeURIComponent(selectedServer.orderId)}` +
+        `&targetUser=${encodeURIComponent(targetUser)}` +
+        `&nama=${encodeURIComponent(`Upgrade Spek Server (${targetUser})`)}` +
+        `&harga=${totalCost}` +
+        `&category=${encodeURIComponent(selectedServer.category || 'Panel Legal')}` +
+        `&ramAdd=${selectedRam}` +
+        `&diskAdd=${selectedDisk}` +
+        `&cpuAdd=${selectedCpu}`;
+
+      window.location.href = checkoutUrl;
+    }
+
+    function toggleSubUserDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('subUserDropdown');
+      if (dd) dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+    }
+    window.addEventListener('click', function(e) {
+      const dd = document.getElementById('subUserDropdown');
+      if (dd && dd.style.display !== 'none' && !dd.contains(e.target)) {
+        dd.style.display = 'none';
+      }
+    });
+    function subLogout() {
+      localStorage.removeItem('seika_user_token');
+      localStorage.removeItem('seika_user_data');
+      window.location.reload();
+    }
+
+    function initAuthTop() {
+      const authContainer = document.getElementById('authNavContainer');
+      if (authToken && savedUser) {
+        const firstName = savedUser.name ? savedUser.name.split(' ')[0] : 'Member';
+        const userDisplayName = savedUser.name || savedUser.email || 'Member';
+        const avatar = (typeof getSmartAvatar === 'function')
+          ? getSmartAvatar(savedUser.avatar, userDisplayName)
+          : (savedUser.avatar || '/assets/logo.png');
+        const avFallback = `onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${escapeHtml(userDisplayName)}');else this.src='/assets/logo.png';"`;
+        authContainer.innerHTML = `
+          <div style="position:relative;">
+            <div class="user-nav-pill" style="display:inline-flex;cursor:pointer;" onclick="toggleSubUserDropdown(event)" title="${savedUser.email}">
+              <img src="${avatar}" class="user-nav-avatar" alt="Avatar" ${avFallback}>
+              <div class="user-nav-info">
+                <span class="user-nav-name">${firstName}</span>
+                <span class="user-nav-tag">5% OFF</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;color:var(--t3);margin-left:2px;"></i>
+            </div>
+            <div class="user-dropdown-menu" id="subUserDropdown" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:240px;background:var(--surface);border:1px solid var(--b1);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,0.25);padding:10px;z-index:99999;">
+              <div class="ud-head" style="padding:8px;border-bottom:1px solid var(--b1);margin-bottom:8px;display:flex;align-items:center;gap:10px;">
+                <img src="${avatar}" style="width:34px;height:34px;border-radius:50%;border:1.5px solid var(--a);" ${avFallback}>
+                <div style="overflow:hidden;">
+                  <div style="font-size:0.82rem;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.name || 'Member'}</div>
+                  <div style="font-size:0.7rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.email || ''}</div>
+                </div>
+              </div>
+              <div class="ud-items" style="display:flex;flex-direction:column;gap:4px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-house" style="color:var(--a);"></i> Beranda Toko</a>
+                <a href="bansos.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:#f43f5e;font-weight:700;text-decoration:none;border-radius:8px;"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free (1GB)</a>
+                <a href="mypanel.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya</a>
+                <a href="riwayat.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-receipt" style="color:#f59e0b;"></i> Riwayat Pesanan</a>
+                <a href="addon.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--a);font-weight:700;text-decoration:none;border-radius:8px;background:var(--abg);"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-on Spek</a>
+                <a href="profile.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun</a>
+                <hr style="border:none;border-top:1px solid var(--b1);margin:4px 0;">
+                <a href="javascript:void(0)" onclick="subLogout()" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--rose);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar (Logout)</a>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        authContainer.innerHTML = `
+          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+            <i class="fa-solid fa-circle-user"></i> <span class="btn-top-auth-txt">Masuk</span>
+          </a>
+        `;
+      }
+    }
+
+    window.addEventListener('load', initPage);
+  </script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

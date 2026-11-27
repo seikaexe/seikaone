@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>Leaderboard Top Pembeli – SeikaOne.id</title>
+  <meta name="description" content="Peringkat pembeli teratas dan pengguna paling aktif di SeikaOne.id. Raih reward dan benefit eksklusif!">
+  <link rel="canonical" href="https://zyrostore.id/leaderboard">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.1"></script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .lb-page-wrap { max-width: 880px; margin: 0 auto; width: 100%; padding: 10px 16px 40px; }
+
+    /* HERO */
+    .lb-hero {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 30px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .lb-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(245,158,11,0.2);
+      color: #f59e0b;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(245,158,11,0.35);
+    }
+    .lb-hero-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .lb-hero-sub {
+      font-size: 0.86rem;
+      color: var(--t3);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* CARD CONTAINER */
+    .lb-card-box {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 18px 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      overflow: hidden;
+    }
+
+    /* REFRESH BUTTON */
+    .btn-lb-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      background: var(--surface);
+      color: #f59e0b;
+      border: 1px solid rgba(245,158,11,0.45);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.12);
+    }
+    .btn-lb-refresh:hover {
+      background: rgba(245,158,11,0.1);
+      border-color: #f59e0b;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px rgba(245,158,11,0.2);
+    }
+    .btn-lb-refresh i {
+      transition: transform 0.5s ease;
+    }
+    .btn-lb-refresh:active i {
+      transform: rotate(360deg);
+    }
+
+    /* ENHANCED PODIUM WRAPPER WITH CELEBRATORY FIREWORKS & SPARKLES */
+    .lb-podium-wrap {
+      position: relative;
+      width: 100%;
+      margin: 10px 0 24px;
+      border-radius: 20px;
+      overflow: hidden;
+      padding: 18px 6px 8px;
+      background: var(--surface);
+      box-sizing: border-box;
+      border: 1px solid var(--b1);
+    }
+
+    .fireworks-stage {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* FIREWORK BURSTS */
+    .fw-burst {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .fw-gold-1 {
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: fwExplodeGold 3s infinite ease-out;
+      box-shadow:
+        0 -36px #f59e0b, 26px -26px #fbbf24, 36px 0 #f59e0b, 26px 26px #fbbf24,
+        0 36px #f59e0b, -26px 26px #fbbf24, -36px 0 #f59e0b, -26px -26px #fbbf24,
+        0 -58px #ef4444, 40px -40px #ec4899, 58px 0 #3b82f6, 40px 40px #10b981,
+        0 58px #ef4444, -40px 40px #ec4899, -58px 0 #3b82f6, -40px -40px #10b981;
+    }
+
+    .fw-gold-2 {
+      top: 30%;
+      left: 53%;
+      transform: translate(-50%, -50%);
+      animation: fwExplodeGold 3s infinite ease-out 1.5s;
+      box-shadow:
+        0 -28px #fbbf24, 20px -20px #f59e0b, 28px 0 #fef08a, 20px 20px #fbbf24,
+        0 28px #f59e0b, -20px 20px #fef08a, -28px 0 #fbbf24, -20px -20px #f59e0b,
+        0 -46px #a855f7, 32px -32px #06b6d4, 46px 0 #f97316, 32px 32px #10b981,
+        0 46px #a855f7, -32px 32px #06b6d4, -46px 0 #f97316, -32px -32px #10b981;
+    }
+
+    .fw-silver {
+      top: 32%;
+      left: 18%;
+      animation: fwExplodeSilver 3.4s infinite ease-out 0.8s;
+      box-shadow:
+        0 -26px #94a3b8, 18px -18px #cbd5e1, 26px 0 #38bdf8, 18px 18px #94a3b8,
+        0 26px #38bdf8, -18px 18px #cbd5e1, -26px 0 #94a3b8, -18px -18px #cbd5e1,
+        0 -44px #60a5fa, 32px -32px #e2e8f0, 44px 0 #60a5fa, 32px 32px #e2e8f0;
+    }
+
+    .fw-bronze {
+      top: 36%;
+      right: 18%;
+      animation: fwExplodeBronze 3.6s infinite ease-out 1.8s;
+      box-shadow:
+        0 -26px #d97706, 18px -18px #f59e0b, 26px 0 #fdba74, 18px 18px #d97706,
+        0 26px #fdba74, -18px 18px #f59e0b, -26px 0 #d97706, -18px -18px #f59e0b,
+        0 -44px #f97316, 32px -32px #fed7aa, 44px 0 #f97316, 32px 32px #fed7aa;
+    }
+
+    @keyframes fwExplodeGold {
+      0% { transform: translate(-50%, 50px) scale(0.1); opacity: 0; }
+      35% { opacity: 1; transform: translate(-50%, -15px) scale(0.65); }
+      70% { opacity: 0.9; transform: translate(-50%, -25px) scale(1.15); }
+      100% { opacity: 0; transform: translate(-50%, -30px) scale(1.4); }
+    }
+
+    @keyframes fwExplodeSilver {
+      0% { transform: translateY(45px) scale(0.1); opacity: 0; }
+      35% { opacity: 1; transform: translateY(-10px) scale(0.65); }
+      70% { opacity: 0.85; transform: translateY(-18px) scale(1.1); }
+      100% { opacity: 0; transform: translateY(-22px) scale(1.3); }
+    }
+
+    @keyframes fwExplodeBronze {
+      0% { transform: translateY(45px) scale(0.1); opacity: 0; }
+      35% { opacity: 1; transform: translateY(-10px) scale(0.65); }
+      70% { opacity: 0.85; transform: translateY(-18px) scale(1.1); }
+      100% { opacity: 0; transform: translateY(-22px) scale(1.3); }
+    }
+
+    /* SPARKLE PARTICLES */
+    .sp-sparkle {
+      position: absolute;
+      user-select: none;
+      font-weight: 900;
+      opacity: 0;
+      animation: spFloat 2.6s infinite ease-in-out;
+    }
+    .sp-1 { top: 12%; left: 44%; color: #f59e0b; font-size: 1.1rem; animation-delay: 0.2s; }
+    .sp-2 { top: 16%; right: 42%; color: #fbbf24; font-size: 1rem; animation-delay: 0.8s; }
+    .sp-3 { top: 30%; left: 16%; color: #38bdf8; font-size: 0.85rem; animation-delay: 1.2s; }
+    .sp-4 { top: 26%; right: 14%; color: #fb923c; font-size: 0.95rem; animation-delay: 0.5s; }
+    .sp-5 { top: 6%; left: 52%; color: #ec4899; font-size: 0.9rem; animation-delay: 1.6s; }
+    .sp-6 { top: 48%; left: 32%; color: #a855f7; font-size: 0.85rem; animation-delay: 2.1s; }
+    .sp-7 { top: 46%; right: 32%; color: #10b981; font-size: 0.9rem; animation-delay: 1.4s; }
+    .sp-8 { top: 22%; left: 50%; color: #eab308; font-size: 1.3rem; animation-delay: 2.3s; }
+
+    @keyframes spFloat {
+      0%, 100% { transform: scale(0.2) rotate(0deg); opacity: 0; }
+      40% { opacity: 1; transform: scale(1.3) rotate(90deg); }
+      80% { opacity: 0.8; transform: scale(1) translateY(-10px) rotate(180deg); }
+    }
+
+    /* PODIUM CARDS */
+    .lb-podium {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 8px;
+      margin: 0;
+      padding: 4px 0;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+    .lb-podium-col {
+      flex: 1;
+      min-width: 0;
+      max-width: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .lb-crown-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+    .lb-crown {
+      font-size: 1.6rem;
+      animation: bounce 2s infinite ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+    .col-rank-1 .lb-crown {
+      font-size: 1.85rem;
+      animation: crownBounce 2.2s infinite ease-in-out;
+      filter: drop-shadow(0 0 10px rgba(245,158,11,0.7));
+    }
+    .col-rank-1 .lb-crown-glow {
+      display: none;
+    }
+    @keyframes crownBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-7px) scale(1.08); }
+    }
+    @keyframes haloPulse {
+      0%, 100% { transform: translateX(-50%) scale(0.85); opacity: 0.6; }
+      50% { transform: translateX(-50%) scale(1.35); opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .lb-podium-card {
+      width: 100%;
+      border-radius: 16px;
+      padding: 12px 6px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      border: 1.5px solid var(--b1);
+      background: var(--bg2);
+      transition: transform .2s ease;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .lb-podium-card:hover { transform: translateY(-3px); }
+    .lb-p1 {
+      background: var(--surface);
+      border-color: #f59e0b;
+      box-shadow: 0 2px 12px rgba(245,158,11,0.15);
+      padding-top: 18px;
+      padding-bottom: 22px;
+      position: relative;
+    }
+    .champion-badge-pill {
+      font-size: 0.58rem;
+      font-weight: 900;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      padding: 2px 7px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    body.dark .champion-badge-pill {
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .lb-p2 {
+      background: var(--surface);
+      border-color: #94a3b8;
+      box-shadow: 0 2px 10px rgba(148,163,184,0.12);
+    }
+    .lb-p3 {
+      background: var(--surface);
+      border-color: #d97706;
+      box-shadow: 0 2px 10px rgba(217,119,6,0.12);
+    }
+    .lb-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--b2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.82rem;
+      color: var(--t1);
+      margin-bottom: 8px;
+    }
+    .lb-name {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--t1);
+      margin-bottom: 4px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+    .lb-spent {
+      font-size: 0.72rem;
+      font-weight: 900;
+      color: #10b981;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .lb-orders {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    /* LIST TOP 4-10 */
+    .lb-list-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+    .lb-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .lb-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      transition: all 0.15s ease;
+    }
+    .lb-item:hover {
+      border-color: #fbbf24;
+      transform: translateX(3px);
+    }
+    .lb-item-l {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      overflow: hidden;
+    }
+    .lb-rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--b2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: var(--t2);
+      flex-shrink: 0;
+    }
+    .lb-item-r {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* REWARDS PERKS BOX */
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .perk-box {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+    }
+    .perk-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(245,158,11,0.14);
+      color: #f59e0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin: 0 auto 10px;
+    }
+    .perk-title { font-size: 0.88rem; font-weight: 800; color: var(--t1); margin-bottom: 4px; }
+    .perk-desc { font-size: 0.74rem; color: var(--t3); line-height: 1.4; }
+  </style>
+</head>
+<body id="body">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Toko">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="riwayat.html" class="btn-top-auth" style="text-decoration:none;background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);">
+          <i class="fa-solid fa-receipt"></i>
+          <span class="btn-top-auth-txt">Riwayat</span>
+        </a>
+        <a href="bansos.html" class="btn-top-auth" style="text-decoration:none;background:rgba(244,63,94,0.12);color:#f43f5e;border-color:rgba(244,63,94,0.3);">
+          <i class="fa-solid fa-gift"></i>
+          <span class="btn-top-auth-txt">Bansos 1GB</span>
+        </a>
+        <a href="mypanel.html" class="btn-top-auth" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span class="btn-top-auth-txt">Panel Saya</span>
+        </a>
+        <div id="authNavContainer"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div id="page">
+      <div class="lb-page-wrap">
+
+        <!-- HERO -->
+        <div class="lb-hero">
+          <div class="lb-hero-badge">
+            <i class="fa-solid fa-fire"></i> Peringkat Pembeli Teraktif
+          </div>
+          <div class="lb-hero-title">
+            <i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Leaderboard Pembeli SeikaOne
+          </div>
+          <div class="lb-hero-sub">
+            Apresiasi khusus bagi pelanggan setia SeikaOne. Dihitung secara otomatis berdasarkan akumulasi transaksi sukses dan total belanja.
+          </div>
+        </div>
+
+        <!-- OVERVIEW STATS (WEB TRANSACTION TOTALS) -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;margin-bottom:20px;">
+          <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(245,158,11,0.15);color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;">
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <div>
+              <div style="font-size:1.15rem;font-weight:900;color:var(--t1);line-height:1.2;" id="statTotalTrx">314+</div>
+              <div style="font-size:0.75rem;color:var(--t3);font-weight:600;">Total Transaksi Berhasil</div>
+            </div>
+          </div>
+          <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(16,185,129,0.15);color:#10b981;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;">
+              <i class="fa-solid fa-money-bill-trend-up"></i>
+            </div>
+            <div>
+              <div style="font-size:1.15rem;font-weight:900;color:#10b981;line-height:1.2;" id="statTotalRevenue">Rp 4.937.924</div>
+              <div style="font-size:0.75rem;color:var(--t3);font-weight:600;">Total Perputaran Belanja</div>
+            </div>
+          </div>
+          <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(14,165,233,0.15);color:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <div style="font-size:1.15rem;font-weight:900;color:var(--t1);line-height:1.2;" id="statTotalBuyers">493+</div>
+              <div style="font-size:0.75rem;color:var(--t3);font-weight:600;">Member Terverifikasi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN LEADERBOARD CARD -->
+        <div class="lb-card-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+            <h3 style="font-size:1rem;font-weight:800;color:var(--t1);margin:0;display:flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-medal" style="color:#f59e0b;"></i> Podium Top 3 Spender
+            </h3>
+            <button onclick="loadLeaderboardData()" class="btn-lb-refresh">
+              <i class="fa-solid fa-rotate-right"></i> Refresh
+            </button>
+          </div>
+
+          <!-- Top 3 Podium Container with Fireworks & Animation Backdrop -->
+          <div class="lb-podium-wrap">
+            <div class="fireworks-stage">
+              <div class="fw-burst fw-silver"></div>
+              <div class="fw-burst fw-gold-1"></div>
+              <div class="fw-burst fw-gold-2"></div>
+              <div class="fw-burst fw-bronze"></div>
+              <div class="sp-sparkle sp-1"><i class="fa-solid fa-star"></i></div>
+              <div class="sp-sparkle sp-2"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <div class="sp-sparkle sp-3"><i class="fa-solid fa-star"></i></div>
+              <div class="sp-sparkle sp-4"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <div class="sp-sparkle sp-5"><i class="fa-solid fa-star"></i></div>
+              <div class="sp-sparkle sp-6"><i class="fa-solid fa-star"></i></div>
+              <div class="sp-sparkle sp-7"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <div class="sp-sparkle sp-8"><i class="fa-solid fa-star"></i></div>
+            </div>
+
+            <div class="lb-podium" id="lbPodium">
+              <div style="padding:30px;text-align:center;color:var(--t3);width:100%;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;"></i>
+                <p style="margin-top:8px;font-size:0.82rem;">Memuat data peringkat...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ranks 4 to 10 Container -->
+          <div class="lb-list-title">Peringkat 4 – 10</div>
+          <div class="lb-list" id="lbList"></div>
+        </div>
+
+        <!-- PERKS / REWARDS SECTION -->
+        <div class="perks-grid">
+          <div class="perk-box">
+            <div class="perk-icon"><i class="fa-solid fa-gem"></i></div>
+            <div class="perk-title">Role & Badge VIP</div>
+            <div class="perk-desc">Top 3 berhak mendapatkan lencana khusus pelanggan loyal di komunitas kami.</div>
+          </div>
+          <div class="perk-box">
+            <div class="perk-icon"><i class="fa-solid fa-percent"></i></div>
+            <div class="perk-title">Diskon Tambahan Member</div>
+            <div class="perk-desc">Login sebagai member untuk mendapatkan potongan 5% di setiap transaksi.</div>
+          </div>
+          <div class="perk-box">
+            <div class="perk-icon"><i class="fa-solid fa-headset"></i></div>
+            <div class="perk-title">Prioritas Garansi & CS</div>
+            <div class="perk-desc">Antrean penanganan klaim server & bantuan bot prioritas tinggi 24 jam.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme logic
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    async function loadLeaderboardData() {
+      const podiumEl = document.getElementById('lbPodium');
+      const listEl = document.getElementById('lbList');
+      podiumEl.innerHTML = '<div style="padding:30px;text-align:center;color:var(--t3);width:100%;"><i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;"></i><p style="margin-top:8px;">Memuat data peringkat...</p></div>';
+      listEl.innerHTML = '';
+
+      try {
+        const res = await fetch('/api/leaderboard');
+        const data = await res.json();
+
+        // Update statistics counters from unified bot & web data
+        if (data.stats) {
+          const elTrx = document.getElementById('statTotalTrx');
+          const elRev = document.getElementById('statTotalRevenue');
+          const elBuy = document.getElementById('statTotalBuyers');
+          if (elTrx && data.stats.totalTrx) elTrx.textContent = Number(data.stats.totalTrx).toLocaleString('id-ID') + '+';
+          if (elRev && data.stats.totalRevenue) elRev.textContent = 'Rp ' + Number(data.stats.totalRevenue).toLocaleString('id-ID');
+          if (elBuy && data.stats.totalBuyers) elBuy.textContent = Number(data.stats.totalBuyers).toLocaleString('id-ID') + '+';
+        }
+
+        if (!data.status || !data.leaderboard || data.leaderboard.length === 0) {
+          podiumEl.innerHTML = `
+            <div style="padding:30px;text-align:center;color:var(--t3);width:100%;">
+              <i class="fa-solid fa-trophy" style="font-size:2.5rem;opacity:0.3;margin-bottom:10px;display:block;"></i>
+              <b style="font-size:0.9rem;color:var(--t1);">Belum ada data transaksi berhasil</b>
+              <p style="font-size:0.8rem;margin-top:4px;">Jadilah pembeli pertama dan raih peringkat #1!</p>
+            </div>
+          `;
+          return;
+        }
+
+        function escapeHtml(str) {
+          if (!str) return '';
+          return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+        }
+
+        function getLbRoleBadgeHtml(u, isPodium = false) {
+          if (!u || !u.roleBadge || u.roleKey === 'free' || u.roleKey === 'member' || u.roleKey === 'none') {
+            return isPodium 
+              ? `<div style="margin:4px 0 6px;"><span class="lb-role-badge" style="background:var(--surface);color:var(--t3);border:1px solid var(--b1);font-size:0.58rem;font-weight:700;padding:2px 8px;border-radius:100px;display:inline-flex;align-items:center;gap:3px;"><i class="fa-regular fa-user" style="font-size:0.55rem;"></i> Member</span></div>`
+              : '';
+          }
+          const color = u.roleColor || '#0ea5e9';
+          if (isPodium) {
+            return `<div style="margin:4px 0 6px;"><span class="lb-role-badge" style="background:${color};color:#fff;font-size:0.6rem;font-weight:800;padding:2px 9px;border-radius:100px;letter-spacing:0.3px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);"><i class="fa-solid fa-shield-halved" style="font-size:0.56rem;"></i> ${escapeHtml(u.roleBadge)}</span></div>`;
+          }
+          return `<span class="lb-role-badge" style="background:${color};color:#fff;font-size:0.58rem;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:0.2px;display:inline-flex;align-items:center;gap:3px;vertical-align:middle;margin-left:6px;box-shadow:0 1px 4px rgba(0,0,0,0.1);"><i class="fa-solid fa-shield-halved" style="font-size:0.52rem;"></i> ${escapeHtml(u.roleBadge)}</span>`;
+        }
+
+        const lb = data.leaderboard;
+        const p1 = lb[0] || null;
+        const p2 = lb[1] || null;
+        const p3 = lb[2] || null;
+
+        let podiumHtml = '';
+
+        // 2nd Place (Left)
+        if (p2) {
+          podiumHtml += `
+            <div class="lb-podium-col col-rank-2">
+              <div class="lb-crown-wrap">
+                <div class="lb-crown" style="color:#94a3b8;" title="Peringkat 2"><i class="fa-solid fa-medal"></i></div>
+              </div>
+              <div class="lb-podium-card lb-p2">
+                <div class="lb-avatar">${p2.name.slice(0, 2).toUpperCase()}</div>
+                <div class="lb-name" title="${p2.name}">${p2.name}</div>
+                ${getLbRoleBadgeHtml(p2, true)}
+                <div class="lb-spent">Rp ${Number(p2.totalSpent).toLocaleString('id-ID')}</div>
+                <div class="lb-orders">${p2.totalOrders} order</div>
+              </div>
+            </div>
+          `;
+        }
+
+        // 1st Place (Center / Taller)
+        if (p1) {
+          podiumHtml += `
+            <div class="lb-podium-col col-rank-1">
+              <div class="lb-crown-wrap">
+                <div class="lb-crown-glow"></div>
+                <div class="lb-crown" style="color:#f59e0b;" title="Juara 1 - Top Spender"><i class="fa-solid fa-crown"></i></div>
+              </div>
+              <div class="lb-podium-card lb-p1">
+                <div class="champion-badge-pill"><i class="fa-solid fa-medal"></i> TOP #1 CHAMPION</div>
+                <div class="lb-avatar" style="border-color:#f59e0b;color:#f59e0b;">${p1.name.slice(0, 2).toUpperCase()}</div>
+                <div class="lb-name" title="${p1.name}" style="font-weight:900;">${p1.name}</div>
+                ${getLbRoleBadgeHtml(p1, true)}
+                <div class="lb-spent" style="font-size:0.95rem;">Rp ${Number(p1.totalSpent).toLocaleString('id-ID')}</div>
+                <div class="lb-orders">${p1.totalOrders} order</div>
+              </div>
+            </div>
+          `;
+        }
+
+        // 3rd Place (Right)
+        if (p3) {
+          podiumHtml += `
+            <div class="lb-podium-col col-rank-3">
+              <div class="lb-crown-wrap">
+                <div class="lb-crown" style="color:#d97706;" title="Peringkat 3"><i class="fa-solid fa-medal"></i></div>
+              </div>
+              <div class="lb-podium-card lb-p3">
+                <div class="lb-avatar">${p3.name.slice(0, 2).toUpperCase()}</div>
+                <div class="lb-name" title="${p3.name}">${p3.name}</div>
+                ${getLbRoleBadgeHtml(p3, true)}
+                <div class="lb-spent">Rp ${Number(p3.totalSpent).toLocaleString('id-ID')}</div>
+                <div class="lb-orders">${p3.totalOrders} order</div>
+              </div>
+            </div>
+          `;
+        }
+
+        podiumEl.innerHTML = podiumHtml;
+
+        // Ranks 4 to 10
+        const rest = lb.slice(3, 10);
+        if (rest.length === 0) {
+          listEl.innerHTML = '<div style="text-align:center;padding:16px;font-size:0.78rem;color:var(--t3);">Belum ada peringkat selanjutnya.</div>';
+        } else {
+          let listHtml = '';
+          rest.forEach((item, idx) => {
+            const rankNum = idx + 4;
+            listHtml += `
+              <div class="lb-item">
+                <div class="lb-item-l">
+                  <span class="lb-rank">${rankNum}</span>
+                  <div>
+                    <div class="lb-name" style="font-size:0.84rem;display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+                      <span>${item.name}</span>
+                      ${getLbRoleBadgeHtml(item, false)}
+                    </div>
+                    <div class="lb-orders" style="font-size:0.72rem;margin-top:2px;">
+                      ${item.totalOrders} transaksi berhasil
+                    </div>
+                  </div>
+                </div>
+                <div class="lb-item-r">
+                  <div class="lb-spent">Rp ${Number(item.totalSpent).toLocaleString('id-ID')}</div>
+                </div>
+              </div>
+            `;
+          });
+          listEl.innerHTML = listHtml;
+        }
+
+      } catch (e) {
+        podiumEl.innerHTML = '<div style="color:var(--rose);padding:20px;text-align:center;">Gagal memuat leaderboard.</div>';
+      }
+    }
+
+    function toggleSubUserDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('subUserDropdown');
+      if (dd) dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+    }
+    window.addEventListener('click', function(e) {
+      const dd = document.getElementById('subUserDropdown');
+      if (dd && dd.style.display !== 'none' && !dd.contains(e.target)) {
+        dd.style.display = 'none';
+      }
+    });
+    function subLogout() {
+      localStorage.removeItem('seika_user_token');
+      localStorage.removeItem('seika_user_data');
+      window.location.reload();
+    }
+
+    function safeEscape(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function initAuthTop() {
+      const authToken = localStorage.getItem('seika_user_token');
+      const savedUser = localStorage.getItem('seika_user_data') ? JSON.parse(localStorage.getItem('seika_user_data')) : null;
+      const authContainer = document.getElementById('authNavContainer');
+
+      if (authToken && savedUser) {
+        const firstName = savedUser.name ? savedUser.name.split(' ')[0] : 'Member';
+        const avatar = (typeof getSmartAvatar === 'function') 
+          ? getSmartAvatar(savedUser.avatar, savedUser.name) 
+          : (savedUser.avatar || '');
+        const avatarFallback = `if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${safeEscape(savedUser.name)}');`;
+        authContainer.innerHTML = `
+          <div style="position:relative;">
+            <div class="user-nav-pill" style="display:inline-flex;cursor:pointer;" onclick="toggleSubUserDropdown(event)" title="${savedUser.email}">
+              <img src="${avatar}" class="user-nav-avatar" alt="Avatar" onerror="${avatarFallback}">
+              <div class="user-nav-info">
+                <span class="user-nav-name">${firstName}</span>
+                <span class="user-nav-tag">5% OFF</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;color:var(--t3);margin-left:2px;"></i>
+            </div>
+            <div class="user-dropdown-menu" id="subUserDropdown" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:240px;background:var(--surface);border:1px solid var(--b1);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,0.25);padding:10px;z-index:99999;">
+              <div class="ud-head" style="padding:8px;border-bottom:1px solid var(--b1);margin-bottom:8px;display:flex;align-items:center;gap:10px;">
+                <img src="${avatar}" style="width:34px;height:34px;border-radius:50%;border:1.5px solid var(--a);" onerror="${avatarFallback}">
+                <div style="overflow:hidden;">
+                  <div style="font-size:0.82rem;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.name || 'Member'}</div>
+                  <div style="font-size:0.7rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.email || ''}</div>
+                </div>
+              </div>
+              <div class="ud-items" style="display:flex;flex-direction:column;gap:4px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-house" style="color:var(--a);"></i> Beranda Toko</a>
+                <a href="bansos.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:#f43f5e;font-weight:700;text-decoration:none;border-radius:8px;"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free (1GB)</a>
+                <a href="mypanel.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya</a>
+                <a href="riwayat.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-receipt" style="color:#f59e0b;"></i> Riwayat Pesanan</a>
+                <a href="addon.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-on Spek</a>
+                <a href="profile.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun</a>
+                <hr style="border:none;border-top:1px solid var(--b1);margin:4px 0;">
+                <a href="javascript:void(0)" onclick="subLogout()" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--rose);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar (Logout)</a>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        authContainer.innerHTML = `
+          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+            <i class="fa-solid fa-circle-user"></i> <span class="btn-top-auth-txt">Masuk</span>
+          </a>
+        `;
+      }
+    }
+
+    window.addEventListener('load', () => {
+      initAuthTop();
+      loadLeaderboardData();
+    });
+  </script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

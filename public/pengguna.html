@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="id" class="dark" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Direktori Pengguna &amp; Role – SeikaOne.id</title>
+  <meta name="description" content="Direktori pengguna, role akses, dan badge komunitas resmi di SeikaOne.id.">
+  <link rel="canonical" href="https://zyrostore.id/pengguna">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="vendor/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="vendor/fontawesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="vendor/fontawesome/all.min.css?v=6.5.0.3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('seika_theme') || 'cream';
+      if (saved === 'light') saved = 'cream';
+      document.documentElement.setAttribute('data-theme', saved);
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    })();
+  </script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .users-page-wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 10px 16px 50px;
+    }
+    @media (min-width: 1024px) {
+      .users-page-wrap {
+        max-width: 1200px;
+        padding: 20px 24px 60px;
+      }
+    }
+
+    /* HERO BANNER */
+    .users-hero {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 28px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .users-hero::before {
+      display: none;
+    }
+    .users-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(236,72,153,0.18);
+      color: #ec4899;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(236,72,153,0.35);
+    }
+    .users-hero-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .users-hero-sub {
+      font-size: 0.85rem;
+      color: var(--t3);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* KPI STATS GRID */
+    .users-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 768px) {
+      .users-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+    .user-stat-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .user-stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(236,72,153,0.4);
+    }
+    .user-stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .user-stat-info {
+      overflow: hidden;
+      flex: 1;
+    }
+    .user-stat-val {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--t1);
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.2;
+    }
+    .user-stat-lbl {
+      font-size: 0.72rem;
+      color: var(--t3);
+      font-weight: 600;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* SEARCH & FILTER CONTROLS */
+    .users-control-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .users-search-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 768px) {
+      .users-search-row {
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      .users-filter-btn {
+        flex-shrink: 0;
+      }
+    }
+    .users-search-wrap {
+      flex: 1;
+      position: relative;
+      min-width: 220px;
+    }
+    .users-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--t3);
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+    .users-search-input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 10px;
+      color: var(--t1);
+      font-size: 0.86rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .users-search-input:focus {
+      border-color: #ec4899;
+    }
+
+    .users-filter-select {
+      display: none !important;
+    }
+
+    .users-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 10px;
+      color: var(--t1);
+      font-size: 0.84rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .users-filter-btn:hover {
+      border-color: #ec4899;
+      background: rgba(236,72,153,0.06);
+    }
+    @media (max-width: 680px) {
+      .users-search-row {
+        flex-direction: column;
+      }
+      .users-search-wrap, .users-filter-btn {
+        width: 100%;
+      }
+    }
+
+    /* LEGAL ROLE CATEGORY BREAKDOWN CARDS */
+    .cp-legal-cat-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--b-strong) !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .cp-legal-cat-card.active {
+      border-color: var(--a, #d97706) !important;
+      background: var(--abg, rgba(217,119,6,0.08)) !important;
+      box-shadow: 0 0 0 1.5px var(--a, #d97706), 0 6px 18px rgba(217,119,6,0.18) !important;
+    }
+    body.dark .cp-legal-cat-card {
+      background: #0f172a !important;
+      border-color: #1e293b !important;
+    }
+    body.dark .cp-legal-cat-card:hover {
+      border-color: #334155 !important;
+    }
+    body.dark .cp-legal-cat-card.active {
+      border-color: #38bdf8 !important;
+      background: rgba(56, 189, 248, 0.1) !important;
+      box-shadow: 0 0 0 1.5px #38bdf8, 0 6px 18px rgba(56, 189, 248, 0.2) !important;
+    }
+
+    /* CUSTOM IN-APP BOTTOM SHEET / MODAL FOR ROLE FILTER */
+    @media (max-width: 680px) {
+      body.sheet-open {
+        overflow: hidden !important;
+        padding-bottom: 0 !important;
+      }
+    }
+    body.sheet-open,
+    body:has(.role-sheet-backdrop.show) {
+      padding-bottom: 0 !important;
+    }
+    .role-sheet-backdrop {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100% !important;
+      height: 100dvh !important;
+      background: rgba(0, 0, 0, 0.72) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      z-index: 999999 !important;
+      display: flex !important;
+      align-items: flex-end !important; /* Bottom sheet on mobile */
+      justify-content: center !important;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.24s ease, visibility 0.24s ease;
+      touch-action: pan-y !important;
+    }
+    .role-sheet-backdrop.show {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+    .role-sheet-box {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 22px 22px 0 0;
+      width: 100%;
+      max-width: 580px;
+      height: 85dvh !important;
+      height: 85vh !important;
+      max-height: 85dvh !important;
+      max-height: 85vh !important;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.45);
+      touch-action: pan-y !important;
+      overflow: hidden !important;
+      margin-bottom: 0 !important;
+    }
+    .role-sheet-backdrop.show .role-sheet-box {
+      transform: translateY(0);
+    }
+    @media (min-width: 681px) {
+      .role-sheet-backdrop {
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 24px !important;
+      }
+      .role-sheet-box {
+        border-radius: 22px !important;
+        transform: scale(0.94);
+        height: auto !important;
+        max-height: 82vh !important;
+        max-width: 580px !important;
+        margin: auto !important;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55) !important;
+      }
+      .role-sheet-backdrop.show .role-sheet-box {
+        transform: scale(1) !important;
+      }
+      .role-sheet-handle {
+        display: none !important;
+      }
+    }
+    .role-sheet-top-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--b1);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .role-sheet-handle {
+      width: 44px;
+      height: 4px;
+      background: var(--b2);
+      border-radius: 4px;
+      margin: 10px auto 4px auto;
+      flex-shrink: 0;
+    }
+    .role-sheet-header {
+      padding: 10px 18px 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .role-sheet-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .role-sheet-close {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: var(--t2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .role-sheet-close:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border-color: #ef4444;
+    }
+    .role-sheet-content {
+      padding: 14px 16px;
+      padding-bottom: max(60px, env(safe-area-inset-bottom, 60px)) !important;
+      overflow-y: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
+      overscroll-behavior: contain !important;
+      flex: 1 1 0px !important;
+      min-height: 0 !important;
+      height: 100% !important;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      touch-action: pan-y !important;
+    }
+    .role-sheet-content::-webkit-scrollbar {
+      width: 5px;
+    }
+    .role-sheet-content::-webkit-scrollbar-thumb {
+      background: var(--b2);
+      border-radius: 4px;
+    }
+    .role-sheet-group-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--t3);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .role-sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      touch-action: pan-y !important;
+    }
+    @media (max-width: 480px) {
+      .role-sheet-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .role-sheet-item {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-family: inherit;
+      color: var(--t1);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: left;
+      touch-action: pan-y !important;
+    }
+    .role-sheet-item:hover {
+      border-color: #ec4899;
+      background: rgba(236, 72, 153, 0.05);
+      transform: translateY(-1px);
+    }
+    .role-sheet-item.active {
+      border-color: #ec4899;
+      background: rgba(236, 72, 153, 0.12);
+      color: #ec4899;
+      box-shadow: 0 0 0 1px #ec4899;
+    }
+    .role-sheet-item .rsi-check {
+      font-size: 0.85rem;
+      color: #ec4899;
+      display: none;
+    }
+    .role-sheet-item.active .rsi-check {
+      display: block;
+    }
+
+    /* FILTER PILLS */
+    .filter-pills-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .filter-pills-bar::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 100px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--t2);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .filter-pill:hover {
+      color: var(--t1);
+      border-color: rgba(236,72,153,0.4);
+    }
+    .filter-pill.active {
+      background: var(--surface);
+      color: #ec4899;
+      border-color: #ec4899;
+      box-shadow: 0 2px 8px rgba(236,72,153,0.15);
+    }
+
+    /* DIRECTORY CONTAINER */
+    .users-table-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .users-table-wrap {
+      overflow-x: auto;
+      width: 100%;
+    }
+    .users-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .users-table th {
+      padding: 14px 18px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--b1);
+      color: var(--t2);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .users-table td {
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--b1);
+      vertical-align: middle;
+    }
+    .users-table tr:hover {
+      background: rgba(255,255,255,0.015);
+    }
+
+    /* USER AVATAR & IDENTITY */
+    .user-cell-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .user-avatar-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--bg2);
+      border: 1.5px solid var(--b1);
+      flex-shrink: 0;
+    }
+    .user-name-text {
+      font-weight: 800;
+      color: var(--t1);
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .user-uname-text {
+      font-size: 0.73rem;
+      color: var(--t3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* VERIFIED BADGES & ICONS */
+    .v-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      vertical-align: middle;
+      cursor: help;
+      position: relative;
+      line-height: 1;
+    }
+    .v-badge i {
+      display: inline-block;
+      vertical-align: middle;
+      transition: transform 0.15s ease;
+    }
+    .v-badge:hover i {
+      transform: scale(1.18);
+    }
+    .v-public i {
+      color: #0284c7;
+      font-size: 0.86rem;
+    }
+    .v-private i {
+      color: #10b981;
+      font-size: 0.86rem;
+    }
+    .v-enterprise i {
+      color: #9333ea;
+      font-size: 0.86rem;
+    }
+    .v-premium i {
+      color: #2563eb;
+      font-size: 0.86rem;
+    }
+    .v-illegal i {
+      color: #e11d48;
+      font-size: 0.82rem;
+    }
+    .v-owner {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .v-owner i.fa-crown {
+      color: #f59e0b;
+      font-size: 0.78rem;
+    }
+    .v-owner i.fa-circle-check {
+      color: #f59e0b;
+      font-size: 0.82rem;
+    }
+    .v-owner:hover {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.5);
+    }
+
+    /* VERIFIED BADGE LEGEND */
+    .verified-legend-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rmd);
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      font-size: 0.76rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .legend-title {
+      font-weight: 800;
+      color: var(--t1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      margin-right: 4px;
+      font-size: 0.78rem;
+    }
+    .legend-items {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--t2);
+      font-weight: 600;
+      white-space: nowrap;
+      background: var(--bg2);
+      padding: 4px 9px;
+      border-radius: 8px;
+      border: 1px solid var(--b1);
+      font-size: 0.74rem;
+    }
+
+    /* STATUS ROLE PILLS */
+    .status-role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .status-role-badge.has-role {
+      background: rgba(16,185,129,0.14);
+      color: #10b981;
+      border: 1px solid rgba(16,185,129,0.3);
+    }
+    .status-role-badge.no-role {
+      background: rgba(100,116,139,0.14);
+      color: #94a3b8;
+      border: 1px solid rgba(100,116,139,0.3);
+    }
+
+    /* ROLE BADGE */
+    .role-badge-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* RESPONSIVE PENGGUNA VIEW (TABLE ON DESKTOP, COMPACT CARDS ON MOBILE) */
+    .users-loader-bar {
+      height: 3px;
+      width: 100%;
+      background: #ec4899;
+      border-radius: 3px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      margin-bottom: 8px;
+    }
+    .users-loader-bar.active {
+      opacity: 1;
+    }
+    .users-desktop-wrap {
+      display: block;
+    }
+    .users-mobile-wrap {
+      display: none;
+      transition: opacity 0.22s ease;
+    }
+    .users-table-card {
+      transition: opacity 0.22s ease;
+    }
+    .users-mobile-wrap.is-loading, .users-table-card.is-loading {
+      opacity: 0.38;
+      pointer-events: none;
+    }
+    .user-card-mob {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      padding: 11px 13px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      animation: fadeInCard 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeInCard {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .user-card-mob:hover {
+      border-color: rgba(236,72,153,0.35);
+      background: var(--surface);
+    }
+    @media (max-width: 680px) {
+      .users-desktop-wrap {
+        display: none !important;
+      }
+      .users-mobile-wrap {
+        display: flex !important;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+      }
+    }
+
+    /* PAGINATION */
+    .users-pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--surface);
+      border-top: 1px solid var(--b1);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pagination-info {
+      font-size: 0.78rem;
+      color: var(--t3);
+    }
+    .pagination-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-pag {
+      padding: 6px 14px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 8px;
+      color: var(--t1);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-pag:hover:not(:disabled) {
+      background: rgba(236,72,153,0.15);
+      border-color: #ec4899;
+      color: #ec4899;
+    }
+    .btn-pag:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* EMPTY STATE */
+    .users-empty {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--t3);
+    }
+    .users-empty i {
+      font-size: 2.2rem;
+      color: var(--t3);
+      margin-bottom: 12px;
+      display: block;
+    }
+  </style>
+</head>
+<body id="body">
+
+  <!-- OFFCANVAS SIDEBAR -->
+  <div class="sb-ov" id="sbOv" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="assets/logo-animated-dark.webp" alt="SeikaOne Logo" class="zyro-logo-animated" data-logo-type="full">
+      <span class="sb-brand-txt">SeikaOne <span class="brand-api">ID</span></span>
+      <button class="sb-x" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="snav">
+      <div id="sidebarUserBox" style="padding:10px 14px;background:var(--bg2);border-radius:12px;margin:0 12px 10px;display:none;align-items:center;gap:10px;cursor:pointer;" onclick="window.location.href='/profile'" title="Klik untuk Pengaturan Akun">
+        <img src="assets/logo.png" id="sbUserAvatar" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--a);">
+        <div style="overflow:hidden;flex:1;">
+          <b id="sbUserName" style="font-size:0.8rem;color:var(--t1);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Member</b>
+          <span style="font-size:0.65rem;color:#22c55e;font-weight:700;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Member Aktif</span>
+        </div>
+        <i class="fa-solid fa-gear" style="font-size:0.8rem;color:var(--t3);"></i>
+      </div>
+
+      <!-- KATEGORI 1: MENU UTAMA & BELANJA -->
+      <div class="snav-group" id="sbGroupShop">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupShop')">
+          <span class="snh-left"><i class="fa-solid fa-store" style="color:var(--a);"></i> Menu &amp; Belanja</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="index.html"><i class="fa-solid fa-cart-shopping"></i> SeikaOne</a>
+          <a href="cek-pesanan.html"><i class="fa-solid fa-magnifying-glass" style="color:var(--a);"></i> Cek Pesanan</a>
+          <a href="riwayat.html"><i class="fa-solid fa-receipt" style="color:#06b6d4;"></i> Riwayat Pesanan</a>
+          <a href="leaderboard.html"><i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Leaderboard Pembeli</a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 2: LAYANAN PANEL & BANSOS -->
+      <div class="snav-group" id="sbGroupServer">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupServer')">
+          <span class="snh-left"><i class="fa-solid fa-server" style="color:#10b981;"></i> Server &amp; Panel</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="cpanel.html"><i class="fa-solid fa-gauge-high" style="color:#0ea5e9;"></i> CPanel Control <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">CLOUD</span></a>
+          <a href="bansos.html"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free <span class="snav-badge" style="background:rgba(244,63,94,0.18);color:#f43f5e;">1GB FREE</span></a>
+          <a href="mypanel.html"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">PTERO</span></a>
+          <a href="addon.html"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">+SPEK</span></a>
+          <a href="api-key.html" onclick="return handleLockedMenu(event, 'Kelola API Key Reseller')"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> Kelola API Key Reseller <span class="snav-badge" style="background:rgba(239,68,68,0.18);color:#ef4444;"><i class="fa-solid fa-lock"></i> LOCK</span></a>
+          <a href="docs.html" onclick="return handleLockedMenu(event, 'Dokumentasi API Docs')"><i class="fa-solid fa-book-bookmark" style="color:#10b981;"></i> Dokumentasi API Docs <span class="snav-badge" style="background:rgba(239,68,68,0.18);color:#ef4444;"><i class="fa-solid fa-lock"></i> LOCK</span></a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 3: BANTUAN & CS (SUPPORT) -->
+      <div class="snav-group" id="sbGroupSupport">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupSupport')">
+          <span class="snh-left"><i class="fa-solid fa-headset" style="color:#06b6d4;"></i> Support &amp; Bantuan</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="index.html"><i class="fa-solid fa-comments" style="color:#a855f7;"></i> Live Chat CS (AI)</a>
+          <a href="garansi.html"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Klaim Garansi Panel</a>
+          <a href="panduan.html"><i class="fa-solid fa-book-open" style="color:#eab308;"></i> Panduan &amp; FAQ <span class="snav-badge">BACA</span></a>
+          <a href="https://t.me/SeikaOne" id="sbTelegramCs" class="store-telegram-cs" target="_blank" rel="noopener"><i class="fa-solid fa-headset"></i> Hubungi CS Telegram</a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 4: AKUN & KOMUNITAS -->
+      <div class="snav-group" id="sbGroupAccount">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupAccount')">
+          <span class="snh-left"><i class="fa-solid fa-user-gear" style="color:#a855f7;"></i> Akun &amp; Komunitas</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="profile.html" id="sbAccountSettingsLink"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun / Profil</a>
+          <a href="pengguna.html" class="act"><i class="fa-solid fa-users" style="color:#ec4899;"></i> Pengguna &amp; Role <span class="snav-badge" style="background:rgba(236,72,153,0.18);color:#ec4899;">KOMUNITAS</span></a>
+          <a href="https://t.me/SeikaOneOfficial" id="sbTelegramChannel" class="store-telegram-channel" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Channel Telegram</a>
+          <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" id="sbWhatsappChannel" class="store-whatsapp-channel" target="_blank" rel="noopener" style="color:#22c55e;"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> Saluran WhatsApp</a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <button class="ib raw" onclick="toggleSidebar()" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="cpanel.html" class="btn-top-auth" style="text-decoration:none;background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span class="btn-top-auth-txt">CPanel</span>
+        </a>
+        <a href="leaderboard.html" class="btn-top-auth" style="text-decoration:none;background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);">
+          <i class="fa-solid fa-trophy"></i>
+          <span class="btn-top-auth-txt">Leaderboard</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="users-page-wrap">
+    
+    <!-- HERO HEADER -->
+    <div class="users-hero">
+      <div class="users-hero-badge">
+        <i class="fa-solid fa-users-rays"></i> KOMUNITAS SEIKAONE
+      </div>
+      <h1 class="users-hero-title">
+        <i class="fa-solid fa-users" style="color:#ec4899;"></i> Direktori Pengguna &amp; Role
+      </h1>
+      <p class="users-hero-sub">
+        Daftar seluruh member komunitas ekosistem SeikaOne. Cek total member terdaftar, status kepemilikan role, dan statistik server panel secara transparan.
+      </p>
+    </div>
+
+    <!-- 4 KPI STATS GRID -->
+    <div class="users-stats-grid">
+      <div class="user-stat-card">
+        <div class="user-stat-icon" style="background:rgba(236,72,153,0.15);color:#ec4899;">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="user-stat-info">
+          <div class="user-stat-val" id="statTotalUsers">...</div>
+          <div class="user-stat-lbl">Total Pengguna</div>
+        </div>
+      </div>
+
+      <div class="user-stat-card">
+        <div class="user-stat-icon" style="background:rgba(16,185,129,0.15);color:#10b981;">
+          <i class="fa-solid fa-crown"></i>
+        </div>
+        <div class="user-stat-info">
+          <div class="user-stat-val" id="statWithRole" style="color:#10b981;">...</div>
+          <div class="user-stat-lbl">Memiliki Role Khusus</div>
+        </div>
+      </div>
+
+      <div class="user-stat-card">
+        <div class="user-stat-icon" style="background:rgba(100,116,139,0.15);color:#94a3b8;">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="user-stat-info">
+          <div class="user-stat-val" id="statWithoutRole" style="color:#94a3b8;">...</div>
+          <div class="user-stat-lbl">Member Biasa / Free</div>
+        </div>
+      </div>
+
+      <div class="user-stat-card">
+        <div class="user-stat-icon" style="background:rgba(14,165,233,0.15);color:#0ea5e9;">
+          <i class="fa-solid fa-server"></i>
+        </div>
+        <div class="user-stat-info">
+          <div class="user-stat-val" id="statTotalPanels" style="color:#0ea5e9;">...</div>
+          <div class="user-stat-lbl">Total Server Panel</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGAL ROLE BREAKDOWN PER KATEGORI -->
+    <div class="users-control-card cp-legal-cat-wrapper" style="margin-bottom:18px;padding:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(217,119,6,0.12);color:var(--a);display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;">
+            <i class="fa-solid fa-certificate"></i>
+          </div>
+          <div>
+            <div style="font-size:0.86rem;font-weight:800;color:var(--t1);letter-spacing:0.2px;">
+              Distribusi Role Legal per Kategori
+            </div>
+            <div style="font-size:0.7rem;color:var(--t3);font-weight:600;">
+              Klik salah satu kartu untuk filter cepat daftar pengguna
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span id="statLegalTotalPill" style="font-size:0.72rem;font-weight:800;padding:4px 10px;border-radius:9999px;background:rgba(217,119,6,0.1);color:var(--a);border:1px solid rgba(217,119,6,0.25);">
+            Total: ... Member Legal
+          </span>
+          <button type="button" class="btn-clear-search" id="btnResetPenggunaRoleCat" onclick="filterByRoleCategory('all')" style="display:none;padding:4px 9px;font-size:0.7rem;cursor:pointer;">
+            <i class="fa-solid fa-xmark"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="cp-legal-cat-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:10px;">
+        <!-- 1. Legal Publik -->
+        <div class="cp-legal-cat-card" id="pgCardLegalPublic" onclick="filterByRoleCategory('legal_public')" style="padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);border:1px solid var(--b1);background:var(--bg2);position:relative;display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:0.76rem;font-weight:800;color:#0284c7;display:flex;align-items:center;gap:5px;">
+              <i class="fa-solid fa-globe" style="font-size:0.8rem;"></i> Legal Publik
+            </span>
+            <span style="font-size:0.6rem;padding:2px 6px;border-radius:4px;background:rgba(2,132,199,0.12);color:#0284c7;font-weight:800;">Node 1</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:2px;">
+            <span style="font-size:1.35rem;font-weight:900;color:var(--t1);font-family:'JetBrains Mono',monospace;" id="statLegalPublic">...</span>
+            <span style="font-size:0.72rem;color:var(--t3);font-weight:700;">Member</span>
+          </div>
+          <div style="font-size:0.66rem;color:var(--t3);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="subLegalPublic" title="Reseller, PT, ADP, Owner, CEO">
+            Reseller, PT, ADP, Owner, CEO
+          </div>
+        </div>
+
+        <!-- 2. Legal Privat -->
+        <div class="cp-legal-cat-card" id="pgCardLegalPrivate" onclick="filterByRoleCategory('legal_private')" style="padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);border:1px solid var(--b1);background:var(--bg2);position:relative;display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:0.76rem;font-weight:800;color:#059669;display:flex;align-items:center;gap:5px;">
+              <i class="fa-solid fa-shield-halved" style="font-size:0.8rem;"></i> Legal Privat
+            </span>
+            <span style="font-size:0.6rem;padding:2px 6px;border-radius:4px;background:rgba(5,150,105,0.12);color:#059669;font-weight:800;">Bandung</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:2px;">
+            <span style="font-size:1.35rem;font-weight:900;color:var(--t1);font-family:'JetBrains Mono',monospace;" id="statLegalPrivate">...</span>
+            <span style="font-size:0.72rem;color:var(--t3);font-weight:700;">Member</span>
+          </div>
+          <div style="font-size:0.66rem;color:var(--t3);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="subLegalPrivate" title="Private Reseller, Private PT">
+            Private Reseller, Private PT
+          </div>
+        </div>
+
+        <!-- 3. Enterprise -->
+        <div class="cp-legal-cat-card" id="pgCardEnterprise" onclick="filterByRoleCategory('enterprise')" style="padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);border:1px solid var(--b1);background:var(--bg2);position:relative;display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:0.76rem;font-weight:800;color:#7c3aed;display:flex;align-items:center;gap:5px;">
+              <i class="fa-solid fa-building" style="font-size:0.8rem;"></i> Enterprise
+            </span>
+            <span style="font-size:0.6rem;padding:2px 6px;border-radius:4px;background:rgba(124,58,237,0.12);color:#7c3aed;font-weight:800;">64GB</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:2px;">
+            <span style="font-size:1.35rem;font-weight:900;color:var(--t1);font-family:'JetBrains Mono',monospace;" id="statEnterprise">...</span>
+            <span style="font-size:0.72rem;color:var(--t3);font-weight:700;">Member</span>
+          </div>
+          <div style="font-size:0.66rem;color:var(--t3);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="subEnterprise" title="Enterprise Reseller, Enterprise PT">
+            Enterprise Reseller, PT
+          </div>
+        </div>
+
+        <!-- 4. Premium -->
+        <div class="cp-legal-cat-card" id="pgCardPremium" onclick="filterByRoleCategory('premium')" style="padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);border:1px solid var(--b1);background:var(--bg2);position:relative;display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:0.76rem;font-weight:800;color:#2563eb;display:flex;align-items:center;gap:5px;">
+              <i class="fa-solid fa-gem" style="font-size:0.8rem;"></i> Premium
+            </span>
+            <span style="font-size:0.6rem;padding:2px 6px;border-radius:4px;background:rgba(37,99,235,0.12);color:#2563eb;font-weight:800;">Sapphire</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:2px;">
+            <span style="font-size:1.35rem;font-weight:900;color:var(--t1);font-family:'JetBrains Mono',monospace;" id="statPremium">...</span>
+            <span style="font-size:0.72rem;color:var(--t3);font-weight:700;">Member</span>
+          </div>
+          <div style="font-size:0.66rem;color:var(--t3);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="subPremium" title="Premium Reseller, Partner, Owner">
+            Reseller, Partner, Owner
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERIFIED BADGE LEGEND -->
+    <div class="verified-legend-bar">
+      <span class="legend-title"><i class="fa-solid fa-certificate" style="color:#0ea5e9;"></i> Status Verifikasi:</span>
+      <div class="legend-items">
+        <span class="legend-item"><i class="fa-solid fa-circle-check" style="color:#0ea5e9;"></i> Legal Publik (Biru)</span>
+        <span class="legend-item"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Legal Privat (Hijau)</span>
+        <span class="legend-item"><i class="fa-solid fa-circle-check" style="color:#a855f7;"></i> Enterprise (Ungu)</span>
+        <span class="legend-item"><i class="fa-solid fa-circle-check" style="color:#2563eb;"></i> Premium (Sapphire)</span>
+        <span class="legend-item"><span class="v-owner" style="padding:1px 5px;"><i class="fa-solid fa-crown"></i><i class="fa-solid fa-circle-check"></i></span> Founder &amp; Owner</span>
+        <span class="legend-item"><i class="fa-solid fa-bolt" style="color:#e11d48;"></i> Panel Ilegal</span>
+        <span class="legend-item"><i class="fa-regular fa-circle" style="color:#94a3b8;"></i> Member Biasa</span>
+      </div>
+    </div>
+
+    <!-- SEARCH & CONTROLS -->
+    <div class="users-control-card">
+      <div class="users-search-row">
+        <div class="users-search-wrap">
+          <i class="fa-solid fa-magnifying-glass users-search-icon"></i>
+          <input type="text" class="users-search-input" id="inputSearchUser" placeholder="Cari nama, @username, atau role member..." oninput="handleSearchDebounce(this.value)">
+        </div>
+
+        <!-- Hidden select for full JS & search compatibility -->
+        <select class="users-filter-select" id="selectRoleFilter" style="display:none;" onchange="setRoleFilter(this.value)">
+          <option value="all">Semua Pengguna</option>
+          <option value="with_role">Hanya yang Memiliki Role</option>
+          <option value="without_role">Hanya Member Biasa (Free)</option>
+          <optgroup label="Kategori Role Terverifikasi">
+            <option value="legal_public">Legal Publik (Verified Biru)</option>
+            <option value="legal_private">Legal Privat (Verified Hijau)</option>
+            <option value="enterprise">Enterprise (Verified Ungu)</option>
+            <option value="premium">Premium (Verified Sapphire)</option>
+            <option value="owner">Founder &amp; Owner</option>
+            <option value="illegal">Panel Ilegal</option>
+          </optgroup>
+          <optgroup label="Owner &amp; Manajemen">
+            <option value="owner">Owner / Founder</option>
+            <option value="ceo">CEO</option>
+            <option value="adp">ADP</option>
+          </optgroup>
+          <optgroup label="Server Legal Publik">
+            <option value="pt">Public PT</option>
+            <option value="reseller">Public Reseller</option>
+          </optgroup>
+          <optgroup label="Server Legal Privat">
+            <option value="private_pt">Private PT</option>
+            <option value="private_reseller">Private Reseller</option>
+          </optgroup>
+          <optgroup label="Enterprise &amp; Premium">
+            <option value="enterprise_pt">Enterprise PT</option>
+            <option value="enterprise_reseller">Enterprise Reseller</option>
+            <option value="premium_reseller">Premium Reseller</option>
+            <option value="premium_partner">Premium Partner</option>
+            <option value="premium_owner">Premium Owner</option>
+          </optgroup>
+          <optgroup label="Server Panel Ilegal">
+            <option value="illegal">Semua Role Ilegal</option>
+            <option value="illegal_ress">Ilegal Reseller</option>
+            <option value="illegal_prem">Ilegal Premium</option>
+            <option value="illegal_adp">Ilegal ADP</option>
+            <option value="illegal_pt">Ilegal PT</option>
+            <option value="illegal_tk">Ilegal TK</option>
+            <option value="illegal_owner">Ilegal Owner</option>
+            <option value="illegal_ceo">Ilegal CEO</option>
+            <option value="illegal_security">Ilegal Security</option>
+            <option value="illegal_svip">Ilegal SVIP</option>
+            <option value="illegal_dev">Ilegal Developer</option>
+            <option value="illegal_pemilik">Ilegal Pemilik</option>
+            <option value="illegal_cofounder">Ilegal Co-Founder</option>
+            <option value="illegal_king">Ilegal KING</option>
+            <option value="illegal_imo">Ilegal Immortal</option>
+            <option value="illegal_god">Ilegal GOD</option>
+          </optgroup>
+        </select>
+
+        <!-- Custom Filter Button Trigger (No Native Select Dialog) -->
+        <button type="button" class="users-filter-btn" id="btnOpenRoleFilterSheet" onclick="openRoleFilterSheet()">
+          <span id="roleFilterCurrentLabel"><i class="fa-solid fa-filter" style="color:#ec4899;margin-right:6px;"></i> Semua Pengguna</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;opacity:0.6;margin-left:8px;"></i>
+        </button>
+      </div>
+
+      <!-- FILTER QUICK PILLS -->
+      <div class="filter-pills-bar">
+        <button class="filter-pill active" data-filter="all" onclick="setRoleFilter('all')">
+          <i class="fa-solid fa-users"></i> Semua Pengguna
+        </button>
+        <button class="filter-pill" data-filter="with_role" onclick="setRoleFilter('with_role')">
+          <i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Memiliki Role
+        </button>
+        <button class="filter-pill" data-filter="legal_public" onclick="setRoleFilter('legal_public')">
+          <i class="fa-solid fa-circle-check" style="color:#0ea5e9;"></i> Legal Publik
+        </button>
+        <button class="filter-pill" data-filter="legal_private" onclick="setRoleFilter('legal_private')">
+          <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Legal Privat
+        </button>
+        <button class="filter-pill" data-filter="enterprise" onclick="setRoleFilter('enterprise')">
+          <i class="fa-solid fa-circle-check" style="color:#a855f7;"></i> Enterprise
+        </button>
+        <button class="filter-pill" data-filter="premium" onclick="setRoleFilter('premium')">
+          <i class="fa-solid fa-circle-check" style="color:#3b82f6;"></i> Premium
+        </button>
+        <button class="filter-pill" data-filter="without_role" onclick="setRoleFilter('without_role')">
+          <i class="fa-solid fa-user"></i> Free
+        </button>
+        <button class="filter-pill" data-filter="owner" onclick="setRoleFilter('owner')">
+          <i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Owner
+        </button>
+        <button class="filter-pill" data-filter="illegal" onclick="setRoleFilter('illegal')">
+          <i class="fa-solid fa-bolt" style="color:#ef4444;"></i> Ilegal
+        </button>
+      </div>
+    </div>
+
+    <!-- USERS DIRECTORY TABLE -->
+    <div class="users-loader-bar" id="usersFilterLoaderBar"></div>
+    <div class="users-table-card">
+      <!-- Desktop Table (Screen > 680px) -->
+      <div class="users-desktop-wrap" style="overflow-x:auto;">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px;">PENGGUNA</th>
+              <th style="min-width:140px;">STATUS ROLE</th>
+              <th style="min-width:180px;">ROLE AKTIF</th>
+              <th style="min-width:120px;">TOTAL PANEL</th>
+              <th style="min-width:140px;">BERGABUNG</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr>
+              <td colspan="5" class="users-empty">
+                <i class="fa-solid fa-circle-notch fa-spin" style="color:#ec4899;"></i>
+                <div>Memuat data pengguna komunitas...</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards View (Screen <= 680px, No horizontal scrolling!) -->
+      <div class="users-mobile-wrap" id="usersMobileCardsList">
+        <div class="users-empty" style="padding:24px 16px;">
+          <i class="fa-solid fa-circle-notch fa-spin" style="color:#ec4899;"></i>
+          <div>Memuat data pengguna komunitas...</div>
+        </div>
+      </div>
+    </div>
+
+      <!-- PAGINATION BAR -->
+      <div class="users-pagination-bar">
+        <div class="pagination-info" id="paginationInfo">
+          Memuat...
+        </div>
+        <div class="pagination-actions">
+          <button class="btn-pag" id="btnPrevPage" onclick="changePage(-1)" disabled>
+            <i class="fa-solid fa-arrow-left"></i> Prev
+          </button>
+          <button class="btn-pag" id="btnNextPage" onclick="changePage(1)" disabled>
+            Next <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- CUSTOM IN-APP BOTTOM SHEET / MODAL FOR ROLE FILTER -->
+  <div class="role-sheet-backdrop" id="modalRoleFilterSheet" onclick="handleRoleSheetBackdropClick(event)">
+    <div class="role-sheet-box" onclick="event.stopPropagation()">
+      <div class="role-sheet-top-bar">
+        <div class="role-sheet-handle"></div>
+        <div class="role-sheet-header">
+          <div class="role-sheet-title">
+            <i class="fa-solid fa-filter" style="color:#ec4899;"></i> Pilih Filter Role
+          </div>
+          <button type="button" class="role-sheet-close" onclick="closeRoleFilterSheet()" aria-label="Tutup">&times;</button>
+        </div>
+      </div>
+
+      <div class="role-sheet-content">
+        <!-- Kategori Utama -->
+        <div>
+          <div class="role-sheet-group-title"><i class="fa-solid fa-layer-group"></i> Kategori Utama</div>
+          <div class="role-sheet-grid">
+            <button type="button" class="role-sheet-item active" data-val="all" onclick="selectRoleFilterFromSheet('all', 'Semua Pengguna')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-users" style="color:#ec4899;"></i> Semua Pengguna</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="with_role" onclick="selectRoleFilterFromSheet('with_role', 'Memiliki Role')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Memiliki Role</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="without_role" onclick="selectRoleFilterFromSheet('without_role', 'Member Biasa (Free)')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-user" style="color:#94a3b8;"></i> Member Biasa / Free</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role Terverifikasi -->
+        <div>
+          <div class="role-sheet-group-title"><i class="fa-solid fa-certificate" style="color:#0ea5e9;"></i> Kategori Terverifikasi</div>
+          <div class="role-sheet-grid">
+            <button type="button" class="role-sheet-item" data-val="legal_public" onclick="selectRoleFilterFromSheet('legal_public', 'Legal Publik (Biru)')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-circle-check" style="color:#0ea5e9;"></i> Legal Publik (Biru)</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="legal_private" onclick="selectRoleFilterFromSheet('legal_private', 'Legal Privat (Hijau)')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Legal Privat (Hijau)</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="enterprise" onclick="selectRoleFilterFromSheet('enterprise', 'Enterprise (Ungu)')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-circle-check" style="color:#a855f7;"></i> Enterprise (Ungu)</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="premium" onclick="selectRoleFilterFromSheet('premium', 'Premium (Sapphire)')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-circle-check" style="color:#2563eb;"></i> Premium (Sapphire)</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="owner" onclick="selectRoleFilterFromSheet('owner', 'Founder & Owner')">
+              <span style="display:flex;align-items:center;gap:8px;"><span class="v-owner" style="padding:0 4px;"><i class="fa-solid fa-crown"></i><i class="fa-solid fa-circle-check"></i></span> Founder &amp; Owner</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="illegal" onclick="selectRoleFilterFromSheet('illegal', 'Panel Ilegal')">
+              <span style="display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-bolt" style="color:#e11d48;"></i> Panel Ilegal</span>
+              <i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role Server Legal Spesifik -->
+        <div>
+          <div class="role-sheet-group-title"><i class="fa-solid fa-server" style="color:#0ea5e9;"></i> Role Server Legal Spesifik</div>
+          <div class="role-sheet-grid">
+            <button type="button" class="role-sheet-item" data-val="pt" onclick="selectRoleFilterFromSheet('pt', 'Public PT')">
+              <span>Public PT</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="reseller" onclick="selectRoleFilterFromSheet('reseller', 'Public Reseller')">
+              <span>Public Reseller</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="private_pt" onclick="selectRoleFilterFromSheet('private_pt', 'Private PT')">
+              <span>Private PT</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="private_reseller" onclick="selectRoleFilterFromSheet('private_reseller', 'Private Reseller')">
+              <span>Private Reseller</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="enterprise_pt" onclick="selectRoleFilterFromSheet('enterprise_pt', 'Enterprise PT')">
+              <span>Enterprise PT</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="enterprise_reseller" onclick="selectRoleFilterFromSheet('enterprise_reseller', 'Enterprise Reseller')">
+              <span>Enterprise Reseller</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="premium_reseller" onclick="selectRoleFilterFromSheet('premium_reseller', 'Premium Reseller')">
+              <span>Premium Reseller</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="premium_partner" onclick="selectRoleFilterFromSheet('premium_partner', 'Premium Partner')">
+              <span>Premium Partner</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="premium_owner" onclick="selectRoleFilterFromSheet('premium_owner', 'Premium Owner')">
+              <span>Premium Owner</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Owner & Manajemen -->
+        <div>
+          <div class="role-sheet-group-title"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Owner &amp; Manajemen</div>
+          <div class="role-sheet-grid">
+            <button type="button" class="role-sheet-item" data-val="owner" onclick="selectRoleFilterFromSheet('owner', 'Owner / Founder')">
+              <span>Owner / Founder</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="ceo" onclick="selectRoleFilterFromSheet('ceo', 'CEO')">
+              <span>CEO</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+            <button type="button" class="role-sheet-item" data-val="adp" onclick="selectRoleFilterFromSheet('adp', 'ADP')">
+              <span>ADP</span><i class="fa-solid fa-circle-check rsi-check"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role Panel Ilegal -->
+        <div>
+          <div class="role-sheet-group-title"><i class="fa-solid fa-bolt" style="color:#e11d48;"></i> Server Panel Ilegal</div>
+          <div class="role-sheet-grid">
+            <button type="button" class="role-sheet-item" data-val="illegal_ress" onclick="selectRoleFilterFromSheet('illegal_ress', 'Ilegal Reseller')"><span>Ilegal Reseller</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_prem" onclick="selectRoleFilterFromSheet('illegal_prem', 'Ilegal Premium')"><span>Ilegal Premium</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_adp" onclick="selectRoleFilterFromSheet('illegal_adp', 'Ilegal ADP')"><span>Ilegal ADP</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_pt" onclick="selectRoleFilterFromSheet('illegal_pt', 'Ilegal PT')"><span>Ilegal PT</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_tk" onclick="selectRoleFilterFromSheet('illegal_tk', 'Ilegal TK')"><span>Ilegal TK</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_owner" onclick="selectRoleFilterFromSheet('illegal_owner', 'Ilegal Owner')"><span>Ilegal Owner</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_ceo" onclick="selectRoleFilterFromSheet('illegal_ceo', 'Ilegal CEO')"><span>Ilegal CEO</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_security" onclick="selectRoleFilterFromSheet('illegal_security', 'Ilegal Security')"><span>Ilegal Security</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_svip" onclick="selectRoleFilterFromSheet('illegal_svip', 'Ilegal SVIP')"><span>Ilegal SVIP</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_dev" onclick="selectRoleFilterFromSheet('illegal_dev', 'Ilegal Dev')"><span>Ilegal Dev</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_pemilik" onclick="selectRoleFilterFromSheet('illegal_pemilik', 'Ilegal Pemilik')"><span>Ilegal Pemilik</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_king" onclick="selectRoleFilterFromSheet('illegal_king', 'Ilegal KING')"><span>Ilegal KING</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_imo" onclick="selectRoleFilterFromSheet('illegal_imo', 'Ilegal Immortal')"><span>Ilegal Immortal</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+            <button type="button" class="role-sheet-item" data-val="illegal_god" onclick="selectRoleFilterFromSheet('illegal_god', 'Ilegal GOD')"><span>Ilegal GOD</span><i class="fa-solid fa-circle-check rsi-check"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    let currentLimit = 25;
+    let currentSearch = '';
+    let currentRoleFilter = 'all';
+    let totalPages = 1;
+    let searchTimeout = null;
+
+    function handleSearchDebounce(val) {
+      if (searchTimeout) clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        currentSearch = (val || '').trim();
+        currentPage = 1;
+        loadUsers();
+      }, 350);
+    }
+
+    function openRoleFilterSheet() {
+      const sheet = document.getElementById('modalRoleFilterSheet');
+      if (sheet) {
+        sheet.classList.add('show');
+        document.body.classList.add('sheet-open');
+      }
+    }
+
+    function closeRoleFilterSheet() {
+      const sheet = document.getElementById('modalRoleFilterSheet');
+      if (sheet) {
+        sheet.classList.remove('show');
+        document.body.classList.remove('sheet-open');
+      }
+    }
+
+    function handleRoleSheetBackdropClick(e) {
+      if (e.target && e.target.id === 'modalRoleFilterSheet') {
+        closeRoleFilterSheet();
+      }
+    }
+
+    function selectRoleFilterFromSheet(val, label) {
+      // 1. Update active item in sheet
+      document.querySelectorAll('.role-sheet-item').forEach(it => {
+        it.classList.toggle('active', it.dataset.val === val);
+      });
+
+      // 2. Update button label
+      const labelEl = document.getElementById('roleFilterCurrentLabel');
+      if (labelEl) {
+        labelEl.innerHTML = `<i class="fa-solid fa-filter" style="color:#ec4899;margin-right:6px;"></i> ${label || val}`;
+      }
+
+      // 3. Smoothly close sheet
+      closeRoleFilterSheet();
+
+      // 4. Apply filter without layout collapse
+      setRoleFilter(val);
+    }
+
+    function toggleSidebar(forceState) {
+      const sb = document.getElementById('sidebar');
+      const ov = document.getElementById('sbOv');
+      if (!sb || !ov) return;
+      const isOpen = forceState !== undefined ? forceState : (!sb.classList.contains('on') && !sb.classList.contains('open'));
+      sb.classList.toggle('on', isOpen);
+      ov.classList.toggle('on', isOpen);
+      sb.classList.toggle('open', isOpen);
+      ov.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function toggleSidebarCategory(groupId) {
+      const g = document.getElementById(groupId);
+      if (g) g.classList.toggle('collapsed');
+    }
+
+    function updateThemeIcon() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+          icon.style.color = isDark ? '#f59e0b' : '';
+        }
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const next = isDark ? 'cream' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+      }
+      localStorage.setItem('seika_theme', next);
+      updateThemeIcon();
+    }
+
+    function handleLockedMenu(e, name) {
+      if (e) e.preventDefault();
+      alert((name || 'Menu ini') + ' sedang terkunci untuk akun Anda.');
+      return false;
+    }
+
+    function setRoleFilter(role) {
+      currentRoleFilter = role;
+      currentPage = 1;
+      
+      const sel = document.getElementById('selectRoleFilter');
+      if (sel) sel.value = role;
+
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === role);
+      });
+
+      document.querySelectorAll('.role-sheet-item').forEach(it => {
+        it.classList.toggle('active', it.dataset.val === role);
+      });
+
+      const labelEl = document.getElementById('roleFilterCurrentLabel');
+      if (labelEl && sel) {
+        const opt = sel.querySelector(`option[value="${role}"]`);
+        if (opt) {
+          labelEl.innerHTML = `<i class="fa-solid fa-filter" style="color:#ec4899;margin-right:6px;"></i> ${opt.textContent}`;
+        }
+      }
+
+      updateActivePenggunaLegalCards(role);
+      loadUsers();
+    }
+
+    function filterByRoleCategory(catKey) {
+      const targetVal = (currentRoleFilter === catKey) ? 'all' : catKey;
+      setRoleFilter(targetVal);
+    }
+
+    function updateActivePenggunaLegalCards(role) {
+      const btnReset = document.getElementById('btnResetPenggunaRoleCat');
+      const isFiltered = ['legal_public', 'legal_private', 'enterprise', 'premium'].includes(role);
+      if (btnReset) btnReset.style.display = isFiltered ? 'inline-flex' : 'none';
+
+      document.getElementById('pgCardLegalPublic')?.classList.toggle('active', role === 'legal_public');
+      document.getElementById('pgCardLegalPrivate')?.classList.toggle('active', role === 'legal_private');
+      document.getElementById('pgCardEnterprise')?.classList.toggle('active', role === 'enterprise');
+      document.getElementById('pgCardPremium')?.classList.toggle('active', role === 'premium');
+    }
+
+    function changePage(delta) {
+      const target = currentPage + delta;
+      if (target >= 1 && target <= totalPages) {
+        currentPage = target;
+        loadUsers();
+      }
+    }
+
+    // In-memory cache for user directory requests to eliminate flickers and make category switching 0ms instantaneous
+    const _penggunaUsersCache = new Map();
+    let _activePenggunaAbortController = null;
+
+    function applyPenggunaData(data) {
+      if (data.stats) {
+        document.getElementById('statTotalUsers').innerText = (data.stats.totalUsers || 0).toLocaleString('id-ID');
+        document.getElementById('statWithRole').innerText = (data.stats.totalWithRole || 0).toLocaleString('id-ID');
+        document.getElementById('statWithoutRole').innerText = (data.stats.totalWithoutRole || 0).toLocaleString('id-ID');
+        document.getElementById('statTotalPanels').innerText = (data.stats.totalPanels || 0).toLocaleString('id-ID');
+
+        // Legal Category Breakdown Stats
+        const elLegalTotal = document.getElementById('statLegalTotalPill');
+        const elLegalPub = document.getElementById('statLegalPublic');
+        const elLegalPriv = document.getElementById('statLegalPrivate');
+        const elEnterprise = document.getElementById('statEnterprise');
+        const elPremium = document.getElementById('statPremium');
+
+        const cats = data.stats.legalCategories || {};
+        const roles = data.stats.legalRoleCounts || {};
+
+        if (elLegalTotal) {
+          const totalLegal = data.stats.totalLegalRoles || ((cats.legal_public || 0) + (cats.legal_private || 0) + (cats.enterprise || 0) + (cats.premium || 0));
+          elLegalTotal.innerText = `Total: ${totalLegal.toLocaleString('id-ID')} Member Legal`;
+        }
+        if (elLegalPub) elLegalPub.innerText = (cats.legal_public || 0).toLocaleString('id-ID');
+        if (elLegalPriv) elLegalPriv.innerText = (cats.legal_private || 0).toLocaleString('id-ID');
+        if (elEnterprise) elEnterprise.innerText = (cats.enterprise || 0).toLocaleString('id-ID');
+        if (elPremium) elPremium.innerText = (cats.premium || 0).toLocaleString('id-ID');
+
+        const subPub = document.getElementById('subLegalPublic');
+        if (subPub && roles.reseller !== undefined) {
+          subPub.innerText = `Ress: ${roles.reseller || 0} · ADP: ${roles.adp || 0} · PT: ${roles.pt || 0}`;
+        }
+        const subPriv = document.getElementById('subLegalPrivate');
+        if (subPriv && roles.private_reseller !== undefined) {
+          subPriv.innerText = `Private Ress: ${roles.private_reseller || 0} · PT: ${roles.private_pt || 0}`;
+        }
+        const subEnt = document.getElementById('subEnterprise');
+        if (subEnt && roles.enterprise_reseller !== undefined) {
+          subEnt.innerText = `Ent. Ress: ${roles.enterprise_reseller || 0} · PT: ${roles.enterprise_pt || 0}`;
+        }
+        const subPrem = document.getElementById('subPremium');
+        if (subPrem && roles.premium_reseller !== undefined) {
+          subPrem.innerText = `Prem. Ress: ${roles.premium_reseller || 0} · Partner: ${roles.premium_partner || 0}`;
+        }
+      }
+      updateActivePenggunaLegalCards(currentRoleFilter);
+
+      totalPages = data.totalPages || 1;
+      renderTable(data.users || []);
+      renderPagination(data.page, data.totalPages, data.total);
+    }
+
+    function prefetchPenggunaLegalCategories() {
+      if (currentSearch) return;
+      const cats = ['all', 'legal_public', 'legal_private', 'enterprise', 'premium'];
+      cats.forEach(c => {
+        const cacheKey = `1_25__${c}`;
+        if (!_penggunaUsersCache.has(cacheKey)) {
+          fetch(`/api/cpanel/community-users?page=1&limit=25&q=&role=${encodeURIComponent(c)}`)
+            .then(res => res.json())
+            .then(data => {
+              if (data && data.status && data.users) {
+                _penggunaUsersCache.set(cacheKey, data);
+              }
+            })
+            .catch(() => {});
+        }
+      });
+    }
+
+    async function loadUsers() {
+      const tbody = document.getElementById('usersTableBody');
+      const mobList = document.getElementById('usersMobileCardsList');
+      const tableCard = document.querySelector('.users-table-card');
+      const loaderBar = document.getElementById('usersFilterLoaderBar');
+      if (!tbody && !mobList) return;
+
+      const cacheKey = `${currentPage}_${currentLimit}_${currentSearch}_${currentRoleFilter}`;
+
+      // 1. INSTANT CACHE HIT: 0ms render!
+      if (_penggunaUsersCache.has(cacheKey)) {
+        const cached = _penggunaUsersCache.get(cacheKey);
+        applyPenggunaData(cached);
+        if (mobList) {
+          mobList.classList.remove('is-loading');
+          mobList.style.minHeight = '';
+        }
+        if (tableCard) {
+          tableCard.classList.remove('is-loading');
+          tableCard.style.minHeight = '';
+        }
+        return;
+      }
+
+      if (loaderBar) loaderBar.classList.add('active');
+
+      const hasExistingMobile = mobList && mobList.children.length > 0 && !mobList.querySelector('.users-empty');
+      const hasExistingDesktop = tbody && tbody.children.length > 0 && !tbody.querySelector('.users-empty');
+
+      if (hasExistingMobile) {
+        const h = mobList.offsetHeight;
+        if (h > 120) {
+          mobList.style.minHeight = h + 'px';
+        }
+        mobList.classList.add('is-loading');
+      } else if (mobList) {
+        mobList.innerHTML = `
+          <div class="users-empty" style="padding:40px 16px;">
+            <i class="fa-solid fa-circle-notch fa-spin" style="color:#ec4899;font-size:1.6rem;margin-bottom:10px;"></i>
+            <div style="font-weight:700;">Memuat data pengguna komunitas...</div>
+          </div>
+        `;
+      }
+
+      if (hasExistingDesktop && tableCard) {
+        const th = tableCard.offsetHeight;
+        if (th > 120) {
+          tableCard.style.minHeight = th + 'px';
+        }
+        tableCard.classList.add('is-loading');
+      } else if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="users-empty">
+              <i class="fa-solid fa-circle-notch fa-spin" style="color:#ec4899;"></i>
+              <div>Memuat data pengguna komunitas...</div>
+            </td>
+          </tr>
+        `;
+      }
+
+      // Abort any ongoing fetch
+      if (_activePenggunaAbortController) {
+        _activePenggunaAbortController.abort();
+      }
+      _activePenggunaAbortController = new AbortController();
+
+      try {
+        const url = `/api/cpanel/community-users?page=${currentPage}&limit=${currentLimit}&q=${encodeURIComponent(currentSearch)}&role=${encodeURIComponent(currentRoleFilter)}`;
+        const resp = await fetch(url, { signal: _activePenggunaAbortController.signal });
+        const data = await resp.json();
+
+        if (data.status) {
+          _penggunaUsersCache.set(cacheKey, data);
+          applyPenggunaData(data);
+          setTimeout(prefetchPenggunaLegalCategories, 350);
+        } else {
+          const errText = `Gagal memuat data pengguna: ${data.message || 'Terjadi kesalahan sistem'}`;
+          if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="users-empty" style="color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i><div>${errText}</div></td></tr>`;
+          if (mobList) mobList.innerHTML = `<div class="users-empty" style="color:#ef4444;padding:24px 16px;"><i class="fa-solid fa-triangle-exclamation"></i><div>${errText}</div></div>`;
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+        const connErr = 'Gagal menghubungi server. Silakan coba beberapa saat lagi.';
+        if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="users-empty" style="color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i><div>${connErr}</div></td></tr>`;
+        if (mobList) mobList.innerHTML = `<div class="users-empty" style="color:#ef4444;padding:24px 16px;"><i class="fa-solid fa-triangle-exclamation"></i><div>${connErr}</div></div>`;
+      } finally {
+        if (loaderBar) loaderBar.classList.remove('active');
+        if (mobList) {
+          mobList.classList.remove('is-loading');
+          setTimeout(() => { mobList.style.minHeight = ''; }, 200);
+        }
+        if (tableCard) {
+          tableCard.classList.remove('is-loading');
+          setTimeout(() => { tableCard.style.minHeight = ''; }, 200);
+        }
+      }
+    }
+
+    function getRoleVerifiedBadge(u) {
+      if (!u) return '';
+      if (u.isOwner) {
+        return `<span class="v-owner" title="Founder &amp; Owner (Verified Gold)"><i class="fa-solid fa-crown"></i><i class="fa-solid fa-circle-check"></i></span>`;
+      }
+      const cat = String(u.roleCategory || '').toLowerCase();
+      const key = String(u.roleKey || '').toLowerCase();
+
+      if (cat === 'legal_public' || ['reseller', 'pt', 'adp', 'ceo'].includes(key)) {
+        return `<span class="v-badge v-public" title="Verified Legal Publik (Centang Biru)"><i class="fa-solid fa-circle-check" style="font-size:0.82rem;"></i></span>`;
+      }
+      if (cat === 'legal_private' || key.startsWith('private_')) {
+        return `<span class="v-badge v-private" title="Verified Legal Privat (Centang Hijau)"><i class="fa-solid fa-circle-check" style="font-size:0.82rem;"></i></span>`;
+      }
+      if (cat === 'enterprise' || key.startsWith('enterprise_')) {
+        return `<span class="v-badge v-enterprise" title="Verified Enterprise (Centang Ungu)"><i class="fa-solid fa-circle-check" style="font-size:0.82rem;"></i></span>`;
+      }
+      if (cat === 'premium' || key.startsWith('premium_')) {
+        return `<span class="v-badge v-premium" title="Verified Premium (Centang Sapphire)"><i class="fa-solid fa-circle-check" style="font-size:0.82rem;"></i></span>`;
+      }
+      if (cat === 'illegal' || key.startsWith('illegal_')) {
+        return `<span class="v-badge v-illegal" title="Role Panel Ilegal"><i class="fa-solid fa-bolt" style="font-size:0.78rem;"></i></span>`;
+      }
+      if (u.hasRole) {
+        return `<span class="v-badge v-public" title="Verified Member"><i class="fa-solid fa-circle-check" style="font-size:0.82rem;"></i></span>`;
+      }
+      return '';
+    }
+
+    function renderTable(users) {
+      const tbody = document.getElementById('usersTableBody');
+      const mobList = document.getElementById('usersMobileCardsList');
+      if (!tbody && !mobList) return;
+
+      if (!users || users.length === 0) {
+        const emptyMsg = 'Tidak ada pengguna yang cocok dengan kriteria pencarian atau filter.';
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" class="users-empty">
+                <i class="fa-solid fa-user-slash"></i>
+                <div>${emptyMsg}</div>
+              </td>
+            </tr>
+          `;
+        }
+        if (mobList) {
+          mobList.innerHTML = `
+            <div class="users-empty" style="padding:24px 16px;">
+              <i class="fa-solid fa-user-slash"></i>
+              <div>${emptyMsg}</div>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      let desktopHtml = '';
+      let mobileHtml = '';
+
+      users.forEach(u => {
+        const joinDate = u.createdAt ? new Date(u.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : '-';
+        const hasRole = Boolean(u.hasRole);
+        const statusBadge = hasRole ? 
+          `<span class="status-role-badge has-role"><i class="fa-solid fa-circle-check"></i> Ada Role</span>` : 
+          `<span class="status-role-badge no-role"><i class="fa-regular fa-circle"></i> Free</span>`;
+
+        const roleColor = u.roleColor || (hasRole ? '#0ea5e9' : '#64748b');
+        const roleLabel = u.roleLabel || (hasRole ? 'Special Role' : 'Member Biasa (Free)');
+        const roleBadge = u.roleBadge || (hasRole ? 'ROLE' : 'FREE');
+
+        const cadpPill = u.cadpCreated ? 
+          `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:100px;font-size:0.65rem;font-weight:800;background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);margin-left:4px;" title="Akun sudah membuat 1x Admin Panel (CADP)"><i class="fa-solid fa-shield-halved"></i> CADP</span>` : '';
+        const overduePill = (u.taxDelinquent || u.roleTaxStatus === 'OVERDUE') ?
+          `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:100px;font-size:0.65rem;font-weight:800;background:rgba(239,68,68,0.18);color:#ef4444;border:1px solid rgba(239,68,68,0.35);margin-left:4px;" title="Pajak Legal Publik Menunggak"><i class="fa-solid fa-triangle-exclamation"></i> OVERDUE</span>` : '';
+
+        let secondaryBadgesHtml = '';
+        let mobSecondaryBadgesHtml = '';
+        if (u.allRoleBadges && u.allRoleBadges.length > 1) {
+          const others = u.allRoleBadges.filter(b => b.key !== u.roleKey);
+          if (others.length > 0) {
+            secondaryBadgesHtml = `<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:4px;">` +
+              others.map(b => `<span style="font-size:0.6rem;font-weight:800;padding:1px 6px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid ${b.color || 'var(--b1)'};color:${b.color || '#fff'};" title="${escapeHtml(b.label)}">${escapeHtml(b.badge)}</span>`).join('') +
+              `</div>`;
+
+            mobSecondaryBadgesHtml = `<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:6px;padding-top:6px;border-top:1px dashed var(--b1);">` +
+              `<span style="font-size:0.6rem;color:var(--t3);font-weight:700;margin-right:2px;text-transform:uppercase;">Role Lain:</span>` +
+              others.map(b => `<span style="font-size:0.58rem;font-weight:800;padding:1px 6px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid ${b.color || 'var(--b1)'};color:${b.color || '#fff'};" title="${escapeHtml(b.label)}">${escapeHtml(b.badge)}</span>`).join('') +
+              `</div>`;
+          }
+        }
+
+        const safeAvatar = (typeof getSmartAvatar === 'function') 
+          ? getSmartAvatar(u.avatar, u.name || u.username) 
+          : (u.avatar || '');
+        const safeAvatarFallback = `if(typeof getSmartAvatar==='function'){this.src=getSmartAvatar('', '${escapeHtml(u.name || u.username)}');}else{this.style.display='none';}`;
+
+        // 1. Desktop Table Row
+        desktopHtml += `
+          <tr>
+            <td>
+              <div class="user-cell-wrap">
+                <img src="${safeAvatar}" class="user-avatar-img" alt="Avatar" onerror="${safeAvatarFallback}">
+                <div style="overflow:hidden;">
+                  <div class="user-name-text">
+                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(u.name)}</span>
+                    ${getRoleVerifiedBadge(u)}
+                  </div>
+                  <div class="user-uname-text">@${escapeHtml(u.username)}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">
+                ${statusBadge}
+                ${cadpPill}
+                ${overduePill}
+              </div>
+            </td>
+            <td>
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                <span class="role-badge-chip" style="background:${roleColor}22;color:${roleColor};border:1px solid ${roleColor}55;">
+                  ${escapeHtml(roleBadge)}
+                </span>
+                <span style="font-size:0.76rem;color:var(--t2);font-weight:600;">
+                  ${escapeHtml(roleLabel)}
+                </span>
+              </div>
+              ${secondaryBadgesHtml}
+            </td>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--t1);">
+              <i class="fa-solid fa-server" style="color:#0ea5e9;font-size:0.8rem;margin-right:4px;"></i> ${u.totalPanels || 0}
+            </td>
+            <td style="font-size:0.76rem;color:var(--t3);">
+              ${joinDate}
+            </td>
+          </tr>
+        `;
+
+        // 2. Mobile Clean Card (Full width, no horizontal scroll!)
+        mobileHtml += `
+          <div class="user-card-mob">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+                <img src="${safeAvatar}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--b1);" alt="Avatar" onerror="${safeAvatarFallback}">
+                <div style="min-width:0;">
+                  <div class="user-name-text" style="font-size:0.88rem;">
+                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;">${escapeHtml(u.name)}</span>
+                    ${getRoleVerifiedBadge(u)}
+                  </div>
+                  <div class="user-uname-text">@${escapeHtml(u.username)}</div>
+                </div>
+              </div>
+              <div style="flex-shrink:0;text-align:right;">
+                <span class="role-badge-chip" style="background:${roleColor}22;color:${roleColor};border:1px solid ${roleColor}55;font-size:0.66rem;padding:2px 7px;">
+                  ${escapeHtml(roleBadge)}
+                </span>
+                <div style="font-size:0.68rem;color:var(--t2);margin-top:2px;font-weight:600;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  ${escapeHtml(roleLabel)}
+                </div>
+              </div>
+            </div>
+            ${mobSecondaryBadgesHtml}
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px dashed var(--b1);font-size:0.72rem;gap:6px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                ${statusBadge}
+                ${cadpPill}
+                ${overduePill}
+                <span style="font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--t1);">
+                  <i class="fa-solid fa-server" style="color:#0ea5e9;font-size:0.75rem;"></i> ${u.totalPanels || 0} Srv
+                </span>
+                <span style="color:var(--t3);">
+                  <i class="fa-regular fa-calendar" style="font-size:0.7rem;"></i> ${joinDate}
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      if (tbody) tbody.innerHTML = desktopHtml;
+      if (mobList) mobList.innerHTML = mobileHtml;
+    }
+
+    function renderPagination(page, totalPageCount, totalItems) {
+      const info = document.getElementById('paginationInfo');
+      if (info) {
+        info.innerHTML = `Menampilkan Halaman <b>${page}</b> dari <b>${totalPageCount}</b> (Total <b>${(totalItems || 0).toLocaleString('id-ID')}</b> Pengguna)`;
+      }
+
+      const btnPrev = document.getElementById('btnPrevPage');
+      const btnNext = document.getElementById('btnNextPage');
+      if (btnPrev) btnPrev.disabled = page <= 1;
+      if (btnNext) btnNext.disabled = page >= totalPageCount;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[m]);
+    }
+
+    // Auto load on ready
+    document.addEventListener('DOMContentLoaded', () => {
+      updateThemeIcon();
+      loadUsers();
+    });
+  </script>
+  <!-- SEIKAONE MODULAR UI ARCHITECTURE -->
+  <script src="js/lib/utils.js?v=1.0"></script>
+  <script src="js/constants/roles.js?v=1.0"></script>
+  <script src="js/components/ui/dialog.js?v=1.0"></script>
+  <script src="js/components/ui/toast.js?v=1.0"></script>
+  <script src="js/components/ui/select.js?v=1.0"></script>
+  <script src="js/components/ui/badge.js?v=1.0"></script>
+  <script src="js/services/api.js?v=1.0"></script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

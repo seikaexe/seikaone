@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>Riwayat Pesanan – SeikaOne.id</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.1"></script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .orders-wrap { max-width: 980px; margin: 0 auto; width: 100%; padding: 10px 16px 40px; }
+
+    /* HERO BANNER - ANTI AI-SLOP CLEAN CARD */
+    .orders-hero {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      border-radius: 18px;
+      padding: 24px 22px;
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .orders-hero-title {
+      font-size: 1.35rem;
+      font-weight: 850;
+      color: var(--t1);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .orders-hero-sub {
+      font-size: 0.85rem;
+      color: var(--t3);
+      max-width: 620px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .orders-search-bar {
+      display: flex;
+      gap: 10px;
+      max-width: 580px;
+    }
+    .orders-search-in {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--b2);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--ease);
+    }
+    .orders-search-in:focus {
+      border-color: #0284c7;
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+    }
+    html:not(.dark) .orders-search-in:focus {
+      border-color: #18181b;
+      box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
+    }
+    .btn-orders-search {
+      padding: 12px 24px;
+      border-radius: 12px;
+      background: #18181b;
+      color: #fff;
+      border: 1px solid #18181b;
+      font-weight: 750;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.16s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      white-space: nowrap;
+    }
+    html.dark .btn-orders-search {
+      background: #0284c7;
+      border-color: #0284c7;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+    .btn-orders-search:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    /* STATS ROW */
+    .order-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .o-stat-box {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .o-stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .o-stat-val { font-size: 1.25rem; font-weight: 900; color: var(--t1); line-height: 1.1; }
+    .o-stat-lbl { font-size: 0.74rem; font-weight: 700; color: var(--t3); margin-top: 3px; }
+
+    /* TAB FILTER */
+    .order-filter-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+    }
+    .of-tab {
+      padding: 8px 18px;
+      border-radius: 9999px;
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      color: var(--t2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: var(--ease);
+    }
+    .of-tab:hover {
+      border-color: var(--t2);
+      color: var(--t1);
+    }
+    .of-tab.active {
+      background: #18181b;
+      border-color: #18181b;
+      color: #ffffff;
+      font-weight: 750;
+    }
+    html.dark .of-tab.active {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+    }
+
+    /* ORDER CARD */
+    .order-card {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .order-card:hover {
+      border-color: var(--t3);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+    }
+    .oc-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--b1);
+      margin-bottom: 16px;
+    }
+    .oc-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .oc-copy-btn {
+      background: none;
+      border: none;
+      color: var(--t3);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 4px;
+      transition: var(--ease);
+    }
+    .oc-copy-btn:hover { color: var(--a); }
+
+    .oc-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.74rem;
+      font-weight: 750;
+    }
+    .oc-status-paid {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+    html.dark .oc-status-paid {
+      background: rgba(16,185,129,0.12);
+      color: #34d399;
+      border: 1px solid rgba(16,185,129,0.3);
+    }
+    .oc-status-pending {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    html.dark .oc-status-pending {
+      background: rgba(245,158,11,0.12);
+      color: #fbbf24;
+      border: 1px solid rgba(245,158,11,0.3);
+    }
+    .oc-status-failed {
+      background: #fff1f2;
+      color: #be123c;
+      border: 1px solid #fecdd3;
+    }
+    html.dark .oc-status-failed {
+      background: rgba(244,63,94,0.12);
+      color: #fb7185;
+      border: 1px solid rgba(244,63,94,0.3);
+    }
+
+    .oc-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .oc-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .oc-lbl { font-size: 0.72rem; color: var(--t3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+    .oc-val { font-size: 0.92rem; font-weight: 800; color: var(--t1); }
+
+    /* CREDENTIALS SECTION */
+    .oc-creds-box {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+    .oc-cred-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px dashed var(--b1);
+    }
+    .oc-cred-row:last-child { border-bottom: none; }
+    .oc-cred-label { color: var(--t3); font-weight: 600; }
+    .oc-cred-val { color: var(--t1); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+    /* FOOTER ACTIONS */
+    .oc-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--b1);
+    }
+    .oc-price {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #059669;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    html.dark .oc-price {
+      color: #34d399;
+    }
+    .oc-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn-oc {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 750;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.16s ease;
+      white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .btn-oc.primary {
+      background: #059669;
+      color: #fff;
+      border-color: #059669;
+    }
+    .btn-oc.primary:hover {
+      background: #047857;
+      border-color: #047857;
+      transform: translateY(-1px);
+    }
+    .btn-oc.accent {
+      background: #18181b;
+      color: #fff;
+      border-color: #18181b;
+    }
+    html.dark .btn-oc.accent {
+      background: #0284c7;
+      border-color: #0284c7;
+    }
+    .btn-oc.accent:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+    .btn-oc.outline {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      color: var(--t1);
+    }
+    .btn-oc.outline:hover {
+      background: var(--bg2);
+      border-color: var(--t2);
+      transform: translateY(-1px);
+    }
+
+    /* TOAST */
+    .toast-box {
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      background: var(--surface); color: var(--t1); padding: 12px 24px;
+      border-radius: 100px; border: 1px solid var(--b2); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 999999; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;
+      transition: top 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    /* RESPONSIVE MOBILE STYLES */
+    @media (max-width: 640px) {
+      .orders-wrap {
+        padding: 10px 12px 30px;
+      }
+      .orders-hero {
+        padding: 20px 16px;
+        margin-bottom: 18px;
+        border-radius: var(--r);
+      }
+      .orders-hero-title {
+        font-size: 1.25rem;
+      }
+      .orders-hero-sub {
+        font-size: 0.78rem;
+        margin-bottom: 16px;
+      }
+      .orders-search-bar {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+      }
+      .orders-search-in {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 11px 18px;
+        font-size: 0.82rem;
+      }
+      .btn-orders-search {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 20px;
+        font-size: 0.82rem;
+      }
+      .order-stats-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .o-stat-box {
+        padding: 10px 8px;
+        gap: 6px;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        border-radius: var(--rsm);
+      }
+      .o-stat-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        margin: 0 auto;
+      }
+      .o-stat-val {
+        font-size: 1.05rem;
+      }
+      .o-stat-lbl {
+        font-size: 0.65rem;
+        margin-top: 1px;
+      }
+      .order-card {
+        padding: 15px 14px;
+        margin-bottom: 14px;
+        border-radius: var(--r);
+      }
+      .oc-head {
+        gap: 8px;
+        padding-bottom: 10px;
+        margin-bottom: 12px;
+      }
+      .oc-id {
+        font-size: 0.82rem;
+        word-break: break-all;
+      }
+      .oc-body {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .oc-creds-box {
+        padding: 12px 12px;
+        margin-bottom: 14px;
+        font-size: 0.75rem;
+      }
+      .oc-cred-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+        padding: 6px 0;
+      }
+      .oc-cred-val {
+        word-break: break-all;
+        max-width: 100%;
+        font-size: 0.78rem;
+      }
+      .oc-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding-top: 12px;
+      }
+      .oc-price {
+        font-size: 1.1rem;
+        text-align: left;
+      }
+      .oc-btns {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .btn-oc {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 9px 12px;
+        box-sizing: border-box;
+      }
+      .btn-top-auth-extra {
+        display: none !important;
+      }
+    }
+  </style>
+<body id="body">
+
+  <div class="toast-box" id="vToast">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <span id="vToastMsg">Pesan</span>
+  </div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Toko">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="addon.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
+          <i class="fa-solid fa-microchip"></i>
+          <span class="btn-top-auth-txt">Add-on Spek</span>
+        </a>
+        <a href="bansos.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(244,63,94,0.12);color:#f43f5e;border-color:rgba(244,63,94,0.3);">
+          <i class="fa-solid fa-gift"></i>
+          <span class="btn-top-auth-txt">Bansos 1GB</span>
+        </a>
+        <a href="mypanel.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span class="btn-top-auth-txt">Panel Saya</span>
+        </a>
+        <div id="authNavContainer"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div id="page">
+      <div class="orders-wrap">
+
+        <!-- HERO BANNER -->
+        <div class="orders-hero">
+          <div class="orders-hero-title">
+            <i class="fa-solid fa-receipt" style="color:var(--a);"></i> Riwayat Pesanan & Transaksi
+          </div>
+          <div class="orders-hero-sub">
+            Lihat semua pesanan produk, detail invoice, kredensial akses Pterodactyl/VPS, dan klaim garansi produk Anda.
+          </div>
+
+          <!-- SEARCH ROW -->
+          <div class="orders-search-bar">
+            <input type="text" id="orderQuery" class="orders-search-in" placeholder="Ketik Email Pembeli atau Order ID (misal: ZYRO-123456)..." onkeydown="if(event.key==='Enter') searchOrders()">
+            <button class="btn-orders-search" onclick="searchOrders()">
+              <i class="fa-solid fa-magnifying-glass"></i> Cari Pesanan
+            </button>
+          </div>
+
+          <div id="guestNotice" style="display:none;margin-top:12px;font-size:0.75rem;color:var(--t3);">
+            <i class="fa-solid fa-circle-info" style="color:var(--a);"></i> 
+            <span>Ingin riwayat belanja otomatis tersimpan permanen tanpa harus cari email? <a href="login.html" style="color:var(--a);font-weight:700;">Masuk / Daftar Akun Member (Diskon 5%)</a></span>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="order-stats-row">
+          <div class="o-stat-box">
+            <div class="o-stat-icon" style="background:rgba(14,165,233,0.12);color:var(--a);">
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <div>
+              <div class="o-stat-val" id="statTotalOrders">0</div>
+              <div class="o-stat-lbl">Total Pesanan</div>
+            </div>
+          </div>
+          <div class="o-stat-box">
+            <div class="o-stat-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+              <div class="o-stat-val" id="statPaidOrders">0</div>
+              <div class="o-stat-lbl">Transaksi Berhasil</div>
+            </div>
+          </div>
+          <div class="o-stat-box">
+            <div class="o-stat-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div>
+              <div class="o-stat-val" id="statPendingOrders">0</div>
+              <div class="o-stat-lbl">Menunggu Bayar</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTER TABS -->
+        <div class="order-filter-nav">
+          <button class="of-tab active" onclick="setOrderFilter('all')">
+            <i class="fa-solid fa-list-ul"></i> Semua Pesanan
+          </button>
+          <button class="of-tab" onclick="setOrderFilter('panel')">
+            <i class="fa-solid fa-server"></i> Panel Pterodactyl
+          </button>
+          <button class="of-tab" onclick="setOrderFilter('vps')">
+            <i class="fa-solid fa-cloud"></i> VPS & Cloud
+          </button>
+          <button class="of-tab" onclick="setOrderFilter('other')">
+            <i class="fa-solid fa-box-archive"></i> Produk Lainnya
+          </button>
+        </div>
+
+        <!-- ORDERS LIST -->
+        <div id="ordersListContainer">
+          <div style="padding:40px;text-align:center;color:var(--t3);">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;"></i>
+            <p style="margin-top:10px;font-size:0.85rem;">Memuat riwayat transaksi Anda...</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const authToken = localStorage.getItem('seika_user_token');
+    const savedUser = localStorage.getItem('seika_user_data') ? JSON.parse(localStorage.getItem('seika_user_data')) : null;
+    let rawOrdersList = [];
+    let currentFilter = 'all';
+
+    // Theme logic
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('vToast');
+      document.getElementById('vToastMsg').innerText = msg;
+      box.style.top = '20px';
+      setTimeout(() => { box.style.top = '-100px'; }, 3000);
+    }
+
+    function copyText(text, msg = 'Berhasil disalin!') {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg);
+      }).catch(() => {
+        showToast('Gagal menyalin');
+      });
+    }
+
+    function isPanelOrder(o) {
+      if (!o) return false;
+      const cat = String(o.category || '').toLowerCase();
+      const name = String(o.productName || o.nama || '').toLowerCase();
+      const id = String(o.productId || o.id || '').toLowerCase();
+
+      // Exclude non-panel categories and products
+      if (cat.includes('account') || cat.includes('premku') || cat.includes('otp') ||
+          cat.includes('vps') || cat.includes('cloud') || cat.includes('role') ||
+          cat.includes('bot') || cat.includes('domain') || cat.includes('jasa')) {
+        return false;
+      }
+      if (name.includes('canva') || name.includes('netflix') || name.includes('spotify') ||
+          name.includes('youtube') || name.includes('role') || name.includes('otp') ||
+          name.includes('vps') || name.includes('cloud') || name.includes('diamond')) {
+        return false;
+      }
+
+      return cat.includes('panel') || name.includes('panel') || id.includes('ptero') || id.includes('panel');
+    }
+
+    function isVpsOrder(o) {
+      if (!o) return false;
+      const cat = String(o.category || '').toLowerCase();
+      const name = String(o.productName || o.nama || '').toLowerCase();
+      return (cat.includes('vps') || name.includes('vps') || cat.includes('cloud') || name.includes('cloud')) && !name.includes('canva');
+    }
+
+    function toggleSubUserDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('subUserDropdown');
+      if (dd) dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+    }
+    window.addEventListener('click', function(e) {
+      const dd = document.getElementById('subUserDropdown');
+      if (dd && dd.style.display !== 'none' && !dd.contains(e.target)) {
+        dd.style.display = 'none';
+      }
+    });
+    function subLogout() {
+      localStorage.removeItem('seika_user_token');
+      localStorage.removeItem('seika_user_data');
+      window.location.reload();
+    }
+
+    async function initPage() {
+      const authContainer = document.getElementById('authNavContainer');
+      const input = document.getElementById('orderQuery');
+      const guestNotice = document.getElementById('guestNotice');
+
+      if (authToken && savedUser) {
+        if (guestNotice) guestNotice.style.display = 'none';
+        const firstName = savedUser.name ? savedUser.name.split(' ')[0] : 'Member';
+        const userDisplayName = savedUser.name || savedUser.email || 'Member';
+        const avatar = (typeof getSmartAvatar === 'function')
+          ? getSmartAvatar(savedUser.avatar, userDisplayName)
+          : (savedUser.avatar || '/assets/logo.png');
+        const avFallback = `onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${escapeHtml(userDisplayName)}');else this.src='/assets/logo.png';"`;
+        authContainer.innerHTML = `
+          <div style="position:relative;">
+            <div class="user-nav-pill" style="display:inline-flex;cursor:pointer;" onclick="toggleSubUserDropdown(event)" title="${savedUser.email}">
+              <img src="${avatar}" class="user-nav-avatar" alt="Avatar" ${avFallback}>
+              <div class="user-nav-info">
+                <span class="user-nav-name">${firstName}</span>
+                <span class="user-nav-tag">5% OFF</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;color:var(--t3);margin-left:2px;"></i>
+            </div>
+            <div class="user-dropdown-menu" id="subUserDropdown" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:240px;background:var(--surface);border:1px solid var(--b1);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,0.25);padding:10px;z-index:99999;">
+              <div class="ud-head" style="padding:8px;border-bottom:1px solid var(--b1);margin-bottom:8px;display:flex;align-items:center;gap:10px;">
+                <img src="${avatar}" style="width:34px;height:34px;border-radius:50%;border:1.5px solid var(--a);" ${avFallback}>
+                <div style="overflow:hidden;">
+                  <div style="font-size:0.82rem;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.name || 'Member'}</div>
+                  <div style="font-size:0.7rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.email || ''}</div>
+                </div>
+              </div>
+              <div class="ud-items" style="display:flex;flex-direction:column;gap:4px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-house" style="color:var(--a);"></i> Beranda Toko</a>
+                <a href="bansos.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:#f43f5e;font-weight:700;text-decoration:none;border-radius:8px;"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free (1GB)</a>
+                <a href="mypanel.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya</a>
+                <a href="riwayat.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--a);font-weight:700;text-decoration:none;border-radius:8px;background:var(--abg);"><i class="fa-solid fa-receipt" style="color:#f59e0b;"></i> Riwayat Pesanan</a>
+                <a href="addon.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-on Spek</a>
+                <a href="profile.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun</a>
+                <hr style="border:none;border-top:1px solid var(--b1);margin:4px 0;">
+                <a href="javascript:void(0)" onclick="subLogout()" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--rose);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar (Logout)</a>
+              </div>
+            </div>
+          </div>
+        `;
+        if (input) input.placeholder = `Akun aktif: ${savedUser.email} (atau cari Order ID)`;
+        await loadMemberOrders();
+      } else {
+        if (guestNotice) guestNotice.style.display = 'block';
+        authContainer.innerHTML = `
+          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+            <i class="fa-solid fa-circle-user"></i> <span class="btn-top-auth-txt">Masuk</span>
+          </a>
+        `;
+        const savedEmail = localStorage.getItem('zyro_buyer_email') || '';
+        let savedOrders = [];
+        try { savedOrders = JSON.parse(localStorage.getItem('zyro_buyer_orders') || '[]'); } catch(e){}
+
+        if (savedEmail || savedOrders.length > 0) {
+          if (savedEmail && input) input.value = savedEmail;
+          await loadGuestOrders(savedEmail, savedOrders);
+        } else {
+          renderEmptyState("Ketikkan alamat email atau Order ID pembelian Anda di kolom atas untuk melihat riwayat transaksi.");
+        }
+      }
+    }
+
+    let memberOrdersCache = [];
+
+    async function loadMemberOrders() {
+      try {
+        const res = await fetch(`/api/user/orders?token=${encodeURIComponent(authToken)}`);
+        const data = await res.json();
+        if (data.status && Array.isArray(data.orders)) {
+          memberOrdersCache = data.orders;
+          rawOrdersList = data.orders;
+          renderOrders();
+        } else {
+          renderEmptyState("Belum ada transaksi di akun Anda. Belanja produk pertama Anda sekarang!");
+        }
+      } catch (e) {
+        renderEmptyState("Gagal memuat riwayat pesanan: " + e.message);
+      }
+    }
+
+    async function loadGuestOrders(query, savedOrders = []) {
+      const container = document.getElementById('ordersListContainer');
+      container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--t3);"><i class="fa-solid fa-spinner fa-spin"></i><p style="margin-top:10px;">Memuat transaksi...</p></div>';
+
+      try {
+        const tokenQuery = authToken ? `&token=${encodeURIComponent(authToken)}` : '';
+        const idsQuery = savedOrders.length > 0 ? `&ids=${encodeURIComponent(savedOrders.join(','))}` : '';
+        // If query is an email and not logged in, but we have saved order IDs from checkout, prioritize ids to prevent 401 privacy rejection
+        const cleanQ = (query && query.includes('@') && !authToken && savedOrders.length > 0) ? '' : (query || '');
+        const res = await fetch(`/api/order/track?q=${encodeURIComponent(cleanQ)}${idsQuery}${tokenQuery}`);
+        const data = await res.json();
+        if (data.status) {
+          rawOrdersList = Array.isArray(data.orders) && data.orders.length ? data.orders : (data.order ? [data.order] : []);
+          renderOrders();
+        } else {
+          if (query && query.includes('@') && !authToken) {
+            renderEmptyState(`Pesanan untuk email <b>${escapeHtml(query)}</b> tersimpan aman. Silakan <a href="login.html" style="color:var(--a);font-weight:700;text-decoration:underline;">Masuk (Login)</a> untuk melihat seluruh riwayat akun Anda, atau cari menggunakan Order ID Anda (contoh: ZYRO-XXXXXX).`);
+          } else {
+            renderEmptyState(data.message || `Tidak ditemukan pesanan dengan kata kunci "${query}".`);
+          }
+        }
+      } catch (e) {
+        renderEmptyState("Gagal memuat data transaksi.");
+      }
+    }
+
+    async function searchOrders() {
+      const q = document.getElementById('orderQuery').value.trim();
+      if (!q) {
+        if (authToken && savedUser) {
+          rawOrdersList = memberOrdersCache;
+          renderOrders();
+          return;
+        }
+        return showToast("Masukkan Order ID atau email Anda!");
+      }
+
+      // If user is logged in as a Member: strictly filter THEIR OWN orders
+      if (authToken && savedUser) {
+        const qLow = q.toLowerCase();
+        // Prevent searching other users' emails
+        if (qLow.includes('@') && qLow !== String(savedUser.email || '').toLowerCase()) {
+          renderEmptyState("Akses Ditolak: Anda tidak memiliki izin untuk melihat riwayat pesanan milik email atau akun lain.");
+          return showToast("Akses ditolak: Tidak dapat melihat pesanan akun email lain!", false);
+        }
+
+        rawOrdersList = memberOrdersCache.filter(o => 
+          (o.orderId && o.orderId.toLowerCase().includes(qLow)) ||
+          (o.productName && o.productName.toLowerCase().includes(qLow)) ||
+          (o.warrantyCode && o.warrantyCode.toLowerCase().includes(qLow)) ||
+          (o.serverUser && o.serverUser.toLowerCase().includes(qLow)) ||
+          (o.buyerEmail && o.buyerEmail.toLowerCase().includes(qLow))
+        );
+
+        if (rawOrdersList.length === 0) {
+          renderEmptyState(`Tidak ditemukan transaksi yang cocok dengan "${q}" di akun Anda.`);
+        } else {
+          renderOrders();
+        }
+        return;
+      }
+
+      await loadGuestOrders(q, []);
+    }
+
+    function setOrderFilter(filter) {
+      currentFilter = filter;
+      const tabs = document.querySelectorAll('.of-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      renderOrders();
+    }
+
+    function renderOrders() {
+      const container = document.getElementById('ordersListContainer');
+      document.getElementById('statTotalOrders').innerText = rawOrdersList.length;
+      document.getElementById('statPaidOrders').innerText = rawOrdersList.filter(o => o.status === 'paid' || o.status === 'completed').length;
+      document.getElementById('statPendingOrders').innerText = rawOrdersList.filter(o => o.status === 'pending' || o.status === 'awaiting_payment').length;
+
+      let filtered = rawOrdersList;
+      if (currentFilter === 'panel') {
+        filtered = rawOrdersList.filter(isPanelOrder);
+      } else if (currentFilter === 'vps') {
+        filtered = rawOrdersList.filter(isVpsOrder);
+      } else if (currentFilter === 'other') {
+        filtered = rawOrdersList.filter(o => !isPanelOrder(o) && !isVpsOrder(o));
+      }
+
+      if (filtered.length === 0) {
+        return renderEmptyState(`Tidak ada transaksi dalam kategori "${currentFilter}".`);
+      }
+
+      let html = '';
+      filtered.forEach(o => {
+        const isPaid = o.status === 'paid' || o.status === 'completed';
+        const isPending = o.status === 'pending';
+        const isAwaiting = o.status === 'awaiting_payment';
+        const isPanel = isPanelOrder(o);
+
+        let statusBadge = '';
+        if (isPaid) {
+          statusBadge = '<span class="oc-status-pill oc-status-paid"><i class="fa-solid fa-circle-check"></i> Selesai / Aktif</span>';
+        } else if (isAwaiting) {
+          statusBadge = '<span class="oc-status-pill oc-status-pending" style="background:rgba(148,163,184,0.15);color:#94a3b8;border-color:rgba(148,163,184,0.3);"><i class="fa-solid fa-hourglass"></i> Belum Bayar</span>';
+        } else if (isPending) {
+          statusBadge = '<span class="oc-status-pill oc-status-pending"><i class="fa-solid fa-clock"></i> Diproses</span>';
+        } else {
+          statusBadge = `<span class="oc-status-pill oc-status-failed"><i class="fa-solid fa-circle-xmark"></i> ${o.status || 'Batal'}</span>`;
+        }
+
+        let dateStr = o.createdAt || '-';
+        try {
+          if (o.timestamp) {
+            dateStr = new Date(o.timestamp).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+          } else if (o.createdAt && !isNaN(new Date(o.createdAt).getTime())) {
+            dateStr = new Date(o.createdAt).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+          }
+        } catch (_) {}
+        const priceStr = 'Rp ' + Number(o.amount || 0).toLocaleString('id-ID');
+
+        // Add-on info badge
+        let addonBadge = '';
+        if (o.addons) {
+          const parts = [];
+          if (o.addons.ramGb) parts.push(`+${o.addons.ramGb}GB RAM`);
+          if (o.addons.diskGb) parts.push(`+${o.addons.diskGb}GB Disk`);
+          if (o.addons.cpuPercent) parts.push(`+${o.addons.cpuPercent}% CPU`);
+          if (parts.length > 0) {
+            addonBadge = `<span style="font-size:0.72rem;background:rgba(14,165,233,0.12);color:#0ea5e9;padding:3px 8px;border-radius:6px;font-weight:700;margin-left:6px;"><i class="fa-solid fa-microchip"></i> ${parts.join(', ')}</span>`;
+          }
+        }
+
+        // Credentials HTML
+        let credsHtml = '';
+        if (isPaid && (o.serverUser || o.username || o.credentials || o.loginUrl || o.panelUrl)) {
+          const loginUrl = o.panelUrl || o.loginUrl || 'https://panel.zyrostore.id';
+          const username = o.serverUser || o.username || '-';
+          const password = o.serverPassword || o.password || '(Sesuai input saat checkout)';
+          const runtime = o.runtime || 'Default NodeJS';
+
+          credsHtml = `
+            <div class="oc-creds-box">
+              <div style="font-weight:800;color:var(--a);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                <i class="fa-solid fa-key"></i> Informasi Akses & Akun:
+              </div>
+              <div class="oc-cred-row">
+                <span class="oc-cred-label">Login Panel:</span>
+                <span class="oc-cred-val">
+                  <a href="${loginUrl}" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline;">${loginUrl}</a>
+                  <button class="oc-copy-btn" onclick="copyText('${loginUrl}', 'Link login disalin!')"><i class="fa-solid fa-copy"></i></button>
+                </span>
+              </div>
+              <div class="oc-cred-row">
+                <span class="oc-cred-label">Username:</span>
+                <span class="oc-cred-val">
+                  <b>${username}</b>
+                  <button class="oc-copy-btn" onclick="copyText('${username}', 'Username disalin!')"><i class="fa-solid fa-copy"></i></button>
+                </span>
+              </div>
+              ${o.serverPassword ? `
+              <div class="oc-cred-row">
+                <span class="oc-cred-label">Password:</span>
+                <span class="oc-cred-val">
+                  <b>${password}</b>
+                  <button class="oc-copy-btn" onclick="copyText('${password}', 'Password disalin!')"><i class="fa-solid fa-copy"></i></button>
+                </span>
+              </div>` : ''}
+              ${isPanel ? `
+              <div class="oc-cred-row">
+                <span class="oc-cred-label">Egg / Runtime:</span>
+                <span class="oc-cred-val"><b>${runtime}</b></span>
+              </div>` : ''}
+            </div>
+          `;
+        } else if (isPaid && o.credentials) {
+          credsHtml = `
+            <div class="oc-creds-box">
+              <div style="font-weight:800;color:var(--a);margin-bottom:6px;"><i class="fa-solid fa-key"></i> Kredensial Produk:</div>
+              <div style="white-space:pre-wrap;color:var(--t1);">${o.credentials}</div>
+            </div>
+          `;
+        }
+
+        // Warranty Code
+        let warrantyInfo = '';
+        if (o.warrantyCode) {
+          warrantyInfo = `
+            <div style="font-size:0.75rem;color:var(--t3);margin-top:6px;display:flex;align-items:center;gap:6px;">
+              <i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Kode Garansi:
+              <b style="font-family:'JetBrains Mono',monospace;color:var(--t1);">${o.warrantyCode}</b>
+              <button class="oc-copy-btn" onclick="copyText('${o.warrantyCode}', 'Kode garansi disalin!')"><i class="fa-solid fa-copy"></i></button>
+            </div>
+          `;
+        }
+
+        // Action buttons
+        let actionsHtml = '';
+        if (isPending) {
+          actionsHtml = `
+            <a href="#" class="btn-oc accent">
+              <i class="fa-solid fa-money-bill-wave"></i> Bayar Sekarang
+            </a>
+          `;
+        } else if (isPaid) {
+          actionsHtml = `
+            <a href="#" class="btn-oc outline">
+              <i class="fa-solid fa-receipt"></i> Invoice
+            </a>
+          `;
+          if (isPanel) {
+            const panelUrl = o.panelUrl || o.loginUrl || 'https://panel.zyrostore.id';
+            actionsHtml += `
+              <a href="mypanel.html" class="btn-oc outline" style="color:#10b981;border-color:rgba(16,185,129,0.3);">
+                <i class="fa-solid fa-server"></i> Kelola di Panel Saya
+              </a>
+              <a href="${panelUrl}" target="_blank" rel="noopener" class="btn-oc primary">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Panel
+              </a>
+            `;
+          }
+          if (o.warrantyCode) {
+            actionsHtml += `
+              <a href="garansi.html" class="btn-oc outline" style="color:#38bdf8;border-color:rgba(56,189,248,0.3);">
+                <i class="fa-solid fa-shield-halved"></i> Klaim Garansi
+              </a>
+            `;
+          }
+        }
+
+        html += `
+          <div class="order-card">
+            <div class="oc-head">
+              <div class="oc-id">
+                <i class="fa-solid fa-receipt"></i>
+                <span>${o.orderId}</span>
+                <button class="oc-copy-btn" onclick="copyText('${o.orderId}', 'Order ID disalin!')" title="Salin Order ID">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+              </div>
+              ${statusBadge}
+            </div>
+
+            <div class="oc-body">
+              <div class="oc-info-item">
+                <span class="oc-lbl">Produk:</span>
+                <span class="oc-val">
+                  ${o.productName || 'Produk Zyro'}${o.duration > 1 ? ` <span style="font-size:0.75rem;color:var(--a);font-weight:700;">(${o.duration} Bulan${o.duration === 12 ? ' - Promo 1 Thn' : ''})</span>` : ''}
+                  ${addonBadge}
+                </span>
+                ${warrantyInfo}
+              </div>
+              <div class="oc-info-item">
+                <span class="oc-lbl">Waktu Pemesanan:</span>
+                <span class="oc-val" style="font-size:0.84rem;font-weight:600;">${dateStr}</span>
+              </div>
+              <div class="oc-info-item">
+                <span class="oc-lbl">Pembeli:</span>
+                <span class="oc-val" style="font-size:0.84rem;font-weight:600;">${o.email || o.customerPhone || '-'}</span>
+              </div>
+            </div>
+
+            ${credsHtml}
+
+            <div class="oc-footer">
+              <div class="oc-price">${priceStr}</div>
+              <div class="oc-btns">${actionsHtml}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderEmptyState(msg) {
+      document.getElementById('ordersListContainer').innerHTML = `
+        <div style="background:var(--surface);border:1px dashed var(--b2);border-radius:var(--rlg);padding:44px 20px;text-align:center;">
+          <i class="fa-solid fa-box-open" style="font-size:2.8rem;color:var(--t3);opacity:0.6;margin-bottom:14px;display:block;"></i>
+          <h4 style="font-weight:800;color:var(--t1);margin-bottom:6px;">Tidak Ada Pesanan</h4>
+          <p style="font-size:0.83rem;color:var(--t3);max-width:440px;margin:0 auto 18px;line-height:1.5;">${msg}</p>
+          <a href="index.html" class="btn-orders-search" style="text-decoration:none;display:inline-flex;">
+            <i class="fa-solid fa-cart-shopping"></i> Jelajahi Produk SeikaOne
+          </a>
+        </div>
+      `;
+    }
+    window.addEventListener('load', initPage);
+  </script>
+
+  <!-- PERSISTENT MOBILE BOTTOM NAVIGATION (Instant render on frame 1) -->
+  <nav class="zyro-bottom-nav" aria-label="Navigasi Cepat Mobile">
+    <a href="shop.html" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
+      <i class="fa-solid fa-store"></i>
+      <span>Toko</span>
+    </a>
+    <a href="riwayat.html" draggable="false" class="zyro-bottom-nav-item active" title="Riwayat Pesanan">
+      <i class="fa-solid fa-receipt"></i>
+      <span>Transaksi</span>
+    </a>
+    <a href="cpanel.html" draggable="false" class="zyro-bottom-nav-item" title="CPanel Server">
+      <i class="fa-solid fa-server"></i>
+      <span>CPanel</span>
+    </a>
+    <a href="bansos.html" draggable="false" class="zyro-bottom-nav-item" title="Bansos Panel Free">
+      <i class="fa-solid fa-gift"></i>
+      <span>Bansos</span>
+    </a>
+    <a href="profile.html" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
+      <i class="fa-solid fa-user"></i>
+      <span>Akun</span>
+    </a>
+  </nav>
+
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

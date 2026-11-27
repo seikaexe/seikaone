@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="id" class="dark" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Pusat Klaim Garansi Panel – SeikaOne.id</title>
+  <meta name="description" content="Pusat klaim garansi panel dan server SeikaOne.id. Garansi replace cepat dan dukungan teknis responsif.">
+  <link rel="canonical" href="https://zyrostore.id/garansi">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.1"></script>
+  <script src="js/components/ui/dialog.js?v=1.0"></script>
+  <script>
+    (function () {
+      var saved = localStorage.getItem('seika_theme') || 'cream';
+      if (saved === 'light') saved = 'cream';
+      document.documentElement.setAttribute('data-theme', saved);
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    })();
+  </script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .warr-page-wrap { max-width: 820px; margin: 0 auto; width: 100%; padding: 10px 16px 40px; }
+
+    /* HERO */
+    .warr-hero {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 30px 24px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .warr-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(56,189,248,0.18);
+      color: #38bdf8;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(56,189,248,0.35);
+    }
+    .warr-hero-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .warr-hero-sub {
+      font-size: 0.86rem;
+      color: var(--t3);
+      max-width: 620px;
+      line-height: 1.55;
+    }
+
+    /* CARD BOX */
+    .warr-card-box {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+
+    /* TAB NAV */
+    .warr-tab-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--b1);
+      padding-bottom: 12px;
+    }
+    .warr-tab-btn {
+      padding: 10px 20px;
+      border-radius: 100px;
+      background: var(--bg2);
+      border: 1.5px solid var(--b1);
+      color: var(--t2);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .warr-tab-btn:hover {
+      border-color: #38bdf8;
+      color: var(--t1);
+      transform: translateY(-1px);
+    }
+    .warr-tab-btn.act {
+      background: var(--surface);
+      border-color: #0284c7;
+      color: #0284c7;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(2,132,199,0.15);
+    }
+
+    /* FORM STYLES */
+    .warr-field {
+      margin-bottom: 16px;
+    }
+    .warr-lbl {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--t1);
+      margin-bottom: 6px;
+    }
+    .warr-in {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--rsm);
+      border: 1.5px solid var(--b2);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.86rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--ease);
+      box-sizing: border-box;
+    }
+    .warr-in:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+    }
+    textarea.warr-in {
+      min-height: 100px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .btn-submit-warr {
+      width: 100%;
+      padding: 14px 22px;
+      border-radius: 100px;
+      background: #0284c7;
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 800;
+      border: 1px solid #0284c7;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(2,132,199,0.25);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-submit-warr:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(2,132,199,0.35);
+    }
+
+    /* RESULT CARD */
+    .ticket-card {
+      background: var(--bg2);
+      border: 1.5px solid var(--b1);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+    }
+    .ticket-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--b1);
+      margin-bottom: 12px;
+    }
+    .ticket-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--a);
+    }
+    .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      margin-bottom: 8px;
+    }
+    .ticket-row:last-child { margin-bottom: 0; }
+    .ticket-lbl { color: var(--t3); font-weight: 600; }
+    .ticket-val { color: var(--t1); font-weight: 700; text-align: right; }
+
+    /* TOAST */
+    .toast-box {
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      background: var(--surface); color: var(--t1); padding: 12px 24px;
+      border-radius: 100px; border: 1px solid var(--b2); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 999999; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;
+      transition: top 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    /* RESPONSIVE MOBILE STYLES */
+    @media (max-width: 640px) {
+      .warr-page-wrap {
+        padding: 10px 12px 30px;
+      }
+      .warr-hero {
+        padding: 20px 16px;
+        margin-bottom: 18px;
+        border-radius: var(--r);
+      }
+      .warr-hero-title {
+        font-size: 1.25rem;
+      }
+      .warr-hero-sub {
+        font-size: 0.8rem;
+      }
+      .warr-card-box {
+        padding: 16px 14px;
+        margin-bottom: 18px;
+        border-radius: var(--r);
+      }
+      .warr-tab-nav {
+        overflow-x: auto;
+        gap: 6px;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+      }
+      .warr-tab-btn {
+        padding: 8px 14px;
+        font-size: 0.78rem;
+        white-space: nowrap;
+      }
+      .ticket-card {
+        padding: 14px;
+      }
+      .ticket-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+      }
+      .btn-top-auth-extra {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <div class="toast-box" id="vToast">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <span id="vToastMsg">Pesan</span>
+  </div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Toko">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="riwayat.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);">
+          <i class="fa-solid fa-receipt"></i>
+          <span class="btn-top-auth-txt">Riwayat</span>
+        </a>
+        <a href="bansos.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(244,63,94,0.12);color:#f43f5e;border-color:rgba(244,63,94,0.3);">
+          <i class="fa-solid fa-gift"></i>
+          <span class="btn-top-auth-txt">Bansos 1GB</span>
+        </a>
+        <a href="mypanel.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span class="btn-top-auth-txt">Panel Saya</span>
+        </a>
+        <div id="authNavContainer"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div id="page">
+      <div class="warr-page-wrap">
+
+        <!-- HERO -->
+        <div class="warr-hero">
+          <div class="warr-hero-badge">
+            <i class="fa-solid fa-shield-halved"></i> Garansi Resmi 30 Hari
+          </div>
+          <div class="warr-hero-title">
+            <i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Pusat Klaim Garansi Panel
+          </div>
+          <div class="warr-hero-sub">
+            Mengalami server panel down, ingin reinstall runtime/egg bot, ganti node, atau lupa password? Ajukan klaim garansi Anda di sini dan tim teknis kami akan langsung memprosesnya.
+          </div>
+        </div>
+
+        <!-- MAIN CARD -->
+        <div class="warr-card-box">
+          <div class="warr-tab-nav">
+            <button class="warr-tab-btn act" id="tab-claim-btn" onclick="switchWarrantyTab('claim')">
+              <i class="fa-solid fa-file-shield"></i> Ajukan Klaim Garansi
+            </button>
+            <button class="warr-tab-btn" id="tab-status-btn" onclick="switchWarrantyTab('status')">
+              <i class="fa-solid fa-magnifying-glass"></i> Cek Status Tiket Klaim
+            </button>
+          </div>
+
+          <!-- TAB 1: FORM KLAIM -->
+          <div id="warr-form-tab">
+            <form onsubmit="submitWarrantyClaim(event)">
+              <div class="warr-field">
+                <label class="warr-lbl">Kode Garansi / Order ID <span style="color:var(--rose);">*</span></label>
+                <input type="text" id="warrCodeInput" class="warr-in" placeholder="Contoh: WARR-ZYRO-XXXXXX atau ZYRO-123456" required>
+                <small style="font-size:0.72rem;color:var(--t3);margin-top:4px;display:block;">
+                  Tersedia di halaman <a href="mypanel.html" style="color:var(--a);font-weight:700;">Panel Saya</a>, riwayat pesanan, atau invoice Anda.
+                </small>
+              </div>
+
+              <div class="warr-field">
+                <label class="warr-lbl">Email Akun Pembeli</label>
+                <input type="email" id="warrEmailInput" class="warr-in" placeholder="email@contoh.com">
+              </div>
+
+              <div class="warr-field">
+                <label class="warr-lbl">No WhatsApp / Telegram Kontak</label>
+                <input type="text" id="warrContactInput" class="warr-in" placeholder="08xxxxxxxxxx atau @username">
+              </div>
+
+              <div class="warr-field">
+                <label class="warr-lbl">Jenis Kendala <span style="color:var(--rose);">*</span></label>
+                <select id="warrIssueType" class="warr-in" required>
+                  <option value="down">Server Down / Panel Error / Server Can't Start</option>
+                  <option value="reinstall">Minta Reinstall Egg / Ganti Node / Ganti Versi</option>
+                  <option value="reset_pass">Lupa Akun / Reset Password Panel Pterodactyl</option>
+                  <option value="node_issue">Kendala Node / Disk Penuh / Out of Memory</option>
+                  <option value="other">Kendala Teknis Lainnya</option>
+                </select>
+              </div>
+
+              <div class="warr-field">
+                <label class="warr-lbl">Deskripsi Kendala & Detail Masalah <span style="color:var(--rose);">*</span></label>
+                <textarea id="warrDescInput" class="warr-in" placeholder="Jelaskan kendala yang dialami secara singkat dan jelas, beserta pesan error jika ada..." required></textarea>
+              </div>
+
+              <!-- Upload Screenshot / Bukti Media -->
+              <div class="warr-field">
+                <label class="warr-lbl" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;">
+                  <span><i class="fa-solid fa-camera" style="color:var(--a);margin-right:4px;"></i> Unggah Bukti Screenshot / Media <span style="font-size:0.72rem;font-weight:600;color:var(--t3);">(Opsional)</span></span>
+                  <span style="font-size:0.7rem;color:var(--t3);">JPG, PNG, WEBP (Maks 5MB)</span>
+                </label>
+                
+                <label for="warrScreenshotFile" id="warrUploadDropzone" class="warr-dropzone" style="display:block;background:var(--bg2);border:2px dashed var(--b1);border-radius:12px;cursor:pointer;transition:all 0.2s ease;padding:4px;">
+                  <input type="file" id="warrScreenshotFile" accept="image/*,image/jpeg,image/png,image/webp" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;opacity:0;" onchange="handleWarrantyFileSelect(event)">
+                  <div id="warrDropzonePlaceholder" style="text-align:center;padding:16px 12px;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size:1.6rem;color:var(--a);margin-bottom:6px;display:block;"></i>
+                    <div style="font-size:0.82rem;font-weight:700;color:var(--t1);">Klik untuk Pilih Gambar atau Screenshot</div>
+                    <div style="font-size:0.72rem;color:var(--t3);margin-top:2px;">Lampirkan tangkapan layar pesan error atau bukti kendala server</div>
+                  </div>
+                  <div id="warrPreviewWrapper" style="display:none;position:relative;padding:10px;text-align:center;">
+                    <img id="warrImagePreview" src="" alt="Bukti Kendala" style="max-height:160px;max-width:100%;border-radius:8px;border:1px solid var(--b1);object-fit:contain;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                    <div style="margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;">
+                      <span id="warrFileName" style="font-size:0.75rem;color:var(--t2);font-weight:600;"></span>
+                      <button type="button" class="btn-remove-preview" onclick="event.preventDefault(); event.stopPropagation(); removeWarrantyFile();" style="background:#ef4444;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:0.7rem;cursor:pointer;font-weight:700;">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                      </button>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              <button type="submit" id="btnSubmitClaim" class="btn-submit-warr">
+                <i class="fa-solid fa-paper-plane"></i> Kirim Pengajuan Garansi
+              </button>
+            </form>
+          </div>
+
+          <!-- TAB 2: CEK STATUS TIKET -->
+          <div id="warr-status-tab" style="display:none;">
+            <div class="warr-field">
+              <label class="warr-lbl">Masukkan Nomor Tiket, Kode Garansi, atau Order ID</label>
+              <div style="display:flex;gap:10px;">
+                <input type="text" id="warrSearchInput" class="warr-in" placeholder="Contoh: TICKET-123456 atau WARR-XXXXXX" onkeydown="if(event.key==='Enter') checkWarrantyTicketStatus()">
+                <button type="button" onclick="checkWarrantyTicketStatus()" class="btn-submit-warr" style="width:auto;padding:0 22px;white-space:nowrap;">
+                  <i class="fa-solid fa-magnifying-glass"></i> Cek
+                </button>
+              </div>
+            </div>
+
+            <div id="warrStatusResult" style="margin-top:20px;"></div>
+          </div>
+        </div>
+
+        <!-- INFO GARANSI -->
+        <div style="background:var(--surface);border:1px solid var(--b1);border-radius:var(--rlg);padding:22px;">
+          <div style="font-size:0.95rem;font-weight:800;color:var(--t1);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+            <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Cakupan Garansi Panel SeikaOne
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;font-size:0.8rem;color:var(--t2);">
+            <div>
+              <b style="color:var(--t1);display:block;margin-bottom:2px;">• Node Down / Mati</b>
+              <span>Jika server fisik mengalami downtime, server Anda akan dipindahkan ke node cadangan dalam waktu cepat.</span>
+            </div>
+            <div>
+              <b style="color:var(--t1);display:block;margin-bottom:2px;">• Bebas Reinstall Runtime</b>
+              <span>Bisa request ganti Egg bot (misal dari NodeJS 18 ke NodeJS 20, Python, atau Java Minecraft).</span>
+            </div>
+            <div>
+              <b style="color:var(--t1);display:block;margin-bottom:2px;">• Reset Akun Instan</b>
+              <span>Jika lupa kredensial login atau password Pterodactyl, tim kami siap me-reset akses server Anda.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme logic
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('vToast');
+      document.getElementById('vToastMsg').innerText = msg;
+      box.style.top = '20px';
+      setTimeout(() => { box.style.top = '-100px'; }, 3000);
+    }
+
+    function copyText(text, msg = 'Berhasil disalin!') {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg);
+      }).catch(() => {
+        showToast('Gagal menyalin');
+      });
+    }
+
+    function switchWarrantyTab(tab) {
+      const btnClaim = document.getElementById('tab-claim-btn');
+      const btnStatus = document.getElementById('tab-status-btn');
+      const formTab = document.getElementById('warr-form-tab');
+      const statusTab = document.getElementById('warr-status-tab');
+
+      if (tab === 'claim') {
+        btnClaim.classList.add('act');
+        btnStatus.classList.remove('act');
+        formTab.style.display = 'block';
+        statusTab.style.display = 'none';
+      } else {
+        btnStatus.classList.add('act');
+        btnClaim.classList.remove('act');
+        formTab.style.display = 'none';
+        statusTab.style.display = 'block';
+      }
+    }
+
+    let selectedWarrantyFile = null;
+
+    function handleWarrantyFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('Ukuran file maksimal 5MB!');
+        event.target.value = '';
+        return;
+      }
+      selectedWarrantyFile = file;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('warrImagePreview').src = e.target.result;
+        document.getElementById('warrFileName').innerText = file.name;
+        document.getElementById('warrDropzonePlaceholder').style.display = 'none';
+        document.getElementById('warrPreviewWrapper').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeWarrantyFile() {
+      selectedWarrantyFile = null;
+      const inp = document.getElementById('warrScreenshotFile');
+      if (inp) inp.value = '';
+      document.getElementById('warrImagePreview').src = '';
+      document.getElementById('warrFileName').innerText = '';
+      document.getElementById('warrPreviewWrapper').style.display = 'none';
+      document.getElementById('warrDropzonePlaceholder').style.display = 'block';
+    }
+
+    async function submitWarrantyClaim(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitClaim');
+      const originalHtml = btn.innerHTML;
+
+      const formData = new FormData();
+      formData.append('orderOrWarrantyCode', document.getElementById('warrCodeInput').value.trim());
+      formData.append('buyerEmail', document.getElementById('warrEmailInput').value.trim());
+      formData.append('buyerContact', document.getElementById('warrContactInput').value.trim());
+      formData.append('issueType', document.getElementById('warrIssueType').value);
+      formData.append('description', document.getElementById('warrDescInput').value.trim());
+      if (selectedWarrantyFile) {
+        formData.append('screenshot', selectedWarrantyFile);
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim Pengajuan...';
+
+      try {
+        const res = await fetch('/api/warranty/claim', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+
+        if (data.status) {
+          if (data.ticketSecret && data.ticketId) {
+            try { localStorage.setItem('zyro_ticket_' + data.ticketId, data.ticketSecret); } catch (_) {}
+          }
+          showToast('Klaim garansi berhasil dikirim!');
+          document.getElementById('warrDescInput').value = '';
+          removeWarrantyFile();
+          
+          // Switch to status tab & show result
+          switchWarrantyTab('status');
+          document.getElementById('warrSearchInput').value = data.ticketId;
+          checkWarrantyTicketStatus();
+        } else {
+          ZyroAlert(data.message || 'Gagal mengirim pengajuan garansi.', { type: 'error', title: 'Klaim Gagal' });
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+        ZyroAlert('Terjadi kesalahan jaringan saat mengirim klaim.', { type: 'error', title: 'Koneksi Bermasalah' });
+      }
+    }
+
+    async function checkWarrantyTicketStatus() {
+      const q = document.getElementById('warrSearchInput').value.trim();
+      const container = document.getElementById('warrStatusResult');
+      if (!q) {
+        return showToast('Masukkan nomor tiket atau kode garansi!');
+      }
+
+      container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--t3);"><i class="fa-solid fa-spinner fa-spin"></i> Mengecek status...</div>';
+
+      try {
+        const savedSecret = localStorage.getItem('zyro_ticket_' + q) || '';
+        const headers = {};
+        if (savedSecret) headers['x-ticket-secret'] = savedSecret;
+
+        const res = await fetch(`/api/warranty/status?q=${encodeURIComponent(q)}`, { headers });
+        const data = await res.json();
+
+        if (!data.status || !data.tickets || data.tickets.length === 0) {
+          container.innerHTML = `
+            <div style="background:var(--bg2);border:1px dashed var(--b2);border-radius:12px;padding:24px;text-align:center;color:var(--t3);">
+              <i class="fa-solid fa-circle-question" style="font-size:2rem;margin-bottom:8px;opacity:0.4;display:block;"></i>
+              Tidak ditemukan tiket garansi dengan kata kunci "${q}". Pastikan kode sudah sesuai.
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        data.tickets.forEach(t => {
+          const tId = t.ticketId || t.id || '-';
+          const tStatus = String(t.status || 'PENDING').toUpperCase();
+          let statusBadge = '<span style="background:rgba(245,158,11,0.15);color:#f59e0b;padding:4px 10px;border-radius:100px;font-size:0.75rem;font-weight:800;">Menunggu Review Admin</span>';
+          if (tStatus === 'APPROVED') {
+            statusBadge = '<span style="background:rgba(16,185,129,0.15);color:#10b981;padding:4px 10px;border-radius:100px;font-size:0.75rem;font-weight:800;"><i class="fa-solid fa-check"></i> Klaim Disetujui</span>';
+          } else if (tStatus === 'RESOLVED') {
+            statusBadge = '<span style="background:rgba(14,165,233,0.15);color:#0ea5e9;padding:4px 10px;border-radius:100px;font-size:0.75rem;font-weight:800;"><i class="fa-solid fa-circle-check"></i> Selesai Diproses</span>';
+          } else if (tStatus === 'REJECTED') {
+            statusBadge = '<span style="background:rgba(244,63,94,0.15);color:#f43f5e;padding:4px 10px;border-radius:100px;font-size:0.75rem;font-weight:800;"><i class="fa-solid fa-xmark"></i> Ditolak</span>';
+          }
+
+          const dateStr = t.createdAt ? (typeof t.createdAt === 'string' && t.createdAt.includes('/') ? t.createdAt : new Date(t.createdAt).toLocaleString('id-ID')) : '-';
+
+          html += `
+            <div class="ticket-card">
+              <div class="ticket-head">
+                <div class="ticket-id">
+                  <i class="fa-solid fa-ticket"></i> ${tId}
+                  <button onclick="copyText('${tId}')" style="background:none;border:none;color:var(--t3);cursor:pointer;margin-left:4px;"><i class="fa-solid fa-copy"></i></button>
+                </div>
+                ${statusBadge}
+              </div>
+              <div class="ticket-row">
+                <span class="ticket-lbl">Kode Garansi / Order:</span>
+                <span class="ticket-val" style="font-family:'JetBrains Mono',monospace;">${t.warrantyCode || t.orderId || '-'}</span>
+              </div>
+              <div class="ticket-row">
+                <span class="ticket-lbl">Waktu Pengajuan:</span>
+                <span class="ticket-val">${dateStr}</span>
+              </div>
+              <div class="ticket-row">
+                <span class="ticket-lbl">Jenis Kendala:</span>
+                <span class="ticket-val">${t.issueTitle || t.issueType || '-'}</span>
+              </div>
+              <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--b1);">
+                <span class="ticket-lbl" style="display:block;margin-bottom:4px;">Deskripsi Kendala:</span>
+                <div style="font-size:0.8rem;color:var(--t1);background:var(--surface);padding:10px 12px;border-radius:8px;border:1px solid var(--b1);white-space:pre-wrap;">${t.description}</div>
+              </div>
+              ${t.screenshotUrl ? `
+              <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--b1);">
+                <span class="ticket-lbl" style="display:block;margin-bottom:6px;"><i class="fa-solid fa-image" style="color:var(--a);"></i> Bukti Screenshot Kendala:</span>
+                <a href="${t.screenshotUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;" title="Klik untuk memperbesar">
+                  <img src="${t.screenshotUrl}" alt="Bukti Kendala" style="max-height:160px;max-width:100%;border-radius:8px;border:1px solid var(--b1);object-fit:cover;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+                </a>
+              </div>` : ''}
+              ${(t.adminNotes || t.adminNote) ? `
+              <div style="margin-top:10px;padding:10px 12px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:8px;">
+                <b style="font-size:0.78rem;color:#10b981;display:block;margin-bottom:3px;"><i class="fa-solid fa-circle-info"></i> Respon / Solusi Admin:</b>
+                <div style="font-size:0.8rem;color:var(--t1);white-space:pre-wrap;">${t.adminNotes || t.adminNote}</div>
+              </div>` : ''}
+
+              <!-- INTERACTIVE CHAT LIVE SECTION -->
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--b1);">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                  <b style="font-size:0.8rem;color:var(--t1);display:flex;align-items:center;gap:6px;">
+                    <i class="fa-solid fa-comments" style="color:var(--a);"></i> Percakapan & Live Chat Tiket
+                  </b>
+                  <span style="font-size:0.68rem;color:var(--t3);"><i class="fa-solid fa-circle" style="color:#10b981;font-size:0.45rem;"></i> Live Chat</span>
+                </div>
+
+                ${t.isAuthorized === false ? `
+                  <div style="padding:16px;background:rgba(239,68,68,0.06);border:1px dashed rgba(239,68,68,0.3);border-radius:10px;text-align:center;color:var(--t2);font-size:0.78rem;">
+                    <i class="fa-solid fa-lock" style="color:#ef4444;font-size:1.1rem;display:block;margin-bottom:6px;"></i>
+                    Percakapan tiket ini terkunci demi keamanan data.<br>
+                    <span style="font-size:0.72rem;color:var(--t3);">Silakan <a href="#" style="color:var(--a);font-weight:700;">Login ke akun Anda</a> atau buka dari browser tempat Anda mengajukan tiket garansi.</span>
+                  </div>
+                ` : `
+                  <!-- Chat Messages Scroll Container -->
+                  <div id="warrChatList_${tId}" style="max-height:220px;overflow-y:auto;background:var(--bg);border:1px solid var(--b1);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;">
+                    ${renderTicketChatMessagesHtml(t.messages || [])}
+                  </div>
+
+                  <!-- Chat Reply Form -->
+                  <form onsubmit="submitCustomerTicketMessage(event, '${tId}')" style="display:flex;gap:6px;margin-top:8px;">
+                    <input type="text" id="inpCustomerMsg_${tId}" class="warr-in" placeholder="Tulis balasan atau pertanyaan ke Admin..." style="height:38px;font-size:0.78rem;border-radius:8px;padding:0 10px;flex:1;" required>
+                    <button type="submit" class="btn-submit-warr" style="width:auto;height:38px;padding:0 14px;border-radius:8px;font-size:0.78rem;white-space:nowrap;">
+                      <i class="fa-solid fa-paper-plane"></i> Kirim
+                    </button>
+                  </form>
+                `}
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      } catch (err) {
+        container.innerHTML = '<div style="color:var(--rose);padding:16px;text-align:center;">Gagal memuat status tiket.</div>';
+      }
+    }
+
+    function renderTicketChatMessagesHtml(messages) {
+      if (!messages || messages.length === 0) {
+        return '<div style="text-align:center;padding:16px;color:var(--t3);font-size:0.75rem;"><i class="fa-regular fa-message" style="display:block;margin-bottom:4px;font-size:1.1rem;opacity:0.4;"></i>Belum ada percakapan tambahan. Kirim pesan di bawah untuk berdiskusi langsung dengan Admin.</div>';
+      }
+
+      return messages.map(m => {
+        const isAdmin = m.sender === 'admin';
+        return `
+          <div style="display:flex;flex-direction:column;align-items:${isAdmin ? 'flex-start' : 'flex-end'};max-width:88%;align-self:${isAdmin ? 'flex-start' : 'flex-end'};">
+            <span style="font-size:0.65rem;color:var(--t3);margin-bottom:2px;font-weight:700;">${m.senderName || (isAdmin ? 'Admin' : 'Anda')} • ${m.time || ''}</span>
+            <div style="background:${isAdmin ? 'rgba(2,132,199,0.15)' : 'var(--a)'};color:${isAdmin ? 'var(--t1)' : '#ffffff'};border:1px solid ${isAdmin ? 'rgba(2,132,199,0.3)' : 'transparent'};padding:7px 11px;border-radius:10px;font-size:0.78rem;line-height:1.4;white-space:pre-wrap;word-break:break-word;">
+              ${escapeHtml(m.text || '')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function submitCustomerTicketMessage(e, ticketId) {
+      e.preventDefault();
+      const inp = document.getElementById(`inpCustomerMsg_${ticketId}`);
+      if (!inp) return;
+      const text = inp.value.trim();
+      if (!text) return;
+
+      inp.value = '';
+      try {
+        const localSec = localStorage.getItem('zyro_ticket_' + ticketId) || '';
+        const res = await fetch('/api/warranty/message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(localSec ? { 'x-ticket-secret': localSec } : {})
+          },
+          body: JSON.stringify({ ticketId, text, sender: 'buyer', secret: localSec })
+        });
+        const data = await res.json();
+        if (data.status) {
+          const list = document.getElementById(`warrChatList_${ticketId}`);
+          if (list) {
+            list.innerHTML = renderTicketChatMessagesHtml(data.messages);
+            list.scrollTop = list.scrollHeight;
+          }
+        } else {
+          showToast('Gagal mengirim pesan: ' + data.message);
+        }
+      } catch (err) {
+        showToast('Koneksi terputus saat kirim chat');
+      }
+    }
+
+    function initPage() {
+      // Check query params (?claim=..., ?code=..., ?orderId=..., ?ticket=...)
+      const urlParams = new URLSearchParams(window.location.search);
+      const codeParam = urlParams.get('claim') || urlParams.get('code') || urlParams.get('orderId');
+      const ticketParam = urlParams.get('ticket');
+
+      if (codeParam) {
+        document.getElementById('warrCodeInput').value = codeParam;
+      }
+      if (ticketParam) {
+        switchWarrantyTab('status');
+        document.getElementById('warrSearchInput').value = ticketParam;
+        checkWarrantyTicketStatus();
+      }
+
+      // Prefill user data
+      const savedEmail = localStorage.getItem('zyro_buyer_email') || '';
+      const savedContact = localStorage.getItem('zyro_buyer_tele') || '';
+      if (savedEmail && !document.getElementById('warrEmailInput').value) {
+        document.getElementById('warrEmailInput').value = savedEmail;
+      }
+      if (savedContact && !document.getElementById('warrContactInput').value) {
+        document.getElementById('warrContactInput').value = savedContact;
+      }
+
+      // Auth pill in topbar
+      const authToken = localStorage.getItem('seika_user_token');
+      const savedUser = localStorage.getItem('seika_user_data') ? JSON.parse(localStorage.getItem('seika_user_data')) : null;
+      const authContainer = document.getElementById('authNavContainer');
+
+      if (authToken && savedUser) {
+        const firstName = savedUser.name ? savedUser.name.split(' ')[0] : 'Member';
+        const userDisplayName = savedUser.name || savedUser.email || 'Member';
+        const avatar = (typeof getSmartAvatar === 'function')
+          ? getSmartAvatar(savedUser.avatar, userDisplayName)
+          : (savedUser.avatar || '/assets/logo.png');
+        const avFallback = `onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${escapeHtml(userDisplayName)}');else this.src='/assets/logo.png';"`;
+        authContainer.innerHTML = `
+          <div style="position:relative;">
+            <div class="user-nav-pill" style="display:inline-flex;cursor:pointer;" onclick="toggleSubUserDropdown(event)" title="${savedUser.email}">
+              <img src="${avatar}" class="user-nav-avatar" alt="Avatar" ${avFallback}>
+              <div class="user-nav-info">
+                <span class="user-nav-name">${firstName}</span>
+                <span class="user-nav-tag">5% OFF</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;color:var(--t3);margin-left:2px;"></i>
+            </div>
+            <div class="user-dropdown-menu" id="subUserDropdown" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:240px;background:var(--surface);border:1px solid var(--b1);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,0.25);padding:10px;z-index:99999;">
+              <div class="ud-head" style="padding:8px;border-bottom:1px solid var(--b1);margin-bottom:8px;display:flex;align-items:center;gap:10px;">
+                <img src="${avatar}" style="width:34px;height:34px;border-radius:50%;border:1.5px solid var(--a);" ${avFallback}>
+                <div style="overflow:hidden;">
+                  <div style="font-size:0.82rem;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.name || 'Member'}</div>
+                  <div style="font-size:0.7rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.email || ''}</div>
+                </div>
+              </div>
+              <div class="ud-items" style="display:flex;flex-direction:column;gap:4px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-house" style="color:var(--a);"></i> Beranda Toko</a>
+                <a href="bansos.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:#f43f5e;font-weight:700;text-decoration:none;border-radius:8px;"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free (1GB)</a>
+                <a href="mypanel.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya</a>
+                <a href="riwayat.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-receipt" style="color:#f59e0b;"></i> Riwayat Pesanan</a>
+                <a href="addon.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-on Spek</a>
+                <a href="profile.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun</a>
+                <hr style="border:none;border-top:1px solid var(--b1);margin:4px 0;">
+                <a href="javascript:void(0)" onclick="subLogout()" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--rose);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar (Logout)</a>
+              </div>
+            </div>
+          </div>
+        `;
+        if (savedUser.email && !document.getElementById('warrEmailInput').value) {
+          document.getElementById('warrEmailInput').value = savedUser.email;
+        }
+      } else {
+        authContainer.innerHTML = `
+          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+            <i class="fa-solid fa-circle-user"></i> <span class="btn-top-auth-txt">Masuk</span>
+          </a>
+        `;
+      }
+    }
+
+    function toggleSubUserDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('subUserDropdown');
+      if (dd) dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+    }
+    window.addEventListener('click', function(e) {
+      const dd = document.getElementById('subUserDropdown');
+      if (dd && dd.style.display !== 'none' && !dd.contains(e.target)) {
+        dd.style.display = 'none';
+      }
+    });
+
+    async function subLogout() {
+      const ok = await ZyroConfirm({
+        title: 'Keluar dari Akun',
+        tag: 'LOGOUT',
+        message: 'Apakah Anda yakin ingin keluar dari akun?',
+        icon: 'fa-solid fa-arrow-right-from-bracket',
+        isDestructive: true,
+        confirmText: 'Ya, Keluar',
+        cancelText: 'Batal'
+      });
+      if (!ok) return;
+      localStorage.removeItem('seika_user_token');
+      localStorage.removeItem('seika_user_data');
+      window.location.reload();
+    }
+
+    window.addEventListener('load', () => {
+      initPage();
+      if (window.ZyroSelect) {
+        window.ZyroSelect.initAll();
+      }
+    });
+  </script>
+
+  <!-- SEIKAONE MODULAR UI ARCHITECTURE -->
+  <script src="js/components/ui/toast.js?v=1.0"></script>
+  <script src="js/components/ui/select.js?v=1.0"></script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

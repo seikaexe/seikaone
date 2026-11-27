@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id" class="dark" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Hall of Fame &amp; Bug Bounty Community – SeikaOne.id</title>
+  <meta name="description" content="Hall of Fame dan Bug Bounty Community SeikaOne.id. Penghargaan bagi kontributor keamanan sistem dan komunitas.">
+  <link rel="canonical" href="https://zyrostore.id/hall-of-fame">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.1"></script>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('seika_theme') || 'cream';
+      if (saved === 'light') saved = 'cream';
+      document.documentElement.setAttribute('data-theme', saved);
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    })();
+  </script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .hof-wrap { max-width: 980px; margin: 0 auto; width: 100%; padding: 14px 16px 50px; }
+
+    /* HERO */
+    .hof-hero {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 28px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .hof-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .hof-hero-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hof-hero-sub {
+      font-size: 0.86rem;
+      color: var(--t2);
+      max-width: 620px;
+      margin: 0 auto 16px;
+      line-height: 1.55;
+    }
+
+    /* TOP STATS ROW */
+    .hof-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .hof-stat-card {
+      background: var(--surface);
+      border: 1px solid var(--b2);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    body.dark .hof-stat-card {
+      background: var(--surface);
+      border-color: var(--b1);
+    }
+    .hof-stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .hof-stat-val { font-size: 1.2rem; font-weight: 900; color: var(--t1); line-height: 1.2; }
+    .hof-stat-lbl { font-size: 0.72rem; color: var(--t3); font-weight: 600; margin-top: 2px; }
+
+    /* TAB NAVIGATION */
+    .hof-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      border-bottom: 1.5px solid var(--b1);
+      padding: 2px 2px 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .hof-tabs::-webkit-scrollbar { display: none; }
+    .hof-tab-btn {
+      padding: 9px 16px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--b2);
+      color: var(--t2);
+      font-weight: 800;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+    .hof-tab-btn:hover { color: var(--t1); border-color: var(--a); }
+    .hof-tab-btn.active {
+      background: var(--surface);
+      border-color: #059669;
+      color: #059669;
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
+    }
+    .hof-tab-pill {
+      font-size: 0.65rem;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* CARDS GRID */
+    .hof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+    .hunter-card {
+      background: var(--surface);
+      border: 1px solid var(--b2);
+      border-radius: 18px;
+      padding: 16px;
+      transition: all 0.22s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.03);
+    }
+    body.dark .hunter-card {
+      background: var(--surface);
+      border-color: var(--b1);
+    }
+    .hunter-card:hover {
+      border-color: var(--a);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.14);
+    }
+    .hunter-card.top-rank-1 {
+      border-color: rgba(245, 158, 11, 0.5) !important;
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.12);
+    }
+    .hunter-card.top-rank-2 {
+      border-color: rgba(148, 163, 184, 0.45) !important;
+      box-shadow: 0 4px 18px rgba(148, 163, 184, 0.08);
+    }
+    .hunter-card.top-rank-3 {
+      border-color: rgba(217, 119, 6, 0.45) !important;
+      box-shadow: 0 4px 18px rgba(217, 119, 6, 0.08);
+    }
+    .hunter-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    .hunter-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #10b981;
+      flex-shrink: 0;
+      background: var(--bg2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .hunter-info { flex: 1; min-width: 0; }
+    .hunter-name {
+      font-size: 0.94rem;
+      font-weight: 850;
+      color: var(--t1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hunter-title {
+      font-size: 0.72rem;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+    .hunter-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .badge-hunter {
+      font-size: 0.64rem;
+      font-weight: 850;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.18);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      letter-spacing: 0.3px;
+    }
+    .rank-ribbon {
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 3px 9px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .rank-ribbon-1 {
+      background: rgba(245, 158, 11, 0.18);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .rank-ribbon-2 {
+      background: rgba(148, 163, 184, 0.18);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+    .rank-ribbon-3 {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fb923c;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .rank-ribbon-normal {
+      background: var(--bg2);
+      color: var(--t3);
+      border: 1px solid var(--b1);
+    }
+    .hunter-reward-box {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .hunter-stat-lbl {
+      font-size: 0.68rem;
+      color: var(--t3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hunter-stat-val {
+      font-size: 0.88rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-top: 2px;
+    }
+    .text-gold { color: #f59e0b; }
+    .text-green { color: #10b981; }
+
+    /* BOUNTY TABLE */
+    .bounty-table-box {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .bounty-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px;
+      border-bottom: 1px solid var(--b1);
+      gap: 12px;
+    }
+    .bounty-row:last-child { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .hof-hero { padding: 20px 14px; }
+      .hof-hero-title { font-size: 1.25rem; }
+      .hof-hero-sub { font-size: 0.8rem; }
+      .hof-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .hof-stat-card:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+      .hof-stat-card {
+        padding: 12px 14px;
+        gap: 10px;
+      }
+      .hof-stat-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+      }
+      .hof-stat-val { font-size: 1.1rem; }
+      .hof-stat-lbl { font-size: 0.68rem; }
+      .hof-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-inner" style="max-width: 980px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 58px;">
+      <a href="index.html" class="brand" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--t1); font-weight: 800;">
+        <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full" style="width: 32px; height: 32px; border-radius: 9px;">
+        <span>SeikaOne<span style="color:var(--a);">.id</span></span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="cpanel.html" class="btn-primary" style="padding: 7px 14px; font-size: 0.8rem; border-radius: var(--rsm); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-gauge-high"></i> <span>CPanel</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="hof-wrap">
+
+    <!-- HERO BANNER -->
+    <div class="hof-hero">
+      <div class="hof-hero-badge">
+        <i class="fa-solid fa-shield-halved"></i> ZYRO SECURITY &amp; COMMUNITY HONORS
+      </div>
+      <h1 class="hof-hero-title">
+        <i class="fa-solid fa-award" style="color:#10b981;"></i> Hall of Fame &amp; Bug Bounty
+      </h1>
+      <p class="hof-hero-sub">
+        Apresiasi tertinggi dari SeikaOne kepada para penemu celah/bug, kontributor sistem, serta pelanggan loyal dengan total transaksi tertinggi.
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <button type="button" onclick="switchHofTab('bounty')" class="btn-primary" style="padding: 9px 18px; font-size: 0.82rem; border-radius: 100px; display: inline-flex; align-items: center; gap: 7px; background: #059669; border: 1px solid #059669; box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25); cursor: pointer; color: #fff; font-weight: 800;">
+          <i class="fa-solid fa-bug"></i> Panduan Bounty &amp; Klaim Saldo
+        </button>
+        <button type="button" onclick="switchHofTab('leaderboard')" class="btn-hbal-sub" style="padding: 9px 18px; font-size: 0.82rem; border-radius: 100px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer;">
+          <i class="fa-solid fa-trophy" style="color:#f59e0b;"></i> Top Leaderboard Buyer
+        </button>
+      </div>
+    </div>
+
+    <!-- STATS OVERVIEW -->
+    <div class="hof-stats-grid">
+      <div class="hof-stat-card">
+        <div class="hof-stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+          <i class="fa-solid fa-bug"></i>
+        </div>
+        <div>
+          <div class="hof-stat-val" id="hofStatHunters">0</div>
+          <div class="hof-stat-lbl">Bug Hunter Terdaftar</div>
+        </div>
+      </div>
+      <div class="hof-stat-card">
+        <div class="hof-stat-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div>
+          <div class="hof-stat-val" id="hofStatLeaderboard">0</div>
+          <div class="hof-stat-lbl">Top Leaderboard Buyer</div>
+        </div>
+      </div>
+      <div class="hof-stat-card">
+        <div class="hof-stat-icon" style="background: rgba(14, 165, 233, 0.15); color: #0ea5e9;">
+          <i class="fa-solid fa-hand-holding-dollar"></i>
+        </div>
+        <div>
+          <div class="hof-stat-val" id="hofStatBounties">Rp 0</div>
+          <div class="hof-stat-lbl">Total Reward Saldo Diberikan</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB BUTTONS -->
+    <div class="hof-tabs">
+      <button class="hof-tab-btn active" id="tabBtnHunters" onclick="switchHofTab('hunters')">
+        <i class="fa-solid fa-bug" style="color:#10b981;"></i>
+        <span>Bug Hunters</span>
+        <span class="hof-tab-pill" id="pillHunters">0</span>
+      </button>
+      <button class="hof-tab-btn" id="tabBtnLeaderboard" onclick="switchHofTab('leaderboard')">
+        <i class="fa-solid fa-trophy" style="color:#f59e0b;"></i>
+        <span>Top Leaderboard</span>
+        <span class="hof-tab-pill" id="pillLeaderboard">0</span>
+      </button>
+      <button class="hof-tab-btn" id="tabBtnDevs" onclick="switchHofTab('devs')">
+        <i class="fa-solid fa-code" style="color:#8b5cf6;"></i>
+        <span>Web Developer &amp; Founder</span>
+      </button>
+      <button class="hof-tab-btn" id="tabBtnBounty" onclick="switchHofTab('bounty')">
+        <i class="fa-solid fa-gift" style="color:#0ea5e9;"></i>
+        <span>Panduan Reward Bounty</span>
+      </button>
+    </div>
+
+    <!-- SECTION 1: BUG HUNTERS -->
+    <div id="secHunters">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="font-size: 1.1rem; font-weight: 850; color: var(--t1); margin: 0; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-shield-cat" style="color:#10b981;"></i> Daftar Kehormatan Penemu Bug (Bug Hunters)
+        </h3>
+        <span style="font-size: 0.75rem; color: var(--t3);">Gelar Resmi &amp; Saldo Gratis</span>
+      </div>
+      <div class="hof-grid" id="gridBugHunters">
+        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--t3);">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.8rem; color: #10b981;"></i>
+          <p style="margin-top: 10px; font-size: 0.85rem;">Memuat daftar Bug Hunter...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: TOP LEADERBOARD -->
+    <div id="secLeaderboard" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="font-size: 1.1rem; font-weight: 850; color: var(--t1); margin: 0; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-medal" style="color:#f59e0b;"></i> Top Transaksi &amp; Pelanggan Setia
+        </h3>
+        <a href="leaderboard.html" style="font-size: 0.78rem; color: var(--a); font-weight: 700; text-decoration: none;">
+          Buka Leaderboard Lengkap &rarr;
+        </a>
+      </div>
+      <div class="hof-grid" id="gridTopLeaderboard">
+        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--t3);">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.8rem; color: #f59e0b;"></i>
+          <p style="margin-top: 10px; font-size: 0.85rem;">Memuat data Leaderboard...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: DEVELOPERS & FOUNDER -->
+    <div id="secDevs" style="display: none;">
+      <div style="margin-bottom: 14px;">
+        <h3 style="font-size: 1.1rem; font-weight: 850; color: var(--t1); margin: 0; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-crown" style="color:#8b5cf6;"></i> Pengembang &amp; Pendiri Web SeikaOne
+        </h3>
+      </div>
+      <div class="hof-grid" id="gridDevelopers"></div>
+    </div>
+
+    <!-- SECTION 4: BOUNTY GUIDE -->
+    <div id="secBounty" style="display: none;">
+      <div class="bounty-table-box">
+        <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--t1); margin: 0 0 8px;">
+          <i class="fa-solid fa-shield-virus" style="color:#10b981;"></i> Program Hadiah Bug Bounty SeikaOne
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--t2); line-height: 1.5; margin: 0 0 18px;">
+          Temukan celah keamanan atau bug fungsional di web <b>zyrostore.id</b> dan dapatkan saldo instan serta gelar resmi <b>Bug Hunter</b> permanen!
+        </p>
+
+        <div class="bounty-row">
+          <div>
+            <div style="font-weight: 800; font-size: 0.88rem; color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> Bug Kritis / Vulnerability Keamanan</div>
+            <div style="font-size: 0.74rem; color: var(--t3); margin-top: 3px;">Celah bypass autentikasi, eksploitasi saldo, kebocoran data sensitif.</div>
+          </div>
+          <div style="text-align: right; flex-shrink: 0;">
+            <div style="font-size: 0.95rem; font-weight: 900; color: #10b981;">Rp 100.000 – Rp 500.000</div>
+            <span class="badge-hunter">+ Role Bug Hunter</span>
+          </div>
+        </div>
+
+        <div class="bounty-row">
+          <div>
+            <div style="font-weight: 800; font-size: 0.88rem; color: #f59e0b;"><i class="fa-solid fa-bug"></i> Bug Transaksi &amp; Fungsional Web</div>
+            <div style="font-size: 0.74rem; color: var(--t3); margin-top: 3px;">Kegagalan checkout, error webhook QRIS, bug form input server/cpanel.</div>
+          </div>
+          <div style="text-align: right; flex-shrink: 0;">
+            <div style="font-size: 0.95rem; font-weight: 900; color: #10b981;">Rp 25.000 – Rp 100.000</div>
+            <span class="badge-hunter">+ Role Bug Hunter</span>
+          </div>
+        </div>
+
+        <div class="bounty-row">
+          <div>
+            <div style="font-weight: 800; font-size: 0.88rem; color: #0ea5e9;"><i class="fa-solid fa-wrench"></i> Bug Tampilan / Glitch Minor</div>
+            <div style="font-size: 0.74rem; color: var(--t3); margin-top: 3px;">Kerusakan visual, layout overflow, typo tombol penting.</div>
+          </div>
+          <div style="text-align: right; flex-shrink: 0;">
+            <div style="font-size: 0.95rem; font-weight: 900; color: #10b981;">Rp 10.000 – Rp 25.000</div>
+            <span class="badge-hunter">+ Saldo Instan</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding: 16px; border-radius: 14px; background: var(--bg2); border: 1px dashed var(--b1); display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+          <div>
+            <div style="font-weight: 850; font-size: 0.88rem; color: var(--t1);">Menemukan Bug Sekarang?</div>
+            <div style="font-size: 0.75rem; color: var(--t2); margin-top: 2px;">Kirimkan tangkapan layar (screenshot) dan langkah reproduksi ke tim developer.</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="https://t.me/SeikaOne" target="_blank" class="btn-primary" style="padding: 9px 16px; font-size: 0.82rem; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: #0088cc;">
+              <i class="fa-brands fa-telegram"></i> Lapor via Telegram
+            </a>
+            <a href="https://wa.me/62895325693003" target="_blank" class="btn-primary" style="padding: 9px 16px; font-size: 0.82rem; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: #25d366;">
+              <i class="fa-brands fa-whatsapp"></i> WhatsApp CS
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let hofData = null;
+
+    function safeEscape(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function switchHofTab(tab) {
+      const tabs = ['hunters', 'leaderboard', 'devs', 'bounty'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+        const sec = document.getElementById('sec' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) btn.classList.toggle('active', t === tab);
+        if (sec) sec.style.display = t === tab ? 'block' : 'none';
+      });
+    }
+
+    async function loadHallOfFame() {
+      try {
+        const res = await fetch('/api/hall-of-fame');
+        const json = await res.json();
+        if (json.status && json.data) {
+          hofData = json.data;
+          renderHofData(json.data);
+        }
+      } catch (err) {
+        console.error('Failed to load Hall of Fame:', err);
+      }
+    }
+
+    function renderHofData(data) {
+      // 1. Stats
+      const statHunters = document.getElementById('hofStatHunters');
+      const statLead = document.getElementById('hofStatLeaderboard');
+      const statBounties = document.getElementById('hofStatBounties');
+      const pillHunters = document.getElementById('pillHunters');
+      const pillLead = document.getElementById('pillLeaderboard');
+
+      if (statHunters) statHunters.innerText = (data.bugHunters || []).length;
+      if (statLead) statLead.innerText = (data.topLeaderboardUsers || []).length;
+      if (pillHunters) pillHunters.innerText = (data.bugHunters || []).length;
+      if (pillLead) pillLead.innerText = (data.topLeaderboardUsers || []).length;
+
+      const totalPaid = (data.bugHunters || []).reduce((sum, h) => sum + (h.totalBounty || 0), 0);
+      if (statBounties) statBounties.innerText = 'Rp ' + totalPaid.toLocaleString('id-ID');
+
+      // 2. Render Bug Hunters
+      const gridHunters = document.getElementById('gridBugHunters');
+      if (gridHunters) {
+        if (!data.bugHunters || data.bugHunters.length === 0) {
+          gridHunters.innerHTML = `
+            <div style="grid-column: 1 / -1; padding: 36px; text-align: center; color: var(--t3); background: var(--surface); border: 1px dashed var(--b1); border-radius: 16px;">
+              <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: #10b981; margin-bottom: 8px;"></i>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--t1);">Jadilah Bug Hunter Pertama!</div>
+              <p style="font-size: 0.78rem; margin: 4px 0 14px;">Belum ada penemu bug terdaftar. Laporkan bug fitur atau celah keamanan untuk masuk Hall of Fame ini.</p>
+              <button onclick="switchHofTab('bounty')" class="btn-primary" style="padding: 7px 16px; font-size: 0.78rem; border-radius: 8px; background: #10b981; border: none; cursor: pointer; color: #fff; font-weight: 800;">
+                Lihat Cara Lapor Bug
+              </button>
+            </div>
+          `;
+        } else {
+          gridHunters.innerHTML = data.bugHunters.map(h => {
+            const hAvatar = (typeof getSmartAvatar === 'function') ? getSmartAvatar(h.avatar, h.name) : (h.avatar || '');
+            const escName = safeEscape(h.name);
+            return `
+            <div class="hunter-card">
+              <div class="hunter-top">
+                <img src="${hAvatar}" class="hunter-avatar" alt="${escName}" onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('', '${escName}');">
+                <div class="hunter-info">
+                  <div class="hunter-name">${escName}</div>
+                  <div class="hunter-title">${safeEscape(h.title || 'Security Researcher')}</div>
+                  <div class="hunter-badge-row">
+                    <span class="badge-hunter"><i class="fa-solid fa-bug"></i> ${safeEscape(h.roleBadge || 'BUG HUNTER')}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="hunter-reward-box">
+                <span class="hunter-stat-lbl"><i class="fa-solid fa-coins" style="color:#10b981;"></i> Total Bounty:</span>
+                <span class="hunter-stat-val text-green">Rp ${(h.totalBounty || 0).toLocaleString('id-ID')}</span>
+              </div>
+            </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 3. Render Top Leaderboard
+      const gridLead = document.getElementById('gridTopLeaderboard');
+      if (gridLead) {
+        if (!data.topLeaderboardUsers || data.topLeaderboardUsers.length === 0) {
+          gridLead.innerHTML = `
+            <div style="grid-column: 1 / -1; padding: 30px; text-align: center; color: var(--t3); background: var(--surface); border: 1px dashed var(--b1); border-radius: 16px;">
+              <i class="fa-solid fa-trophy" style="font-size: 2rem; color: #f59e0b; margin-bottom: 8px;"></i>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--t1);">Leaderboard Aktif</div>
+              <p style="font-size: 0.78rem; margin: 4px 0;">Tingkatkan transaksi belanja Anda untuk meraih gelar Top Leaderboard mingguan.</p>
+            </div>
+          `;
+        } else {
+          gridLead.innerHTML = data.topLeaderboardUsers.map((u, i) => {
+            const rankNum = u.rank || (i + 1);
+            const isTop3 = rankNum <= 3;
+            let rankRibbon = '';
+            if (rankNum === 1) {
+              rankRibbon = `<span class="rank-ribbon rank-ribbon-1"><i class="fa-solid fa-crown"></i> #1 JUARA</span>`;
+            } else if (rankNum === 2) {
+              rankRibbon = `<span class="rank-ribbon rank-ribbon-2"><i class="fa-solid fa-medal"></i> #2 RUNNER UP</span>`;
+            } else if (rankNum === 3) {
+              rankRibbon = `<span class="rank-ribbon rank-ribbon-3"><i class="fa-solid fa-award"></i> #3 BRONZE</span>`;
+            } else {
+              rankRibbon = `<span class="rank-ribbon rank-ribbon-normal">#${rankNum}</span>`;
+            }
+
+            const ringColor = rankNum === 1 ? '#f59e0b' : (rankNum === 2 ? '#94a3b8' : (rankNum === 3 ? '#fb923c' : (u.roleColor || 'var(--a)')));
+            const cardRankClass = isTop3 ? `hunter-card top-rank-${rankNum}` : 'hunter-card';
+            const uAvatar = (typeof getSmartAvatar === 'function') ? getSmartAvatar(u.avatar, u.name) : (u.avatar || '');
+            const escName = safeEscape(u.name);
+
+            return `
+            <div class="${cardRankClass}">
+              <div class="hunter-top">
+                <img src="${uAvatar}" class="hunter-avatar" style="border-color:${ringColor};" alt="${escName}" onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('', '${escName}');">
+                <div class="hunter-info">
+                  <div class="hunter-name">${escName}</div>
+                  <div class="hunter-title">${safeEscape(u.roleLabel || u.title || 'Pelanggan Setia')}</div>
+                  <div class="hunter-badge-row">
+                    <span class="badge-hunter" style="background:${u.roleColor ? u.roleColor + '1a' : 'rgba(245,158,11,0.18)'}; color:${u.roleColor || '#f59e0b'}; border-color:${u.roleColor ? u.roleColor + '4d' : 'rgba(245,158,11,0.35)'};">
+                      <i class="fa-solid fa-trophy"></i> ${safeEscape(u.roleBadge || 'TOP BUYER')}
+                    </span>
+                  </div>
+                </div>
+                ${rankRibbon}
+              </div>
+              <div class="hunter-reward-box">
+                <div>
+                  <div class="hunter-stat-lbl"><i class="fa-solid fa-wallet" style="color:#f59e0b;"></i> Total Belanja</div>
+                  <div class="hunter-stat-val text-gold">Rp ${(u.totalSpent || 0).toLocaleString('id-ID')}</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="hunter-stat-lbl"><i class="fa-solid fa-receipt"></i> Transaksi Selesai</div>
+                  <div class="hunter-stat-val">${u.totalOrders || 0} Order</div>
+                </div>
+              </div>
+            </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 4. Render Developers
+      const gridDevs = document.getElementById('gridDevelopers');
+      if (gridDevs && data.developers) {
+        gridDevs.innerHTML = data.developers.map(d => {
+          const dAvatar = (typeof getSmartAvatar === 'function') ? getSmartAvatar(d.avatar, d.name) : (d.avatar || '');
+          const escName = safeEscape(d.name);
+          return `
+          <div class="hunter-card">
+            <div class="hunter-top">
+              <img src="${dAvatar}" class="hunter-avatar" style="border-color:${d.roleColor || '#8b5cf6'};" alt="${escName}" onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('', '${escName}');">
+              <div class="hunter-info">
+                <div class="hunter-name">${escName}</div>
+                <div class="hunter-title">${safeEscape(d.title || 'Developer')}</div>
+                <div class="hunter-badge-row">
+                  <span class="badge-hunter" style="background:rgba(139,92,246,0.18);color:${d.roleColor || '#8b5cf6'};border-color:${d.roleColor ? d.roleColor + '4d' : 'rgba(139,92,246,0.35)'};">
+                    <i class="fa-solid fa-crown"></i> ${safeEscape(d.roleBadge || 'DEVELOPER')}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function toggleTheme() {
+      const cur = localStorage.getItem('seika_theme') || document.documentElement.getAttribute('data-theme') || (document.body.classList.contains('dark') ? 'dark' : 'light');
+      const tgt = cur === 'dark' ? 'light' : 'dark';
+
+      const icon = document.querySelector('#themeBtn i');
+      if (icon) {
+        icon.classList.remove('cp-theme-spin');
+        void icon.offsetWidth;
+        icon.classList.add('cp-theme-spin');
+      }
+
+      const executeTheme = () => {
+        document.documentElement.setAttribute('data-theme', tgt);
+        if (tgt === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.body.classList.remove('dark');
+        }
+        document.documentElement.style.colorScheme = tgt;
+        localStorage.setItem('seika_theme', tgt);
+        if (icon) {
+          icon.className = (tgt === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + ' cp-theme-spin';
+        }
+      };
+
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(executeTheme);
+      } else if (document.startViewTransition) {
+        document.startViewTransition(executeTheme);
+      } else {
+        document.documentElement.classList.add('cp-theme-transitioning');
+        if (document.body) document.body.classList.add('cp-theme-transitioning');
+        executeTheme();
+        clearTimeout(window.__hofThemeTransTimeout);
+        window.__hofThemeTransTimeout = setTimeout(() => {
+          document.documentElement.classList.remove('cp-theme-transitioning');
+          if (document.body) document.body.classList.remove('cp-theme-transitioning');
+          if (icon) icon.classList.remove('cp-theme-spin');
+        }, 350);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('seika_theme') || 'dark';
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      }
+      loadHallOfFame();
+    });
+  </script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

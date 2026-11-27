@@ -1,0 +1,2661 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Dokumentasi REST API Provider Reseller H2H – SeikaOne.id</title>
+  <meta name="description" content="Dokumentasi resmi REST API Host-to-Host (H2H) SeikaOne.id untuk integrasi otomatis toko online panel Pterodactyl, role, dan VPS.">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="vendor/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="vendor/fontawesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="vendor/fontawesome/all.min.css?v=6.5.0.3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link id="themeEngineStylesheet" rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 76px;
+    }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      touch-action: pan-y;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--t1);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* SIDEBAR DRAWER OVERRIDES */
+    .sb-ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 9400;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    .sb-ov.on, .sb-ov.open {
+      opacity: 1 !important;
+      pointer-events: all !important;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 290px;
+      max-width: 86vw;
+      height: 100%;
+      max-height: 100dvh;
+      box-sizing: border-box;
+      background: var(--surface);
+      border-right: 1px solid var(--b1);
+      z-index: 9500;
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 12px;
+      gap: 2px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sidebar.on, .sidebar.open {
+      transform: translateX(0) !important;
+    }
+    .snav-group.collapsed .snav-collapse {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 1px solid var(--b1);
+      backdrop-filter: blur(12px);
+    }
+    .topbar .tb-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 60px;
+    }
+    .tb-l { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .tb-r { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .tb-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--t1);
+    }
+    .brand-api {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .ib {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .ib:hover {
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--a);
+      border-color: var(--a);
+    }
+    .btn-top-auth {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    @media (max-width: 640px) {
+      .btn-top-auth { display: none !important; }
+    }
+
+    /* DESKTOP SPLIT SHELL */
+    .docs-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 24px 16px 120px;
+      box-sizing: border-box;
+      flex: 1;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    /* STICKY DESKTOP TOC */
+    .docs-toc {
+      width: 260px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 76px;
+      max-height: calc(100vh - 96px);
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 18px;
+      padding: 18px 14px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      scrollbar-width: thin;
+    }
+    .docs-toc-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--t3);
+      margin: 4px 8px 10px;
+    }
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--t2);
+      text-decoration: none;
+      transition: all 0.18s;
+      border-left: 2px solid transparent;
+    }
+    .toc-item:hover {
+      color: var(--a);
+      background: var(--bg2);
+    }
+    .toc-item.active {
+      color: var(--a);
+      background: rgba(14, 165, 233, 0.08);
+      border-left-color: var(--a);
+      font-weight: 800;
+    }
+    .toc-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+    .toc-badge.get { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .toc-badge.post { background: rgba(14, 165, 233, 0.15); color: #0ea5e9; }
+
+    /* MOBILE HORIZONTAL PILLS BAR */
+    .docs-nav-bar {
+      position: sticky;
+      top: 60px;
+      z-index: 900;
+      background: var(--surface);
+      border-bottom: 1px solid var(--b1);
+      padding: 10px 16px;
+      display: none;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .docs-nav-bar::-webkit-scrollbar { display: none; }
+    .doc-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--bg2);
+      color: var(--t2);
+      border: 1px solid var(--b1);
+      text-decoration: none;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .doc-pill:hover, .doc-pill.active {
+      background: var(--a);
+      color: #fff;
+      border-color: var(--a);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+    }
+    .doc-pill.active .method-badge {
+      background: rgba(255,255,255,0.25) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+    }
+
+    @media (max-width: 1059px) {
+      .docs-toc { display: none !important; }
+      .docs-nav-bar { display: flex !important; }
+      .docs-shell { padding: 16px 14px 120px; }
+    }
+
+    /* MAIN FLOW */
+    .docs-main-flow {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+    }
+
+    /* MODERN HERO (AUSTINPAY STYLE WITH ZYRO PREMIUM LOOK) */
+    .docs-hero {
+      margin-bottom: 24px;
+      padding: 24px 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.03);
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #10b981;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .hero-main-title {
+      font-size: clamp(1.5rem, 5vw, 2.3rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 10px;
+      color: var(--t1);
+    }
+    .hero-lead-text {
+      font-size: clamp(0.88rem, 2.5vw, 0.98rem);
+      color: var(--t2);
+      line-height: 1.6;
+      margin: 0 0 18px;
+      max-width: 780px;
+    }
+    .hero-lead-text .hl-success {
+      color: #10b981;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* HERO QUICK PILLS (CHIPS) */
+    .hero-chips-wrap {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--b1);
+    }
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .hero-chip code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #10b981;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .hero-chip:hover {
+      border-color: var(--a);
+      background: rgba(14, 165, 233, 0.08);
+      color: var(--a);
+    }
+
+    /* CARDS */
+    .d-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.02);
+      box-sizing: border-box;
+    }
+    .d-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--b1);
+      flex-wrap: wrap;
+    }
+    .card-icon-sq {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(14, 165, 233, 0.12);
+      color: var(--a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .d-card-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--t1);
+    }
+    .d-card-desc {
+      font-size: 0.88rem;
+      color: var(--t2);
+      line-height: 1.6;
+      margin: 0 0 18px;
+    }
+
+    /* STEP NUMBERED LIST (AUSTINPAY STYLE) */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: rgba(16, 185, 129, 0.14);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content {
+      flex: 1;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: var(--t2);
+    }
+    .step-content strong {
+      display: block;
+      color: var(--t1);
+      font-size: 0.92rem;
+      margin-bottom: 3px;
+    }
+    .step-content a {
+      color: #10b981;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    /* CREDENTIAL PREVIEW BOXES */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .cred-box {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .cred-box-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--t3);
+      margin-bottom: 6px;
+    }
+    .cred-box-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #10b981;
+      word-break: break-all;
+    }
+
+    /* WARNING / ALERT CALLOUT BOX */
+    .callout-warn {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: var(--t1);
+      margin: 18px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .callout-warn i {
+      color: #f59e0b;
+      font-size: 1.1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* MACOS TERMINAL STYLE CODE BOX */
+    .mac-code-box {
+      background: #070e1b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 14px 0 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    }
+    .mac-code-bar {
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .mac-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .mac-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .mac-dot.r { background: #ff5f56; }
+    .mac-dot.y { background: #ffbd2e; }
+    .mac-dot.g { background: #27c93f; }
+    .mac-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .mac-copy-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .mac-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+    .mac-code-body {
+      margin: 0;
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* LANGUAGE SWITCHER PILLS */
+    .lang-pills-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .lang-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--bg2);
+      color: var(--t2);
+      border: 1px solid var(--b1);
+      cursor: pointer;
+      transition: all 0.18s;
+      flex-shrink: 0;
+    }
+    .lang-pill:hover {
+      color: var(--t1);
+      border-color: var(--a);
+    }
+    .lang-pill.active {
+      background: rgba(14, 165, 233, 0.15);
+      color: var(--a);
+      border-color: rgba(14, 165, 233, 0.4);
+    }
+
+    /* ACCORDION ENDPOINTS (AUSTINPAY IMAGE 3 STYLE) */
+    .endpoint-accordion-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .ep-item {
+      border: 1px solid var(--b1);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--surface);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .ep-item:hover {
+      border-color: rgba(14, 165, 233, 0.35);
+    }
+    .ep-header {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--bg2);
+      transition: all 0.2s;
+      flex-wrap: nowrap !important;
+      border-radius: 14px;
+    }
+    .ep-header-l {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+    }
+    .ep-header-r {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .ep-header:hover {
+      background: rgba(14, 165, 233, 0.04);
+    }
+    .ep-item.open .ep-header {
+      background: rgba(14, 165, 233, 0.06);
+      border-bottom: 1px solid var(--b1);
+    }
+    .method-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .mb-get { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .mb-post { background: rgba(14, 165, 233, 0.15); color: #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.3); }
+    .ep-path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--t1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ep-copy-url-btn {
+      background: transparent;
+      border: 1px solid var(--b1);
+      color: var(--t3);
+      font-size: 0.72rem;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .ep-copy-url-btn:hover {
+      color: var(--a);
+      border-color: var(--a);
+    }
+    .ep-auth-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--b1);
+      background: var(--surface);
+      color: var(--t2);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    @media (max-width: 480px) {
+      .ep-header { padding: 8px 10px; gap: 6px; }
+      .ep-header-l { gap: 6px; }
+      .ep-header-r { gap: 6px; }
+      .method-badge { font-size: 0.65rem; padding: 2px 5px; }
+      .ep-path { font-size: 0.76rem; }
+      .ep-auth-tag { font-size: 0.65rem; padding: 2px 6px; }
+    }
+    .ep-chevron {
+      color: var(--t3);
+      font-size: 0.85rem;
+      transition: transform 0.25s ease;
+      margin-left: 6px;
+    }
+    .ep-item.open .ep-chevron {
+      transform: rotate(180deg);
+      color: var(--a);
+    }
+
+    .ep-body {
+      display: none;
+      padding: 22px;
+      box-sizing: border-box;
+      animation: fadeIn 0.2s ease;
+    }
+    .ep-item.open .ep-body {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION SUB-HEADERS INSIDE ENDPOINT */
+    .ep-sub-title {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--t3);
+      margin: 18px 0 8px;
+    }
+
+    /* PARAMETERS TABLE */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--b1);
+    }
+    .d-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    .d-table th {
+      background: var(--bg2);
+      padding: 10px 14px;
+      font-weight: 700;
+      color: var(--t1);
+      border-bottom: 1px solid var(--b1);
+      white-space: nowrap;
+    }
+    .d-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--b1);
+      color: var(--t2);
+      line-height: 1.5;
+    }
+    .d-table tr:last-child td { border-bottom: none; }
+    .d-table code {
+      background: rgba(16, 185, 129, 0.08);
+      color: #10b981;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    /* QUICK ACTION BUTTON TO JUMP TO PLAYGROUND */
+    .btn-test-endpoint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(14, 165, 233, 0.12);
+      color: var(--a);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+    .btn-test-endpoint:hover {
+      background: var(--a);
+      color: #fff;
+    }
+
+    /* LIVE PLAYGROUND BOX */
+    .tool-group { margin-bottom: 14px; }
+    .tool-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--t2);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tool-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.84rem;
+      font-family: 'JetBrains Mono', monospace;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .tool-input:focus {
+      border-color: var(--a);
+    }
+    .preset-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: var(--bg2);
+      color: var(--t1);
+      border: 1px solid var(--b1);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .preset-pill:hover {
+      border-color: var(--a);
+      color: var(--a);
+      background: rgba(14, 165, 233, 0.06);
+    }
+
+    /* FLOATING BOTTOM TESTER BAR (MOBILE ONLY) */
+    .floating-tester-bar {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      z-index: 950;
+      background: var(--surface);
+      border-top: 1px solid var(--b1);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+    }
+    .ft-left {
+      display: flex;
+      flex-direction: column;
+    }
+    .ft-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ft-desc {
+      font-size: 0.68rem;
+      color: var(--t3);
+    }
+    .ft-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: #10b981;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      text-decoration: none;
+    }
+    @media (min-width: 769px) {
+      .floating-tester-bar { display: none !important; }
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--b1);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .bn-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--t3);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .bn-item i { font-size: 1.15rem; }
+    .bn-item.active { color: var(--a); }
+    @media (min-width: 769px) {
+      .bottom-nav { display: none; }
+    }
+
+    /* TOAST */
+    #docsToast {
+      position: fixed;
+      bottom: 84px;
+      right: 20px;
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.12);
+      z-index: 99999;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+    #docsToast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    @media (min-width: 769px) {
+      #docsToast { bottom: 24px; right: 24px; }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <!-- OFFCANVAS SIDEBAR -->
+  <div class="sb-ov" id="sbOv" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="assets/logo-animated-dark.webp" width="32" height="32" alt="SeikaOne Logo" class="zyro-logo-animated" data-logo-type="full">
+      <span class="sb-brand-txt">SeikaOne <span class="brand-api">ID</span></span>
+      <button class="sb-x" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="snav">
+      <div id="sidebarUserBox" style="padding:10px 14px;background:var(--bg2);border-radius:12px;margin:0 12px 10px;display:none;align-items:center;gap:10px;cursor:pointer;" onclick="window.location.href='/profile'" title="Klik untuk Pengaturan Akun">
+        <script>
+          (function(){
+            try {
+              var raw = localStorage.getItem('seika_user_data');
+              if (raw) {
+                var u = JSON.parse(raw);
+                var cached = localStorage.getItem('seika_cached_avatar_b64');
+                var ava = cached || (u && u.avatar) || '/assets/logo.png';
+                var nm = (u && u.name) ? (u.name.split(' ')[0] || u.name) : 'Member';
+                document.getElementById('sidebarUserBox').style.display = 'flex';
+                document.write('<img src="' + ava + '" id="sbUserAvatar" width="36" height="36" alt="Avatar" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--a);object-fit:cover;">');
+                document.write('<div style="overflow:hidden;flex:1;">');
+                document.write('<b id="sbUserName" style="font-size:0.8rem;color:var(--t1);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + nm + '</b>');
+                document.write('<span style="font-size:0.65rem;color:#22c55e;font-weight:700;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Diskon 5% Aktif</span>');
+                document.write('</div>');
+                document.write('<i class="fa-solid fa-gear" style="font-size:0.8rem;color:var(--t3);"></i>');
+              }
+            } catch(_) {}
+          })();
+        </script>
+      </div>
+
+      <!-- KATEGORI 1: MENU UTAMA & BELANJA -->
+      <div class="snav-group" id="sbGroupShop">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupShop')">
+          <span class="snh-left"><i class="fa-solid fa-store" style="color:var(--a);"></i> Menu &amp; Belanja</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="index.html"><i class="fa-solid fa-cart-shopping"></i> SeikaOne</a>
+          <a href="cek-pesanan.html"><i class="fa-solid fa-magnifying-glass" style="color:var(--a);"></i> Cek Pesanan</a>
+          <a href="riwayat.html"><i class="fa-solid fa-receipt" style="color:#06b6d4;"></i> Riwayat Pesanan</a>
+          <a href="hall-of-fame.html"><i class="fa-solid fa-award" style="color:#10b981;"></i> Hall of Fame &amp; Bug Hunter <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">BOUNTY</span></a>
+          <a href="leaderboard.html"><i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Leaderboard Pembeli</a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 2: LAYANAN PANEL & BANSOS -->
+      <div class="snav-group" id="sbGroupServer">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupServer')">
+          <span class="snh-left"><i class="fa-solid fa-server" style="color:#10b981;"></i> Server &amp; Panel</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="cpanel.html"><i class="fa-solid fa-gauge-high" style="color:#0ea5e9;"></i> CPanel Control <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">CLOUD</span></a>
+          <a href="bansos.html"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free <span class="snav-badge" style="background:rgba(244,63,94,0.18);color:#f43f5e;">1GB FREE</span></a>
+          <a href="mypanel.html"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">PTERO</span></a>
+          <a href="addon.html"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">+SPEK</span></a>
+          <a href="api-key.html"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> Kelola API Key Reseller <span class="snav-badge" style="background:rgba(245,158,11,0.18);color:#f59e0b;">KEY</span></a>
+          <a href="docs.html" class="act"><i class="fa-solid fa-book-bookmark" style="color:#10b981;"></i> Dokumentasi API Docs <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">v1.0</span></a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 3: BANTUAN & CS (SUPPORT) -->
+      <div class="snav-group" id="sbGroupSupport">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupSupport')">
+          <span class="snh-left"><i class="fa-solid fa-headset" style="color:#06b6d4;"></i> Support &amp; Bantuan</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="https://t.me/SeikaOne" target="_blank" rel="noopener"><i class="fa-solid fa-comments" style="color:#a855f7;"></i> Hubungi CS Telegram</a>
+          <a href="garansi.html"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Klaim Garansi Panel</a>
+          <a href="panduan.html"><i class="fa-solid fa-book-open" style="color:#eab308;"></i> Panduan &amp; FAQ <span class="snav-badge">BACA</span></a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 4: AKUN & KOMUNITAS -->
+      <div class="snav-group" id="sbGroupAccount">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupAccount')">
+          <span class="snh-left"><i class="fa-solid fa-circle-user" style="color:var(--rose);"></i> Akun &amp; Komunitas</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="profile.html"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun &amp; Profil</a>
+          <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener"><i class="fa-brands fa-telegram" style="color:#0ea5e9;"></i> Channel Telegram Resmi</a>
+          <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> Saluran WhatsApp</a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <button class="ib raw" onclick="toggleSidebar()" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
+        <a href="index.html" class="tb-brand">
+          <img src="assets/logo-animated-dark.webp" width="30" height="30" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">DOCS</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <a href="https://t.me/SeikaOne" target="_blank" rel="noopener" class="ib" title="Bantuan CS Telegram">
+          <i class="fa-solid fa-headset" style="color:var(--a);"></i>
+        </a>
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Mode Tampilan">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="api-key.html" class="btn-top-auth" style="background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);">
+          <i class="fa-solid fa-key"></i>
+          <span>Kelola API Key</span>
+        </a>
+        <a href="cpanel.html" class="btn-top-auth" style="background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span>CPanel</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- STICKY SUBNAV PILLS (MOBILE / TABLET) -->
+  <nav class="docs-nav-bar">
+    <a href="#overview" class="doc-pill active"><i class="fa-solid fa-globe"></i> Overview</a>
+    <a href="#auth" class="doc-pill"><i class="fa-solid fa-key"></i> Autentikasi</a>
+    <a href="#endpoints" class="doc-pill"><i class="fa-solid fa-layer-group"></i> Endpoints</a>
+    <a href="#playground" class="doc-pill" style="color:#0ea5e9;font-weight:800;"><i class="fa-solid fa-bolt"></i> Playground</a>
+    <a href="#tool-sig" class="doc-pill"><i class="fa-solid fa-calculator"></i> Kalkulator</a>
+    <a href="#errors" class="doc-pill"><i class="fa-solid fa-triangle-exclamation"></i> Error Codes</a>
+  </nav>
+
+  <!-- MAIN CONTAINER (DESKTOP SPLIT SHELL) -->
+  <div class="docs-shell">
+
+    <!-- DESKTOP STICKY TABLE OF CONTENTS -->
+    <aside class="docs-toc" id="docsToc">
+      <div class="docs-toc-title">Navigasi Referensi</div>
+      <a href="#overview" class="toc-item active"><i class="fa-solid fa-globe" style="width:16px;"></i> Ringkasan &amp; Base URL</a>
+      <a href="#auth" class="toc-item"><i class="fa-solid fa-key" style="width:16px;"></i> Autentikasi &amp; Syarat</a>
+      
+      <div class="docs-toc-title" style="margin-top:14px;">Koleksi Endpoints v1</div>
+      <a href="#endpoints" class="toc-item" onclick="openAndScrollEndpoint('ep-profile')">
+        <span class="toc-badge get" style="margin:0 6px 0 0;">GET</span> /profile
+      </a>
+      <a href="#endpoints" class="toc-item" onclick="openAndScrollEndpoint('ep-services')">
+        <span class="toc-badge get" style="margin:0 6px 0 0;">GET</span> /services
+      </a>
+      <a href="#endpoints" class="toc-item" onclick="openAndScrollEndpoint('ep-order')">
+        <span class="toc-badge post" style="margin:0 6px 0 0;">POST</span> /order
+      </a>
+      <a href="#endpoints" class="toc-item" onclick="openAndScrollEndpoint('ep-status')">
+        <span class="toc-badge post" style="margin:0 6px 0 0;">POST</span> /status
+      </a>
+
+      <div class="docs-toc-title" style="margin-top:14px;">Tools Developer</div>
+      <a href="#playground" class="toc-item" style="color:var(--a);font-weight:800;">
+        <i class="fa-solid fa-bolt" style="width:16px;"></i> Live API Playground
+      </a>
+      <a href="#tool-sig" class="toc-item">
+        <i class="fa-solid fa-calculator" style="width:16px;"></i> Kalkulator Signature
+      </a>
+      <a href="#errors" class="toc-item">
+        <i class="fa-solid fa-triangle-exclamation" style="width:16px;"></i> Kode Respon HTTP
+      </a>
+
+      <div style="margin-top:auto;padding-top:14px;border-top:1px dashed var(--b1);display:flex;flex-direction:column;gap:8px;">
+        <a href="api-key.html" class="btn-act btn-act-primary" style="padding:9px 12px;font-size:0.78rem;justify-content:center;">
+          <i class="fa-solid fa-key"></i> Buka API Key
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN FLOW -->
+    <main class="docs-main-flow">
+
+      <!-- HERO HEADER (AUSTINPAY STYLE) -->
+      <section id="overview" class="docs-hero">
+        <div class="hero-eyebrow">
+          <i class="fa-solid fa-code"></i> DOCUMENTATION
+        </div>
+        <h1 class="hero-main-title">SeikaOne API</h1>
+        <p class="hero-lead-text">
+          REST API untuk integrasi otomatis pembuatan panel Pterodactyl, kode klaim role, dan server cloud. Semua endpoint mengembalikan JSON dengan field <span class="hl-success">status (boolean)</span> dan data terenkripsi.
+        </p>
+
+        <!-- CHIPS WRAP -->
+        <div class="hero-chips-wrap">
+          <div class="hero-chip" onclick="copyText('https://zyrostore.id/api/v1', 'Base URL disalin!')" style="cursor:pointer;" title="Klik untuk salin">
+            <i class="fa-solid fa-server" style="color:#10b981;"></i>
+            <span>Base URL: <code>https://zyrostore.id/api/v1</code></span>
+            <i class="fa-regular fa-copy" style="font-size:0.7rem;color:var(--t3);"></i>
+          </div>
+          <div class="hero-chip">
+            <i class="fa-solid fa-arrow-right-arrow-left" style="color:#0ea5e9;"></i>
+            <span>Format: <code>application/json</code></span>
+          </div>
+          <div class="hero-chip">
+            <i class="fa-solid fa-lock" style="color:#10b981;"></i>
+            <span>HTTPS only</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 1: AUTENTIKASI & SYARAT INTEGRASI (AUSTINPAY STYLE) -->
+      <section id="auth" class="d-card">
+        <div class="d-card-header">
+          <div class="card-icon-sq" style="background:rgba(16,185,129,0.12);color:#10b981;">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <div>
+            <h2 class="d-card-title">Autentikasi &amp; Syarat Integrasi</h2>
+            <div style="font-size:0.78rem;color:var(--t3);">Public API Authentication Protocol</div>
+          </div>
+        </div>
+
+        <p class="d-card-desc">
+          Semua endpoint <code>/api/v1/*</code> merupakan Public API terproteksi (wajib <strong>API Key</strong> + <strong>IP Whitelist</strong>). Server memvalidasi kredensial pada setiap request untuk mengamankan saldo akun Anda dari akses tidak sah.
+        </p>
+
+        <!-- STEP NUMBERED LIST (AUSTINPAY REF) -->
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Buat API Key</strong>
+              Masuk ke menu <a href="api-key.html">Kelola API Key</a> &rarr; klik tombol <strong>Buat API Key Baru</strong>. API Secret hanya ditampilkan sekali saat dibuat — simpan baik-baik karena tidak dapat dilihat ulang demi keamanan.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Daftarkan IP Whitelist (Sangat Direkomendasikan)</strong>
+              Di halaman <a href="api-key.html">Kelola API Key</a>, bagian <strong>IP Whitelist</strong>, tambahkan IP server atau IP hosting bot Anda. Jika diisi, request dari IP lain otomatis ditolak (HTTP 403) untuk mencegah kebocoran saldo.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Kirimkan Kredensial via HTTP Header</strong>
+              Kirimkan API Key melalui header request di bawah ini (pilih salah satu format):
+            </div>
+          </div>
+        </div>
+
+        <!-- CREDENTIAL CARDS (AUSTINPAY IMAGE 2 STYLE) -->
+        <div class="cred-grid">
+          <div class="cred-box">
+            <div class="cred-box-label">HEADER (DIREKOMENDASIKAN)</div>
+            <div class="cred-box-val">X-Zyro-Key: zyro_live_xxx</div>
+          </div>
+          <div class="cred-box">
+            <div class="cred-box-label">BEARER TOKEN (ALTERNATIF)</div>
+            <div class="cred-box-val">Authorization: Bearer zyro_live_xxx</div>
+          </div>
+        </div>
+
+        <!-- WARNING CALLOUT (AUSTINPAY REF IMAGE 2) -->
+        <div class="callout-warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <strong>Penting:</strong> Request API wajib memenuhi syarat autentikasi: API Key valid &amp; aktif, dan IP pengirim terdaftar di IP Whitelist (jika fitur whitelist diisi pada profil mitra).
+          </div>
+        </div>
+
+        <!-- STEP 4: HMAC SIGNATURE -->
+        <div class="step-list" style="margin-top:20px;">
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>HMAC-SHA256 Signature dengan API Secret (Wajib untuk POST)</strong>
+              Setiap request yang mengubah data / memotong saldo (seperti <code>POST /api/v1/order</code> dan <code>POST /api/v1/status</code>) wajib ditandatangani menggunakan API Secret Anda untuk menjamin keaslian payload.
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:14px;margin:12px 0 16px;">
+          <div style="font-size:0.75rem;font-weight:800;color:var(--t3);text-transform:uppercase;margin-bottom:6px;">Rumus Pembentukan String to Sign:</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.83rem;color:#10b981;word-break:break-all;">
+            String_To_Sign = TIMESTAMP + "." + METHOD + "." + RAW_BODY
+          </div>
+          <div style="font-size:0.75rem;color:var(--t3);margin-top:6px;">
+            * Toleransi selisih waktu timestamp maksimal 5 menit dari jam server untuk menangkal replay attack.
+          </div>
+        </div>
+
+        <!-- CODE EXAMPLE WITH MACOS TERMINAL HEADER -->
+        <div style="margin-top:16px;">
+          <div style="font-size:0.76rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--t3);margin-bottom:8px;">
+            Contoh Pembuatan Signature (HMAC-SHA256):
+          </div>
+
+          <div class="lang-pills-bar">
+            <button class="lang-pill active" onclick="switchAuthSnippet('php', this)">🐘 PHP</button>
+            <button class="lang-pill" onclick="switchAuthSnippet('node', this)">JS Node.js</button>
+            <button class="lang-pill" onclick="switchAuthSnippet('python', this)">🐍 Python</button>
+            <button class="lang-pill" onclick="switchAuthSnippet('curl', this)">&gt;_ cURL</button>
+          </div>
+
+          <div class="mac-code-box">
+            <div class="mac-code-bar">
+              <div class="mac-dots">
+                <span class="mac-dot r"></span>
+                <span class="mac-dot y"></span>
+                <span class="mac-dot g"></span>
+              </div>
+              <div class="mac-title" id="authSnippetTitle">php</div>
+              <button type="button" class="mac-copy-btn" onclick="copySnippetById('authSnippetCode')">
+                <i class="fa-regular fa-copy"></i> Copy
+              </button>
+            </div>
+            <pre class="mac-code-body" id="authSnippetCode">&lt;?php
+// PHP 7.4+ HMAC-SHA256 Signature Generator
+$apiKey = 'zyro_live_xxxxxxxxxxxxxxxxxxxxxxxx';
+$apiSecret = 'sec_live_yyyyyyyyyyyyyyyyyyyyyyyy';
+
+$timestamp = (string) round(microtime(true) * 1000);
+$payload = [
+    'ref_id' =&gt; 'INV-' . time(),
+    'service_code' =&gt; 'ptero-pub-1gb',
+    'data' =&gt; [ 'server_name' =&gt; 'Bot WhatsApp Store' ]
+];
+$rawBody = json_encode($payload);
+$stringToSign = $timestamp . '.POST.' . $rawBody;
+$signature = hash_hmac('sha256', $stringToSign, $apiSecret);
+
+$ch = curl_init('https://zyrostore.id/api/v1/order');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $rawBody);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-Zyro-Key: ' . $apiKey,
+    'X-Zyro-Timestamp: ' . $timestamp,
+    'X-Zyro-Signature: ' . $signature
+]);
+$res = curl_exec($ch);
+curl_close($ch);
+print_r(json_decode($res, true));</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: ENDPOINT EXPLORER (ACCORDION STYLE AUSTINPAY IMAGE 3) -->
+      <section id="endpoints" class="d-card">
+        <div class="d-card-header">
+          <div class="card-icon-sq" style="background:rgba(14,165,233,0.12);color:var(--a);">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div>
+            <h2 class="d-card-title">Koleksi Endpoint API v1</h2>
+            <div style="font-size:0.78rem;color:var(--t3);">Klik salah satu endpoint untuk melihat parameter &amp; contoh kode</div>
+          </div>
+        </div>
+
+        <div class="endpoint-accordion-wrap">
+
+          <!-- 1. GET /api/v1/profile -->
+          <div class="ep-item open" id="ep-profile">
+            <div class="ep-header" onclick="toggleEndpointAccordion('ep-profile')">
+              <div class="ep-header-l">
+                <span class="method-badge mb-get">GET</span>
+                <span class="ep-path">/api/v1/profile</span>
+                <button type="button" class="ep-copy-url-btn" onclick="event.stopPropagation(); copyText('https://zyrostore.id/api/v1/profile', 'URL endpoint disalin!')" title="Salin URL">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+              <div class="ep-header-r">
+                <span class="ep-auth-tag"><i class="fa-solid fa-key" style="color:#10b981;"></i> API Key</span>
+                <i class="fa-solid fa-chevron-down ep-chevron"></i>
+              </div>
+            </div>
+            <div class="ep-body">
+              <p class="d-card-desc">
+                Cek informasi akun reseller, nama mitra, status API, sisa saldo deposit terkini, dan kuota limit request tersisa.
+              </p>
+
+              <div class="ep-sub-title">HTTP HEADERS</div>
+              <div class="table-wrap">
+                <table class="d-table">
+                  <thead>
+                    <tr><th>Header</th><th>Tipe</th><th>Status</th><th>Deskripsi</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>X-Zyro-Key</code></td><td>String</td><td><span style="color:#ef4444;font-weight:800;">Wajib</span></td><td>API Key publik milik akun reseller Anda.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="ep-sub-title">CONTOH REQUEST</div>
+              <div class="lang-pills-bar">
+                <button class="lang-pill active" onclick="switchEpSnippet('profile', 'curl', this)">&gt;_ cURL</button>
+                <button class="lang-pill" onclick="switchEpSnippet('profile', 'node', this)">JS Node.js</button>
+                <button class="lang-pill" onclick="switchEpSnippet('profile', 'python', this)">🐍 Python</button>
+                <button class="lang-pill" onclick="switchEpSnippet('profile', 'php', this)">🐘 PHP</button>
+              </div>
+
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title" id="title_profile">curl</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('snippet_profile')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="snippet_profile">curl -X GET https://zyrostore.id/api/v1/profile \
+  -H "X-Zyro-Key: YOUR_API_KEY"</pre>
+              </div>
+
+              <div class="ep-sub-title">RESPONSE</div>
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title">json • 200 OK</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('resp_profile')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="resp_profile">{
+  "status": true,
+  "code": 200,
+  "data": {
+    "partner_id": "USR-793115",
+    "name": "Mitra Reseller Store",
+    "email": "<a href="#" class="__cf_email__" data-cfemail="bbcbdac9cfd5dec9fbc8cfd4c9de95d8d4d6">[email&#160;protected]</a>",
+    "balance": 250000,
+    "api_key": "zyro_live_xxxxxxxxxxxxxxxxxxxxxxxx",
+    "ip_whitelist": ["103.145.22.10"],
+    "rate_limit_per_min": 60,
+    "status": "ACTIVE"
+  }
+}</pre>
+              </div>
+
+              <button type="button" class="btn-test-endpoint" onclick="loadToPlayground('GET', '/api/v1/profile', '')">
+                <i class="fa-solid fa-play"></i> Coba Endpoint Ini di Playground
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. GET /api/v1/services -->
+          <div class="ep-item" id="ep-services">
+            <div class="ep-header" onclick="toggleEndpointAccordion('ep-services')">
+              <div class="ep-header-l">
+                <span class="method-badge mb-get">GET</span>
+                <span class="ep-path">/api/v1/services</span>
+                <button type="button" class="ep-copy-url-btn" onclick="event.stopPropagation(); copyText('https://zyrostore.id/api/v1/services', 'URL endpoint disalin!')" title="Salin URL">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+              <div class="ep-header-r">
+                <span class="ep-auth-tag"><i class="fa-solid fa-key" style="color:#10b981;"></i> API Key</span>
+                <i class="fa-solid fa-chevron-down ep-chevron"></i>
+              </div>
+            </div>
+            <div class="ep-body">
+              <p class="d-card-desc">
+                Ambil seluruh katalog produk aktif di SeikaOne (Panel Pterodactyl publik/private, role klaim voucher, dan VPS).
+              </p>
+
+              <div class="ep-sub-title">QUERY PARAMETERS</div>
+              <div class="table-wrap">
+                <table class="d-table">
+                  <thead>
+                    <tr><th>Parameter</th><th>Tipe</th><th>Status</th><th>Deskripsi</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>category</code></td><td>String</td><td>Opsional</td><td>Filter nama kategori, contoh: <code>Panel</code>, <code>Role</code>, <code>VPS</code>.</td></tr>
+                    <tr><td><code>type</code></td><td>String</td><td>Opsional</td><td>Filter tipe layanan: <code>PANEL</code>, <code>ROLE</code>, <code>DIGITAL</code>.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="ep-sub-title">CONTOH REQUEST</div>
+              <div class="lang-pills-bar">
+                <button class="lang-pill active" onclick="switchEpSnippet('services', 'curl', this)">&gt;_ cURL</button>
+                <button class="lang-pill" onclick="switchEpSnippet('services', 'node', this)">JS Node.js</button>
+                <button class="lang-pill" onclick="switchEpSnippet('services', 'python', this)">🐍 Python</button>
+                <button class="lang-pill" onclick="switchEpSnippet('services', 'php', this)">🐘 PHP</button>
+              </div>
+
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title" id="title_services">curl</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('snippet_services')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="snippet_services">curl -X GET "https://zyrostore.id/api/v1/services?category=Panel" \
+  -H "X-Zyro-Key: YOUR_API_KEY"</pre>
+              </div>
+
+              <div class="ep-sub-title">RESPONSE</div>
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title">json • 200 OK</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('resp_services')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="resp_services">{
+  "status": true,
+  "code": 200,
+  "total": 56,
+  "data": [
+    {
+      "service_code": "ptero-pub-1gb",
+      "name": "Panel Publik 1GB",
+      "category": "Panel Legal Publik",
+      "type": "PANEL",
+      "price": 1000,
+      "stock": "Unlimited",
+      "description": "PANEL PTERODACTYL LEGAL PUBLIK 1GB (RAM: 1GB, CPU: 50%, Disk: 2GB NVMe)"
+    },
+    {
+      "service_code": "role-pub-reseller",
+      "name": "Role Public - Reseller",
+      "category": "Role Panel Legal Publik",
+      "type": "ROLE",
+      "price": 10000,
+      "stock": "99",
+      "description": "Voucher kode klaim role panel reseller legal publik."
+    }
+  ]
+}</pre>
+              </div>
+
+              <button type="button" class="btn-test-endpoint" onclick="loadToPlayground('GET', '/api/v1/services?category=Panel', '')">
+                <i class="fa-solid fa-play"></i> Coba Endpoint Ini di Playground
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. POST /api/v1/order -->
+          <div class="ep-item" id="ep-order">
+            <div class="ep-header" onclick="toggleEndpointAccordion('ep-order')">
+              <div class="ep-header-l">
+                <span class="method-badge mb-post">POST</span>
+                <span class="ep-path">/api/v1/order</span>
+                <button type="button" class="ep-copy-url-btn" onclick="event.stopPropagation(); copyText('https://zyrostore.id/api/v1/order', 'URL endpoint disalin!')" title="Salin URL">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+              <div class="ep-header-r">
+                <span class="ep-auth-tag" style="color:var(--a);"><i class="fa-solid fa-shield-halved"></i> Signed POST</span>
+                <i class="fa-solid fa-chevron-down ep-chevron"></i>
+              </div>
+            </div>
+            <div class="ep-body">
+              <p class="d-card-desc">
+                Pesan produk atau buat server Pterodactyl instan. Saldo deposit reseller akan dipotong secara atomik, dan kredensial server langsung diberikan.
+              </p>
+
+              <div class="ep-sub-title">REQUEST BODY PARAMETERS (JSON)</div>
+              <div class="table-wrap">
+                <table class="d-table">
+                  <thead>
+                    <tr><th>Parameter</th><th>Tipe</th><th>Status</th><th>Deskripsi</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>ref_id</code></td><td>String</td><td><span style="color:#ef4444;font-weight:800;">Wajib</span></td><td>ID referensi invoice unik dari sistem Anda (3-64 karakter). Anti-double order.</td></tr>
+                    <tr><td><code>service_code</code></td><td>String</td><td><span style="color:#ef4444;font-weight:800;">Wajib</span></td><td>Kode layanan produk dari endpoint <code>/services</code>.</td></tr>
+                    <tr><td><code>data.server_name</code></td><td>String</td><td><span style="color:#ef4444;font-weight:800;">PANEL</span></td><td>Nama server bot / project pembeli.</td></tr>
+                    <tr><td><code>data.runtime</code></td><td>String</td><td>Opsional</td><td>Egg runtime engine: <code>nodejs</code> (default) atau <code>python</code>.</td></tr>
+                    <tr><td><code>data.panel_username</code></td><td>String</td><td>Opsional</td><td>Custom username pembeli (opsional).</td></tr>
+                    <tr><td><code>data.panel_password</code></td><td>String</td><td>Opsional</td><td>Custom password pembeli (opsional).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="ep-sub-title">CONTOH REQUEST (DENGAN SIGNATURE)</div>
+              <div class="lang-pills-bar">
+                <button class="lang-pill active" onclick="switchEpSnippet('order', 'curl', this)">&gt;_ cURL</button>
+                <button class="lang-pill" onclick="switchEpSnippet('order', 'node', this)">JS Node.js</button>
+                <button class="lang-pill" onclick="switchEpSnippet('order', 'python', this)">🐍 Python</button>
+                <button class="lang-pill" onclick="switchEpSnippet('order', 'php', this)">🐘 PHP</button>
+              </div>
+
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title" id="title_order">curl</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('snippet_order')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="snippet_order"># cURL Terminal (Signed POST)
+TIMESTAMP=$(date +%s%3N)
+BODY='{"ref_id":"INV-10029","service_code":"ptero-pub-1gb","data":{"server_name":"Bot Store"}}'
+SIGNATURE=$(echo -n "\${TIMESTAMP}.POST.\${BODY}" | openssl dgst -sha256 -hmac "YOUR_API_SECRET" | awk '{print $2}')
+
+curl -X POST https://zyrostore.id/api/v1/order \
+  -H "Content-Type: application/json" \
+  -H "X-Zyro-Key: YOUR_API_KEY" \
+  -H "X-Zyro-Timestamp: \${TIMESTAMP}" \
+  -H "X-Zyro-Signature: \${SIGNATURE}" \
+  -d "\${BODY}"</pre>
+              </div>
+
+              <div class="ep-sub-title">RESPONSE SUKSES (PANEL SERVER)</div>
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title">json • 200 OK</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('resp_order')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="resp_order">{
+  "status": true,
+  "code": 200,
+  "data": {
+    "trx_id": "ZYRO-H2H-1793358000000-A1B2C3D4",
+    "ref_id": "INV-STORE-10029",
+    "service_code": "ptero-pub-1gb",
+    "status": "COMPLETED",
+    "price": 1000,
+    "current_balance": 249000,
+    "result": {
+      "panel_url": "https://szxennpterodactyl.my.id",
+      "username": "buyer_gaming",
+      "password": "ZyroPasswordSecure123!",
+      "server_id": "srv_84f92a",
+      "server_identifier": "84f92a11",
+      "server_name": "Bot WhatsApp Store"
+    },
+    "created_at": "2026-11-02T02:00:00.000Z"
+  }
+}</pre>
+              </div>
+
+              <button type="button" class="btn-test-endpoint" onclick="loadToPlayground('POST', '/api/v1/order', JSON.stringify({ ref_id: 'PLAYGROUND-' + Date.now(), service_code: 'ptero-pub-1gb', data: { server_name: 'Bot WhatsApp Store', runtime: 'nodejs' } }, null, 2))">
+                <i class="fa-solid fa-play"></i> Coba Order Ini di Playground
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. POST /api/v1/status -->
+          <div class="ep-item" id="ep-status">
+            <div class="ep-header" onclick="toggleEndpointAccordion('ep-status')">
+              <div class="ep-header-l">
+                <span class="method-badge mb-post">POST</span>
+                <span class="ep-path">/api/v1/status</span>
+                <button type="button" class="ep-copy-url-btn" onclick="event.stopPropagation(); copyText('https://zyrostore.id/api/v1/status', 'URL endpoint disalin!')" title="Salin URL">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+              <div class="ep-header-r">
+                <span class="ep-auth-tag" style="color:var(--a);"><i class="fa-solid fa-shield-halved"></i> Signed POST</span>
+                <i class="fa-solid fa-chevron-down ep-chevron"></i>
+              </div>
+            </div>
+            <div class="ep-body">
+              <p class="d-card-desc">
+                Cek rincian status pesanan, kredensial server, atau kode voucher berdasarkan <code>ref_id</code> sistem Anda atau <code>trx_id</code> dari SeikaOne.
+              </p>
+
+              <div class="ep-sub-title">REQUEST BODY PARAMETERS (JSON)</div>
+              <div class="table-wrap">
+                <table class="d-table">
+                  <thead>
+                    <tr><th>Parameter</th><th>Tipe</th><th>Status</th><th>Deskripsi</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>ref_id</code></td><td>String</td><td>Kombinasi</td><td>ID referensi invoice unik dari sistem toko Anda.</td></tr>
+                    <tr><td><code>trx_id</code></td><td>String</td><td>Kombinasi</td><td>ID transaksi internal SeikaOne (Contoh: <code>ZYRO-H2H-...</code>).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="ep-sub-title">CONTOH REQUEST</div>
+              <div class="lang-pills-bar">
+                <button class="lang-pill active" onclick="switchEpSnippet('status', 'curl', this)">&gt;_ cURL</button>
+                <button class="lang-pill" onclick="switchEpSnippet('status', 'node', this)">JS Node.js</button>
+                <button class="lang-pill" onclick="switchEpSnippet('status', 'python', this)">🐍 Python</button>
+                <button class="lang-pill" onclick="switchEpSnippet('status', 'php', this)">🐘 PHP</button>
+              </div>
+
+              <div class="mac-code-box">
+                <div class="mac-code-bar">
+                  <div class="mac-dots">
+                    <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+                  </div>
+                  <div class="mac-title" id="title_status">curl</div>
+                  <button type="button" class="mac-copy-btn" onclick="copySnippetById('snippet_status')">
+                    <i class="fa-regular fa-copy"></i> Copy
+                  </button>
+                </div>
+                <pre class="mac-code-body" id="snippet_status"># cURL Terminal (Signed POST)
+TIMESTAMP=$(date +%s%3N)
+BODY='{"ref_id":"INV-10029"}'
+SIGNATURE=$(echo -n "\${TIMESTAMP}.POST.\${BODY}" | openssl dgst -sha256 -hmac "YOUR_API_SECRET" | awk '{print $2}')
+
+curl -X POST https://zyrostore.id/api/v1/status \
+  -H "Content-Type: application/json" \
+  -H "X-Zyro-Key: YOUR_API_KEY" \
+  -H "X-Zyro-Timestamp: \${TIMESTAMP}" \
+  -H "X-Zyro-Signature: \${SIGNATURE}" \
+  -d "\${BODY}"</pre>
+              </div>
+
+              <button type="button" class="btn-test-endpoint" onclick="loadToPlayground('POST', '/api/v1/status', JSON.stringify({ ref_id: 'INV-STORE-10029' }, null, 2))">
+                <i class="fa-solid fa-play"></i> Coba Status Ini di Playground
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 3: INTERACTIVE LIVE API PLAYGROUND & TESTER -->
+      <section id="playground" class="d-card" style="border: 1.5px solid var(--a); box-shadow: 0 4px 20px rgba(14,165,233,0.12);">
+        <div class="d-card-header" style="border-bottom:none;margin-bottom:8px;padding-bottom:0;">
+          <div class="card-icon-sq">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div>
+            <h2 class="d-card-title" style="color:var(--a);">Live API Playground &amp; Tester</h2>
+            <div style="font-size:0.78rem;color:var(--t3);">Uji kredensial &amp; request langsung dari browser Anda</div>
+          </div>
+        </div>
+
+        <p class="d-card-desc">
+          Masukkan API Key &amp; Secret Anda untuk mencoba memanggil endpoint SeikaOne. Signature HMAC dihitung secara aman di browser klien menggunakan Web Crypto API:
+        </p>
+
+        <!-- CREDENTIALS INPUT -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;margin-bottom:14px;">
+          <div class="tool-group">
+            <label class="tool-label">API Key (X-Zyro-Key)</label>
+            <input type="text" id="pgApiKey" class="tool-input" placeholder="zyro_live_...">
+          </div>
+          <div class="tool-group">
+            <label class="tool-label">API Secret (Hanya Disimpan di RAM Browser)</label>
+            <div style="display:flex;gap:6px;">
+              <input type="password" id="pgApiSecret" class="tool-input" placeholder="sec_live_...">
+              <button type="button" class="ib" onclick="togglePgSecret()" title="Lihat/Tutup Secret" style="border-radius:10px;">
+                <i class="fa-solid fa-eye" id="pgSecretEye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRESET BUTTONS -->
+        <div style="margin-bottom:14px;">
+          <label class="tool-label">Template Cepat (Presets):</label>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" class="preset-pill" onclick="applyPgPreset('profile')">
+              <i class="fa-regular fa-user" style="color:#10b981;"></i> Profil Saldo
+            </button>
+            <button type="button" class="preset-pill" onclick="applyPgPreset('services')">
+              <i class="fa-solid fa-layer-group" style="color:#10b981;"></i> Katalog Produk
+            </button>
+            <button type="button" class="preset-pill" onclick="applyPgPreset('services_panel')">
+              <i class="fa-solid fa-server" style="color:#10b981;"></i> Filter Panel
+            </button>
+            <button type="button" class="preset-pill" onclick="applyPgPreset('order_ptero')">
+              <i class="fa-solid fa-cart-shopping" style="color:#0ea5e9;"></i> Order Panel 1GB
+            </button>
+            <button type="button" class="preset-pill" onclick="applyPgPreset('status')">
+              <i class="fa-solid fa-clock-rotate-left" style="color:#0ea5e9;"></i> Cek Status
+            </button>
+          </div>
+        </div>
+
+        <!-- REQUEST URL & METHOD -->
+        <div style="display:grid;grid-template-columns:120px 1fr;gap:10px;margin-bottom:14px;">
+          <div>
+            <label class="tool-label">Method</label>
+            <select id="pgMethod" class="tool-input" style="height:42px;font-weight:700;" onchange="handlePgMethodChange()">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+            </select>
+          </div>
+          <div>
+            <label class="tool-label">Endpoint Path</label>
+            <input type="text" id="pgPath" class="tool-input" value="/api/v1/profile">
+          </div>
+        </div>
+
+        <!-- BODY JSON (POST ONLY) -->
+        <div class="tool-group" id="pgBodyGroup" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <label class="tool-label" style="margin:0;">Request Body JSON</label>
+            <span style="font-size:0.72rem;color:var(--t3);">Otomatis di-sign dengan API Secret</span>
+          </div>
+          <textarea id="pgBody" class="tool-input" rows="4" style="font-size:0.8rem;"></textarea>
+        </div>
+
+        <!-- ACTION BUTTON -->
+        <div style="margin-bottom:16px;">
+          <button type="button" class="btn-act btn-act-primary" id="btnSendPg" onclick="sendPlaygroundRequest()" style="width:100%;justify-content:center;padding:12px;font-size:0.92rem;border-radius:12px;">
+            <i class="fa-solid fa-paper-plane"></i> Kirim Test Request Sekarang
+          </button>
+        </div>
+
+        <!-- OUTPUT CONSOLE -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <label class="tool-label" style="margin:0;">Respon Server SeikaOne:</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span id="pgStatusBadge" style="display:none;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;">-</span>
+              <span id="pgTimeBadge" style="display:none;font-size:0.72rem;color:var(--t3);font-family:'JetBrains Mono',monospace;">-</span>
+              <button type="button" class="mac-copy-btn" onclick="copyText(document.getElementById('pgResponse').textContent, 'Respon JSON disalin!')">
+                <i class="fa-regular fa-copy"></i> Salin Respon
+              </button>
+            </div>
+          </div>
+          <div class="mac-code-box" style="margin:0;">
+            <div class="mac-code-bar">
+              <div class="mac-dots">
+                <span class="mac-dot r"></span><span class="mac-dot y"></span><span class="mac-dot g"></span>
+              </div>
+              <div class="mac-title">live response preview</div>
+            </div>
+            <pre class="mac-code-body" id="pgResponse" style="max-height:360px;overflow-y:auto;">// Klik tombol "Kirim Test Request Sekarang" di atas untuk melihat respon JSON dari server SeikaOne...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: INTERACTIVE HMAC CALCULATOR -->
+      <section id="tool-sig" class="d-card">
+        <div class="d-card-header">
+          <div class="card-icon-sq" style="background:rgba(245,158,11,0.12);color:#f59e0b;">
+            <i class="fa-solid fa-calculator"></i>
+          </div>
+          <div>
+            <h2 class="d-card-title">Kalkulator Signature Live (Web Crypto)</h2>
+            <div style="font-size:0.78rem;color:var(--t3);">Verifikasi algoritma HMAC-SHA256 Anda secara real-time</div>
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <label class="tool-label">API Secret Anda</label>
+          <input type="text" id="toolSecret" class="tool-input" placeholder="Masukkan sec_live_...">
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div>
+            <label class="tool-label">HTTP Method</label>
+            <select id="toolMethod" class="tool-input" style="height:42px;">
+              <option value="POST">POST</option>
+              <option value="GET">GET</option>
+            </select>
+          </div>
+          <div>
+            <label class="tool-label">Unix Timestamp (Ms)</label>
+            <input type="text" id="toolTimestamp" class="tool-input">
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <label class="tool-label">Raw JSON Body (Hanya untuk POST)</label>
+          <textarea id="toolBody" class="tool-input" rows="3" placeholder='{"ref_id":"TEST-1","service_code":"ptero-pub-1gb"}'></textarea>
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <button type="button" class="btn-act btn-act-primary" style="width:100%;justify-content:center;padding:12px;border-radius:12px;" onclick="calculateLiveSig()">
+            <i class="fa-solid fa-bolt"></i> Hitung Signature Sekarang
+          </button>
+        </div>
+
+        <div class="tool-group">
+          <label class="tool-label">String to Sign yang Dibentuk</label>
+          <input type="text" id="toolStringToSign" readonly class="tool-input" style="color:var(--t3);">
+        </div>
+
+        <div class="tool-group">
+          <label class="tool-label">Hasil Signature (X-Zyro-Signature)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="toolSignature" readonly class="tool-input" style="color:#10b981;font-weight:700;">
+            <button type="button" class="ib" onclick="copyText(document.getElementById('toolSignature').value, 'Signature disalin!')" style="border-radius:10px;">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: ERROR CODES TABLE -->
+      <section id="errors" class="d-card">
+        <div class="d-card-header">
+          <div class="card-icon-sq" style="background:rgba(239,68,68,0.12);color:#ef4444;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h2 class="d-card-title">Daftar Kode Respon &amp; HTTP Error</h2>
+            <div style="font-size:0.78rem;color:var(--t3);">Panduan pemecahan masalah &amp; error recovery</div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="d-table">
+            <thead>
+              <tr><th>HTTP Code</th><th>Error Code</th><th>Penyebab &amp; Solusi Mitra</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>200</code></td><td><code>OK</code></td><td>Permintaan berhasil diproses oleh server SeikaOne.</td></tr>
+              <tr><td><code>400</code></td><td><code>MISSING_API_KEY</code></td><td>Header <code>X-Zyro-Key</code> belum disertakan pada permintaan.</td></tr>
+              <tr><td><code>400</code></td><td><code>INVALID_REF_ID</code></td><td>Parameter <code>ref_id</code> kosong atau kurang dari 3 karakter alfanumerik.</td></tr>
+              <tr><td><code>401</code></td><td><code>INVALID_API_KEY</code></td><td>API Key tidak valid atau tidak terdaftar di database sistem.</td></tr>
+              <tr><td><code>401</code></td><td><code>INVALID_SIGNATURE</code></td><td>Perhitungan HMAC-SHA256 salah. Pastikan string to sign sesuai spesifikasi.</td></tr>
+              <tr><td><code>401</code></td><td><code>TIMESTAMP_EXPIRED</code></td><td>Timestamp kedaluwarsa atau selisih waktu melebihi 5 menit dari jam server.</td></tr>
+              <tr><td><code>402</code></td><td><code>INSUFFICIENT_BALANCE</code></td><td>Saldo deposit tidak cukup untuk memotong harga layanan. Silakan top up saldo.</td></tr>
+              <tr><td><code>403</code></td><td><code>IP_NOT_WHITELISTED</code></td><td>IP server Anda belum didaftarkan di halaman IP Whitelist akun mitra.</td></tr>
+              <tr><td><code>403</code></td><td><code>ACCESS_JAILED</code></td><td>Terkena auto-jail selama 30 menit akibat flood spam &gt;15 request/detik.</td></tr>
+              <tr><td><code>404</code></td><td><code>SERVICE_NOT_FOUND</code></td><td>Kode produk (<code>service_code</code>) tidak ditemukan di katalog SeikaOne.</td></tr>
+              <tr><td><code>429</code></td><td><code>RATE_LIMIT_EXCEEDED</code></td><td>Melebihi batas kecepatan 60 request/menit. Silakan jeda beberapa saat.</td></tr>
+              <tr><td><code>500</code></td><td><code>INTERNAL_SERVER_ERROR</code></td><td>Kendala internal server. Saldo otomatis di-rollback jika sempat terpotong.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FLOATING QUICK TESTER BAR FOR MOBILE (AUSTINPAY IMAGE 1 & 3 REF) -->
+  <div class="floating-tester-bar">
+    <div class="ft-left">
+      <div class="ft-title">
+        <i class="fa-solid fa-flask" style="color:#10b981;"></i> API Tester
+      </div>
+      <div class="ft-desc">Uji endpoint langsung dari browser</div>
+    </div>
+    <a href="#playground" class="ft-btn">
+      <i class="fa-solid fa-play"></i> Coba Endpoint
+    </a>
+  </div>
+
+  <!-- MOBILE BOTTOM BAR -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bn-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="docs.html" class="bn-item active">
+      <i class="fa-solid fa-book-bookmark"></i>
+      <span>Docs</span>
+    </a>
+    <a href="api-key.html" class="bn-item">
+      <i class="fa-solid fa-key"></i>
+      <span>API Key</span>
+    </a>
+    <a href="cpanel.html" class="bn-item">
+      <i class="fa-solid fa-server"></i>
+      <span>CPanel</span>
+    </a>
+  </nav>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="docsToast">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i>
+    <span id="docsToastMsg">Teks berhasil disalin!</span>
+  </div>
+
+  <script data-cfasync="false" src="#"></script><script>
+    // AUTH CODE SNIPPETS (SECTION 1)
+    const AUTH_SNIPPETS = {
+      php: `<?php
+// PHP 7.4+ HMAC-SHA256 Signature Generator
+$apiKey = 'zyro_live_xxxxxxxxxxxxxxxxxxxxxxxx';
+$apiSecret = 'sec_live_yyyyyyyyyyyyyyyyyyyyyyyy';
+
+$timestamp = (string) round(microtime(true) * 1000);
+$payload = [
+    'ref_id' => 'INV-' . time(),
+    'service_code' => 'ptero-pub-1gb',
+    'data' => [ 'server_name' => 'Bot WhatsApp Store' ]
+];
+$rawBody = json_encode($payload);
+$stringToSign = $timestamp . '.POST.' . $rawBody;
+$signature = hash_hmac('sha256', $stringToSign, $apiSecret);
+
+$ch = curl_init('https://zyrostore.id/api/v1/order');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $rawBody);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-Zyro-Key: ' . $apiKey,
+    'X-Zyro-Timestamp: ' . $timestamp,
+    'X-Zyro-Signature: ' . $signature
+]);
+$res = curl_exec($ch);
+curl_close($ch);
+print_r(json_decode($res, true));`,
+
+      node: `// Node.js 18+ Native Fetch + Crypto
+const crypto = require('crypto');
+
+const apiKey = 'zyro_live_xxxxxxxxxxxxxxxxxxxxxxxx';
+const apiSecret = 'sec_live_yyyyyyyyyyyyyyyyyyyyyyyy';
+
+const timestamp = Date.now().toString();
+const payload = {
+  ref_id: 'INV-' + Date.now(),
+  service_code: 'ptero-pub-1gb',
+  data: { server_name: 'Bot WhatsApp Store' }
+};
+const rawBody = JSON.stringify(payload);
+const stringToSign = \`\${timestamp}.POST.\${rawBody}\`;
+const signature = crypto.createHmac('sha256', apiSecret).update(stringToSign).digest('hex');
+
+const response = await fetch('https://zyrostore.id/api/v1/order', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Zyro-Key': apiKey,
+    'X-Zyro-Timestamp': timestamp,
+    'X-Zyro-Signature': signature
+  },
+  body: rawBody
+});
+console.log(await response.json());`,
+
+      python: `# Python 3.8+ Requests
+import time, hmac, hashlib, json, requests
+
+api_key = 'zyro_live_xxxxxxxxxxxxxxxxxxxxxxxx'
+api_secret = 'sec_live_yyyyyyyyyyyyyyyyyyyyyyyy'
+
+timestamp = str(int(time.time() * 1000))
+payload = {
+    'ref_id': f'INV-{int(time.time())}',
+    'service_code': 'ptero-pub-1gb',
+    'data': { 'server_name': 'Bot WhatsApp Store' }
+}
+raw_body = json.dumps(payload, separators=(',', ':'))
+string_to_sign = f'{timestamp}.POST.{raw_body}'
+signature = hmac.new(api_secret.encode('utf-8'), string_to_sign.encode('utf-8'), hashlib.sha256).hexdigest()
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-Zyro-Key': api_key,
+    'X-Zyro-Timestamp': timestamp,
+    'X-Zyro-Signature': signature
+}
+res = requests.post('https://zyrostore.id/api/v1/order', data=raw_body, headers=headers)
+print(res.json())`,
+
+      curl: `# cURL Terminal (Bash)
+TIMESTAMP=$(date +%s%3N)
+BODY='{"ref_id":"INV-10029","service_code":"ptero-pub-1gb","data":{"server_name":"Bot Store"}}'
+SIGNATURE=$(echo -n "\${TIMESTAMP}.POST.\${BODY}" | openssl dgst -sha256 -hmac "sec_live_yyyyyyyyyyyyyyyyyyyyyyyy" | awk '{print $2}')
+
+curl -X POST https://zyrostore.id/api/v1/order \\
+  -H "Content-Type: application/json" \\
+  -H "X-Zyro-Key: zyro_live_xxxxxxxxxxxxxxxxxxxxxxxx" \\
+  -H "X-Zyro-Timestamp: \${TIMESTAMP}" \\
+  -H "X-Zyro-Signature: \${SIGNATURE}" \\
+  -d "\${BODY}"`
+    };
+
+    // ENDPOINTS SNIPPET DICTIONARY
+    const EP_SNIPPETS = {
+      profile: {
+        curl: `curl -X GET https://zyrostore.id/api/v1/profile \\
+  -H "X-Zyro-Key: YOUR_API_KEY"`,
+        node: `// Node.js 18+ Native Fetch
+const res = await fetch('https://zyrostore.id/api/v1/profile', {
+  headers: { 'X-Zyro-Key': 'YOUR_API_KEY' }
+});
+const profile = await res.json();
+console.log('Sisa Saldo:', profile.data.balance);`,
+        python: `# Python 3.8+ Requests
+import requests
+res = requests.get('https://zyrostore.id/api/v1/profile', headers={'X-Zyro-Key': 'YOUR_API_KEY'})
+print(res.json())`,
+        php: `<?php
+$ch = curl_init('https://zyrostore.id/api/v1/profile');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Zyro-Key: YOUR_API_KEY']);
+$res = curl_exec($ch);
+curl_close($ch);
+print_r(json_decode($res, true));`
+      },
+
+      services: {
+        curl: `curl -X GET "https://zyrostore.id/api/v1/services?category=Panel" \\
+  -H "X-Zyro-Key: YOUR_API_KEY"`,
+        node: `// Node.js 18+ Native Fetch
+const res = await fetch('https://zyrostore.id/api/v1/services?category=Panel', {
+  headers: { 'X-Zyro-Key': 'YOUR_API_KEY' }
+});
+console.log(await res.json());`,
+        python: `# Python 3.8+ Requests
+import requests
+params = {'category': 'Panel'}
+res = requests.get('https://zyrostore.id/api/v1/services', headers={'X-Zyro-Key': 'YOUR_API_KEY'}, params=params)
+print(res.json())`,
+        php: `<?php
+$ch = curl_init('https://zyrostore.id/api/v1/services?category=Panel');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Zyro-Key: YOUR_API_KEY']);
+$res = curl_exec($ch);
+curl_close($ch);
+print_r(json_decode($res, true));`
+      },
+
+      order: {
+        curl: `# cURL Terminal (Signed POST)
+TIMESTAMP=$(date +%s%3N)
+BODY='{"ref_id":"INV-10029","service_code":"ptero-pub-1gb","data":{"server_name":"Bot Store"}}'
+SIGNATURE=$(echo -n "\${TIMESTAMP}.POST.\${BODY}" | openssl dgst -sha256 -hmac "YOUR_API_SECRET" | awk '{print $2}')
+
+curl -X POST https://zyrostore.id/api/v1/order \\
+  -H "Content-Type: application/json" \\
+  -H "X-Zyro-Key: YOUR_API_KEY" \\
+  -H "X-Zyro-Timestamp: \${TIMESTAMP}" \\
+  -H "X-Zyro-Signature: \${SIGNATURE}" \\
+  -d "\${BODY}"`,
+        node: `// Node.js 18+ Native Fetch + Crypto
+const crypto = require('crypto');
+const timestamp = Date.now().toString();
+const payload = {
+  ref_id: 'INV-' + Date.now(),
+  service_code: 'ptero-pub-1gb',
+  data: { server_name: 'Bot WhatsApp Store' }
+};
+const rawBody = JSON.stringify(payload);
+const stringToSign = \`\${timestamp}.POST.\${rawBody}\`;
+const signature = crypto.createHmac('sha256', 'YOUR_API_SECRET').update(stringToSign).digest('hex');
+
+const res = await fetch('https://zyrostore.id/api/v1/order', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Zyro-Key': 'YOUR_API_KEY',
+    'X-Zyro-Timestamp': timestamp,
+    'X-Zyro-Signature': signature
+  },
+  body: rawBody
+});
+console.log(await res.json());`,
+        python: `# Python 3.8+ Requests
+import time, hmac, hashlib, json, requests
+timestamp = str(int(time.time() * 1000))
+payload = {
+    'ref_id': f'INV-{int(time.time())}',
+    'service_code': 'ptero-pub-1gb',
+    'data': { 'server_name': 'Bot WhatsApp Store' }
+}
+raw_body = json.dumps(payload, separators=(',', ':'))
+sig = hmac.new('YOUR_API_SECRET'.encode(), f'{timestamp}.POST.{raw_body}'.encode(), hashlib.sha256).hexdigest()
+res = requests.post('https://zyrostore.id/api/v1/order', data=raw_body, headers={
+    'Content-Type': 'application/json',
+    'X-Zyro-Key': 'YOUR_API_KEY',
+    'X-Zyro-Timestamp': timestamp,
+    'X-Zyro-Signature': sig
+})
+print(res.json())`,
+        php: `<?php
+$timestamp = (string) round(microtime(true) * 1000);
+$payload = [
+    'ref_id' => 'INV-' . time(),
+    'service_code' => 'ptero-pub-1gb',
+    'data' => [ 'server_name' => 'Bot WhatsApp Store' ]
+];
+$rawBody = json_encode($payload);
+$signature = hash_hmac('sha256', $timestamp . '.POST.' . $rawBody, 'YOUR_API_SECRET');
+
+$ch = curl_init('https://zyrostore.id/api/v1/order');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $rawBody);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-Zyro-Key: YOUR_API_KEY',
+    'X-Zyro-Timestamp: ' . $timestamp,
+    'X-Zyro-Signature: ' . $signature
+]);
+$res = curl_exec($ch);
+curl_close($ch);
+print_r(json_decode($res, true));`
+      },
+
+      status: {
+        curl: `# cURL Terminal (Signed POST)
+TIMESTAMP=$(date +%s%3N)
+BODY='{"ref_id":"INV-10029"}'
+SIGNATURE=$(echo -n "\${TIMESTAMP}.POST.\${BODY}" | openssl dgst -sha256 -hmac "YOUR_API_SECRET" | awk '{print $2}')
+
+curl -X POST https://zyrostore.id/api/v1/status \\
+  -H "Content-Type: application/json" \\
+  -H "X-Zyro-Key: YOUR_API_KEY" \\
+  -H "X-Zyro-Timestamp: \${TIMESTAMP}" \\
+  -H "X-Zyro-Signature: \${SIGNATURE}" \\
+  -d "\${BODY}"`,
+        node: `// Node.js 18+ Native Fetch + Crypto
+const crypto = require('crypto');
+const timestamp = Date.now().toString();
+const rawBody = JSON.stringify({ ref_id: 'INV-10029' });
+const signature = crypto.createHmac('sha256', 'YOUR_API_SECRET').update(\`\${timestamp}.POST.\${rawBody}\`).digest('hex');
+
+const res = await fetch('https://zyrostore.id/api/v1/status', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Zyro-Key': 'YOUR_API_KEY',
+    'X-Zyro-Timestamp': timestamp,
+    'X-Zyro-Signature': signature
+  },
+  body: rawBody
+});
+console.log(await res.json());`,
+        python: `# Python 3.8+ Requests
+import time, hmac, hashlib, json, requests
+timestamp = str(int(time.time() * 1000))
+raw_body = json.dumps({'ref_id': 'INV-10029'}, separators=(',', ':'))
+sig = hmac.new('YOUR_API_SECRET'.encode(), f'{timestamp}.POST.{raw_body}'.encode(), hashlib.sha256).hexdigest()
+res = requests.post('https://zyrostore.id/api/v1/status', data=raw_body, headers={
+    'Content-Type': 'application/json',
+    'X-Zyro-Key': 'YOUR_API_KEY',
+    'X-Zyro-Timestamp': timestamp,
+    'X-Zyro-Signature': sig
+})
+print(res.json())`,
+        php: `<?php
+$timestamp = (string) round(microtime(true) * 1000);
+$rawBody = json_encode(['ref_id' => 'INV-10029']);
+$signature = hash_hmac('sha256', $timestamp . '.POST.' . $rawBody, 'YOUR_API_SECRET');
+
+$ch = curl_init('https://zyrostore.id/api/v1/status');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $rawBody);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-Zyro-Key: YOUR_API_KEY',
+    'X-Zyro-Timestamp: ' . $timestamp,
+    'X-Zyro-Signature: ' . $signature
+]);
+$res = curl_exec($ch);
+curl_close($ch);
+print_r(json_decode($res, true));`
+      }
+    };
+
+    // ACCORDION TOGGLE LOGIC
+    function toggleEndpointAccordion(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('open');
+    }
+
+    function openAndScrollEndpoint(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('open');
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // SNIPPET CONTROLLERS
+    function switchAuthSnippet(lang, btnEl) {
+      if (btnEl) {
+        const bar = btnEl.closest('.lang-pills-bar');
+        if (bar) {
+          bar.querySelectorAll('.lang-pill').forEach(b => b.classList.remove('active'));
+          btnEl.classList.add('active');
+        }
+      }
+      const titleEl = document.getElementById('authSnippetTitle');
+      const codeEl = document.getElementById('authSnippetCode');
+      if (titleEl) titleEl.textContent = lang;
+      if (codeEl && AUTH_SNIPPETS[lang]) codeEl.textContent = AUTH_SNIPPETS[lang];
+    }
+
+    function switchEpSnippet(ep, lang, btnEl) {
+      if (btnEl) {
+        const bar = btnEl.closest('.lang-pills-bar');
+        if (bar) {
+          bar.querySelectorAll('.lang-pill').forEach(b => b.classList.remove('active'));
+          btnEl.classList.add('active');
+        }
+      }
+      const titleEl = document.getElementById('title_' + ep);
+      const codeEl = document.getElementById('snippet_' + ep);
+      if (titleEl) titleEl.textContent = lang;
+      if (codeEl && EP_SNIPPETS[ep] && EP_SNIPPETS[ep][lang]) {
+        codeEl.textContent = EP_SNIPPETS[ep][lang];
+      }
+    }
+
+    function initAllSnippets() {
+      switchAuthSnippet('php');
+      const endpoints = ['profile', 'services', 'order', 'status'];
+      endpoints.forEach(ep => {
+        const codeEl = document.getElementById('snippet_' + ep);
+        const titleEl = document.getElementById('title_' + ep);
+        if (codeEl && EP_SNIPPETS[ep]) {
+          codeEl.textContent = EP_SNIPPETS[ep]['curl'];
+          if (titleEl) titleEl.textContent = 'curl';
+        }
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('docsToast');
+      const txt = document.getElementById('docsToastMsg');
+      if (txt) txt.textContent = msg;
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+    }
+
+    function copyText(text, successMsg = 'Teks disalin ke clipboard!') {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg);
+      }).catch(() => {
+        showToast('Gagal menyalin teks.');
+      });
+    }
+
+    function copySnippetById(id) {
+      const el = document.getElementById(id);
+      if (el) copyText(el.textContent, 'Kode berhasil disalin!');
+    }
+
+    // JUMP TO PLAYGROUND WITH VALUES
+    function loadToPlayground(method, path, bodyStr) {
+      const methodEl = document.getElementById('pgMethod');
+      const pathEl = document.getElementById('pgPath');
+      const bodyEl = document.getElementById('pgBody');
+      const pgSection = document.getElementById('playground');
+
+      if (methodEl) methodEl.value = method;
+      if (pathEl) pathEl.value = path;
+      if (bodyEl && bodyStr) bodyEl.value = bodyStr;
+
+      handlePgMethodChange();
+      if (pgSection) {
+        pgSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      showToast('Endpoint dimuat ke playground!');
+    }
+
+    // PLAYGROUND LOGIC
+    function togglePgSecret() {
+      const inp = document.getElementById('pgApiSecret');
+      const icon = document.getElementById('pgSecretEye');
+      if (!inp || !icon) return;
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        icon.className = 'fa-solid fa-eye-slash';
+      } else {
+        inp.type = 'password';
+        icon.className = 'fa-solid fa-eye';
+      }
+    }
+
+    function handlePgMethodChange() {
+      const method = document.getElementById('pgMethod').value;
+      const group = document.getElementById('pgBodyGroup');
+      if (group) group.style.display = method === 'POST' ? 'block' : 'none';
+    }
+
+    function applyPgPreset(type) {
+      const methodEl = document.getElementById('pgMethod');
+      const pathEl = document.getElementById('pgPath');
+      const bodyEl = document.getElementById('pgBody');
+
+      if (type === 'profile') {
+        methodEl.value = 'GET';
+        pathEl.value = '/api/v1/profile';
+      } else if (type === 'services') {
+        methodEl.value = 'GET';
+        pathEl.value = '/api/v1/services';
+      } else if (type === 'services_panel') {
+        methodEl.value = 'GET';
+        pathEl.value = '/api/v1/services?category=Panel';
+      } else if (type === 'order_ptero') {
+        methodEl.value = 'POST';
+        pathEl.value = '/api/v1/order';
+        bodyEl.value = JSON.stringify({
+          ref_id: 'PLAYGROUND-' + Date.now(),
+          service_code: 'ptero-pub-1gb',
+          data: {
+            server_name: 'Bot Playground Store',
+            runtime: 'nodejs'
+          }
+        }, null, 2);
+      } else if (type === 'status') {
+        methodEl.value = 'POST';
+        pathEl.value = '/api/v1/status';
+        bodyEl.value = JSON.stringify({
+          ref_id: 'INV-STORE-10029'
+        }, null, 2);
+      }
+      handlePgMethodChange();
+      showToast('Preset dimuat ke editor!');
+    }
+
+    async function computeHmacSignature(secret, stringToSign) {
+      const enc = new TextEncoder();
+      const key = await crypto.subtle.importKey(
+        'raw',
+        enc.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' },
+        false,
+        ['sign']
+      );
+      const signatureBuffer = await crypto.subtle.sign('HMAC', key, enc.encode(stringToSign));
+      const hashArray = Array.from(new Uint8Array(signatureBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function sendPlaygroundRequest() {
+      const apiKey = document.getElementById('pgApiKey').value.trim();
+      const apiSecret = document.getElementById('pgApiSecret').value.trim();
+      const method = document.getElementById('pgMethod').value;
+      const path = document.getElementById('pgPath').value.trim();
+      const bodyRaw = document.getElementById('pgBody').value.trim();
+
+      const btn = document.getElementById('btnSendPg');
+      const respEl = document.getElementById('pgResponse');
+      const statusBadge = document.getElementById('pgStatusBadge');
+      const timeBadge = document.getElementById('pgTimeBadge');
+
+      if (!apiKey) {
+        alert('Silakan masukkan API Key (X-Zyro-Key) Anda terlebih dahulu.');
+        document.getElementById('pgApiKey').focus();
+        return;
+      }
+
+      if (method === 'POST' && !apiSecret) {
+        alert('Metode POST membutuhkan API Secret untuk menghitung tanda tangan digital (HMAC-SHA256).');
+        document.getElementById('pgApiSecret').focus();
+        return;
+      }
+
+      const originalBtnHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menghubungi Server SeikaOne...';
+      respEl.textContent = '// Mengirim permintaan ke server...';
+
+      const startTime = performance.now();
+      try {
+        const headers = { 'X-Zyro-Key': apiKey };
+        let requestBody = null;
+
+        if (method === 'POST') {
+          headers['Content-Type'] = 'application/json';
+          const timestamp = Date.now().toString();
+          headers['X-Zyro-Timestamp'] = timestamp;
+
+          let jsonBodyStr = bodyRaw || '{}';
+          try {
+            const parsed = JSON.parse(jsonBodyStr);
+            jsonBodyStr = JSON.stringify(parsed);
+          } catch(e) {
+            alert('Format JSON pada Request Body tidak valid: ' + e.message);
+            btn.disabled = false;
+            btn.innerHTML = originalBtnHtml;
+            return;
+          }
+
+          requestBody = jsonBodyStr;
+          const stringToSign = `${timestamp}.POST.${jsonBodyStr}`;
+          const signature = await computeHmacSignature(apiSecret, stringToSign);
+          headers['X-Zyro-Signature'] = signature;
+        }
+
+        const fetchUrl = path.startsWith('http') ? path : path;
+        const res = await fetch(fetchUrl, {
+          method: method,
+          headers: headers,
+          body: requestBody
+        });
+
+        const elapsedMs = Math.round(performance.now() - startTime);
+        const data = await res.json().catch(() => null);
+
+        statusBadge.style.display = 'inline-block';
+        statusBadge.textContent = `${res.status} ${res.statusText || (res.ok ? 'OK' : 'Error')}`;
+        if (res.ok) {
+          statusBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+          statusBadge.style.color = '#10b981';
+          statusBadge.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+        } else {
+          statusBadge.style.background = 'rgba(239, 68, 68, 0.15)';
+          statusBadge.style.color = '#ef4444';
+          statusBadge.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+        }
+
+        timeBadge.style.display = 'inline-block';
+        timeBadge.textContent = `⏱️ ${elapsedMs} ms`;
+
+        respEl.textContent = data ? JSON.stringify(data, null, 2) : '// Tidak ada payload respon.';
+        showToast(`Respon diterima (${res.status}) dalam ${elapsedMs}ms!`);
+      } catch (err) {
+        statusBadge.style.display = 'inline-block';
+        statusBadge.textContent = 'ERR';
+        statusBadge.style.background = 'rgba(239, 68, 68, 0.15)';
+        statusBadge.style.color = '#ef4444';
+        respEl.textContent = `// Terjadi kesalahan jaringan / koneksi:\n${err.message}`;
+        showToast('Koneksi gagal atau terputus.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHtml;
+      }
+    }
+
+    // LIVE WEB CRYPTO HMAC CALCULATOR
+    async function calculateLiveSig() {
+      const secret = document.getElementById('toolSecret').value.trim();
+      let ts = document.getElementById('toolTimestamp').value.trim();
+      if (!ts) {
+        ts = Date.now().toString();
+        document.getElementById('toolTimestamp').value = ts;
+      }
+      const method = document.getElementById('toolMethod').value.trim().toUpperCase();
+      const body = document.getElementById('toolBody').value.trim();
+
+      const stringToSign = `${ts}.${method}.${body}`;
+      document.getElementById('toolStringToSign').value = stringToSign;
+
+      if (!secret) {
+        alert('Silakan masukkan API Secret Anda terlebih dahulu!');
+        return;
+      }
+
+      try {
+        const hex = await computeHmacSignature(secret, stringToSign);
+        document.getElementById('toolSignature').value = hex;
+        showToast('Signature berhasil dihitung!');
+      } catch (err) {
+        alert('Gagal menghitung signature: ' + err.message);
+      }
+    }
+
+    // SIDEBAR DRAWER TOGGLES
+    function toggleSidebar(forceState) {
+      const sb = document.getElementById('sidebar');
+      const ov = document.getElementById('sbOv');
+      if (!sb || !ov) return;
+      const isOpen = forceState !== undefined ? forceState : (!sb.classList.contains('on') && !sb.classList.contains('open'));
+      sb.classList.toggle('on', isOpen);
+      ov.classList.toggle('on', isOpen);
+      sb.classList.toggle('open', isOpen);
+      ov.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function toggleSidebarCategory(groupId) {
+      const g = document.getElementById(groupId);
+      if (g) g.classList.toggle('collapsed');
+    }
+
+    // THEME SWITCHER
+    function updateThemeIcon() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+          icon.style.color = isDark ? '#f59e0b' : '';
+        }
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const next = isDark ? 'cream' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('cream');
+        document.documentElement.style.backgroundColor = '#070e1b';
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('cream');
+        document.documentElement.style.backgroundColor = '#FAF8F5';
+      }
+      localStorage.setItem('seika_theme', next);
+      updateThemeIcon();
+    }
+
+    // SCROLLSPY FOR DESKTOP TOC & MOBILE SUBNAV PILLS
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollY = window.pageYOffset + 140;
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        if (scrollY >= top && scrollY < top + height) {
+          // Desktop TOC
+          document.querySelectorAll('.toc-item').forEach(item => {
+            item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+          });
+          // Mobile Pills
+          document.querySelectorAll('.doc-pill').forEach(pill => {
+            pill.classList.toggle('active', pill.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { passive: true });
+
+    // AUTO-POPULATE LOGGED-IN CREDENTIALS
+    function tryAutoFillCredentials() {
+      try {
+        const cachedKey = localStorage.getItem('zyro_user_api_key');
+        if (cachedKey) {
+          const pgInp = document.getElementById('pgApiKey');
+          if (pgInp && !pgInp.value) pgInp.value = cachedKey;
+        }
+      } catch (_) {}
+    }
+
+    // Run immediately so code never stays '// Memuat...'
+    initAllSnippets();
+
+    // INITIALIZATION
+    document.addEventListener('DOMContentLoaded', () => {
+      initAllSnippets();
+      updateThemeIcon();
+      tryAutoFillCredentials();
+
+      const tsEl = document.getElementById('toolTimestamp');
+      if (tsEl) tsEl.value = Date.now().toString();
+
+      // Sidebar links close drawer
+      const sb = document.getElementById('sidebar');
+      if (sb) {
+        sb.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => toggleSidebar(false));
+        });
+      }
+
+      // Close on ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleSidebar(false);
+      });
+    });
+  </script>
+</body>
+</html>

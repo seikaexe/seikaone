@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>Panel Saya (Pterodactyl Hub) – SeikaOne.id</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.0"></script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .panel-hub-wrap { max-width: 980px; margin: 0 auto; width: 100%; padding: 10px 16px 40px; }
+    
+    /* HERO BANNER - ANTI AI-SLOP CLEAN CARD */
+    .panel-hero {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      border-radius: 18px;
+      padding: 24px 22px;
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .panel-hero-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .panel-hero-sub {
+      font-size: 0.84rem;
+      color: var(--t3);
+      max-width: 620px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .panel-search-bar {
+      display: flex;
+      gap: 10px;
+      max-width: 580px;
+    }
+    .panel-search-in {
+      flex: 1;
+      padding: 13px 18px;
+      border-radius: var(--rsm);
+      border: 1.5px solid var(--b2);
+      background: var(--surface);
+      color: var(--t1);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--ease);
+    }
+    .panel-search-in:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .btn-panel-search {
+      padding: 13px 24px;
+      border-radius: var(--rsm);
+      background: #10b981;
+      color: #fff;
+      border: none;
+      font-weight: 800;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--ease);
+      box-shadow: 0 4px 14px rgba(16,185,129,0.25);
+    }
+    .btn-panel-search:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* STATS ROW */
+    .panel-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .p-stat-box {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .p-stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    .p-stat-val { font-size: 1.25rem; font-weight: 900; color: var(--t1); line-height: 1.1; }
+    .p-stat-lbl { font-size: 0.74rem; font-weight: 700; color: var(--t3); margin-top: 3px; }
+
+    /* SERVER CARDS */
+    .server-card {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 22px;
+      margin-bottom: 18px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.02);
+    }
+    .server-card:hover {
+      border-color: #10b981;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.08);
+      transform: translateY(-2px);
+    }
+    .server-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .server-title-box { display: flex; align-items: center; gap: 12px; }
+    .server-egg-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(16,185,129,0.12);
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .server-name { font-size: 1.05rem; font-weight: 800; color: var(--t1); }
+    .server-sub { font-size: 0.74rem; color: var(--t3); margin-top: 2px; }
+
+    .server-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+    .spec-item { display: flex; flex-direction: column; gap: 3px; }
+    .spec-lbl { font-size: 0.68rem; font-weight: 800; color: var(--t3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .spec-val { font-size: 0.88rem; font-weight: 800; color: var(--t1); font-family: 'JetBrains Mono', monospace; }
+
+    .server-cred-box {
+      background: var(--bg2);
+      border: 1px dashed var(--b2);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cred-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .cred-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--t2);
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin: 0;
+    }
+
+    .server-actions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--b1);
+    }
+    .server-btn {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 750;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.16s ease;
+      white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .server-btn.primary {
+      background: #059669;
+      color: #fff;
+      border-color: #059669;
+    }
+    .server-btn.primary:hover {
+      background: #047857;
+      border-color: #047857;
+      transform: translateY(-1px);
+    }
+    .server-btn.outline {
+      background: var(--surface);
+      border: 1.5px solid var(--b2);
+      color: var(--t1);
+    }
+    .server-btn.outline:hover {
+      background: var(--bg2);
+      border-color: var(--t2);
+      transform: translateY(-1px);
+    }
+    .server-btn.upgrade {
+      background: #18181b;
+      color: #fff;
+      border: 1px solid #18181b;
+    }
+    html.dark .server-btn.upgrade {
+      background: #0284c7;
+      border-color: #0284c7;
+    }
+    .server-btn.upgrade:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .toast-box {
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      background: var(--surface); color: var(--t1); padding: 12px 24px;
+      border-radius: 100px; border: 1px solid var(--b2); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 999999; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;
+    /* RESPONSIVE MOBILE STYLES */
+    @media (max-width: 640px) {
+      .panel-hub-wrap { padding: 10px 12px 30px; }
+      .panel-hero { padding: 20px 16px; margin-bottom: 18px; border-radius: var(--r); }
+      .panel-hero-title { font-size: 1.25rem; }
+      .panel-hero-sub { font-size: 0.8rem; margin-bottom: 16px; }
+      .panel-search-bar { flex-direction: column; width: 100%; gap: 8px; }
+      .panel-search-in { width: 100%; box-sizing: border-box; padding: 11px 18px; font-size: 0.82rem; }
+      .btn-panel-search { width: 100%; justify-content: center; padding: 11px 20px; font-size: 0.82rem; }
+      .panel-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+      .p-stat-box { padding: 10px 8px; gap: 6px; flex-direction: column; text-align: center; justify-content: center; border-radius: var(--rsm); }
+      .p-stat-icon { width: 32px; height: 32px; font-size: 0.95rem; border-radius: 8px; margin: 0 auto; }
+      .p-stat-val { font-size: 1.05rem; }
+      .p-stat-lbl { font-size: 0.65rem; margin-top: 1px; }
+      .server-card { padding: 15px 14px; margin-bottom: 14px; border-radius: var(--r); }
+      .btn-top-auth-extra { display: none !important; }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <div class="toast-box" id="vToast">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <span id="vToastMsg">Pesan</span>
+  </div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Toko">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div id="authNavContainer"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div id="page">
+      <div class="panel-hub-wrap">
+
+        <!-- HERO BANNER -->
+        <div class="panel-hero">
+          <div class="panel-hero-title">
+            <i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Pterodactyl Saya
+          </div>
+          <div class="panel-hero-sub">
+            Kelola seluruh server panel Pterodactyl Anda, cek kredensial akses, upgrade spesifikasi add-on, dan login langsung ke panel kontrol server.
+          </div>
+
+          <!-- SEARCH ROW -->
+          <div class="panel-search-bar">
+            <input type="text" id="panelQuery" class="panel-search-in" placeholder="Ketik Email Pembeli atau Order ID (contoh: ZYRO-123456)..." onkeydown="if(event.key==='Enter') searchPanels()">
+            <button class="btn-panel-search" onclick="searchPanels()">
+              <i class="fa-solid fa-magnifying-glass"></i> Cari Panel
+            </button>
+          </div>
+
+          <div id="guestNotice" style="display:none;margin-top:12px;font-size:0.75rem;color:var(--t3);">
+            <i class="fa-solid fa-circle-info" style="color:var(--a);"></i> 
+            <span>Ingin server panel otomatis tersimpan permanen? <a href="login.html" style="color:var(--a);font-weight:700;">Masuk / Daftar Akun Member (Diskon 5%)</a></span>
+          </div>
+
+          <!-- QUICK ACCESS TABS -->
+          <div style="display:flex;gap:8px;margin-top:16px;overflow-x:auto;padding-bottom:4px;">
+            <a href="cpanel.html" class="btn-top-auth" style="text-decoration:none;padding:7px 14px;font-size:0.76rem;background:rgba(14,165,233,0.18);color:#0ea5e9;border:1px solid rgba(14,165,233,0.35);border-radius:100px;font-weight:800;">
+              <i class="fa-solid fa-gauge-high"></i> CPanel Control
+            </a>
+            <a href="mypanel.html" class="btn-top-auth" style="text-decoration:none;padding:7px 14px;font-size:0.76rem;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);border-radius:100px;font-weight:700;">
+              <i class="fa-solid fa-server"></i> Panel Saya
+            </a>
+            <a href="bansos.html" class="btn-top-auth" style="text-decoration:none;padding:7px 14px;font-size:0.76rem;background:rgba(244,63,94,0.12);color:#f43f5e;border:1px solid rgba(244,63,94,0.3);border-radius:100px;font-weight:700;">
+              <i class="fa-solid fa-gift"></i> Bansos 1GB Free
+            </a>
+            <a href="addon.html" class="btn-top-auth" style="text-decoration:none;padding:7px 14px;font-size:0.76rem;background:rgba(14,165,233,0.12);color:#0ea5e9;border:1px solid rgba(14,165,233,0.3);border-radius:100px;font-weight:700;">
+              <i class="fa-solid fa-microchip"></i> Add-on Spek
+            </a>
+            <a href="riwayat.html" class="btn-top-auth" style="text-decoration:none;padding:7px 14px;font-size:0.76rem;background:rgba(245,158,11,0.12);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);border-radius:100px;font-weight:700;">
+              <i class="fa-solid fa-receipt"></i> Riwayat Pesanan
+            </a>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="panel-stats-row">
+          <div class="p-stat-box">
+            <div class="p-stat-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">
+              <i class="fa-solid fa-hard-drive"></i>
+            </div>
+            <div>
+              <div class="p-stat-val" id="statTotalServer">0</div>
+              <div class="p-stat-lbl">Server Panel Terdaftar</div>
+            </div>
+          </div>
+          <div class="p-stat-box">
+            <div class="p-stat-icon" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <div>
+              <div class="p-stat-val" id="statAddons">0</div>
+              <div class="p-stat-lbl">Add-On Terpasang</div>
+            </div>
+          </div>
+          <div class="p-stat-box">
+            <div class="p-stat-icon" style="background:rgba(234,179,8,0.12);color:#eab308;">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+              <div class="p-stat-val">30 Hari</div>
+              <div class="p-stat-lbl">Garansi Penggantian</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL LIST CONTAINER -->
+        <div id="panelsListContainer">
+          <div style="padding:40px;text-align:center;color:var(--t3);">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;"></i>
+            <p style="margin-top:10px;font-size:0.85rem;">Memuat daftar panel server Anda...</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const authToken = localStorage.getItem('seika_user_token');
+    const savedUser = localStorage.getItem('seika_user_data') ? JSON.parse(localStorage.getItem('seika_user_data')) : null;
+    let allPanelOrders = [];
+
+    // Theme logic
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('vToast');
+      document.getElementById('vToastMsg').innerText = msg;
+      box.style.top = '20px';
+      setTimeout(() => { box.style.top = '-100px'; }, 3000);
+    }
+
+    function copyText(text, msg = 'Berhasil disalin!') {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg);
+      }).catch(() => {
+        showToast('Gagal menyalin');
+      });
+    }
+
+    function isPanelOrder(o) {
+      if (!o) return false;
+      const st = String(o.status || '').toLowerCase();
+      // ONLY active/paid panel orders should appear in MyPanel!
+      // Exclude cancelled, expired, failed, pending, and awaiting_payment
+      if (st !== 'completed' && st !== 'paid') return false;
+
+      // Exclude addon payments
+      if (o.orderType === 'addon' || String(o.productId || '').toLowerCase().includes('addon')) {
+        return false;
+      }
+
+      // Exclude non-panel categories and products
+      const cat = String(o.category || '').toLowerCase();
+      const name = String(o.productName || o.nama || '').toLowerCase();
+      const id = String(o.productId || o.id || '').toLowerCase();
+
+      if (cat.includes('account') || cat.includes('premku') || cat.includes('otp') ||
+          cat.includes('vps') || cat.includes('cloud') || cat.includes('role') ||
+          cat.includes('bot') || cat.includes('domain') || cat.includes('jasa')) {
+        return false;
+      }
+      if (name.includes('canva') || name.includes('netflix') || name.includes('spotify') ||
+          name.includes('youtube') || name.includes('role') || name.includes('otp') ||
+          name.includes('vps') || name.includes('cloud') || name.includes('diamond')) {
+        return false;
+      }
+
+      // Must match panel keywords or pterodactyl IDs
+      return cat.includes('panel') || name.includes('panel') || id.includes('ptero') || id.includes('panel');
+    }
+
+    function toggleSubUserDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('subUserDropdown');
+      if (dd) dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+    }
+    window.addEventListener('click', function(e) {
+      const dd = document.getElementById('subUserDropdown');
+      if (dd && dd.style.display !== 'none' && !dd.contains(e.target)) {
+        dd.style.display = 'none';
+      }
+    });
+    function subLogout() {
+      localStorage.removeItem('seika_user_token');
+      localStorage.removeItem('seika_user_data');
+      window.location.reload();
+    }
+
+    async function initPage() {
+      const authContainer = document.getElementById('authNavContainer');
+      const input = document.getElementById('panelQuery');
+      const guestNotice = document.getElementById('guestNotice');
+
+      if (authToken && savedUser) {
+        if (guestNotice) guestNotice.style.display = 'none';
+        const firstName = savedUser.name ? savedUser.name.split(' ')[0] : 'Member';
+        const userDisplayName = savedUser.name || savedUser.email || 'Member';
+        const avatar = (typeof getSmartAvatar === 'function')
+          ? getSmartAvatar(savedUser.avatar, userDisplayName)
+          : (savedUser.avatar || '/assets/logo.png');
+        const avFallback = `onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${escapeHtml(userDisplayName)}');else this.src='/assets/logo.png';"`;
+        authContainer.innerHTML = `
+          <div style="position:relative;">
+            <div class="user-nav-pill" style="display:inline-flex;cursor:pointer;" onclick="toggleSubUserDropdown(event)" title="${savedUser.email}">
+              <img src="${avatar}" class="user-nav-avatar" alt="Avatar" ${avFallback}>
+              <div class="user-nav-info">
+                <span class="user-nav-name">${firstName}</span>
+                <span class="user-nav-tag">5% OFF</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;color:var(--t3);margin-left:2px;"></i>
+            </div>
+            <div class="user-dropdown-menu" id="subUserDropdown" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:240px;background:var(--surface);border:1px solid var(--b1);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,0.25);padding:10px;z-index:99999;">
+              <div class="ud-head" style="padding:8px;border-bottom:1px solid var(--b1);margin-bottom:8px;display:flex;align-items:center;gap:10px;">
+                <img src="${avatar}" style="width:34px;height:34px;border-radius:50%;border:1.5px solid var(--a);" ${avFallback}>
+                <div style="overflow:hidden;">
+                  <div style="font-size:0.82rem;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.name || 'Member'}</div>
+                  <div style="font-size:0.7rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${savedUser.email || ''}</div>
+                </div>
+              </div>
+              <div class="ud-items" style="display:flex;flex-direction:column;gap:4px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-house" style="color:var(--a);"></i> Beranda Toko</a>
+                <a href="bansos.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:#f43f5e;font-weight:700;text-decoration:none;border-radius:8px;"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free (1GB)</a>
+                <a href="mypanel.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--a);font-weight:700;text-decoration:none;border-radius:8px;background:var(--abg);"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya</a>
+                <a href="riwayat.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-receipt" style="color:#f59e0b;"></i> Riwayat Pesanan</a>
+                <a href="addon.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-on Spek</a>
+                <a href="profile.html" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--t2);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun</a>
+                <hr style="border:none;border-top:1px solid var(--b1);margin:4px 0;">
+                <a href="javascript:void(0)" onclick="subLogout()" style="display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:0.8rem;color:var(--rose);text-decoration:none;border-radius:8px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar (Logout)</a>
+              </div>
+            </div>
+          </div>
+        `;
+        if (input) input.placeholder = "Ketik Email atau Order ID (contoh: emailkamu@gmail.com)...";
+        await loadMemberPanels();
+      } else {
+        if (guestNotice) guestNotice.style.display = 'block';
+        authContainer.innerHTML = `
+          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+            <i class="fa-solid fa-circle-user"></i> <span class="btn-top-auth-txt">Masuk</span>
+          </a>
+        `;
+        const savedEmail = localStorage.getItem('zyro_buyer_email') || '';
+        let savedOrders = [];
+        try { savedOrders = JSON.parse(localStorage.getItem('zyro_buyer_orders') || '[]'); } catch(e){}
+
+        if (savedEmail || savedOrders.length > 0) {
+          if (savedEmail && input) input.value = savedEmail;
+          await loadGuestPanels(savedEmail, savedOrders);
+        } else {
+          renderEmptyState("Ketikkan alamat email atau Order ID pembelian Anda di kolom atas untuk melihat panel server Anda.");
+        }
+      }
+    }
+
+    let memberPanelsCache = [];
+
+    async function loadMemberPanels() {
+      try {
+        const res = await fetch(`/api/user/orders?token=${encodeURIComponent(authToken)}`);
+        const data = await res.json();
+        if (data.status && Array.isArray(data.orders)) {
+          memberPanelsCache = data.orders.filter(isPanelOrder);
+          allPanelOrders = memberPanelsCache;
+          renderPanels(allPanelOrders);
+        } else {
+          renderEmptyState("Belum ada server panel di akun Anda. Beli panel legal murah & instan di toko kami!");
+        }
+      } catch (e) {
+        renderEmptyState("Gagal memuat daftar panel server: " + e.message);
+      }
+    }
+
+    async function loadGuestPanels(query, savedOrders = []) {
+      const container = document.getElementById('panelsListContainer');
+      container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--t3);"><i class="fa-solid fa-spinner fa-spin"></i><p style="margin-top:10px;">Mencari panel server...</p></div>';
+
+      try {
+        const tokenQuery = authToken ? `&token=${encodeURIComponent(authToken)}` : '';
+        const idsQuery = savedOrders.length > 0 ? `&ids=${encodeURIComponent(savedOrders.join(','))}` : '';
+        const res = await fetch(`/api/order/track?q=${encodeURIComponent(query || '')}${idsQuery}${tokenQuery}`);
+        const data = await res.json();
+        if (data.status) {
+          const raw = Array.isArray(data.orders) && data.orders.length ? data.orders : (data.order ? [data.order] : []);
+          allPanelOrders = raw.filter(isPanelOrder);
+          renderPanels(allPanelOrders);
+        } else {
+          renderEmptyState(data.message || `Tidak ditemukan panel server dengan kata kunci "${query}".`);
+        }
+      } catch (e) {
+        renderEmptyState("Gagal memuat data panel.");
+      }
+    }
+
+    async function searchPanels() {
+      const q = document.getElementById('panelQuery').value.trim();
+      if (!q) {
+        if (authToken && savedUser) {
+          allPanelOrders = memberPanelsCache;
+          renderPanels(allPanelOrders);
+          return;
+        }
+        return showToast("Masukkan Order ID atau email Anda!");
+      }
+
+      if (authToken && savedUser) {
+        const qLow = q.toLowerCase();
+        if (qLow.includes('@') && qLow !== String(savedUser.email || '').toLowerCase()) {
+          renderEmptyState("Akses Ditolak: Anda tidak dapat melihat server panel milik akun email lain.");
+          return showToast("Akses ditolak: Tidak dapat melihat panel akun email lain!", false);
+        }
+        allPanelOrders = memberPanelsCache.filter(p => 
+          (p.orderId && p.orderId.toLowerCase().includes(qLow)) ||
+          (p.productName && p.productName.toLowerCase().includes(qLow)) ||
+          (p.serverUser && p.serverUser.toLowerCase().includes(qLow)) ||
+          (p.warrantyCode && p.warrantyCode.toLowerCase().includes(qLow)) ||
+          (p.buyerEmail && p.buyerEmail.toLowerCase().includes(qLow))
+        );
+        if (allPanelOrders.length === 0) {
+          renderEmptyState(`Tidak ditemukan panel server yang cocok dengan "${q}" di akun Anda.`);
+        } else {
+          renderPanels(allPanelOrders);
+        }
+        return;
+      }
+
+      await loadGuestPanels(q, []);
+    }
+
+    function renderPanels(panels) {
+      const container = document.getElementById('panelsListContainer');
+      document.getElementById('statTotalServer').innerText = panels.length;
+
+      let addonCount = 0;
+      panels.forEach(p => {
+        if (p.addons && (p.addons.ramGb || p.addons.diskGb || p.addons.cpuPercent)) addonCount++;
+      });
+      document.getElementById('statAddons').innerText = addonCount;
+
+      if (!panels || panels.length === 0) {
+        return renderEmptyState("Anda belum memiliki panel server Pterodactyl. Pesan sekarang untuk mendapatkan garansi 30 hari & spek kencang!");
+      }
+
+      let html = '';
+      panels.forEach(p => {
+        const isDone = p.status === 'completed' || p.status === 'paid';
+        const badgeColor = isDone ? '#10b981' : (p.status === 'pending' ? '#f59e0b' : '#ef4444');
+        const badgeBg = isDone ? 'rgba(16,185,129,0.12)' : (p.status === 'pending' ? 'rgba(245,158,11,0.12)' : 'rgba(239,68,68,0.12)');
+        const statusLabel = isDone ? 'Aktif / Lunas' : (p.status === 'pending' ? 'Menunggu Pembayaran' : 'Dibatalkan');
+
+        let ramText = '-';
+        let diskText = '-';
+        let cpuText = '-';
+
+        const match = (p.productName || '').match(/(\d+)\s*gb/i);
+        if (match) {
+          const baseGb = parseInt(match[1]);
+          const addRam = p.addons?.ramGb || 0;
+          const addDisk = p.addons?.diskGb || 0;
+          const addCpu = p.addons?.cpuPercent || 0;
+
+          ramText = `${baseGb + addRam} GB`;
+          diskText = `${(baseGb * 2) + addDisk} GB NVMe`;
+          cpuText = `${Math.min(250, (baseGb * 25) + addCpu)}%`;
+        }
+
+        let panelUrl = 'https://panel.zyrodevv.my.id';
+        if (p.accountDetails) {
+          const matchUrl = p.accountDetails.match(/https?:\/\/[^\s\n\r]+/);
+          if (matchUrl) panelUrl = matchUrl[0];
+        }
+
+        html += `
+          <div class="server-card">
+            <div class="server-head">
+              <div class="server-title-box">
+                <div class="server-egg-icon">
+                  <i class="fa-solid fa-server"></i>
+                </div>
+                <div>
+                  <div class="server-name">${p.productName}</div>
+                  <div class="server-sub">
+                    ${p.category || 'Panel Pterodactyl'} • Order ID: <b style="font-family:'JetBrains Mono',monospace;color:var(--a);">${p.orderId}</b>
+                  </div>
+                </div>
+              </div>
+              <span style="font-size:0.75rem;font-weight:800;padding:4px 12px;border-radius:100px;background:${badgeBg};color:${badgeColor};display:inline-flex;align-items:center;gap:6px;">
+                <i class="fa-solid fa-circle" style="font-size:0.5rem;"></i> ${statusLabel}
+              </span>
+            </div>
+
+            <div class="server-specs-grid">
+              <div class="spec-item">
+                <span class="spec-lbl"><i class="fa-solid fa-egg" style="color:var(--a);"></i> Runtime</span>
+                <span class="spec-val">${p.runtime || 'NodeJS'}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-lbl"><i class="fa-solid fa-memory" style="color:#0ea5e9;"></i> RAM</span>
+                <span class="spec-val">${ramText}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-lbl"><i class="fa-solid fa-hard-drive" style="color:#a855f7;"></i> Disk NVMe</span>
+                <span class="spec-val">${diskText}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-lbl"><i class="fa-solid fa-bolt" style="color:#eab308;"></i> CPU Limit</span>
+                <span class="spec-val">${cpuText}</span>
+              </div>
+            </div>
+
+            ${p.accountDetails ? `
+              <div class="server-cred-box">
+                <div class="cred-title-row">
+                  <span style="font-size:0.75rem;font-weight:800;color:var(--t1);"><i class="fa-solid fa-key" style="color:#fbbf24;"></i> Kredensial Akses Server:</span>
+                  <button type="button" class="server-btn outline" style="padding:4px 10px;font-size:0.7rem;" onclick="copyText('${p.accountDetails.replace(/'/g, "\\'").replace(/\n/g, '\\n')}', 'Kredensial berhasil disalin!')">
+                    <i class="fa-solid fa-copy"></i> Salin Semua
+                  </button>
+                </div>
+                <pre class="cred-text">${p.accountDetails}</pre>
+              </div>
+            ` : ''}
+
+            <div class="server-actions-row">
+              <div style="font-size:0.75rem;color:var(--t3);">
+                Kode Garansi: <b style="font-family:'JetBrains Mono',monospace;color:var(--t1);">${p.warrantyCode || '-'}</b>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <a href="${panelUrl}" target="_blank" rel="noopener" class="server-btn primary">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Panel Pterodactyl
+                </a>
+                <a href="addon.html" class="server-btn upgrade">
+                  <i class="fa-solid fa-microchip"></i> Tambah Spek
+                </a>
+                <a href="#" class="server-btn outline" style="color:#10b981;border-color:rgba(16,185,129,0.35);" title="Beli server baru dan masukkan ke akun ini" onclick="localStorage.setItem('zyro_last_selected_panel_user', '${p.serverUser || p.username || ''}')">
+                  <i class="fa-solid fa-plus"></i> Tambah Server ke User Ini
+                </a>
+                ${p.warrantyCode ? `
+                  <a href="garansi.html" class="server-btn outline" style="color:#38bdf8;border-color:rgba(56,189,248,0.3);">
+                    <i class="fa-solid fa-shield-halved"></i> Klaim Garansi
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderEmptyState(msg) {
+      document.getElementById('statTotalServer').innerText = '0';
+      document.getElementById('statAddons').innerText = '0';
+      document.getElementById('panelsListContainer').innerHTML = `
+        <div style="background:var(--surface);border:1px solid var(--b1);border-radius:var(--rlg);padding:48px 20px;text-align:center;">
+          <i class="fa-solid fa-server" style="font-size:3.2rem;color:#10b981;opacity:0.35;margin-bottom:14px;display:block;"></i>
+          <h4 style="font-size:1.15rem;font-weight:900;color:var(--t1);margin-bottom:8px;">Belum Ada Panel Ditemukan</h4>
+          <p style="font-size:0.84rem;color:var(--t3);max-width:440px;margin:0 auto 20px;line-height:1.5;">${msg}</p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <a href="index.html" class="btn-panel-search" style="text-decoration:none;">
+              <i class="fa-solid fa-cart-shopping"></i> Pesan Panel Sekarang
+            </a>
+            <a href="addon.html" class="server-btn upgrade" style="padding:12px 20px;font-size:0.88rem;">
+              <i class="fa-solid fa-microchip"></i> Lihat Tarif Add-On
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    window.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

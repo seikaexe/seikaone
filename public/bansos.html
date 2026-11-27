@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>Bansos Panel Free 1GB/2GB – SeikaOne.id</title>
+  <meta name="description" content="Layanan bansos server panel Pterodactyl gratis aktif 3 hari dari SeikaOne.id. Dapatkan spek 2GB dengan bonus referral.">
+  <link rel="canonical" href="https://zyrostore.id/bansos">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bansos-accent: #f43f5e;
+      --bansos-accent-glow: rgba(244, 63, 94, 0.25);
+      --bansos-term-bg: #1c1917;
+    }
+    :root.dark {
+      color-scheme: dark;
+      --bansos-accent: #f43f5e;
+      --bansos-accent-glow: rgba(244, 63, 94, 0.35);
+      --bansos-term-bg: #060d17;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--t1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bansos-container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+      width: 100%;
+    }
+
+    /* TOP HEADER & BADGES */
+    .bansos-hero {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+    .bansos-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.28);
+      color: #f43f5e;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.15);
+    }
+    .bansos-title {
+      font-size: 1.85rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--t1);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .bansos-title span {
+      color: #e11d48;
+    }
+    .bansos-desc {
+      font-size: 0.88rem;
+      color: var(--t2);
+      line-height: 1.6;
+      max-width: 640px;
+      margin: 0 auto 18px;
+    }
+    .bansos-specs-chips {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    @media (min-width: 640px) {
+      .bansos-specs-chips {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+    }
+    .b-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      box-sizing: border-box;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .b-chip:hover {
+      border-color: var(--a);
+      background: var(--surface);
+      transform: translateY(-1px);
+    }
+    .b-chip i {
+      color: var(--a);
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+    .b-chip-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      line-height: 1.25;
+    }
+    .b-chip-title {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--t1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .b-chip-sub {
+      font-size: 0.66rem;
+      font-weight: 600;
+      color: var(--t3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+    .b-chip-alert {
+      border-color: rgba(244, 63, 94, 0.3) !important;
+      background: rgba(244, 63, 94, 0.06) !important;
+    }
+    .b-chip-alert i {
+      color: #f43f5e !important;
+    }
+    .b-chip-alert .b-chip-title {
+      color: #f43f5e !important;
+    }
+    .b-chip-gold {
+      border-color: rgba(251, 191, 36, 0.35) !important;
+      background: rgba(251, 191, 36, 0.08) !important;
+    }
+    .b-chip-gold i {
+      color: #fbbf24 !important;
+    }
+    .b-chip-gold .b-chip-title {
+      color: #fbbf24 !important;
+    }
+
+    /* NAV TABS */
+    .bansos-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--bg2);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid var(--b1);
+      margin-bottom: 22px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .bansos-tab-btn {
+      padding: 10px 6px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--t2);
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+      text-align: center;
+      min-width: 0;
+    }
+    .bansos-tab-btn:hover {
+      color: var(--t1);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .bansos-tab-btn.active {
+      background: var(--surface);
+      color: #f43f5e;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.12);
+      font-weight: 800;
+    }
+    .bansos-tab-btn i {
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .tab-lbl-short {
+      display: inline;
+    }
+    .tab-lbl-full {
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .tab-lbl-short {
+        display: none;
+      }
+      .tab-lbl-full {
+        display: inline;
+      }
+      .bansos-tab-btn {
+        font-size: 0.84rem;
+        padding: 11px 16px;
+        gap: 8px;
+      }
+      .bansos-tab-btn i {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* MAIN BANSOS CARD */
+    .bansos-card {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .bansos-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: #e11d48;
+    }
+
+    .bc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--b1);
+      margin-bottom: 20px;
+    }
+    .bc-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bc-title i { color: #f43f5e; }
+
+    /* QUOTA BADGE */
+    .quota-badge-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      padding: 6px 12px;
+      border-radius: 100px;
+    }
+    .qb-lbl {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .qb-val {
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: #10b981;
+      padding: 2px 10px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 100px;
+    }
+    .qb-val.empty {
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.12);
+      border-color: rgba(244, 63, 94, 0.25);
+    }
+
+    /* COMPACT GLOBAL SERVER BANSOS STATUS BAR */
+    .bansos-global-stats-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 12px;
+      padding: 9px 14px;
+      margin-bottom: 18px;
+      font-size: 0.75rem;
+    }
+    .b-gstat-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .b-gstat-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .b-gstat-dot.green { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.4); }
+    .b-gstat-dot.red { background: #ef4444; }
+    .b-gstat-dot.blue { background: #0ea5e9; }
+    .b-gstat-lbl {
+      color: var(--t3);
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+    .b-gstat-val {
+      font-weight: 800;
+      color: var(--t1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+    }
+    .b-gstat-val.text-green { color: #10b981; }
+    .b-gstat-val.text-muted { color: var(--t3); }
+    .b-gstat-sep {
+      color: var(--b1);
+      font-size: 0.65rem;
+    }
+    .b-gstat-badge {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0ea5e9;
+      font-weight: 800;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .b-gstat-badge.full {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* FORM ELEMENTS */
+    .b-group {
+      margin-bottom: 18px;
+    }
+    .b-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--t1);
+      margin-bottom: 8px;
+    }
+    .b-label span {
+      color: var(--t3);
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+    .b-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .b-input:focus {
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+      background: var(--surface);
+    }
+    .b-hint {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--t3);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* RUNTIME SELECTOR */
+    .runtime-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .runtime-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--b1);
+      background: var(--bg2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .runtime-card:hover {
+      border-color: rgba(244, 63, 94, 0.4);
+    }
+    .runtime-card.active {
+      border-color: #f43f5e;
+      background: rgba(244, 63, 94, 0.08);
+      box-shadow: 0 3px 12px rgba(244, 63, 94, 0.12);
+    }
+    .rt-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .rt-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--t1);
+    }
+    .rt-desc {
+      font-size: 0.7rem;
+      color: var(--t3);
+      font-weight: 600;
+    }
+
+    /* CLAIM BUTTON - CLEAN SOLID */
+    .btn-claim {
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: 1px solid #e11d48;
+      background: #e11d48;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.16s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-top: 10px;
+    }
+    .btn-claim:hover:not(:disabled) {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+    .btn-claim:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    .btn-claim:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      filter: grayscale(0.5);
+      box-shadow: none;
+    }
+
+    /* QUOTA EXHAUSTED NOTICE */
+    .quota-exhausted-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(244, 63, 94, 0.08);
+      border: 1.5px dashed rgba(244, 63, 94, 0.35);
+      color: #f43f5e;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    /* REFERRAL CARD (Matching Screenshot) */
+    .referral-card {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .ref-header {
+      margin-bottom: 12px;
+    }
+    .ref-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ref-desc {
+      font-size: 0.8rem;
+      color: var(--t2);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    .ref-input-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .ref-input {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      outline: none;
+      cursor: text;
+    }
+    .btn-copy-ref {
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--b1);
+      background: var(--bg2);
+      color: var(--t1);
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-copy-ref:hover {
+      border-color: #f43f5e;
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.08);
+    }
+    .ref-stats-pill {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--t3);
+      font-weight: 700;
+    }
+    .ref-stats-pill b {
+      color: var(--t1);
+    }
+
+    /* ACTIVITY LOG TERMINAL (Matching Screenshot) */
+    .term-card {
+      background: #060d17;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      margin-bottom: 24px;
+    }
+    .term-bar {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      background: #091322;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 10px;
+    }
+    .term-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .term-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .term-dot.red { background: #ff5f56; }
+    .term-dot.yellow { background: #ffbd2e; }
+    .term-dot.green { background: #27c93f; }
+    .term-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .term-body {
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: #38bdf8;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .term-line {
+      margin-bottom: 4px;
+    }
+    .term-line.system { color: #94a3b8; }
+    .term-line.ready { color: #4ade80; }
+    .term-line.claim { color: #f43f5e; font-weight: 700; }
+    .term-line.referral { color: #fbbf24; font-weight: 700; }
+
+    /* PREVIOUS CLAIMS LIST */
+    .claims-card {
+      background: var(--surface);
+      border: 1.5px solid var(--b1);
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin-bottom: 22px;
+    }
+    .claim-item {
+      padding: 16px;
+      background: var(--bg2);
+      border-radius: 14px;
+      border: 1px solid var(--b1);
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ci-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .ci-name {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--t1);
+    }
+    .ci-cred-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      background: var(--surface);
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--b1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+    .ci-btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ci-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .ci-btn.login {
+      background: #10b981;
+      color: #fff;
+    }
+    .ci-btn.copy {
+      background: var(--bg);
+      border-color: var(--b1);
+      color: var(--t1);
+    }
+
+    /* MODAL POPUP */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-box {
+      background: var(--surface);
+      border: 1.5px solid rgba(244, 63, 94, 0.4);
+      border-radius: 24px;
+      max-width: 500px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(244, 63, 94, 0.2);
+      text-align: center;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .m-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.12);
+      border: 2px solid #10b981;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+    }
+    .m-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--t1);
+      margin-bottom: 6px;
+    }
+    .m-sub {
+      font-size: 0.82rem;
+      color: var(--t2);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .m-cred-box {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .m-cred-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .m-cred-lbl {
+      color: var(--t3);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+    .m-cred-val {
+      color: var(--t1);
+      font-weight: 700;
+    }
+    .m-btn-row {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+    .btn-m-action {
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-m-action.primary {
+      background: #10b981;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    }
+    .btn-m-action.secondary {
+      background: var(--bg2);
+      color: var(--t1);
+      border: 1px solid var(--b1);
+    }
+
+    /* TOAST */
+    .b-toast {
+      position: fixed;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 9999999;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: bottom 0.35s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+    }
+    .b-toast.show { bottom: 28px; }
+  </style>
+<body id="body">
+
+  <div class="b-toast" id="bToast">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i>
+    <span id="bToastMsg">Pesan Notifikasi</span>
+  </div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Beranda">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="cpanel.html" class="btn-top-auth" style="text-decoration:none;background:rgba(14,165,233,0.12);color:#0ea5e9;border-color:rgba(14,165,233,0.3);">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span class="btn-top-auth-txt">CPanel</span>
+        </a>
+        <a href="mypanel.html" class="btn-top-auth" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span class="btn-top-auth-txt">Panel Saya</span>
+        </a>
+        <div id="authNavContainer"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="bansos-container">
+
+    <!-- HERO HEADER -->
+    <div class="bansos-hero">
+      <div class="bansos-pill-badge" id="bansosPillBadge">
+        <i class="fa-solid fa-gift" style="color:#6366f1;"></i> Layanan Bansos Panel Aktif · Kuota 25 Slot
+      </div>
+      <h1 class="bansos-title" id="bansosTitle">
+        Bansos Gratis <span id="bansosTitleSpan">Panel Legal Publik</span>
+      </h1>
+      <p class="bansos-desc" id="bansosDesc">
+        Klaim server panel Pterodactyl 1GB gratis dengan masa aktif 3 hari penuh! Cocok untuk bot WhatsApp, script NodeJS, bot Telegram Python. Ajak teman menggunakan link referral Anda untuk mendapatkan bonus jatah panel 2GB!
+      </p>
+      <div class="bansos-specs-chips">
+        <div class="b-chip">
+          <i class="fa-solid fa-microchip"></i>
+          <div class="b-chip-info">
+            <span class="b-chip-title" id="chipRamTitle">RAM 1024 MB</span>
+            <span class="b-chip-sub" id="chipRamSub">1GB Legal Publik</span>
+          </div>
+        </div>
+        <div class="b-chip">
+          <i class="fa-solid fa-gauge-high"></i>
+          <div class="b-chip-info">
+            <span class="b-chip-title" id="chipCpuTitle">CPU 50% Core</span>
+            <span class="b-chip-sub" id="chipCpuSub">Standard Speed</span>
+          </div>
+        </div>
+        <div class="b-chip">
+          <i class="fa-solid fa-hard-drive"></i>
+          <div class="b-chip-info">
+            <span class="b-chip-title" id="chipDiskTitle">Disk 1 GB</span>
+            <span class="b-chip-sub" id="chipDiskSub">1.024 MB NVMe</span>
+          </div>
+        </div>
+        <div class="b-chip">
+          <i class="fa-solid fa-server"></i>
+          <div class="b-chip-info">
+            <span class="b-chip-title">Node Publik</span>
+            <span class="b-chip-sub">cp.zyrostore.id</span>
+          </div>
+        </div>
+        <div class="b-chip b-chip-alert">
+          <i class="fa-solid fa-clock"></i>
+          <div class="b-chip-info">
+            <span class="b-chip-title" id="chipDaysTitle">Masa Aktif 3 Hari</span>
+            <span class="b-chip-sub">Reset Otomatis</span>
+          </div>
+        </div>
+        <div class="b-chip b-chip-gold">
+          <i class="fa-solid fa-user-plus"></i>
+          <div class="b-chip-info">
+            <span class="b-chip-title" id="chipEventTitle">Bonus Referral</span>
+            <span class="b-chip-sub" id="chipEventSub">+1 Jatah (Spek 2GB)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="bansos-tabs">
+      <button class="bansos-tab-btn active">
+        <i class="fa-solid fa-server"></i>
+        <span class="tab-lbl-short">Buat Gratis</span>
+        <span class="tab-lbl-full">Buat Panel Gratis</span>
+      </button>
+      <a href="mypanel.html" class="bansos-tab-btn">
+        <i class="fa-solid fa-hard-drive"></i>
+        <span class="tab-lbl-short">Panel Saya</span>
+        <span class="tab-lbl-full">Kelola di Panel Saya</span>
+      </a>
+      <a href="index.html" class="bansos-tab-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="tab-lbl-short">Toko Produk</span>
+        <span class="tab-lbl-full">Toko Produk SeikaOne</span>
+      </a>
+    </div>
+
+    <!-- MAIN FORM CARD (Matching Screenshot) -->
+    <div class="bansos-card">
+      <div class="bc-header">
+        <div class="bc-title">
+          <i class="fa-solid fa-cube"></i> Buat Panel Gratis
+          <span id="badge2GB" style="display:none;background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.35);padding:2px 8px;border-radius:100px;font-size:0.68rem;font-weight:800;margin-left:8px;"><i class="fa-solid fa-crown"></i> BONUS REFERRAL (2GB RAM / 100% CPU)</span>
+        </div>
+        <div class="quota-badge-wrap">
+          <span class="qb-lbl">KUOTA KAMU:</span>
+          <span class="qb-val" id="quotaBadgeDisplay">1x jatah tersisa</span>
+        </div>
+      </div>
+
+      <!-- COMPACT GLOBAL SERVER BANSOS STATUS BAR -->
+      <div class="bansos-global-stats-bar" id="bansosGlobalStatsBar">
+        <div class="b-gstat-item" title="Total Server Bansos yang Telah Diklaim">
+          <span class="b-gstat-dot blue"></span>
+          <span class="b-gstat-lbl">Terklaim:</span>
+          <span class="b-gstat-val" id="statGlobalClaimed">14 Server</span>
+        </div>
+        <div class="b-gstat-sep">•</div>
+        <div class="b-gstat-item" title="Server Bansos Aktif &amp; Berjalan Normal">
+          <span class="b-gstat-dot green"></span>
+          <span class="b-gstat-lbl">Online:</span>
+          <span class="b-gstat-val text-green" id="statGlobalOnline">14 Server</span>
+        </div>
+        <div class="b-gstat-sep">•</div>
+        <div class="b-gstat-item" title="Server Bansos Kedaluwarsa / Selesai Masa Aktif">
+          <span class="b-gstat-dot red"></span>
+          <span class="b-gstat-lbl">Offline:</span>
+          <span class="b-gstat-val text-muted" id="statGlobalOffline">0 Server</span>
+        </div>
+        <div class="b-gstat-sep">•</div>
+        <div class="b-gstat-item" title="Kapasitas Slot Server Bansos Global">
+          <span class="b-gstat-lbl">Slot:</span>
+          <span class="b-gstat-badge" id="statGlobalQuotaBadge">Sisa 11 / 25</span>
+        </div>
+      </div>
+
+      <!-- NOTICE KUOTA GLOBAL PENUH -->
+      <div id="globalQuotaFullNotice" style="display:none;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:0.76rem;color:#ef4444;align-items:center;gap:10px;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size:1.1rem;flex-shrink:0;"></i>
+        <span><b>Kuota Bansos Global Penuh!</b> Seluruh slot server bansos gratis sedang terpakai. Harap menunggu hingga ada server aktif yang kedaluwarsa (expired) agar kuota slot server otomatis terbuka kembali.</span>
+      </div>
+
+      <!-- NOTICE WAJIB LOGIN -->
+      <div id="loginRequiredNotice" style="display:none;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.28);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:0.8rem;color:#38bdf8;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <i class="fa-solid fa-user-lock" style="font-size:1.15rem;color:#0ea5e9;flex-shrink:0;"></i>
+          <span><b>Wajib Masuk Akun:</b> Silakan login ke akun SeikaOne kamu untuk mengklaim bansos panel legal gratis.</span>
+        </div>
+        <a href="login.html" class="btn-primary" style="padding:6px 14px;font-size:0.75rem;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Masuk Sekarang</span>
+        </a>
+      </div>
+
+      <form id="bansosForm" onsubmit="event.preventDefault(); submitClaim();">
+        <div class="b-group">
+          <label class="b-label" for="panelUsername">
+            <i class="fa-solid fa-user" style="color:#0ea5e9;"></i> Username Panel
+            <span>(tanpa spasi / simbol khusus)</span>
+          </label>
+          <input type="text" id="panelUsername" class="b-input" placeholder="cth: zyroganteng" maxlength="16" required autocomplete="off" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()">
+          <span class="b-hint">Username untuk login ke control panel Pterodactyl di https://cp.zyrostore.id</span>
+        </div>
+
+        <div class="b-group">
+          <label class="b-label" for="panelEmail">
+            <i class="fa-solid fa-envelope" style="color:#f59e0b;"></i> Email Akun Panel
+            <span>(terhubung otomatis ke akun login)</span>
+          </label>
+          <input type="email" id="panelEmail" class="b-input" placeholder="Silakan masuk akun terlebih dahulu" readonly style="opacity:0.9;cursor:not-allowed;">
+          <span class="b-hint">Kredensial login panel otomatis dikirimkan ke email akun SeikaOne kamu.</span>
+        </div>
+
+        <div class="b-group">
+          <label class="b-label">
+            <i class="fa-solid fa-code" style="color:#10b981;"></i> Pilihan Runtime / Bahasa Script
+          </label>
+          <div class="runtime-grid">
+            <div class="runtime-card active" id="rtNode" onclick="selectRuntime('nodejs')">
+              <div class="rt-icon" style="background:rgba(34,197,94,0.12);color:#22c55e;">
+                <i class="fa-brands fa-node-js"></i>
+              </div>
+              <div>
+                <div class="rt-name">NodeJS (v20)</div>
+                <div class="rt-desc">Bot WhatsApp, Baileys, Express</div>
+              </div>
+            </div>
+            <div class="runtime-card" id="rtPython" onclick="selectRuntime('python')">
+              <div class="rt-icon" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+                <i class="fa-brands fa-python"></i>
+              </div>
+              <div>
+                <div class="rt-name">Python (v3.11)</div>
+                <div class="rt-desc">Bot Telegram, Pyrogram, Telethon</div>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" id="selectedRuntime" value="nodejs">
+        </div>
+
+        <!-- ACTION BUTTON (Matching Screenshot Red Button) -->
+        <button type="submit" id="btnClaim" class="btn-claim">
+          <i class="fa-solid fa-server"></i> Buat Panel Sekarang
+        </button>
+
+        <!-- ACTIVE SERVER LIMIT ALERT -->
+        <div id="activeLimitAlert" class="quota-exhausted-box" style="display:none;background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:#fbbf24;">
+          <i class="fa-solid fa-hourglass-half" style="font-size:1.1rem;margin-top:2px;color:#f59e0b;"></i>
+          <div>
+            <b>Server Bansos Anda Sedang Aktif!</b><br>
+            Anda masih memiliki <span id="activeLimitCountText">1</span> server bansos gratis yang sedang berjalan. Demi performa server, harap tunggu hingga masa aktif server sebelumnya berakhir atau dihapus terlebih dahulu sebelum mengklaim kuota bansos berikutnya.
+          </div>
+        </div>
+
+        <div id="quotaExhaustedAlert" class="quota-exhausted-box" style="display:none;">
+          <i class="fa-solid fa-circle-exclamation" style="font-size:1.1rem;margin-top:2px;"></i>
+          <div>
+            Jatah klaim bansos gratis kamu sudah habis <b>(Max 1x per perangkat / IP)</b>.<br>
+            Ingin jatah panel tambahan dengan spek <b>2GB RAM / 100% CPU</b>? 
+            <b>Login akun member</b> di bawah dan bagikan link referral kamu. Setiap teman yang mendaftar akun di SeikaOne, kamu akan langsung mendapat <b>+1 jatah panel 2GB gratis</b>!
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- REFERRAL BOX CONTAINER -->
+    <div id="referralCardContainer">
+      <!-- Active Referral Card (Logged-in) -->
+      <div class="referral-card" id="refCardActive" style="display:none;">
+        <div class="ref-header">
+          <div class="ref-title">
+            <i class="fa-solid fa-user-plus" style="color:#ec4899;"></i> Ajak Teman Mendaftar, Dapat Panel 2GB
+          </div>
+          <div class="ref-desc">
+            Bagikan link referral unik kamu di bawah. Setiap teman yang <b>mendaftar akun member SeikaOne</b> lewat link kamu, temanmu dapat <b>Panel 2GB</b> dan kamu otomatis dapat <b>+1 jatah panel 2GB gratis</b>!
+          </div>
+        </div>
+
+        <div class="ref-input-group">
+          <input type="text" id="refLinkInput" class="ref-input" readonly value="Memuat link referral..." onclick="this.select()">
+          <button class="btn-copy-ref" onclick="copyRefLink()">
+            <i class="fa-regular fa-copy"></i> Salin Link
+          </button>
+        </div>
+
+        <div class="ref-stats-pill">
+          <span><i class="fa-solid fa-users" style="color:#0ea5e9;"></i> Teman Mendaftar: <b id="refCount">0 Orang</b></span>
+          <span>&bull;</span>
+          <span><i class="fa-solid fa-gift" style="color:#10b981;"></i> Bonus Kuota (2GB): <b id="refBonus">+0 Kuota</b></span>
+        </div>
+      </div>
+
+      <!-- Locked Referral Card (Guest / Unlogged) -->
+      <div class="referral-card" id="refCardLocked" style="border: 1.5px solid var(--b2); background: var(--surface);">
+        <div class="ref-header">
+          <div class="ref-title" style="color: #e11d48;">
+            <i class="fa-solid fa-lock"></i> Sistem Referral (Wajib Login Member)
+          </div>
+          <div class="ref-desc">
+            Kamu tetap bisa klaim panel bansos 1GB tanpa login (max 1x per perangkat). 
+            Namun untuk <b>mengaktifkan link referral unik</b> dan mendapatkan <b>bonus kuota panel 2GB</b>, kamu harus masuk / mendaftar sebagai akun member SeikaOne.
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+          <a href="#" class="btn-claim" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;font-size:0.88rem;background:#18181b;border:1px solid #18181b;box-shadow:0 1px 3px rgba(0,0,0,0.1);width:auto;">
+            <i class="fa-solid fa-user-plus"></i> Daftar Akun Member (Dapat 2GB)
+          </a>
+          <a href="login.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;font-size:0.84rem;color:var(--t2);text-decoration:none;font-weight:700;">
+            Sudah punya akun? Masuk
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG TERMINAL (Matching Screenshot) -->
+    <div class="term-card">
+      <div class="term-bar">
+        <div class="term-dots">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+        </div>
+        <div class="term-title">
+          <i class="fa-solid fa-terminal" style="color:#38bdf8;margin-right:4px;"></i> bansos_activity.log
+        </div>
+      </div>
+      <div class="term-body" id="termBody">
+        <div class="term-line system">[SYSTEM] Sistem Bansos siap digunakan.</div>
+        <div class="term-line ready">[READY] Silakan pilih layanan yang ingin dieksekusi.</div>
+      </div>
+    </div>
+
+    <!-- MY PREVIOUS CLAIMS SECTION -->
+    <div class="claims-card" id="myClaimsCard" style="display:none;">
+      <div class="bc-title" style="margin-bottom:14px;">
+        <i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Bansos Saya
+      </div>
+      <div id="myClaimsList"></div>
+    </div>
+
+  </div>
+
+  <!-- SUCCESS CREDENTIALS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="m-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div class="m-title">Panel Berhasil Dibuat!</div>
+      <div class="m-sub" id="mSubText">
+        Selamat! Server Pterodactyl Legal Publik 5GB kamu telah otomatis aktif dan siap digunakan selama 7 hari.
+      </div>
+
+      <div class="m-cred-box">
+        <div class="m-cred-row">
+          <span class="m-cred-lbl">Link Login:</span>
+          <span class="m-cred-val" id="mDomain">https://cp.zyrostore.id</span>
+        </div>
+        <div class="m-cred-row">
+          <span class="m-cred-lbl">Username:</span>
+          <span class="m-cred-val" id="mUsername">-</span>
+        </div>
+        <div class="m-cred-row">
+          <span class="m-cred-lbl">Password:</span>
+          <span class="m-cred-val" id="mPassword">-</span>
+        </div>
+        <div class="m-cred-row">
+          <span class="m-cred-lbl">Server ID:</span>
+          <span class="m-cred-val" id="mServerId">-</span>
+        </div>
+        <div class="m-cred-row">
+          <span class="m-cred-lbl">Resource:</span>
+          <span class="m-cred-val" id="mSpecs">RAM 1GB | CPU 100% | Disk 1GB</span>
+        </div>
+      </div>
+
+      <div class="m-btn-row">
+        <a href="https://cp.zyrostore.id" id="mOpenLoginBtn" target="_blank" class="btn-m-action primary">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Panel Pterodactyl
+        </a>
+        <button class="btn-m-action secondary" onclick="copyModalCredentials()">
+          <i class="fa-regular fa-copy"></i> Salin Semua Kredensial
+        </button>
+        <a href="mypanel.html" class="btn-m-action secondary">
+          <i class="fa-solid fa-server"></i> Kelola di Panel Saya
+        </a>
+        <button class="btn-m-action secondary" onclick="closeSuccessModal()" style="border:none;background:transparent;color:var(--t3);font-size:0.78rem;">
+          Tutup Jendela Ini
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // THEME HANDLING
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const b = document.getElementById('themeBtn');
+      if (b) {
+        const icon = b.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          b.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const b = document.getElementById('themeBtn');
+      if (b) {
+        const icon = b.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    // TOAST
+    function showToast(msg) {
+      const t = document.getElementById('bToast');
+      const m = document.getElementById('bToastMsg');
+      if (!t || !m) return;
+      m.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+
+    // DEVICE TOKEN
+    function getDeviceToken() {
+      let token = localStorage.getItem('zyro_bansos_device');
+      if (!token) {
+        token = 'dev_' + Math.random().toString(36).substring(2) + Date.now().toString(36);
+        localStorage.setItem('zyro_bansos_device', token);
+      }
+      return token;
+    }
+
+    // REFERRAL CODE FROM URL
+    function detectReferralFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get('ref');
+      if (ref) {
+        localStorage.setItem('zyro_bansos_ref', ref.trim().toUpperCase());
+      }
+    }
+    detectReferralFromUrl();
+
+    // RUNTIME SELECTION
+    function selectRuntime(rt) {
+      document.getElementById('selectedRuntime').value = rt;
+      const n = document.getElementById('rtNode');
+      const p = document.getElementById('rtPython');
+      if (rt === 'nodejs') {
+        n.classList.add('active');
+        p.classList.remove('active');
+      } else {
+        p.classList.add('active');
+        n.classList.remove('active');
+      }
+    }
+
+    let bansosInfo = null;
+    let lastCredentials = null;
+
+    // LOAD BANSOS INFO & QUOTA
+    async function loadBansosInfo() {
+      const token = localStorage.getItem('seika_user_token') || localStorage.getItem('token');
+      const savedUserStr = localStorage.getItem('seika_user_data');
+      const savedUser = savedUserStr ? JSON.parse(savedUserStr) : null;
+      const devToken = getDeviceToken();
+
+      // Render Auth in Nav
+      const authContainer = document.getElementById('authNavContainer');
+      const emailInp = document.getElementById('panelEmail');
+      if (savedUser && token) {
+        const firstName = savedUser.name ? savedUser.name.split(' ')[0] : 'Member';
+        const userDisplayName = savedUser.name || savedUser.email || 'Member';
+        const avatar = (typeof getSmartAvatar === 'function')
+          ? getSmartAvatar(savedUser.avatar, userDisplayName)
+          : (savedUser.avatar || '/assets/logo.png');
+        const avFallback = `onerror="if(typeof getSmartAvatar==='function')this.src=getSmartAvatar('','${escapeHtml(userDisplayName)}');else this.src='/assets/logo.png';"`;
+        authContainer.innerHTML = `
+          <a href="profile.html" class="user-nav-pill" style="text-decoration:none;" title="${savedUser.email}">
+            <img src="${avatar}" class="user-nav-avatar" alt="Avatar" ${avFallback}>
+            <span class="user-nav-name">${firstName}</span>
+          </a>
+        `;
+        if (emailInp) {
+          emailInp.value = savedUser.email || '';
+          emailInp.readOnly = true;
+        }
+      } else {
+        authContainer.innerHTML = `
+          <a href="login.html" class="btn-top-auth" style="text-decoration:none;">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span class="btn-top-auth-txt">Masuk</span>
+          </a>
+        `;
+        if (emailInp) {
+          emailInp.value = '';
+          emailInp.readOnly = true;
+          emailInp.placeholder = 'Silakan masuk akun terlebih dahulu';
+        }
+      }
+
+      try {
+        const headers = { 'X-Device-Token': devToken };
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+
+        const res = await fetch('/api/bansos/info?deviceToken=' + encodeURIComponent(devToken), { headers });
+        const data = await res.json();
+        if (data.status) {
+          bansosInfo = data;
+          renderBansosData(data);
+        }
+      } catch (err) {
+        console.error('Failed to load bansos info:', err);
+      }
+    }
+
+    function renderBansosData(data) {
+      const q = data.quota || {};
+      const remaining = q.remaining || 0;
+      const activeCount = q.activeCount || 0;
+      const maxActive = q.maxActive || 1;
+      const isLimitReached = activeCount >= maxActive;
+
+      // Global Server Bansos Quota & Metrics
+      const gq = data.globalQuota || {};
+      const gClaimed = gq.totalClaimed || 0;
+      const gOnline = gq.serversOnline !== undefined ? gq.serversOnline : (gq.activeServers || 0);
+      const gOffline = gq.serversOffline !== undefined ? gq.serversOffline : 0;
+      const gLimit = gq.globalLimit || 25;
+      const gRemaining = gq.remainingSlots !== undefined ? gq.remainingSlots : Math.max(0, gLimit - gOnline);
+      const isGlobalFull = Boolean(gq.isFull);
+
+      const elGClaimed = document.getElementById('statGlobalClaimed');
+      const elGOnline = document.getElementById('statGlobalOnline');
+      const elGOffline = document.getElementById('statGlobalOffline');
+      const elGBadge = document.getElementById('statGlobalQuotaBadge');
+      const elGFullNotice = document.getElementById('globalQuotaFullNotice');
+
+      if (elGClaimed) elGClaimed.innerText = `${gClaimed} Server`;
+      if (elGOnline) elGOnline.innerText = `${gOnline} Server`;
+      if (elGOffline) elGOffline.innerText = `${gOffline} Server`;
+      if (elGBadge) {
+        elGBadge.innerText = isGlobalFull ? `Penuh (${gOnline}/${gLimit})` : `Sisa ${gRemaining} / ${gLimit}`;
+        elGBadge.classList.toggle('full', isGlobalFull);
+      }
+      if (elGFullNotice) {
+        elGFullNotice.style.display = isGlobalFull ? 'flex' : 'none';
+      }
+
+      const badge = document.getElementById('quotaBadgeDisplay');
+      const btn = document.getElementById('btnClaim');
+      const alertBox = document.getElementById('quotaExhaustedAlert');
+      const activeAlert = document.getElementById('activeLimitAlert');
+      const activeText = document.getElementById('activeLimitCountText');
+
+      if (activeText) activeText.innerText = `${activeCount} / ${maxActive}`;
+
+      if (badge) {
+        badge.innerText = `${remaining}x jatah tersisa`;
+        if (remaining > 0 && !isLimitReached && !isGlobalFull) {
+          badge.classList.remove('empty');
+        } else {
+          badge.classList.add('empty');
+        }
+      }
+
+      // Event awareness
+      const ev = data.event || {};
+      const isEventActive = Boolean(ev.enabled);
+      const isEventEnded = Boolean(ev.isEnded);
+
+      if (isEventActive) {
+        const pBadge = document.getElementById('bansosPillBadge');
+        if (pBadge) pBadge.innerHTML = `<i class="fa-solid fa-fire" style="color:#ef4444;"></i> Event Terbatas s/d 20 Oktober 2026 · Kuota ${ev.maxSlots || gLimit} Slot`;
+        const titleSpan = document.getElementById('bansosTitleSpan');
+        if (titleSpan) titleSpan.innerHTML = `Panel 5GB Legal Publik`;
+        const bDesc = document.getElementById('bansosDesc');
+        if (bDesc) bDesc.innerText = `Klaim server panel Pterodactyl 5GB gratis dengan masa aktif 7 hari penuh! Cocok untuk bot WhatsApp, script NodeJS, bot Telegram Python, atau hosting toko kamu. Kuota terbatas hanya ${ev.maxSlots || gLimit} slot server s/d 20 Oktober 2026.`;
+
+        const cRam = document.getElementById('chipRamTitle');
+        if (cRam) cRam.innerText = `RAM ${ev.maxRam || 5120} MB`;
+        const cRamSub = document.getElementById('chipRamSub');
+        if (cRamSub) cRamSub.innerText = `5GB Legal Publik`;
+
+        const cCpu = document.getElementById('chipCpuTitle');
+        if (cCpu) cCpu.innerText = `CPU ${ev.maxCpu || 125}% Core`;
+        const cCpuSub = document.getElementById('chipCpuSub');
+        if (cCpuSub) cCpuSub.innerText = `High Performance`;
+
+        const cDisk = document.getElementById('chipDiskTitle');
+        if (cDisk) cDisk.innerText = `Disk 10 GB`;
+        const cDiskSub = document.getElementById('chipDiskSub');
+        if (cDiskSub) cDiskSub.innerText = `${ev.maxDisk || 10240} MB NVMe`;
+
+        const cDays = document.getElementById('chipDaysTitle');
+        if (cDays) cDays.innerText = `Masa Aktif ${ev.activeDays || 7} Hari`;
+
+        const cEvTitle = document.getElementById('chipEventTitle');
+        if (cEvTitle) cEvTitle.innerText = `Batas Klaim`;
+        const cEvSub = document.getElementById('chipEventSub');
+        if (cEvSub) cEvSub.innerText = `20 Oktober 2026`;
+      } else {
+        const pBadge = document.getElementById('bansosPillBadge');
+        if (pBadge) pBadge.innerHTML = `<i class="fa-solid fa-gift" style="color:#6366f1;"></i> Layanan Bansos Panel Aktif · Kuota ${gLimit} Slot`;
+        const titleSpan = document.getElementById('bansosTitleSpan');
+        if (titleSpan) titleSpan.innerHTML = data.is2GB ? `Panel 2GB (Bonus Referral)` : `Panel 1GB Legal Publik`;
+        const bDesc = document.getElementById('bansosDesc');
+        if (bDesc) bDesc.innerText = data.is2GB
+          ? `Selamat! Akun kamu berhak mendapatkan panel bansos gratis spek 2GB (Bonus Referral) dengan masa aktif 3 hari penuh!`
+          : `Klaim server panel Pterodactyl 1GB gratis dengan masa aktif 3 hari penuh! Cocok untuk bot WhatsApp, script NodeJS, bot Telegram Python. Ajak teman menggunakan kode referral kamu untuk mendapatkan jatah panel bonus 2GB!`;
+
+        const cRam = document.getElementById('chipRamTitle');
+        if (cRam) cRam.innerText = data.is2GB ? `RAM 2048 MB` : `RAM 1024 MB`;
+        const cRamSub = document.getElementById('chipRamSub');
+        if (cRamSub) cRamSub.innerText = data.is2GB ? `2GB Bonus Referral` : `1GB Legal Publik`;
+
+        const cCpu = document.getElementById('chipCpuTitle');
+        if (cCpu) cCpu.innerText = data.is2GB ? `CPU 100% Core` : `CPU 50% Core`;
+        const cCpuSub = document.getElementById('chipCpuSub');
+        if (cCpuSub) cCpuSub.innerText = data.is2GB ? `Boost Referral` : `Standard Speed`;
+
+        const cDisk = document.getElementById('chipDiskTitle');
+        if (cDisk) cDisk.innerText = data.is2GB ? `Disk 2 GB` : `Disk 1 GB`;
+        const cDiskSub = document.getElementById('chipDiskSub');
+        if (cDiskSub) cDiskSub.innerText = data.is2GB ? `2.048 MB NVMe` : `1.024 MB NVMe`;
+
+        const cDays = document.getElementById('chipDaysTitle');
+        if (cDays) cDays.innerText = `Masa Aktif 3 Hari`;
+
+        const cEvTitle = document.getElementById('chipEventTitle');
+        if (cEvTitle) cEvTitle.innerText = `Bonus Referral`;
+        const cEvSub = document.getElementById('chipEventSub');
+        if (cEvSub) cEvSub.innerText = `+1 Jatah (Spek 2GB)`;
+      }
+
+      // Show 2GB Referral Badge if user is eligible (hide in 5GB event since all get 5GB)
+      const badge2GB = document.getElementById('badge2GB');
+      if (badge2GB) {
+        badge2GB.style.display = (!isEventActive && data.is2GB) ? 'inline-block' : 'none';
+      }
+
+      const loginNotice = document.getElementById('loginRequiredNotice');
+      if (!data.isLoggedIn) {
+        if (loginNotice) loginNotice.style.display = 'flex';
+        if (activeAlert) activeAlert.style.display = 'none';
+        if (alertBox) alertBox.style.display = 'none';
+        if (badge) {
+          badge.innerText = 'Wajib Login';
+          badge.classList.add('empty');
+        }
+        if (btn) {
+          btn.disabled = false;
+          btn.type = 'button';
+          btn.onclick = function() { window.location.href = '/login?redirect=/bansos'; };
+          btn.innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Akun untuk Klaim Bansos`;
+        }
+      } else {
+        if (loginNotice) loginNotice.style.display = 'none';
+        if (btn) {
+          btn.type = 'submit';
+          btn.onclick = null;
+        }
+
+        if (isEventEnded) {
+          if (activeAlert) activeAlert.style.display = 'none';
+          if (alertBox) alertBox.style.display = 'none';
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-calendar-xmark"></i> Event Telah Berakhir (20 Okt 2026)`;
+          }
+        } else if (isGlobalFull) {
+          if (activeAlert) activeAlert.style.display = 'none';
+          if (alertBox) alertBox.style.display = 'none';
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-lock"></i> Kuota Event Penuh (${gOnline}/${gLimit} Terpakai)`;
+          }
+        } else if (isLimitReached && remaining > 0) {
+          if (activeAlert) activeAlert.style.display = 'flex';
+          if (alertBox) alertBox.style.display = 'none';
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-hourglass-half"></i> Tunggu Server Selesai (${activeCount}/${maxActive} Aktif)`;
+          }
+        } else if (remaining <= 0) {
+          if (activeAlert) activeAlert.style.display = 'none';
+          if (alertBox) alertBox.style.display = 'flex';
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = isEventActive
+              ? `<i class="fa-solid fa-circle-check"></i> Jatah Event 5GB Sudah Diklaim`
+              : `<i class="fa-solid fa-ban"></i> Kuota Bansos Habis`;
+          }
+        } else {
+          if (activeAlert) activeAlert.style.display = 'none';
+          if (alertBox) alertBox.style.display = 'none';
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-server"></i> Buat Panel Sekarang`;
+          }
+        }
+      }
+
+      // Referral link & stats (Active only if logged in)
+      const refActive = document.getElementById('refCardActive');
+      const refLocked = document.getElementById('refCardLocked');
+      if (data.referral && !data.referral.requireLogin) {
+        if (refActive) refActive.style.display = 'block';
+        if (refLocked) refLocked.style.display = 'none';
+        const refInp = document.getElementById('refLinkInput');
+        const refCount = document.getElementById('refCount');
+        const refBonus = document.getElementById('refBonus');
+        if (refInp) refInp.value = data.referral.link || '';
+        if (refCount) refCount.innerText = `${data.referral.invitedCount || 0} Orang`;
+        if (refBonus) refBonus.innerText = `+${data.referral.bonusEarned || 0} Kuota`;
+      } else {
+        if (refActive) refActive.style.display = 'none';
+        if (refLocked) refLocked.style.display = 'block';
+      }
+
+      // Render Logs
+      renderLogs(data.logs || []);
+
+      // Render Previous Claims
+      renderPreviousClaims(data.myClaims || []);
+    }
+
+    function renderLogs(logs) {
+      const tb = document.getElementById('termBody');
+      if (!tb) return;
+      if (!logs || logs.length === 0) {
+        tb.innerHTML = `
+          <div class="term-line system">[SYSTEM] Sistem Bansos siap digunakan.</div>
+          <div class="term-line ready">[READY] Silakan pilih layanan yang ingin dieksekusi.</div>
+        `;
+        return;
+      }
+
+      let html = '';
+      logs.forEach(l => {
+        let txt = l.text || '';
+        txt = txt.replace(/([a-zA-Z0-9._%*+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, (m, u, d) => (u.includes('*') ? m : (u.length <= 2 ? u[0] + '***@' + d : u.slice(0, 2) + '***' + u.slice(-2) + '@' + d)));
+        txt = txt.replace(/Gilang Ramandan/gi, 'SeikaOne');
+        let cls = 'system';
+        if (txt.includes('[READY]')) cls = 'ready';
+        else if (txt.includes('[KLAIM_SUKSES]')) cls = 'claim';
+        else if (txt.includes('[REFERRAL]') || txt.includes('[KOMISI_REFERRAL]')) cls = 'referral';
+        html += `<div class="term-line ${cls}">${escapeHtml(txt)}</div>`;
+      });
+      tb.innerHTML = html;
+      tb.scrollTop = tb.scrollHeight;
+    }
+
+    function renderPreviousClaims(claims) {
+      const card = document.getElementById('myClaimsCard');
+      const list = document.getElementById('myClaimsList');
+      if (!card || !list) return;
+
+      if (!claims || claims.length === 0) {
+        card.style.display = 'none';
+        return;
+      }
+
+      card.style.display = 'block';
+      let html = '';
+      claims.forEach((c, idx) => {
+        const isDel = Boolean(c.deleted);
+        const statusHtml = isDel ?
+          `<span class="qb-val" style="font-size:0.7rem;background:rgba(239,68,68,0.2);color:#ef4444;border-color:rgba(239,68,68,0.4);">KEDALUWARSA / DIHAPUS</span>` :
+          `<span class="qb-val" style="font-size:0.7rem;background:rgba(16,185,129,0.2);color:#10b981;">AKTIF (${c.activeDays || 3} HARI)</span>`;
+
+        let expStr = 'Masa aktif 3 hari';
+        if (c.expiresAt) {
+          const expDate = new Date(c.expiresAt);
+          expStr = `Kedaluwarsa: ${expDate.toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}`;
+        }
+
+        html += `
+          <div class="claim-item" style="${isDel ? 'opacity:0.65;border-color:rgba(239,68,68,0.3);' : ''}">
+            <div class="ci-top">
+              <div class="ci-name">
+                <i class="fa-solid fa-server" style="color:${isDel ? '#ef4444' : '#10b981'};"></i> 
+                ${escapeHtml(c.serverName || 'Bansos Panel Free')}
+                ${c.isReferralBonus ? '<span style="font-size:0.65rem;background:rgba(251,191,36,0.2);color:#fbbf24;padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:800;">2GB REF</span>' : ''}
+              </div>
+              ${statusHtml}
+            </div>
+            <div class="ci-cred-row">
+              <div><span style="color:var(--t3);">USER:</span> <b>${escapeHtml(c.username || '-')}</b></div>
+              <div><span style="color:var(--t3);">PASS:</span> <b>${escapeHtml(c.password || '******')}</b></div>
+              <div><span style="color:var(--t3);">SPEK:</span> <b>${escapeHtml(c.specs || '1GB RAM')}</b></div>
+              <div style="grid-column:1/-1;font-size:0.72rem;color:var(--t3);"><i class="fa-solid fa-clock"></i> ${expStr}</div>
+            </div>
+            <div class="ci-btn-row">
+              ${!isDel ? `
+                <a href="${c.loginUrl || 'https://cp.zyrostore.id'}" target="_blank" class="ci-btn login">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Panel
+                </a>
+                <button class="ci-btn copy" onclick="copyText('${c.username} / ${c.password}', 'Kredensial')">
+                  <i class="fa-regular fa-copy"></i> Salin User & Pass
+                </button>
+              ` : `
+                <span style="font-size:0.78rem;color:#ef4444;display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-triangle-exclamation"></i> Server otomatis dihapus karena masa aktif telah berakhir.</span>
+              `}
+              <a href="mypanel.html" class="ci-btn copy">
+                <i class="fa-solid fa-sliders"></i> Kelola di Panel Saya
+              </a>
+            </div>
+          </div>
+        `;
+      });
+      list.innerHTML = html;
+    }
+
+    // COPY REFERRAL LINK
+    function copyRefLink() {
+      const inp = document.getElementById('refLinkInput');
+      if (!inp || !inp.value) return;
+      navigator.clipboard.writeText(inp.value).then(() => {
+        showToast('Link referral berhasil disalin ke papan klip!');
+      }).catch(() => {
+        inp.select();
+        document.execCommand('copy');
+        showToast('Link referral berhasil disalin!');
+      });
+    }
+
+    function copyText(txt, label = 'Teks') {
+      navigator.clipboard.writeText(txt).then(() => {
+        showToast(`${label} berhasil disalin!`);
+      });
+    }
+
+    // SUBMIT CLAIM
+    async function submitClaim() {
+      const btn = document.getElementById('btnClaim');
+      const userInp = document.getElementById('panelUsername');
+      const emailInp = document.getElementById('panelEmail');
+      const runtimeInp = document.getElementById('selectedRuntime');
+
+      const authToken = localStorage.getItem('seika_user_token') || localStorage.getItem('token');
+      if (!authToken) {
+        showToast('Silakan masuk ke akun SeikaOne kamu untuk klaim bansos!');
+        setTimeout(() => {
+          window.location.href = '/login?redirect=/bansos';
+        }, 1200);
+        return;
+      }
+
+      const username = userInp.value.trim().toLowerCase();
+      if (!username || username.length < 3) {
+        showToast('Username panel minimal 3 karakter huruf/angka!');
+        userInp.focus();
+        return;
+      }
+
+      const email = emailInp.value.trim();
+      const runtime = runtimeInp.value;
+      const devToken = getDeviceToken();
+      const refCode = localStorage.getItem('zyro_bansos_ref') || '';
+
+      // UI Loading state
+      btn.disabled = true;
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyiapkan Server Pterodactyl...';
+
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Device-Token': devToken,
+          'Authorization': 'Bearer ' + authToken
+        };
+
+        const res = await fetch('/api/bansos/claim', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            username,
+            email,
+            runtime,
+            deviceToken: devToken,
+            refCode
+          })
+        });
+
+        const data = await res.json();
+        if (data.status) {
+          lastCredentials = data.credentials;
+          const sRam = data.credentials?.specs?.ram || 1024;
+          showToast(`Selamat! Panel ${sRam >= 2048 ? '2GB' : '1GB'} gratis berhasil dibuat!`);
+          openSuccessModal(data.credentials);
+          // Reload info
+          await loadBansosInfo();
+        } else {
+          showToast(data.message || 'Gagal membuat panel bansos.');
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+          if (data.requireLogin) {
+            setTimeout(() => {
+              window.location.href = '/login?redirect=/bansos';
+            }, 1500);
+          }
+        }
+      } catch (err) {
+        console.error('Claim error:', err);
+        showToast('Terjadi kesalahan jaringan. Silakan coba sesaat lagi.');
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+      }
+    }
+
+    // SUCCESS MODAL
+    function openSuccessModal(cred) {
+      const activeDays = (lastBansosData && lastBansosData.event && lastBansosData.event.enabled) ? 7 : 3;
+      document.getElementById('mDomain').innerText = cred.domain || 'https://cp.zyrostore.id';
+      document.getElementById('mUsername').innerText = cred.username || '-';
+      document.getElementById('mPassword').innerText = cred.password || '-';
+      document.getElementById('mServerId').innerText = cred.serverIdentifier || cred.serverId || '-';
+      document.getElementById('mSpecs').innerText = `RAM ${cred.specs.ram}MB | CPU ${cred.specs.cpu}% | Disk ${cred.specs.disk}MB • Masa Aktif ${activeDays} Hari`;
+      document.getElementById('mOpenLoginBtn').href = cred.domain || 'https://cp.zyrostore.id';
+
+      document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').style.display = 'none';
+      const btn = document.getElementById('btnClaim');
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-server"></i> Buat Panel Sekarang';
+      }
+    }
+
+    function copyModalCredentials() {
+      if (!lastCredentials) return;
+      const sRam = lastCredentials.specs?.ram || 1024;
+      const ramGb = sRam >= 2048 ? 2 : 1;
+      const isEv = Boolean(lastBansosData && lastBansosData.event && lastBansosData.event.enabled);
+      const days = isEv ? 7 : 3;
+      const text = `BANSOS PANEL FREE ${ramGb}GB SEIKAONE
+Link Login: ${lastCredentials.domain}
+Username: ${lastCredentials.username}
+Password: ${lastCredentials.password}
+Server ID: ${lastCredentials.serverIdentifier || lastCredentials.serverId}
+Spesifikasi: RAM ${lastCredentials.specs?.ram || 1024} MB | CPU ${lastCredentials.specs?.cpu || 50}% | Disk ${lastCredentials.specs?.disk || 1024} MB (Masa Aktif ${days} Hari)
+Web CPanel: https://panel.zyrostore.id
+Simpan kredensial ini baik-baik!`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Kredensial lengkap berhasil disalin!');
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
+
+    // Close modal on click outside
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('successModal');
+      if (e.target === modal) {
+        closeSuccessModal();
+      }
+    });
+
+    // INIT
+    loadBansosInfo();
+  </script>
+
+  <!-- PERSISTENT MOBILE BOTTOM NAVIGATION (Instant render on frame 1) -->
+  <nav class="zyro-bottom-nav" aria-label="Navigasi Cepat Mobile">
+    <a href="shop.html" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
+      <i class="fa-solid fa-store"></i>
+      <span>Toko</span>
+    </a>
+    <a href="riwayat.html" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
+      <i class="fa-solid fa-receipt"></i>
+      <span>Transaksi</span>
+    </a>
+    <a href="cpanel.html" draggable="false" class="zyro-bottom-nav-item" title="CPanel Server">
+      <i class="fa-solid fa-server"></i>
+      <span>CPanel</span>
+    </a>
+    <a href="bansos.html" draggable="false" class="zyro-bottom-nav-item active" title="Bansos Panel Free">
+      <i class="fa-solid fa-gift"></i>
+      <span>Bansos</span>
+    </a>
+    <a href="profile.html" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
+      <i class="fa-solid fa-user"></i>
+      <span>Akun</span>
+    </a>
+  </nav>
+
+  <script src="js/lib/utils.js?v=1.0"></script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

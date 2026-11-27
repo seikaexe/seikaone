@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    window.__PAGE_START__ = Date.now();
+    (function () {
+      try {
+        var sp = new URLSearchParams(window.location.search);
+        var qTheme = sp.get('theme');
+        if (qTheme === 'classic' || qTheme === 'dark') {
+          localStorage.setItem('seika_theme_engine', 'dark');
+          localStorage.setItem('seika_theme', 'dark');
+        } else if (qTheme === 'cream' || qTheme === 'light') {
+          localStorage.setItem('seika_theme_engine', 'cream');
+          localStorage.setItem('seika_theme', 'cream');
+        }
+        var engine = localStorage.getItem('seika_theme_engine') || localStorage.getItem('seika_theme') || 'dark';
+        if (engine === 'light') engine = 'cream';
+        if (engine === 'classic') engine = 'dark';
+
+        var d = document.documentElement;
+        d.setAttribute('data-theme', engine);
+        if (engine === 'dark') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>SeikaOne.id – Pusat Layanan Cloud VPS, Panel Pterodactyl &amp; Produk Digital Terpercaya</title>
+  <meta name="description" content="SeikaOne.id menyediakan Cloud VPS High Performance, Panel Pterodactyl Legal 30 Hari, Script Bot WhatsApp &amp; Telegram, Aplikasi Premium, dan Nokos OTP 24 Jam Nonstop. Proses otomatis instan, bayar mudah via QRIS &amp; Saldo.">
+  <meta name="keywords" content="SeikaOne, SeikaOne, Cloud VPS Murah, Panel Pterodactyl Legal, VPS DigitalOcean, VPS Linode, Nokos OTP, Bot WhatsApp, Script Bot, YouTube Premium, Canva Pro, Reseller H2H">
+  <meta name="author" content="SeikaOne">
+
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/fontawesome/all.min.css?v=6.5.0.3">
+
+  <!-- Core Zyro Theme Stylesheets -->
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link id="themeEngineStylesheet" rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <link rel="stylesheet" href="css/landing.css?v=5.4.1">
+
+  <style>
+    /* Critical Frame-0 Safety: Ensure preloader never blocks clicks when faded out */
+    #preloader.fade-out {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      display: none !important;
+    }
+    /* Hero CTA Row Symmetry & Alignment Fix */
+    .lp-cta-row {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 16px !important;
+      margin: 0 auto 26px !important;
+      width: 100% !important;
+    }
+    .lp-cta-row .lp-btn,
+    .btn-hero-primary,
+    .btn-hero-secondary {
+      margin: 0 !important;
+      cursor: pointer !important;
+      position: relative;
+      z-index: 10;
+      touch-action: manipulation;
+      box-sizing: border-box !important;
+      vertical-align: middle !important;
+    }
+    @media (min-width: 640px) {
+      .lp-cta-row {
+        flex-direction: row !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+      .lp-cta-row .lp-btn {
+        width: 255px !important;
+        min-width: 255px !important;
+        max-width: 255px !important;
+        height: 50px !important;
+        padding: 0 18px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+      }
+    }
+    @media (max-width: 639.98px) {
+      .lp-cta-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        max-width: 340px !important;
+      }
+      .lp-cta-row .lp-btn {
+        width: 100% !important;
+        height: 48px !important;
+        margin: 0 !important;
+      }
+    }
+    .lp-feat-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid transparent;
+    }
+    .lp-feat-ico {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    [data-theme="dark"] .lp-feat-ico {
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: none;
+    }
+    .lp-feat-head h3 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--lp-text);
+      margin: 0;
+      line-height: 1.35;
+    }
+    .lp-feat-card p {
+      font-size: 0.86rem;
+      color: var(--lp-muted);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0 4px;
+    }
+  </style>
+<script>window.currentStoreTotalUsers = 777; window.currentStoreTotalTrx = 1287;</script></head>
+<body class="lp-body">
+
+  <!-- 1. Reading Progress Bar -->
+  <div class="lp-bar" id="lp-bar"></div>
+
+  <!-- 2. LUXURY TECH ENTRANCE PRELOADER (FROZEN CORE UI) -->
+  <div id="preloader" class="zyro-intro-splash" aria-hidden="false">
+    <div class="zyro-intro-ambient"></div>
+    <div class="zyro-intro-card">
+      <div class="zyro-emblem-wrapper">
+        <div class="zyro-orbit-ring zyro-orbit-outer"></div>
+        <div class="zyro-orbit-ring zyro-orbit-inner"></div>
+        <div class="zyro-emblem-box">
+          <img src="assets/logo-static-dark.webp" width="91" height="74" alt="SeikaOne" class="zyro-emblem-img zyro-logo-static">
+          <span class="zyro-emblem-glow"></span>
+        </div>
+      </div>
+      <div class="zyro-intro-branding">
+        <div class="zyro-intro-title">SEIKAONE</div>
+        <div class="zyro-intro-tagline">
+          <i class="fa-solid fa-bolt"></i>
+          <span>OFFICIAL DIGITAL STORE</span>
+        </div>
+      </div>
+      <div class="zyro-intro-loader">
+        <div class="zyro-loader-beam">
+          <div class="zyro-loader-thumb"></div>
+        </div>
+        <div class="zyro-loader-status">
+          <span class="zyro-status-dot"></span>
+          <span class="zyro-status-text">Memuat Sistem...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. OFFCANVAS SIDEBAR (SEIKAONE OFFICIAL DRAWER) -->
+  <div class="sb-ov" id="sbOv" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="assets/logo-animated-dark.webp" width="32" height="32" alt="SeikaOne Logo" class="zyro-logo-animated" data-logo-type="full">
+      <span class="sb-brand-txt">SeikaOne <span class="brand-api">ID</span></span>
+      <button class="sb-x" onclick="toggleSidebar()" aria-label="Tutup Menu"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="snav">
+      <!-- KATEGORI 1: MENU UTAMA & BELANJA -->
+      <div class="snav-group" id="sbGroupShop">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupShop')">
+          <span class="snh-left"><i class="fa-solid fa-store" style="color:var(--a);"></i> Menu &amp; Belanja</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="#" class="act"><i class="fa-solid fa-house" style="color:#0ea5e9;"></i> Beranda Utama</a>
+          <a href="#"><i class="fa-solid fa-cart-shopping"></i> Katalog Belanja</a>
+          <a href="#"><i class="fa-solid fa-magnifying-glass" style="color:var(--a);"></i> Cek Pesanan</a>
+          <a href="#"><i class="fa-solid fa-receipt" style="color:#06b6d4;"></i> Riwayat Pesanan</a>
+          <a href="#"><i class="fa-solid fa-award" style="color:#10b981;"></i> Hall of Fame &amp; Bug Hunter <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">BOUNTY</span></a>
+          <a href="#"><i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Leaderboard Pembeli</a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 2: LAYANAN PANEL & BANSOS -->
+      <div class="snav-group" id="sbGroupServer">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupServer')">
+          <span class="snh-left"><i class="fa-solid fa-server" style="color:#10b981;"></i> Server &amp; Panel</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="#"><i class="fa-solid fa-gauge-high" style="color:#0ea5e9;"></i> CPanel Control <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">CLOUD</span></a>
+          <a href="#"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free <span class="snav-badge" style="background:rgba(244,63,94,0.18);color:#f43f5e;">1GB FREE</span></a>
+          <a href="#"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">PTERO</span></a>
+          <a href="#"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">+SPEK</span></a>
+          <a href="#"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> Kelola API Key Reseller <span class="snav-badge" style="background:rgba(245,158,11,0.18);color:#f59e0b;">KEY</span></a>
+          <a href="#"><i class="fa-solid fa-book-bookmark" style="color:#10b981;"></i> Dokumentasi API Docs <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">v1.0</span></a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 3: BANTUAN & CS (SUPPORT) -->
+      <div class="snav-group" id="sbGroupSupport">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupSupport')">
+          <span class="snh-left"><i class="fa-solid fa-headset" style="color:#06b6d4;"></i> Support &amp; Bantuan</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="javascript:void(0)" onclick="toggleChatWidget()"><i class="fa-solid fa-comments" style="color:#a855f7;"></i> Live Chat CS (AI)</a>
+          <a href="#"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Klaim Garansi Panel</a>
+          <a href="#"><i class="fa-solid fa-book-open" style="color:#eab308;"></i> Panduan &amp; FAQ <span class="snav-badge">BACA</span></a>
+          <a href="https://t.me/SeikaOne" target="_blank" rel="noopener"><i class="fa-solid fa-headset"></i> Hubungi CS Telegram</a>
+        </div>
+      </div>
+
+      <!-- KATEGORI 4: AKUN & KOMUNITAS -->
+      <div class="snav-group" id="sbGroupAccount">
+        <div class="snav-header" onclick="toggleSidebarCategory('sbGroupAccount')">
+          <span class="snh-left"><i class="fa-solid fa-user-gear" style="color:#a855f7;"></i> Akun &amp; Komunitas</span>
+          <i class="fa-solid fa-chevron-down snh-chevron"></i>
+        </div>
+        <div class="snav-collapse">
+          <a href="#"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun / Profil</a>
+          <a href="#"><i class="fa-solid fa-users" style="color:#ec4899;"></i> Pengguna &amp; Role <span class="snav-badge" id="sbMemberCountBadge" style="background:rgba(236,72,153,0.18);color:#ec4899;font-weight:800;white-space:nowrap;flex-shrink:0;">535 MEMBER</span></a>
+          <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Channel Telegram</a>
+          <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" target="_blank" rel="noopener" style="color:#22c55e;"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> Saluran WhatsApp</a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- 4. OFFICIAL SEIKAONE TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <button class="ib raw" onclick="toggleSidebar()" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
+        <a href="#" class="tb-brand">
+          <img src="assets/logo-animated-dark.webp" width="32" height="32" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r">
+        <button class="ib" id="cs-btn" onclick="toggleChatWidget()" title="Live Chat CS">
+          <i class="fa-solid fa-headset"></i>
+        </button>
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="#" class="btn-top-auth" id="btnTopLogin" title="Buka Katalog Belanja" style="text-decoration:none;background:var(--a);color:#fff;border-radius:10px;padding:6px 14px;font-weight:700;font-size:0.84rem;display:inline-flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-store"></i>
+          <span class="btn-top-auth-txt">Buka Toko</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 5. HERO SECTION (SEIKAONE LUXURY CYBER TECH) -->
+  <header class="lp-hero" id="beranda">
+    <div class="lp-wrap">
+      <!-- Luxury Floating Emblem with Dual Orbit Rings -->
+      <div class="zyro-emblem-wrapper lp-hero-emblem">
+        <div class="zyro-orbit-ring zyro-orbit-outer"></div>
+        <div class="zyro-orbit-ring zyro-orbit-inner"></div>
+        <div class="zyro-emblem-box">
+          <img src="assets/logo-static-dark.webp" width="91" height="74" alt="SeikaOne" class="zyro-emblem-img zyro-logo-static">
+          <span class="zyro-emblem-glow"></span>
+        </div>
+      </div>
+
+      <div class="lp-live">
+        <span class="lp-dot"></span>
+        <span>100% Otomatis • Uptime 99.9% • Online 24 Jam Nonstop</span>
+      </div>
+
+      <h1>Infrastruktur Server Cloud &amp; <em>Market Digital</em> Terpercaya</h1>
+      <p class="lp-lead">
+        Deploy Cloud VPS Intel NVMe, Hosting Panel Pterodactyl Legal 30 Hari, Script Bot Multi-Device, dan Akun Premium dengan proses instan 24 jam nonstop via QRIS &amp; Saldo.
+      </p>
+
+      <div class="lp-cta-row">
+        <a href="#" class="lp-btn pri btn-hero-primary">
+          <i class="fa-solid fa-rocket"></i>
+          <span>Eksplor Layanan Cloud</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#" class="lp-btn sec btn-hero-secondary">
+          <i class="fa-solid fa-server"></i>
+          <span>Kelola Server (CPanel)</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="lp-chips">
+        <span class="lp-chip"><i class="fa-solid fa-bolt"></i> Auto 1-3 Detik</span>
+        <span class="lp-chip"><i class="fa-solid fa-shield-halved"></i> Garansi 30 Hari</span>
+        <span class="lp-chip"><i class="fa-solid fa-qrcode"></i> QRIS &amp; Saldo</span>
+        <span class="lp-chip"><i class="fa-solid fa-robot"></i> Sync Bot Telegram</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 6. REALTIME STATS & HARDWARE TELEMETRY (TAMPIL TEPAT DI BAWAH HERO) -->
+    <section class="lp-sec" id="statistik">
+      <div class="lp-wrap">
+        <div class="lp-center lp-reveal">
+          <span class="lp-eyebrow"><i class="fa-solid fa-chart-line"></i> Statistik Realtime</span>
+          <h2 class="lp-h2">Dipercaya Ratusan Developer &amp; Komunitas</h2>
+          <p class="lp-sub">Pantau keandalan infrastruktur server cloud, stabilitas uptime 24/7, dan rekam jejak transaksi sukses secara live dan transparan.</p>
+        </div>
+
+        <div class="lp-stats-container">
+          <!-- Big Wide Card: Uptime & Live System Health -->
+          <div class="lp-card-wide lp-reveal">
+            <div class="lp-up-head">
+              <div class="lp-up-title">
+                <div class="lp-pulse-ico"><i class="fa-solid fa-server"></i></div>
+                <div>
+                  <h3>Server Uptime &amp; Telemetri Hardware</h3>
+                  <p><span class="lp-dot" style="margin-right:6px"></span>Berjalan stabil tanpa henti 24 jam nonstop</p>
+                </div>
+              </div>
+              <div class="lp-pulse-live">
+                <span class="lp-dot"></span>
+                <span>SISTEM AKTIF &bull; 99.9%</span>
+              </div>
+            </div>
+
+            <!-- Animated ECG Waveform -->
+            <svg class="lp-ecg" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+              <path class="base" d="M0 30H60L68 30L76 8L88 52L98 30H150L158 30L166 12L178 48L188 30H240L248 30L256 10L268 50L278 30H300"/>
+              <path class="line" d="M0 30H60L68 30L76 8L88 52L98 30H150L158 30L166 12L178 48L188 30H240L248 30L256 10L268 50L278 30H300"/>
+            </svg>
+
+            <!-- 4 Countdown/Uptime Tiles -->
+            <div class="lp-tiles">
+              <div class="lp-tile"><b id="lp-up-d">00</b><small>Hari</small></div>
+              <div class="lp-tile"><b id="lp-up-h">00</b><small>Jam</small></div>
+              <div class="lp-tile"><b id="lp-up-m">00</b><small>Menit</small></div>
+              <div class="lp-tile"><b id="lp-up-s">00</b><small>Detik</small></div>
+            </div>
+
+            <!-- Live Hardware Strip (2x2 on mobile, 4 on desktop) -->
+            <div class="lp-mon">
+              <div class="lp-m">
+                <div class="lp-m-h"><span>Latensi &bull; Sinyal</span><b id="lp-sig-ms">-- ms</b></div>
+                <div class="lp-bars" id="lp-bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+                <small id="lp-sig-t">Sangat Cepat</small>
+              </div>
+
+              <div class="lp-m">
+                <div class="lp-m-h"><span>CPU Server</span><b id="lp-cpu-v">--%</b></div>
+                <div class="lp-bar-t"><div class="lp-bar-f" id="lp-cpu-b"></div></div>
+                <small id="lp-cpu-t">Multi Core</small>
+              </div>
+
+              <div class="lp-m">
+                <div class="lp-m-h"><span>RAM Penggunaan</span><b id="lp-ram-v">--%</b></div>
+                <div class="lp-bar-t"><div class="lp-bar-f" id="lp-ram-b"></div></div>
+                <small id="lp-ram-t">Optimized</small>
+              </div>
+
+              <div class="lp-m">
+                <div class="lp-m-h"><span>Status Toko</span><b style="color:#10b981;">Online</b></div>
+                <div class="lp-bar-t"><div class="lp-bar-f" style="width:100%;background:#10b981;"></div></div>
+                <small>Auto Provisioning</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Summary Metric Cards (2x2 Grid di HP agar rapi & tidak menumpuk) -->
+          <div class="lp-metrics-grid">
+            <!-- Metric 1: Transaksi -->
+            <div class="lp-metric-card lp-reveal" style="--d:.04s">
+              <div class="lp-metric-top">
+                <div class="lp-metric-ico" style="background:rgba(16,185,129,0.12);color:#10b981;">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <span class="lp-metric-tag" style="background:rgba(16,185,129,0.1);color:#10b981;">
+                  <i class="fa-solid fa-bolt"></i> Realtime
+                </span>
+              </div>
+              <div class="lp-metric-val" id="lp-trx">1.200+</div>
+              <div class="lp-metric-lbl">Total Transaksi Sukses</div>
+            </div>
+
+            <!-- Metric 2: Member -->
+            <div class="lp-metric-card lp-reveal" style="--d:.08s">
+              <div class="lp-metric-top">
+                <div class="lp-metric-ico" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <span class="lp-metric-tag" style="background:rgba(14,165,233,0.1);color:#0ea5e9;">
+                  <i class="fa-solid fa-user-check"></i> Terdaftar
+                </span>
+              </div>
+              <div class="lp-metric-val" id="lp-users">639+</div>
+              <div class="lp-metric-lbl">Member Aktif</div>
+            </div>
+
+            <!-- Metric 3: Pengunjung -->
+            <div class="lp-metric-card lp-reveal" style="--d:.12s">
+              <div class="lp-metric-top">
+                <div class="lp-metric-ico" style="background:rgba(245,158,11,0.12);color:#f59e0b;">
+                  <i class="fa-solid fa-globe"></i>
+                </div>
+                <span class="lp-metric-tag" style="background:rgba(245,158,11,0.1);color:#f59e0b;">
+                  <i class="fa-solid fa-chart-line"></i> Total Hits
+                </span>
+              </div>
+              <div class="lp-metric-val" id="lp-visitor">1.789+</div>
+              <div class="lp-metric-lbl">Total Pengunjung</div>
+            </div>
+
+            <!-- Metric 4: Jam Server -->
+            <div class="lp-metric-card lp-reveal" style="--d:.16s">
+              <div class="lp-metric-top">
+                <div class="lp-metric-ico" style="background:rgba(236,72,153,0.12);color:#ec4899;">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <span class="lp-metric-tag" style="background:rgba(236,72,153,0.1);color:#ec4899;">
+                  <i class="fa-solid fa-satellite-dish"></i> WIB
+                </span>
+              </div>
+              <div class="lp-metric-val lp-time-val" id="lp-clock">--:--:--</div>
+              <div class="lp-metric-lbl" id="lp-date">Jam Server (WIB)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SHOWCASE 6 PILAR UTAMA SEIKAONE (BENTO GRID) -->
+    <section class="lp-sec" id="layanan">
+      <div class="lp-wrap">
+        <div class="lp-center lp-reveal">
+          <span class="lp-eyebrow"><i class="fa-solid fa-boxes-stacked"></i> Produk Unggulan</span>
+          <h2 class="lp-h2">Infrastruktur &amp; Solusi Digital Terintegrasi</h2>
+          <p class="lp-sub">Kebutuhan server cloud, hosting bot, dan aset digital berkualitas tinggi dalam satu ekosistem terpadu.</p>
+        </div>
+
+        <div class="lp-srv-grid">
+          <!-- Pillar 1: Cloud VPS & RDP High Performance (Bento 2-Col) -->
+          <div class="lp-srv-card bento-wide-2 lp-reveal" style="--d:.04s">
+            <div class="lp-srv-top">
+              <div class="lp-srv-ico" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+                <i class="fa-solid fa-cloud"></i>
+              </div>
+              <div>
+                <h3>Cloud VPS &amp; RDP High Performance</h3>
+              </div>
+              <span class="lp-srv-badge cyan"><i class="fa-solid fa-microchip"></i> Intel NVMe</span>
+            </div>
+            <p class="lp-srv-desc">
+              Server VPS DigitalOcean &amp; Linode performa tinggi dengan Intel Premium CPU, SSD NVMe, full root access, bandwidth besar, uptime 99.9%, dan garansi replace 30 hari resmi.
+            </p>
+            <div class="lp-srv-tags">
+              <span class="lp-srv-tag">DigitalOcean</span>
+              <span class="lp-srv-tag">Linode</span>
+              <span class="lp-srv-tag">Multi Region (SG/US/ID)</span>
+              <span class="lp-srv-tag">Full Root</span>
+              <span class="lp-srv-tag">2GB - 32GB RAM</span>
+            </div>
+            <a href="#" class="lp-srv-btn">
+              <span>Buka Menu VPS Cloud</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Pillar 2: Hosting Panel Pterodactyl Legal -->
+          <div class="lp-srv-card lp-reveal" style="--d:.08s">
+            <div class="lp-srv-top">
+              <div class="lp-srv-ico" style="background:rgba(245,158,11,0.12);color:#f59e0b;">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <div>
+                <h3>Panel Pterodactyl Legal</h3>
+              </div>
+              <span class="lp-srv-badge amber"><i class="fa-solid fa-shield"></i> Garansi 30 Hari</span>
+            </div>
+            <p class="lp-srv-desc">
+              Hosting bot Node.js &amp; Python 24 jam nonstop. Pilihan Node Public, Private, Enterprise, dan Hemat anti-suspend dengan proteksi DDoS bawaan.
+            </p>
+            <div class="lp-srv-tags">
+              <span class="lp-srv-tag">Node.js 20/22/24</span>
+              <span class="lp-srv-tag">Python 3.11</span>
+              <span class="lp-srv-tag">Auto Deploy 1-3s</span>
+            </div>
+            <a href="#" class="lp-srv-btn">
+              <span>Beli Panel Ptero</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Pillar 3: Web CPanel Manager (Eksklusif SeikaOne) -->
+          <div class="lp-srv-card lp-reveal" style="--d:.12s">
+            <div class="lp-srv-top">
+              <div class="lp-srv-ico" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+                <i class="fa-solid fa-server"></i>
+              </div>
+              <div>
+                <h3>Web CPanel Manager</h3>
+              </div>
+              <span class="lp-srv-badge cyan"><i class="fa-solid fa-star"></i> Eksklusif Web</span>
+            </div>
+            <p class="lp-srv-desc">
+              Kelola server Pterodactyl kamu langsung dari browser! Pantau live console, file manager, start/restart/stop remote server tanpa perlu aplikasi tambahan.
+            </p>
+            <div class="lp-srv-tags">
+              <span class="lp-srv-tag">In-Browser Manager</span>
+              <span class="lp-srv-tag">Live Console</span>
+              <span class="lp-srv-tag">Power Actions</span>
+            </div>
+            <a href="#" class="lp-srv-btn">
+              <span>Buka Web CPanel</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Pillar 4: Host-to-Host (H2H) REST API -->
+          <div class="lp-srv-card lp-reveal" style="--d:.16s">
+            <div class="lp-srv-top">
+              <div class="lp-srv-ico" style="background:rgba(239,68,68,0.12);color:#ef4444;">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <div>
+                <h3>Reseller &amp; H2H API</h3>
+              </div>
+              <span class="lp-srv-badge red"><i class="fa-solid fa-code"></i> Developer API</span>
+            </div>
+            <p class="lp-srv-desc">
+              Hubungkan katalog &amp; stok SeikaOne ke bot atau web toko kamu via REST API Host-to-Host. Dapatkan harga grosir reseller termurah dan webhook callback otomatis.
+            </p>
+            <div class="lp-srv-tags">
+              <span class="lp-srv-tag">RESTful API</span>
+              <span class="lp-srv-tag">Harga Reseller</span>
+              <span class="lp-srv-tag">Webhook Callback</span>
+            </div>
+            <a href="#" class="lp-srv-btn">
+              <span>Dokumentasi API</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Pillar 5: Script Bot Siap Run -->
+          <div class="lp-srv-card lp-reveal" style="--d:.20s">
+            <div class="lp-srv-top">
+              <div class="lp-srv-ico" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <div>
+                <h3>Script Bot Siap Run</h3>
+              </div>
+              <span class="lp-srv-badge purple"><i class="fa-solid fa-unlock"></i> 100% No ENC</span>
+            </div>
+            <p class="lp-srv-desc">
+              Source code bot WhatsApp Multi-Device &amp; Telegram berkualitas tinggi, bebas enkripsi (No ENC), gratis update berkala, dan panduan konfigurasi pemula.
+            </p>
+            <div class="lp-srv-tags">
+              <span class="lp-srv-tag">WhatsApp Multi-Device</span>
+              <span class="lp-srv-tag">Telegram Bot</span>
+              <span class="lp-srv-tag">Clean Architecture</span>
+            </div>
+            <a href="#" class="lp-srv-btn">
+              <span>Katalog Script</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Pillar 6: Aset Digital, Nokos OTP & Bansos Komunitas (Bento 3-Col) -->
+          <div class="lp-srv-card bento-wide-3 lp-reveal" style="--d:.24s">
+            <div class="lp-srv-top">
+              <div class="lp-srv-ico" style="background:rgba(16,185,129,0.12);color:#10b981;">
+                <i class="fa-solid fa-gem"></i>
+              </div>
+              <div>
+                <h3>Akun Premium, Nokos Virtual OTP &amp; Bansos Komunitas</h3>
+              </div>
+              <span class="lp-srv-badge green"><i class="fa-solid fa-gift"></i> Ekosistem Lengkap</span>
+            </div>
+            <p class="lp-srv-desc">
+              Akses cepat langganan YouTube Premium, Canva Pro, CapCut, akun game, nomor virtual (Nokos) OTP WhatsApp &amp; Telegram instan via RumahOTP, serta program Bansos Panel Pterodactyl 1GB gratis untuk pembelajaran anggota komunitas.
+            </p>
+            <div class="lp-srv-tags">
+              <span class="lp-srv-tag">YouTube Premium</span>
+              <span class="lp-srv-tag">Canva Pro</span>
+              <span class="lp-srv-tag">Nokos WhatsApp &amp; Telegram</span>
+              <span class="lp-srv-tag">Bansos 1GB Gratis (/bansos)</span>
+              <span class="lp-srv-tag">Garansi Terjamin</span>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+              <a href="#" class="lp-srv-btn" style="margin-top:0;">
+                <span>Buka Menu Digital &amp; Nokos</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <a href="#" class="lp-srv-btn" style="margin-top:0;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.25);">
+                <span>Klaim Bansos Panel 1GB</span>
+                <i class="fa-solid fa-gift"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WHY CHOOSE SEIKAONE (KEUNGGULAN) -->
+    <section class="lp-sec" id="tentang">
+      <div class="lp-wrap">
+        <div class="lp-center lp-reveal">
+          <span class="lp-eyebrow"><i class="fa-solid fa-shield-halved"></i> Keunggulan Layanan</span>
+          <h2 class="lp-h2">Kenapa Memilih SeikaOne.id?</h2>
+          <p class="lp-sub">Pengalaman belanja infrastruktur digital tanpa hambatan: serba otomatis, aman, dan bergaransi resmi.</p>
+        </div>
+
+        <div class="lp-feat-grid">
+          <!-- Feat 1 -->
+          <div class="lp-feat-card lp-reveal">
+            <div class="lp-feat-head" style="background:rgba(14,165,233,0.10);border-color:rgba(14,165,233,0.22);">
+              <div class="lp-feat-ico" style="color:#0ea5e9;">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <h3>Proses Otomatis 24/7</h3>
+            </div>
+            <p>Setelah pembayaran terkonfirmasi, sistem otomatis langsung memproses order tanpa menunggu admin, aktif detik itu juga.</p>
+          </div>
+
+          <!-- Feat 2 -->
+          <div class="lp-feat-card lp-reveal" style="--d:.06s">
+            <div class="lp-feat-head" style="background:rgba(245,158,11,0.10);border-color:rgba(245,158,11,0.22);">
+              <div class="lp-feat-ico" style="color:#f59e0b;">
+                <i class="fa-solid fa-shield-virus"></i>
+              </div>
+              <h3>Server Stabil &amp; Anti-DDoS</h3>
+            </div>
+            <p>Didukung hardware enterprise level dan proteksi Anti-DDoS multi-layer sehingga server bot dan aplikasi tetap menyala tanpa gangguan.</p>
+          </div>
+
+          <!-- Feat 3 -->
+          <div class="lp-feat-card lp-reveal" style="--d:.12s">
+            <div class="lp-feat-head" style="background:rgba(16,185,129,0.10);border-color:rgba(16,185,129,0.22);">
+              <div class="lp-feat-ico" style="color:#10b981;">
+                <i class="fa-solid fa-qrcode"></i>
+              </div>
+              <h3>Pembayaran Instan Lengkap</h3>
+            </div>
+            <p>Dukungan QRIS Realtime untuk seluruh bank (BCA, Mandiri, BRI, BNI) dan e-wallet (DANA, GoPay, OVO, ShopeePay) serta saldo akun website.</p>
+          </div>
+
+          <!-- Feat 4 -->
+          <div class="lp-feat-card lp-reveal" style="--d:.18s">
+            <div class="lp-feat-head" style="background:rgba(236,72,153,0.10);border-color:rgba(236,72,153,0.22);">
+              <div class="lp-feat-ico" style="color:#ec4899;">
+                <i class="fa-solid fa-certificate"></i>
+              </div>
+              <h3>Garansi Replace Terjamin</h3>
+            </div>
+            <p>Klaim garansi transparan langsung dari dashboard akun kamu. Riwayat penggantian dan masa aktif terpantau secara realtime.</p>
+          </div>
+
+          <!-- Feat 5 -->
+          <div class="lp-feat-card lp-reveal" style="--d:.24s">
+            <div class="lp-feat-head" style="background:rgba(139,92,246,0.10);border-color:rgba(139,92,246,0.22);">
+              <div class="lp-feat-ico" style="color:#8b5cf6;">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <h3>Integrasi Web &amp; Bot Telegram</h3>
+            </div>
+            <p>Satu akun untuk semua: saldo dan status pembelian otomatis tersinkronisasi antara Website SeikaOne dan Bot Auto Order Telegram.</p>
+          </div>
+
+          <!-- Feat 6 -->
+          <div class="lp-feat-card lp-reveal" style="--d:.30s">
+            <div class="lp-feat-head" style="background:rgba(239,68,68,0.10);border-color:rgba(239,68,68,0.22);">
+              <div class="lp-feat-ico" style="color:#ef4444;">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+              <h3>Support Cepat &amp; Tanggap</h3>
+            </div>
+            <p>Tim pengembang dan admin siap membantu kendala teknis kamu melalui Telegram maupun fitur bantuan live chat langsung di bot.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. LIVE TESTIMONIALS MARQUEE -->
+    <section class="lp-sec" id="testimoni">
+      <div class="lp-wrap lp-center lp-reveal">
+        <span class="lp-eyebrow"><i class="fa-solid fa-comments"></i> Testimoni Pengguna</span>
+        <h2 class="lp-h2">Ulasan Pembeli &amp; Bukti Transaksi Nyata</h2>
+        <p class="lp-sub">Ribuan transaksi sukses telah diselesaikan secara otomatis. Arahkan kursor atau sentuh untuk menjeda.</p>
+      </div>
+
+      <div class="lp-marquee lp-reveal">
+        <div class="lp-track">
+          <!-- Card 1 -->
+          <div class="lp-testi-card">
+            <div class="lp-t-head">
+              <div class="lp-t-avatar">F</div>
+              <div class="lp-t-user">
+                <b>Farhan Pratama</b>
+                <small>VPS DigitalOcean 8GB</small>
+              </div>
+              <div class="lp-t-stars">★★★★★</div>
+            </div>
+            <div class="lp-t-body">
+              "Gokil deploy VPS-nya gak nyampe 5 detik langsung dapet IP dan password root. Speknya real sesuai deskripsi, mantap SeikaOne!"
+            </div>
+            <div class="lp-t-foot">
+              <span><i class="fa-solid fa-circle-check"></i> Terverifikasi</span>
+              <span style="color:var(--lp-muted);font-weight:600;">2 Jam Lalu</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="lp-testi-card">
+            <div class="lp-t-head">
+              <div class="lp-t-avatar" style="background:#0ea5e9;color:#fff;">R</div>
+              <div class="lp-t-user">
+                <b>Reza Maulana</b>
+                <small>Panel Legal Private 32GB</small>
+              </div>
+              <div class="lp-t-stars">★★★★★</div>
+            </div>
+            <div class="lp-t-body">
+              "Buat running bot WhatsApp lancar jaya, Anti-DDoS beneran aktif. Garansi 30 harinya amanah banget, rekomen buat developer bot."
+            </div>
+            <div class="lp-t-foot">
+              <span><i class="fa-solid fa-circle-check"></i> Terverifikasi</span>
+              <span style="color:var(--lp-muted);font-weight:600;">4 Jam Lalu</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="lp-testi-card">
+            <div class="lp-t-head">
+              <div class="lp-t-avatar" style="background:#10b981;color:#fff;">A</div>
+              <div class="lp-t-user">
+                <b>Aditya Wijaya</b>
+                <small>Nokos OTP Telegram</small>
+              </div>
+              <div class="lp-t-stars">★★★★★</div>
+            </div>
+            <div class="lp-t-body">
+              "Order nokos OTP di sini paling nyaman, kodenya cepet nongol di layar web. Gak perlu ribet nunggu admin approve."
+            </div>
+            <div class="lp-t-foot">
+              <span><i class="fa-solid fa-circle-check"></i> Terverifikasi</span>
+              <span style="color:var(--lp-muted);font-weight:600;">6 Jam Lalu</span>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="lp-testi-card">
+            <div class="lp-t-head">
+              <div class="lp-t-avatar" style="background:#ec4899;color:#fff;">D</div>
+              <div class="lp-t-user">
+                <b>Dimas Setiawan</b>
+                <small>Canva Pro 1 Tahun</small>
+              </div>
+              <div class="lp-t-stars">★★★★★</div>
+            </div>
+            <div class="lp-t-body">
+              "Beli Canva Pro langsung masuk ke email pribadi. Udah 3 bulan aman gak pernah drop. Pelayanan cepat dan terpercaya!"
+            </div>
+            <div class="lp-t-foot">
+              <span><i class="fa-solid fa-circle-check"></i> Terverifikasi</span>
+              <span style="color:var(--lp-muted);font-weight:600;">Kemarin</span>
+            </div>
+          </div>
+
+          <!-- Duplicate Set for Smooth Infinite Loop -->
+          <div class="lp-testi-card">
+            <div class="lp-t-head">
+              <div class="lp-t-avatar">F</div>
+              <div class="lp-t-user">
+                <b>Farhan Pratama</b>
+                <small>VPS DigitalOcean 8GB</small>
+              </div>
+              <div class="lp-t-stars">★★★★★</div>
+            </div>
+            <div class="lp-t-body">
+              "Gokil deploy VPS-nya gak nyampe 5 detik langsung dapet IP dan password root. Speknya real sesuai deskripsi, mantap SeikaOne!"
+            </div>
+            <div class="lp-t-foot">
+              <span><i class="fa-solid fa-circle-check"></i> Terverifikasi</span>
+              <span style="color:var(--lp-muted);font-weight:600;">2 Jam Lalu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lp-center" style="margin-top:14px;">
+        <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener" class="lp-btn sec sm">
+          <i class="fa-brands fa-telegram"></i>
+          <span>Buka Channel Testimoni Resmi</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 10. FAQ ACCORDION -->
+    <section class="lp-sec" id="faq">
+      <div class="lp-wrap lp-faq-wrap">
+        <div class="lp-center lp-reveal">
+          <span class="lp-eyebrow"><i class="fa-solid fa-circle-question"></i> Bantuan &amp; FAQ</span>
+          <h2 class="lp-h2">Pertanyaan yang Sering Diajukan</h2>
+          <p class="lp-sub">Punya pertanyaan seputar layanan kami? Temukan jawabannya langsung di bawah ini.</p>
+        </div>
+
+        <div class="lp-faq-list">
+          <details class="lp-q lp-reveal" name="zyro-faq">
+            <summary>
+              <span>Apakah saya harus membuat akun sebelum berbelanja?</span>
+              <i class="fa-solid fa-plus"></i>
+            </summary>
+            <div class="lp-a">
+              Ya, disarankan mendaftar akun terlebih dahulu agar riwayat transaksi, saldo deposit, data login server, dan klaim garansi tersimpan rapi serta bisa kamu akses kapan saja melalui dashboard pengguna.
+            </div>
+          </details>
+
+          <details class="lp-q lp-reveal" name="zyro-faq">
+            <summary>
+              <span>Bagaimana cara pembayaran di SeikaOne?</span>
+              <i class="fa-solid fa-plus"></i>
+            </summary>
+            <div class="lp-a">
+              Kamu bisa membayar instan menggunakan <b>QRIS All Payment</b> yang mendukung semua bank di Indonesia (BCA, Mandiri, BRI, BNI, BSI) dan seluruh e-wallet (DANA, GoPay, OVO, ShopeePay, LinkAja) atau membayar langsung menggunakan saldo akun website.
+            </div>
+          </details>
+
+          <details class="lp-q lp-reveal" name="zyro-faq">
+            <summary>
+              <span>Berapa lama pesanan saya diproses setelah bayar?</span>
+              <i class="fa-solid fa-plus"></i>
+            </summary>
+            <div class="lp-a">
+              Seluruh transaksi diproses otomatis oleh sistem dalam <b>1 sampai 3 detik</b> setelah pembayaran QRIS kamu terdeteksi oleh gateway. Informasi IP VPS, kredensial panel, atau produk digital akan langsung tampil di layar dan dikirim ke akun kamu.
+            </div>
+          </details>
+
+          <details class="lp-q lp-reveal" name="zyro-faq">
+            <summary>
+              <span>Bagaimana mekanisme klaim garansi produk?</span>
+              <i class="fa-solid fa-plus"></i>
+            </summary>
+            <div class="lp-a">
+              Setiap produk legal memiliki garansi resmi 30 hari. Kamu bisa memanfaatkan fitur <b>Klaim Garansi</b> langsung dari menu profil dashboard atau menghubungi tim support via Telegram <b>@SeikaOne</b> dengan menyertakan Invoice ID pesanan.
+            </div>
+          </details>
+
+          <details class="lp-q lp-reveal" name="zyro-faq">
+            <summary>
+              <span>Apakah saya bisa menjadi reseller via API?</span>
+              <i class="fa-solid fa-plus"></i>
+            </summary>
+            <div class="lp-a">
+              Tentu bisa! Kami menyediakan dokumentasi lengkap dan REST API Host-to-Host (H2H) di menu <a href="#" style="color:var(--lp-pri);font-weight:700;">Dokumentasi API</a>. Kamu bisa menghubungkan katalog produk kami ke bot Telegram atau website toko online kamu sendiri dengan harga reseller.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FINAL CALL TO ACTION CARD -->
+    <section class="lp-sec">
+      <div class="lp-wrap">
+        <div class="lp-final-card lp-reveal">
+          <span class="lp-eyebrow" style="background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);"><i class="fa-solid fa-rocket"></i> Siap Memulai?</span>
+          <h2 class="lp-h2" style="margin-top:14px;">Siap Order Layanan Impian Kamu Sekarang?</h2>
+          <p class="lp-sub" style="margin-bottom:24px;">
+            Jelajahi ekosistem layanan cloud dan produk digital kami, pilih spesifikasi yang kamu butuhkan, dan nikmati proses aktivasi instan 24 jam nonstop.
+          </p>
+          <a href="#" class="lp-btn pri btn-hero-primary" style="padding:14px 32px;font-size:1.05rem;">
+            <i class="fa-solid fa-rocket"></i>
+            <span>Mulai Sekarang di SeikaOne</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12. OFFICIAL FOOTER -->
+  <footer class="lp-foot">
+    <div class="lp-wrap">
+      <div class="lp-foot-grid">
+        <div>
+          <a href="#" class="tb-brand" style="margin-bottom:14px;font-size:1.15rem;">
+            <img src="assets/logo-animated-dark.webp" width="34" height="34" alt="SeikaOne Logo" class="zyro-logo-animated" data-logo-type="full">
+            <span>SeikaOne <span class="brand-api">ID</span></span>
+          </a>
+          <p style="font-size:0.88rem;color:var(--lp-muted);max-width:380px;line-height:1.65;">
+            Platform infrastruktur digital &amp; cloud server terpercaya untuk developer, pebisnis online, dan kreator: Cloud VPS, Panel Pterodactyl Legal, Script Bot, Aplikasi Premium, dan Nokos OTP 24 Jam.
+          </p>
+        </div>
+
+        <div>
+          <h4>Navigasi Cepat</h4>
+          <div class="lp-foot-links">
+            <a href="#"><i class="fa-solid fa-store" style="width:16px;"></i> Toko / Katalog</a>
+            <a href="#"><i class="fa-solid fa-user" style="width:16px;"></i> Login / Register</a>
+            <a href="#"><i class="fa-solid fa-book" style="width:16px;"></i> Dokumentasi API</a>
+            <a href="#"><i class="fa-solid fa-sliders" style="width:16px;"></i> Web Manager CPanel</a>
+            <a href="#"><i class="fa-solid fa-shield" style="width:16px;"></i> Cek Garansi VPS</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Hubungi Kami</h4>
+          <div class="lp-foot-links" style="margin-bottom:16px;">
+            <a href="https://t.me/SeikaOne" target="_blank" rel="noopener"><i class="fa-brands fa-telegram" style="width:16px;"></i> Owner: @SeikaOne</a>
+            <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener"><i class="fa-solid fa-bullhorn" style="width:16px;"></i> Channel: @SeikaOneOfficial</a>
+            <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="width:16px;"></i> Saluran WhatsApp</a>
+          </div>
+          <div class="lp-soc">
+            <a href="https://t.me/SeikaOne" target="_blank" rel="noopener" aria-label="Telegram Owner"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener" aria-label="Telegram Channel"><i class="fa-solid fa-bullhorn"></i></a>
+            <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" target="_blank" rel="noopener" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lp-copy">
+        &copy; 2024&ndash;<span id="lp-year">2026</span> <b>SeikaOne.id</b>. Seluruh Hak Cipta Dilindungi Undang-Undang.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0" defer></script>
+  <script src="js/landing.js?v=6.2.0" defer></script>
+</body>
+</html>

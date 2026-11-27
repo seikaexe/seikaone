@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var sp = new URLSearchParams(window.location.search);
+        var qTheme = sp.get('theme');
+        if (qTheme === 'classic') {
+          localStorage.setItem('zyro_theme_engine', 'classic');
+        } else if (qTheme === 'cream') {
+          localStorage.setItem('zyro_theme_engine', 'cream');
+        }
+        var engine = localStorage.getItem('zyro_theme_engine') || localStorage.getItem('zyro_theme') || 'cream';
+        if (engine === 'light') engine = 'cream';
+        window._themeEngine = engine;
+
+        var d = document.documentElement;
+        if (engine === 'classic' || engine === 'dark') {
+          d.setAttribute('data-theme', 'dark');
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.setAttribute('data-theme', 'cream');
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>ZyroStore.id – Pusat Layanan Digital & Akun Premium Terpercaya</title>
+  <meta name="description" content="ZyroStore.id menyediakan Panel Pterodactyl Legal, VPS High Performance, YouTube Premium, Canva Pro, Nokos OTP WhatsApp & Telegram, dan Script Bot dengan harga murah dan garansi penuh.">
+  <meta name="keywords" content="ZyroStore, ZyroDevv, Panel Pterodactyl Murah, Panel Legal Publik, VPS Murah, Nokos OTP, Nokos WhatsApp, Akun Premium, YouTube Premium, Canva Pro, Bot WhatsApp">
+  <meta name="author" content="ZyroDevv">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="google-site-verification" content="SDl-KKcksG7GFQgDPnyF9GpWdM17v2cnxethckofgHU">
+  <meta name="theme-color" content="#0284c7">
+  <link rel="canonical" href="https://zyrostore.id/shop">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:url" content="https://zyrostore.id/shop">
+  <meta property="og:site_name" content="ZyroStore.id">
+  <meta property="og:title" content="ZyroStore.id – Pusat Layanan Digital & Akun Premium Terpercaya">
+  <meta property="og:description" content="ZyroStore.id menyediakan Panel Pterodactyl Legal, VPS High Performance, Nokos OTP, Akun Premium, dan Script Bot dengan proses otomatis 24/7.">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://zyrostore.id/shop">
+  <meta name="twitter:title" content="ZyroStore.id – Pusat Layanan Digital Terpercaya">
+  <meta name="twitter:description" content="Beli Panel Pterodactyl, VPS Cloud Server, Nokos OTP, dan Akun Premium murah & bergaransi.">
+
+  <!-- Schema.org Structured Data (Untuk Google Search & AI Overview / Gemini / Perplexity) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://zyrostore.id/#organization",
+        "name": "ZyroStore.id",
+        "alternateName": "ZyroDevv Store",
+        "url": "https://zyrostore.id/",
+        "logo": "https://zyrostore.id/assets/logo.png",
+        "description": "Pusat Layanan Digital, Hosting Bot Panel Pterodactyl Legal, VPS Cloud Server, Nokos SMS OTP, dan Akun Premium Terpercaya di Indonesia.",
+        "sameAs": [
+          "https://t.me/ZyroDevv",
+          "https://t.me/ZyroDevvOfficial"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://zyrostore.id/#website",
+        "url": "https://zyrostore.id/",
+        "name": "ZyroStore.id",
+        "publisher": { "@id": "https://zyrostore.id/#organization" },
+        "inLanguage": "id-ID"
+      },
+      {
+        "@type": "OnlineStore",
+        "@id": "https://zyrostore.id/#store",
+        "name": "ZyroStore.id",
+        "description": "Toko online penyedia hosting Game Server & Bot (Pterodactyl), VPS Cloud Indonesia & Singapore, Nokos OTP, dan Akun Premium.",
+        "url": "https://zyrostore.id/",
+        "parentOrganization": { "@id": "https://zyrostore.id/#organization" },
+        "currenciesAccepted": "IDR",
+        "paymentAccepted": "QRIS, Saldo Akun, Transfer Bank, E-Wallet"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" href="/assets/logo.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/vendor/fontawesome/webfonts/fa-solid-900.woff2?v=6.5.0.3" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/vendor/fontawesome/webfonts/fa-regular-400.woff2?v=6.5.0.3" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fontawesome/all.min.css?v=6.5.0.3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="/css/zyro-ui.css?v=3.1.0">
+  <link rel="preload" href="/css/panel-config-modal.css?v=3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/panel-config-modal.css?v=3.0"></noscript>
+  <link id="themeEngineStylesheet" rel="stylesheet" href="/css/shop-cream.css?v=3.3">
+  <script>
+    /* ====================================================
+       EARLY ZERO-FLICKER AUTH & PRELOADER CONTROLLER
+       Executes synchronously in <head> before DOM paint
+       ==================================================== */
+    (function () {
+      try {
+        var token = localStorage.getItem('zyro_user_token') || localStorage.getItem('user_token') || sessionStorage.getItem('zyro_user_token');
+        var rawUser = localStorage.getItem('zyro_user_data');
+        if (token && rawUser) {
+          window.__EARLY_USER__ = JSON.parse(rawUser);
+          var u = window.__EARLY_USER__;
+          var cachedAva = localStorage.getItem('zyro_cached_avatar_b64');
+          window.__EARLY_AVA__ = cachedAva || (u && u.avatar) || '/assets/logo.webp';
+          window.__EARLY_NAME__ = (u && u.name) ? (u.name.split(' ')[0] || u.name) : 'Member';
+          window.__EARLY_EMAIL__ = (u && u.email) || '';
+          
+          var isOwner = Boolean(u && (
+            (u.email && ['gilangx288@gmail.com', 'zyrodevv@gmail.com', 'gilram336@gmail.com'].includes(u.email.toLowerCase())) ||
+            (u.isAdmin === true && u.cpanelRole?.category === 'owner')
+          ));
+          window.__EARLY_IS_OWNER__ = isOwner;
+
+          var role = ((u && u.cpanelRole?.name) || (u && u.role) || 'Member').replace('Legal ', '');
+          if (u && Array.isArray(u.roles)) {
+            if (u.roles.includes('bug_hunter')) role = '<i class="fa-solid fa-bug"></i> Bug Hunter';
+            else if (u.roles.includes('top_leaderboard')) role = '<i class="fa-solid fa-trophy"></i> Top Leaderboard';
+            else if (isOwner || u.roles.includes('developer') || u.roles.includes('founder')) role = '<i class="fa-solid fa-crown"></i> Founder / Dev';
+          } else if (isOwner) {
+            role = '<i class="fa-solid fa-crown"></i> Founder / Dev';
+          }
+          window.__EARLY_ROLE__ = role;
+
+          if (window.__EARLY_USER__ && window.__EARLY_USER__.avatar) {
+            try {
+              var earlyImg = new Image();
+              earlyImg.decoding = 'sync';
+              earlyImg.src = window.__EARLY_AVA__;
+            } catch (_) {}
+          }
+          document.documentElement.classList.add('zyro-authenticated');
+          document.documentElement.classList.remove('zyro-guest');
+          var isHidden = localStorage.getItem('zyro_hide_balance') === 'true' || localStorage.getItem('zyro_balance_hidden') === 'true';
+          var balNum = Number(u.balance || 0);
+          var bStr = isHidden ? 'Rp ••••••••' : ('Rp ' + balNum.toLocaleString('id-ID'));
+          window.__EARLY_BAL_STR__ = bStr;
+          if (!isHidden && typeof u.balance !== 'undefined') {
+            if (bStr.length > 15) {
+              document.documentElement.classList.add('zyro-bal-huge');
+            } else if (bStr.length > 12) {
+              document.documentElement.classList.add('zyro-bal-long');
+            }
+          }
+        } else {
+          document.documentElement.classList.add('zyro-guest');
+          document.documentElement.classList.remove('zyro-authenticated');
+        }
+      } catch(e) {
+        document.documentElement.classList.add('zyro-guest');
+      }
+
+      // Early Sync Store Stats from Cache (Zero FOUS)
+      try {
+        var cachedUsers = localStorage.getItem('zyro_total_users');
+        if (cachedUsers && !window.currentStoreTotalUsers) {
+          var cu = parseInt(cachedUsers, 10);
+          if (!isNaN(cu) && cu > 0) window.currentStoreTotalUsers = cu;
+        }
+        var cachedTrx = localStorage.getItem('zyro_total_trx');
+        if (cachedTrx && !window.currentStoreTotalTrx) {
+          var ct = parseInt(cachedTrx, 10);
+          if (!isNaN(ct) && ct > 0) window.currentStoreTotalTrx = ct;
+        }
+      } catch(_) {}
+
+      // Record page start time for luxury tech entrance preloader
+      window.__PAGE_START__ = Date.now();
+
+      window.handleLockedMenu = function() {
+        return true;
+      };
+    })();
+  </script>
+  <script>
+    (function () {
+      var sp = new URLSearchParams(window.location.search);
+      var qTheme = sp.get('theme');
+      if (qTheme === 'classic') {
+        localStorage.setItem('zyro_theme_engine', 'classic');
+      } else if (qTheme === 'cream') {
+        localStorage.setItem('zyro_theme_engine', 'cream');
+      }
+      var engine = localStorage.getItem('zyro_theme_engine') || localStorage.getItem('zyro_theme') || 'cream';
+      if (engine === 'light') engine = 'cream';
+      window._themeEngine = engine;
+
+      var isDark = (engine === 'classic' || engine === 'dark' || localStorage.getItem('zyro_theme') === 'dark');
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('cream');
+        var link = document.getElementById('themeEngineStylesheet');
+        if (link && engine === 'classic') link.disabled = true;
+      } else {
+        document.documentElement.setAttribute('data-theme', 'cream');
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('cream');
+      }
+    })();
+
+    window.toggleThemeEngine = function() {
+      var cur = localStorage.getItem('zyro_theme_engine') || 'cream';
+      var next = (cur === 'cream') ? 'classic' : 'cream';
+      localStorage.setItem('zyro_theme_engine', next);
+      window.location.reload();
+    };
+  </script>
+  <script src="/js/lib/utils.js?v=2.1" defer></script>
+  <script>
+    function applyStoreTheme(theme) {
+      var isDark = theme === 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        if (document.body) document.body.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (document.body) document.body.classList.remove('dark');
+      }
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      document.documentElement.style.removeProperty('background-color');
+      document.documentElement.style.removeProperty('color');
+      var actualTheme = isDark ? 'dark' : 'cream';
+      document.documentElement.setAttribute('data-theme', actualTheme);
+      localStorage.setItem('zyro_theme', actualTheme);
+      if (typeof window !== 'undefined') window.isDark = isDark;
+      var icons = document.querySelectorAll('#themeBtn i, #sidebarThemeIcon, .theme-toggle-icon');
+      icons.forEach(function (ic) {
+        var isSpinning = ic.classList.contains('cp-theme-spin');
+        ic.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+      });
+    }
+
+    function toggleTheme() {
+      var cur = localStorage.getItem('zyro_theme') || document.documentElement.getAttribute('data-theme') || (document.body && document.body.classList.contains('dark') ? 'dark' : 'cream');
+      var tgt = cur === 'dark' ? 'cream' : 'dark';
+
+      // 1. Icon spin animation feedback without layout thrashing
+      var icons = document.querySelectorAll('#themeBtn i, #sidebarThemeIcon, .theme-toggle-icon');
+      icons.forEach(function (ic) {
+        ic.classList.remove('cp-theme-spin');
+      });
+      requestAnimationFrame(function () {
+        icons.forEach(function (ic) {
+          ic.classList.add('cp-theme-spin');
+        });
+      });
+
+      var executeTheme = function () {
+        applyStoreTheme(tgt);
+      };
+
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(executeTheme);
+      } else if (document.startViewTransition) {
+        document.startViewTransition(executeTheme);
+      } else {
+        executeTheme();
+      }
+    }
+
+    (function initTheme() {
+      var saved = localStorage.getItem('zyro_theme') || 'cream';
+      applyStoreTheme(saved);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () { applyStoreTheme(saved); });
+      }
+    })();
+  </script>
+  <style>
+    /* ====================================================
+       CRITICAL ZERO-FLICKER AUTH & PRELOADER RULES
+       ==================================================== */
+    html.zyro-authenticated #home-balance-card {
+      display: flex !important;
+    }
+    html.zyro-authenticated #home-guest-balance-card {
+      display: none !important;
+    }
+    html.zyro-authenticated #btnTopLogin {
+      display: none !important;
+    }
+    html.zyro-authenticated #userNavPill {
+      display: inline-flex !important;
+    }
+
+    html.zyro-guest #home-balance-card {
+      display: none !important;
+    }
+    html.zyro-guest #home-guest-balance-card {
+      display: flex !important;
+    }
+    html.zyro-guest #btnTopLogin {
+      display: inline-flex !important;
+    }
+    html.zyro-guest #userNavPill {
+      display: none !important;
+    }
+
+    :root[data-theme="dark"], html.dark {
+      color-scheme: dark;
+    }
+    :root[data-theme="light"], :root[data-theme="cream"], html:not(.dark) {
+      color-scheme: light;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+    html, body {
+      background-color: var(--bg, #070e1b);
+      color: var(--t1, #f1f5f9);
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    /* VIEW TRANSITIONS API SUPPORT (Silky smooth 60/120fps GPU theme cross-fade) */
+    ::view-transition-image-pair(root) {
+      isolation: isolate;
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.28s;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    ::view-transition-new(root) {
+      mix-blend-mode: normal;
+    }
+
+    /* SILKY SMOOTH THEME TRANSITION (Universal Fallback) */
+    html.theme-transitioning,
+    html.theme-transitioning *,
+    html.theme-transitioning *::before,
+    html.theme-transitioning *::after,
+    html.cp-theme-transitioning,
+    html.cp-theme-transitioning *,
+    html.cp-theme-transitioning *::before,
+    html.cp-theme-transitioning *::after {
+      transition: background-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  fill 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  stroke 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      transition-delay: 0s !important;
+    }
+
+    .cp-theme-spin {
+      animation: cpThemeSpin 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    @keyframes cpThemeSpin {
+      0% {
+        transform: rotate(0deg) scale(0.65);
+        opacity: 0.3;
+      }
+      50% {
+        transform: rotate(180deg) scale(1.22);
+        opacity: 0.85;
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 1;
+      }
+    }
+    .notif-permission-card {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      width: calc(100% - 32px);
+      max-width: 440px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1.5px solid rgba(14, 165, 233, 0.35);
+      border-radius: 20px;
+      padding: 16px 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(14, 165, 233, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 999999;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+    .notif-permission-card.active-ready {
+      display: block !important;
+    }
+    .notif-permission-card.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .npc-body { display: flex; flex-direction: column; gap: 10px; }
+    .npc-top { display: flex; align-items: center; gap: 12px; }
+    .npc-icon-box {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      color: #38bdf8; display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; flex-shrink: 0; position: relative;
+    }
+    .npc-pulse {
+      position: absolute; top: -2px; right: -2px; width: 10px; height: 10px;
+      border-radius: 50%; background: #f43f5e;
+      animation: notifPulse 1.6s infinite;
+    }
+    @keyframes notifPulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(244, 63, 94, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+    }
+    .npc-head-info { flex: 1; min-width: 0; }
+    .npc-title {
+      font-size: 0.92rem; font-weight: 800; color: #fff;
+      letter-spacing: -0.2px; display: flex; align-items: center; gap: 6px;
+    }
+    .npc-sub { font-size: 0.72rem; color: #94a3b8; margin-top: 2px; }
+    .npc-btn-dismiss {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; transition: all 0.2s ease; flex-shrink: 0;
+    }
+    .npc-btn-dismiss:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+    .npc-text { font-size: 0.76rem; color: #94a3b8; line-height: 1.45; margin: 0; }
+    .npc-text b { color: #38bdf8; }
+    .npc-actions { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .npc-btn-allow {
+      flex: 1; background: #0284c7;
+      color: #fff; border: 1px solid #0284c7; padding: 10px 16px; border-radius: 12px;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25); transition: all 0.2s ease; font-family: inherit;
+    }
+    .npc-btn-allow:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .npc-btn-later {
+      background: rgba(255, 255, 255, 0.05); color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 14px; border-radius: 12px;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+      font-family: inherit; white-space: nowrap;
+    }
+    .npc-btn-later:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    @media (max-width: 580px) {
+      .notif-permission-card { bottom: 16px; width: calc(100% - 24px); padding: 14px 16px; }
+    }
+  </style>
+  <!-- ONESIGNAL WEB SDK -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      try {
+        await OneSignal.init({
+          appId: "e939fe32-d119-43a6-99cb-b0493b5dba0b",
+          serviceWorkerParam: { scope: "/" },
+          serviceWorkerPath: "/OneSignalSDKWorker.js",
+          notifyButton: { enable: false }
+        });
+        if (OneSignal.Notifications && OneSignal.Notifications.permission) {
+          const btn = document.getElementById('btn-subscribe-push');
+          const label = document.getElementById('pushBtnLabel');
+          if (btn) btn.classList.add('active');
+          if (label) label.textContent = 'Aktif';
+        }
+      } catch (err) {
+        console.warn('[OneSignal Init Warn]:', err);
+      }
+    });
+  </script>
+  <!-- GOOGLE IDENTITY SERVICES (Only for unauthenticated guests) -->
+  <script>
+    (function() {
+      try {
+        var token = localStorage.getItem('zyro_user_token') || localStorage.getItem('user_token') || sessionStorage.getItem('zyro_user_token');
+        if (!token) {
+          var gs = document.createElement('script');
+          gs.src = 'https://accounts.google.com/gsi/client';
+          gs.async = true;
+          gs.defer = true;
+          document.head.appendChild(gs);
+        }
+      } catch(e) {}
+    })();
+  </script>
+<body id="body">
+
+<!-- LUXURY TECH ENTRANCE PRELOADER -->
+<div id="preloader" class="zyro-intro-splash" aria-hidden="false">
+  <div class="zyro-intro-ambient"></div>
+  <div class="zyro-intro-card">
+    <div class="zyro-emblem-wrapper">
+      <div class="zyro-orbit-ring zyro-orbit-outer"></div>
+      <div class="zyro-orbit-ring zyro-orbit-inner"></div>
+      <div class="zyro-emblem-box">
+        <img src="/assets/logo-static-dark.webp" width="91" height="74" alt="ZyroStore" class="zyro-emblem-img zyro-logo-static">
+        <span class="zyro-emblem-glow"></span>
+      </div>
+    </div>
+    <div class="zyro-intro-branding">
+      <div class="zyro-intro-title">ZYROSTORE</div>
+      <div class="zyro-intro-tagline">
+        <i class="fa-solid fa-bolt"></i>
+        <span>OFFICIAL DIGITAL STORE</span>
+      </div>
+    </div>
+    <div class="zyro-intro-loader">
+      <div class="zyro-loader-beam">
+        <div class="zyro-loader-thumb"></div>
+      </div>
+      <div class="zyro-loader-status">
+        <span class="zyro-status-dot"></span>
+        <span class="zyro-status-text">Memuat Sistem...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST STACK -->
+<div id="toast-stack"></div>
+
+<!-- FLOATING NOTIFICATION PERMISSION CARD -->
+<div id="notif-permission-banner" class="notif-permission-card" style="display:none;">
+  <div class="npc-body">
+    <div class="npc-top">
+      <div class="npc-icon-box">
+        <i class="fa-solid fa-bell"></i>
+        <span class="npc-pulse"></span>
+      </div>
+      <div class="npc-head-info">
+        <div class="npc-title">
+          <span>Nyalakan Notifikasi</span>
+          <span style="font-size:0.58rem;background:rgba(16,185,129,0.18);color:#10b981;border:1px solid rgba(16,185,129,0.3);padding:2px 7px;border-radius:20px;font-weight:700;">UPDATE REALTIME</span>
+        </div>
+        <div class="npc-sub">Update langsung ke HP &amp; browser kamu</div>
+      </div>
+      <button type="button" class="npc-btn-dismiss" onclick="dismissNotifPermissionBanner()" aria-label="Tutup">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <p class="npc-text">
+      Dapatkan info restok <b>bansos panel 1GB gratis</b>, diskon promo kilat, rilis script bot, serta nota &amp; status pesanan kamu secara realtime.
+    </p>
+    <div class="npc-actions">
+      <button type="button" class="npc-btn-allow" onclick="requestWebNotificationsPrompt()">
+        <i class="fa-solid fa-bell"></i> Izinkan Notifikasi
+      </button>
+      <button type="button" class="npc-btn-later" onclick="dismissNotifPermissionBanner()">
+        Nanti Saja
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION PANEL -->
+<div id="notif-panel">
+  <div class="np-head">
+    <div class="np-title"><i class="fa-solid fa-bell"></i> Notifikasi</div>
+    <button class="np-clear" onclick="clearNotifs()">Hapus Semua</button>
+  </div>
+  <div class="np-push-prompt" id="np-push-prompt">
+    <div class="np-push-text">
+      <div class="np-push-title"><i class="fa-solid fa-bell"></i> Push Notifikasi Web</div>
+      <div class="np-push-desc">Dapatkan update promo & info pesanan di HP/PC</div>
+    </div>
+    <button class="btn-push-toggle" id="btn-subscribe-push" onclick="toggleWebPushSubscription()">
+      <span id="pushBtnLabel">Aktifkan</span>
+    </button>
+  </div>
+  <div class="np-list" id="np-list"></div>
+</div>
+
+<!-- CS PANEL -->
+<div id="cs-panel">
+  <div class="np-head">
+    <div class="np-title"><i class="fa-solid fa-headset"></i> Bantuan CS</div>
+  </div>
+  <div class="cs-list">
+    <a href="https://t.me/ZyroDevv?text=Halo%20bang%20ZyroDevv,%20saya%20mau%20tanya%20stok%20produk" class="fab-item" target="_blank" rel="noopener">
+      <i class="fa-solid fa-box-open" style="color:var(--amber);"></i> Cek Stok Produk
+    </a>
+    <a href="https://t.me/ZyroDevv?text=Halo%20bang%20ZyroDevv,%20saya%20mengalami%20masalah%20pesanan" class="fab-item" target="_blank" rel="noopener">
+      <i class="fa-solid fa-circle-exclamation" style="color:var(--rose);"></i> Masalah Pesanan
+    </a>
+    <a href="https://t.me/ZyroDevvOfficial" class="fab-item store-telegram-channel" target="_blank" rel="noopener">
+      <i class="fa-brands fa-telegram" style="color:var(--a);"></i> Channel Telegram
+    </a>
+    <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" class="fab-item store-whatsapp-channel" target="_blank" rel="noopener">
+      <i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> Saluran WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- OFFCANVAS SIDEBAR -->
+<div class="sb-ov" id="sbOv" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <img src="/assets/logo-animated-dark.webp" width="32" height="32" alt="ZyroStore Logo" class="zyro-logo-animated" data-logo-type="full">
+    <span class="sb-brand-txt">ZyroStore <span class="brand-api">ID</span></span>
+    <button class="sb-x" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav class="snav">
+    <div id="sidebarUserBox" style="padding:10px 14px;background:var(--bg2);border-radius:12px;margin:0 12px 10px;display:none;align-items:center;gap:10px;cursor:pointer;" onclick="window.location.href='/profile'" title="Klik untuk Pengaturan Akun">
+      <script>
+        if (window.__EARLY_USER__) {
+          document.getElementById('sidebarUserBox').style.display = 'flex';
+        }
+        document.write('<img src="' + (window.__EARLY_AVA__ || '/assets/logo.webp') + '" id="sbUserAvatar" width="36" height="36" alt="Avatar" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--a);">');
+      </script>
+      <div style="overflow:hidden;flex:1;">
+        <b id="sbUserName" style="font-size:0.8rem;color:var(--t1);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><script>document.write(window.__EARLY_NAME__ || 'Member');</script></b>
+        <span style="font-size:0.65rem;color:#22c55e;font-weight:700;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Diskon 5% Aktif</span>
+      </div>
+      <i class="fa-solid fa-gear" style="font-size:0.8rem;color:var(--t3);"></i>
+    </div>
+    <!-- KATEGORI 1: MENU UTAMA & BELANJA -->
+    <div class="snav-group" id="sbGroupShop">
+      <div class="snav-header" onclick="toggleSidebarCategory('sbGroupShop')">
+        <span class="snh-left"><i class="fa-solid fa-store" style="color:var(--a);"></i> Menu &amp; Belanja</span>
+        <i class="fa-solid fa-chevron-down snh-chevron"></i>
+      </div>
+      <div class="snav-collapse">
+        <a href="/"><i class="fa-solid fa-house" style="color:#0ea5e9;"></i> Beranda Utama</a>
+        <a href="/shop" class="act"><i class="fa-solid fa-cart-shopping"></i> Katalog Belanja</a>
+        <a href="/cek-pesanan"><i class="fa-solid fa-magnifying-glass" style="color:var(--a);"></i> Cek Pesanan</a>
+        <a href="/riwayat"><i class="fa-solid fa-receipt" style="color:#06b6d4;"></i> Riwayat Pesanan</a>
+        <a href="/hall-of-fame"><i class="fa-solid fa-award" style="color:#10b981;"></i> Hall of Fame &amp; Bug Hunter <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">BOUNTY</span></a>
+        <a href="/leaderboard"><i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Leaderboard Pembeli</a>
+      </div>
+    </div>
+
+    <!-- KATEGORI 2: LAYANAN PANEL & BANSOS -->
+    <div class="snav-group" id="sbGroupServer">
+      <div class="snav-header" onclick="toggleSidebarCategory('sbGroupServer')">
+        <span class="snh-left"><i class="fa-solid fa-server" style="color:#10b981;"></i> Server &amp; Panel</span>
+        <i class="fa-solid fa-chevron-down snh-chevron"></i>
+      </div>
+      <div class="snav-collapse">
+        <a href="/cpanel"><i class="fa-solid fa-gauge-high" style="color:#0ea5e9;"></i> CPanel Control <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">CLOUD</span></a>
+        <a href="/bansos"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free <span class="snav-badge" style="background:rgba(244,63,94,0.18);color:#f43f5e;">1GB FREE</span></a>
+        <a href="/mypanel"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">PTERO</span></a>
+        <a href="/addon"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel <span class="snav-badge" style="background:rgba(14,165,233,0.18);color:#0ea5e9;">+SPEK</span></a>
+        <a href="/api-key"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> Kelola API Key Reseller <span class="snav-badge" style="background:rgba(245,158,11,0.18);color:#f59e0b;">KEY</span></a>
+        <a href="/docs"><i class="fa-solid fa-book-bookmark" style="color:#10b981;"></i> Dokumentasi API Docs <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;">v1.0</span></a>
+      </div>
+    </div>
+
+    <!-- KATEGORI 3: BANTUAN & CS (SUPPORT) -->
+    <div class="snav-group" id="sbGroupSupport">
+      <div class="snav-header" onclick="toggleSidebarCategory('sbGroupSupport')">
+        <span class="snh-left"><i class="fa-solid fa-headset" style="color:#06b6d4;"></i> Support &amp; Bantuan</span>
+        <i class="fa-solid fa-chevron-down snh-chevron"></i>
+      </div>
+      <div class="snav-collapse">
+        <a href="javascript:void(0)" onclick="toggleChatWidget()"><i class="fa-solid fa-comments" style="color:#a855f7;"></i> Live Chat CS (AI)</a>
+        <a href="/garansi"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Klaim Garansi Panel</a>
+        <a href="/panduan"><i class="fa-solid fa-book-open" style="color:#eab308;"></i> Panduan &amp; FAQ <span class="snav-badge">BACA</span></a>
+        <a href="https://t.me/ZyroDevv" id="sbTelegramCs" class="store-telegram-cs" target="_blank" rel="noopener"><i class="fa-solid fa-headset"></i> Hubungi CS Telegram</a>
+      </div>
+    </div>
+
+    <!-- KATEGORI 4: AKUN & KOMUNITAS -->
+    <div class="snav-group" id="sbGroupAccount">
+      <div class="snav-header" onclick="toggleSidebarCategory('sbGroupAccount')">
+        <span class="snh-left"><i class="fa-solid fa-user-gear" style="color:#a855f7;"></i> Akun &amp; Komunitas</span>
+        <i class="fa-solid fa-chevron-down snh-chevron"></i>
+      </div>
+      <div class="snav-collapse">
+        <a href="/profile" id="sbAccountSettingsLink"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun / Profil</a>
+        <a href="/pengguna"><i class="fa-solid fa-users" style="color:#ec4899;"></i> Pengguna &amp; Role <span class="snav-badge" id="sbMemberCountBadge" style="background:rgba(236,72,153,0.18);color:#ec4899;font-weight:800;white-space:nowrap;flex-shrink:0;">535 MEMBER</span></a>
+        <a href="https://t.me/ZyroDevvOfficial" id="sbTelegramChannel" class="store-telegram-channel" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Channel Telegram</a>
+        <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" id="sbWhatsappChannel" class="store-whatsapp-channel" target="_blank" rel="noopener" style="color:#22c55e;"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> Saluran WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- KATEGORI 5: OWNER / ADMIN (HANYA UNTUK gilangx288@gmail.com) -->
+    <div class="snav-group" id="sbAdminGroup" style="display:none;">
+      <div class="snav-header" onclick="toggleSidebarCategory('sbAdminGroup')" style="color:#f59e0b;">
+        <span class="snh-left"><i class="fa-solid fa-crown"></i> Khusus Owner</span>
+        <i class="fa-solid fa-chevron-down snh-chevron"></i>
+      </div>
+      <div class="snav-collapse">
+        <a href="/admin" id="sbAdminLink"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Admin Panel</a>
+      </div>
+    </div>
+  </nav>
+</aside>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-inner">
+    <div class="tb-l">
+      <button class="ib raw" onclick="toggleSidebar()" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
+      <a href="/shop" class="tb-brand" title="Katalog Toko ZyroStore">
+        <img src="/assets/logo-animated-dark.webp" width="32" height="32" alt="ZyroStore" class="zyro-logo-animated" data-logo-type="full">
+        <span>ZyroStore <span class="brand-api">ID</span></span>
+      </a>
+    </div>
+    <div class="tb-r">
+      <button class="ib" id="cs-btn" onclick="toggleChatWidget()" title="Live Chat CS (AI & Admin)">
+        <i class="fa-solid fa-headset"></i>
+      </button>
+      <button class="ib" id="notif-btn" onclick="toggleNotifPanel()" title="Notifikasi">
+        <i class="fa-solid fa-bell"></i>
+        <span class="notif-badge" id="notif-badge"></span>
+      </button>
+      <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
+      <!-- MEMBER AUTH PROFILE TOPBAR -->
+      <div id="authTopNavContainer" style="position:relative;display:flex;align-items:center;">
+        <a href="/login" class="btn-top-auth" id="btnTopLogin" title="Masuk Akun Member" style="text-decoration:none;">
+          <i class="fa-solid fa-circle-user"></i>
+          <span class="btn-top-auth-txt">Masuk</span>
+        </a>
+
+        <div class="user-nav-pill" id="userNavPill" style="cursor:pointer;" onclick="toggleUserDropdown(event)" title="Akun Member">
+          <script>
+            (function(){
+              var u = window.__EARLY_USER__;
+              var cachedAva = localStorage.getItem('zyro_cached_avatar_b64');
+              var ava = cachedAva || (u && u.avatar) || '/assets/logo.webp';
+              var nm = (u && u.name) ? (u.name.split(' ')[0] || u.name) : 'Member';
+              document.write('<img src="' + ava + '" id="userNavAvatar" class="user-nav-avatar" width="28" height="28" alt="Avatar">');
+              document.write('<div class="user-nav-info">');
+              document.write('<span class="user-nav-name" id="userNavName">' + nm + '</span>');
+              document.write('<span class="user-nav-tag"><i class="fa-solid fa-crown" style="color:#f59e0b;font-size:0.6rem;"></i> 5% OFF</span>');
+              document.write('</div>');
+            })();
+          </script>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;color:var(--t3);margin-left:2px;"></i>
+        </div>
+
+        <!-- User Dropdown Menu -->
+        <div class="user-dropdown-menu" id="userDropdownMenu" style="display:none;">
+          <div class="ud-head">
+            <script>
+              document.write('<img src="' + (window.__EARLY_AVA__ || '/assets/logo.webp') + '" id="udAvatar" class="ud-avatar" width="40" height="40" alt="Avatar">');
+            </script>
+            <div style="overflow:hidden;">
+              <div class="ud-name" id="udName"><script>document.write(window.__EARLY_NAME__ || 'Member Zyro');</script></div>
+              <div class="ud-email" id="udEmail"><script>document.write(window.__EARLY_EMAIL__ || 'member@example.com');</script></div>
+              <div class="ud-badge"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Diskon 5% Aktif</div>
+            </div>
+          </div>
+          <div class="ud-items">
+            <a href="/cpanel"><i class="fa-solid fa-gauge-high" style="color:#0ea5e9;"></i> CPanel Control Cloud</a>
+            <a href="/bansos"><i class="fa-solid fa-gift" style="color:#f43f5e;"></i> Bansos Panel Free (1GB)</a>
+            <a href="/mypanel"><i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya (Pterodactyl)</a>
+            <a href="/riwayat"><i class="fa-solid fa-receipt" style="color:var(--a);"></i> Riwayat Pesanan Saya</a>
+            <a href="/addon"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel</a>
+            <a href="/api-key"><i class="fa-solid fa-key" style="color:#f59e0b;"></i> Kelola API Key Reseller <span class="snav-badge" style="background:rgba(245,158,11,0.18);color:#f59e0b;font-size:0.6rem;padding:1px 5px;border-radius:4px;margin-left:auto;">KEY</span></a>
+            <a href="/docs"><i class="fa-solid fa-book-bookmark" style="color:#10b981;"></i> Dokumentasi API Docs <span class="snav-badge" style="background:rgba(16,185,129,0.18);color:#10b981;font-size:0.6rem;padding:1px 5px;border-radius:4px;margin-left:auto;">v1.0</span></a>
+            <a href="/garansi"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Klaim Garansi Panel</a>
+            <a href="/profile"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> Pengaturan Akun & Profil</a>
+            <a href="/admin" id="udAdminLink" style="display:none;color:#f59e0b;font-weight:700;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Admin Panel Dashboard</a>
+            <a href="javascript:void(0)" onclick="toggleChatWidget(); toggleUserDropdown();"><i class="fa-solid fa-comments" style="color:#a855f7;"></i> Live Chat CS</a>
+            <hr style="border:none;border-top:1px solid var(--b1);margin:6px 0;">
+            <a href="javascript:void(0)" onclick="userLogout()" style="color:var(--rose);"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar (Logout)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-ov" id="detailModal">
+  <div class="modal-sheet">
+    <div class="mhandle"></div>
+    <div class="md-slider-wrap" id="md-slider-wrap">
+      <div class="md-slider-track" id="md-slider-track"></div>
+    </div>
+    <div class="md-body">
+      <div class="md-title" id="md-title">—</div>
+      <div class="md-price" id="md-price">Rp —</div>
+      <div class="md-desc" id="md-desc">—</div>
+      <div class="md-footer">
+        <div class="md-stok"><i class="fa-solid fa-boxes-stacked"></i> Stok: <span id="md-stok">—</span></div>
+        <div class="md-footer-row">
+          <button class="btn-share" id="md-share-btn" onclick="shareProduct()" title="Bagikan produk">
+            <i class="fa-solid fa-share-nodes"></i>
+          </button>
+          <a id="md-order-btn" class="btn-order" href="javascript:void(0)" rel="noopener">
+            <i class="fa-solid fa-cart-arrow-down"></i> Order Sekarang
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LEADERBOARD MODAL -->
+<div class="modal-ov" id="leaderboardModal">
+  <div class="modal-sheet">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-trophy" style="color:#fbbf24;"></i> Top Pembeli ZyroStore</div>
+        <div class="modal-head-sub">Peringkat pelanggan setia & top spender bulan ini</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeLeaderboardModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="lb-wrap">
+      <!-- Compact Summary Strip for Website Store -->
+      <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:8px 14px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-around;text-align:center;gap:8px;">
+        <div>
+          <div style="font-size:0.95rem;font-weight:900;color:var(--t1);" id="modalLbTotalTrx">314+</div>
+          <div style="font-size:0.68rem;color:var(--t3);font-weight:600;">Total Transaksi</div>
+        </div>
+        <div style="width:1px;height:24px;background:var(--b1);"></div>
+        <div>
+          <div style="font-size:0.95rem;font-weight:900;color:#10b981;" id="modalLbTotalSpent">Rp 4.937.924</div>
+          <div style="font-size:0.68rem;color:var(--t3);font-weight:600;">Total Belanja</div>
+        </div>
+        <div style="width:1px;height:24px;background:var(--b1);"></div>
+        <div>
+          <div style="font-size:0.95rem;font-weight:900;color:var(--t1);" id="modalLbTotalBuyers">493+</div>
+          <div style="font-size:0.68rem;color:var(--t3);font-weight:600;">Member Terdaftar</div>
+        </div>
+      </div>
+
+      <!-- Podium Top 3 -->
+      <div class="lb-podium" id="lbPodium">
+        <!-- Rendered by JS -->
+      </div>
+      <!-- Top 4-10 List -->
+      <div style="font-size:0.75rem;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+        Peringkat 4 - 10
+      </div>
+      <div class="lb-list" id="lbList">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KLAIM GARANSI MODAL -->
+<div class="modal-ov" id="warrantyModal">
+  <div class="modal-sheet">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i> Pusat Klaim Garansi Panel</div>
+        <div class="modal-head-sub">Garansi 30 Hari: Ganti server / Reinstall / Perbaikan</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeWarrantyModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="warr-wrap">
+      <div class="warr-tab-nav">
+        <button class="warr-tab-btn act" id="tab-claim-btn" onclick="switchWarrantyTab('claim')">
+          <i class="fa-solid fa-file-shield"></i> Ajukan Klaim
+        </button>
+        <button class="warr-tab-btn" id="tab-status-btn" onclick="switchWarrantyTab('status')">
+          <i class="fa-solid fa-magnifying-glass"></i> Cek Status Tiket
+        </button>
+      </div>
+
+      <!-- TAB 1: FORM AJUKAN KLAIM -->
+      <div id="warr-form-tab">
+        <form onsubmit="submitWarrantyClaim(event)">
+          <div class="warr-field">
+            <label class="warr-lbl">Kode Garansi / Order ID <span style="color:var(--rose);">*</span></label>
+            <input type="text" id="warrCodeInput" class="warr-in" placeholder="Contoh: WARR-ZYRO-XXXXXX atau ORD-XXXX" required>
+            <small style="font-size:0.68rem;color:var(--t3);margin-top:3px;display:block;">Bisa cek di bukti pesanan, halaman sukses bayar, atau cek invoice email.</small>
+          </div>
+          <div class="warr-field">
+            <label class="warr-lbl">Email Akun Pembeli</label>
+            <input type="email" id="warrEmailInput" class="warr-in" placeholder="email@contoh.com">
+          </div>
+          <div class="warr-field">
+            <label class="warr-lbl">No WhatsApp / Telegram Pembeli</label>
+            <input type="text" id="warrContactInput" class="warr-in" placeholder="08xxxxxxxxxx atau @username">
+          </div>
+          <div class="warr-field">
+            <label class="warr-lbl">Jenis Kendala <span style="color:var(--rose);">*</span></label>
+            <select id="warrIssueType" class="warr-in" required>
+              <option value="down">Server Down / Panel Error / Can't Start</option>
+              <option value="reinstall">Minta Reinstall Egg / Ganti Node / Ganti Versi</option>
+              <option value="reset_pass">Lupa Akun / Reset Password Panel Pterodactyl</option>
+              <option value="node_issue">Kendala Node / Disk Penuh / Out of Memory</option>
+              <option value="other">Kendala Teknis Lainnya</option>
+            </select>
+          </div>
+          <div class="warr-field">
+            <label class="warr-lbl">Deskripsi Kendala <span style="color:var(--rose);">*</span></label>
+            <textarea id="warrDescInput" class="warr-in" placeholder="Jelaskan kendala yang dialami secara singkat dan jelas..." required></textarea>
+          </div>
+          <button type="submit" id="btnSubmitClaim" class="btn-order" style="margin-top:14px;">
+            <i class="fa-solid fa-paper-plane"></i> Kirim Pengajuan Garansi
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB 2: CEK STATUS TIKET -->
+      <div id="warr-status-tab" style="display:none;">
+        <div class="warr-field">
+          <label class="warr-lbl">Masukkan Nomor Tiket / Kode Garansi / Order ID</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="warrSearchInput" class="warr-in" placeholder="TICKET-XXXXXX atau WARR-XXXXXX">
+            <button type="button" onclick="checkWarrantyTicketStatus()" class="btn-act btn-save" style="margin:0;padding:0 16px;white-space:nowrap;border-radius:10px;">
+              <i class="fa-solid fa-magnifying-glass"></i> Cek
+            </button>
+          </div>
+        </div>
+        <div id="warrStatusResult" style="margin-top:16px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL (LOGIN / REGISTER / GOOGLE SIGN-IN) -->
+<div class="modal-ov" id="authModal">
+  <div class="modal-sheet" style="max-width:440px;">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-circle-user" style="color:var(--a);"></i> <span id="authModalHeadTitle">Masuk ke Akun</span></div>
+        <div class="modal-head-sub" id="authModalHeadSub">Dapatkan potongan otomatis 5% setiap transaksi</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeAuthModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div style="padding:18px 22px 26px;">
+      <!-- Google Sign In Button -->
+      <button type="button" class="btn-google-auth" id="btnGoogleLogin" onclick="triggerGoogleSignIn()">
+        <svg class="google-logo-svg" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Masuk Cepat dengan Google</span>
+      </button>
+
+      <!-- Google GIS Target Container (if client id rendered) -->
+      <div id="googleBtnContainer" style="display:none;margin-bottom:12px;"></div>
+
+      <div class="auth-divider">ATAU DENGAN EMAIL</div>
+
+      <!-- Auth Tabs: Login vs Register -->
+      <div class="warr-tab-nav" style="margin-bottom:16px;">
+        <button type="button" class="warr-tab-btn act" id="tab-login-btn" onclick="switchAuthTab('login')">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk
+        </button>
+        <button type="button" class="warr-tab-btn" id="tab-register-btn" onclick="switchAuthTab('register')">
+          <i class="fa-solid fa-user-plus"></i> Daftar (Diskon 5%)
+        </button>
+      </div>
+
+      <!-- FORM LOGIN -->
+      <form id="formAuthLogin" onsubmit="handleUserLogin(event)">
+        <div class="warr-field">
+          <label class="warr-lbl">Email Akun</label>
+          <input type="email" id="loginEmail" class="warr-in" placeholder="email@contoh.com" required>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Password</label>
+          <input type="password" id="loginPass" class="warr-in" placeholder="••••••••" required>
+        </div>
+        <button type="submit" id="btnLoginSubmit" class="btn-order" style="margin-top:10px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Sekarang
+        </button>
+      </form>
+
+      <!-- FORM REGISTER -->
+      <form id="formAuthRegister" onsubmit="handleUserRegister(event)" style="display:none;">
+        <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:10px 12px;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+          <i class="fa-solid fa-gift" style="color:#22c55e;font-size:1.1rem;"></i>
+          <span style="font-size:0.75rem;color:var(--t1);font-weight:600;">Daftar gratis & nikmati <b>Diskon Otomatis 5%</b> untuk setiap order!</span>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Nama Lengkap</label>
+          <input type="text" id="regName" class="warr-in" placeholder="Nama Anda" required>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Email</label>
+          <input type="email" id="regEmail" class="warr-in" placeholder="email@contoh.com" required>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">No. WhatsApp / Telegram</label>
+          <input type="text" id="regPhone" class="warr-in" placeholder="08xxxxxxxxxx atau @username">
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Password Baru</label>
+          <input type="password" id="regPass" class="warr-in" placeholder="Minimal 6 karakter" required minlength="6">
+        </div>
+        <button type="submit" id="btnRegisterSubmit" class="btn-order" style="margin-top:10px;background:#22c55e;">
+          <i class="fa-solid fa-crown"></i> Buat Akun & Dapatkan Diskon 5%
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- USER ORDERS HISTORY MODAL (SEMUA PESANAN & PANEL SAYA) -->
+<div class="modal-ov" id="userOrdersModal">
+  <div class="modal-sheet" style="max-width:620px;">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-receipt" style="color:var(--a);"></i> <span id="ordersModalTitle">Riwayat Pesanan</span></div>
+        <div class="modal-head-sub" id="userOrdersSub">Daftar transaksi Anda (Member maupun Guest / Tanpa Login)</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeUserOrdersModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- TABS: ALL ORDERS vs PANEL SAYA -->
+    <div style="padding:10px 20px 0;display:flex;gap:8px;">
+      <button type="button" class="warr-tab-btn act" id="tabBtnAllOrders" onclick="switchOrderModalTab('all')">
+        <i class="fa-solid fa-bag-shopping"></i> Semua Pesanan
+      </button>
+      <button type="button" class="warr-tab-btn" id="tabBtnMyPanels" onclick="switchOrderModalTab('panel')">
+        <i class="fa-solid fa-server" style="color:#10b981;"></i> Panel Saya
+      </button>
+    </div>
+
+    <!-- SEARCH / LOOKUP BAR FOR GUEST & MEMBER -->
+    <div style="padding:12px 20px 0;" id="orderLookupWrap">
+      <div style="display:flex;gap:8px;">
+        <input type="text" id="orderSearchInput" class="warr-in" placeholder="Ketik Email atau Order ID (misal ZYRO-123456)..." style="font-size:0.8rem;padding:9px 14px;" onkeydown="if(event.key==='Enter') executeOrderSearch()">
+        <button type="button" class="btn-order" onclick="executeOrderSearch()" style="width:auto;padding:0 16px;white-space:nowrap;font-size:0.8rem;">
+          <i class="fa-solid fa-magnifying-glass"></i> Cari
+        </button>
+      </div>
+      <div id="guestOrderPrompt" style="display:none;margin-top:8px;font-size:0.73rem;color:var(--t3);line-height:1.4;">
+        <i class="fa-solid fa-circle-info" style="color:var(--a);"></i> <span>Ingin pesanan tersimpan otomatis tanpa perlu cari email? <a href="/login" style="color:var(--a);font-weight:700;">Masuk / Daftar Akun Member (Diskon 5%)</a></span>
+      </div>
+    </div>
+
+    <div style="padding:14px 20px 24px;max-height:65vh;overflow-y:auto;" id="userOrdersList">
+      <div style="padding:30px;text-align:center;color:var(--t3);"><i class="fa-solid fa-spinner fa-spin"></i> Memuat riwayat pesanan...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ACCOUNT SETTINGS MODAL (GANTI PROFIL, EMAIL, PASSWORD) -->
+<div class="modal-ov" id="accountSettingsModal">
+  <div class="modal-sheet" style="max-width:480px;">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-user-gear" style="color:#06b6d4;"></i> <span>Pengaturan Akun</span></div>
+        <div class="modal-head-sub">Kelola data profil, email, dan kata sandi akun Anda</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeAccountSettingsModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- USER SUMMARY CARD -->
+    <div style="padding:14px 20px 0;">
+      <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+        <div style="position:relative;flex-shrink:0;">
+          <img src="/assets/logo.webp" id="settUserAvatar" width="48" height="48" alt="Avatar" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--a);object-fit:cover;display:block;">
+          <button type="button" onclick="document.getElementById('settAvatarFileInput').click()" title="Ganti Foto Profil" style="position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:var(--a);color:#fff;border:1.5px solid var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.6rem;padding:0;">
+            <i class="fa-solid fa-camera"></i>
+          </button>
+        </div>
+        <div style="overflow:hidden;flex:1;">
+          <div id="settUserName" style="font-size:0.9rem;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Member Zyro</div>
+          <div id="settUserEmail" style="font-size:0.75rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f727a727d7a6d5f7a677e726f737a317c7072">[email&#160;protected]</a></div>
+          <div style="font-size:0.68rem;color:#22c55e;font-weight:700;margin-top:2px;"><i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Diskon Member 5% Aktif</div>
+        </div>
+      </div>
+      <input type="file" id="settAvatarFileInput" accept="image/*,image/png,image/jpeg,image/webp,image/gif" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;opacity:0;" onchange="handleSettingsAvatarUpload(event)">
+    </div>
+
+    <!-- TABS -->
+    <div style="padding:14px 20px 0;display:flex;gap:6px;">
+      <button type="button" class="warr-tab-btn act" id="settTabBtnProfile" onclick="switchSettingsTab('profile')">
+        <i class="fa-solid fa-id-card"></i> Profil
+      </button>
+      <button type="button" class="warr-tab-btn" id="settTabBtnEmail" onclick="switchSettingsTab('email')">
+        <i class="fa-solid fa-envelope"></i> Ganti Email
+      </button>
+      <button type="button" class="warr-tab-btn" id="settTabBtnPassword" onclick="switchSettingsTab('password')">
+        <i class="fa-solid fa-key"></i> Ganti Password
+      </button>
+    </div>
+
+    <div style="padding:16px 20px 24px;">
+      <!-- TAB 1: EDIT PROFILE -->
+      <form id="formSettProfile" onsubmit="handleUpdateProfile(event)">
+        <div class="warr-field">
+          <label class="warr-lbl">Nama Lengkap</label>
+          <input type="text" id="settInputName" class="warr-in" placeholder="Nama Anda" required>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">No. WhatsApp / Username Telegram</label>
+          <input type="text" id="settInputPhone" class="warr-in" placeholder="08xxxxxxxxxx atau @username">
+        </div>
+        <button type="submit" id="btnSettProfileSubmit" class="btn-order" style="margin-top:8px;">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan Profil
+        </button>
+      </form>
+
+      <!-- TAB 2: CHANGE EMAIL -->
+      <form id="formSettEmail" onsubmit="handleUpdateEmail(event)" style="display:none;">
+        <div class="warr-field">
+          <label class="warr-lbl">Email Saat Ini</label>
+          <input type="email" id="settInputCurrentEmail" class="warr-in" style="opacity:0.7;" disabled readonly>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Alamat Email Baru</label>
+          <input type="email" id="settInputNewEmail" class="warr-in" placeholder="emailbaru@contoh.com" required>
+        </div>
+        <div class="warr-field" id="settEmailPassField">
+          <label class="warr-lbl">Password Akun (Konfirmasi Keamanan)</label>
+          <input type="password" id="settInputEmailPassword" class="warr-in" placeholder="Masukkan password Anda">
+        </div>
+        <button type="submit" id="btnSettEmailSubmit" class="btn-order" style="margin-top:8px;background:#0ea5e9;">
+          <i class="fa-solid fa-envelope-circle-check"></i> Perbarui Email
+        </button>
+      </form>
+
+      <!-- TAB 3: CHANGE PASSWORD -->
+      <form id="formSettPassword" onsubmit="handleUpdatePassword(event)" style="display:none;">
+        <div class="warr-field" id="settOldPassField">
+          <label class="warr-lbl">Password Lama</label>
+          <input type="password" id="settInputOldPass" class="warr-in" placeholder="••••••••">
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Password Baru (Min. 6 Karakter)</label>
+          <input type="password" id="settInputNewPass" class="warr-in" placeholder="Password baru" minlength="6" required>
+        </div>
+        <div class="warr-field">
+          <label class="warr-lbl">Konfirmasi Password Baru</label>
+          <input type="password" id="settInputConfirmPass" class="warr-in" placeholder="Ulangi password baru" minlength="6" required>
+        </div>
+        <button type="submit" id="btnSettPassSubmit" class="btn-order" style="margin-top:8px;background:#10b981;">
+          <i class="fa-solid fa-lock"></i> Perbarui Password
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ADD-ON SPEK PANEL INFO MODAL -->
+<div class="modal-ov" id="addonInfoModal">
+  <div class="modal-sheet" style="max-width:580px;">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i> Add-On Spek Panel Pterodactyl</div>
+        <div class="modal-head-sub">Tingkatkan spesifikasi server panel Anda secara instan</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeAddonInfoModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div style="padding:16px 20px 24px;max-height:75vh;overflow-y:auto;">
+      <!-- Add-on Feature Highlights -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px;">
+        <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:12px;text-align:center;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,0.15);color:#0ea5e9;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;">
+            <i class="fa-solid fa-memory"></i>
+          </div>
+          <b style="font-size:0.82rem;color:var(--t1);display:block;">Tambah RAM</b>
+          <span style="font-size:0.72rem;color:var(--t3);">Mulai Rp 1.000 / GB<br>Pilihan +1GB s/d +4GB</span>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:12px;text-align:center;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(168,85,247,0.15);color:#a855f7;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;">
+            <i class="fa-solid fa-hard-drive"></i>
+          </div>
+          <b style="font-size:0.82rem;color:var(--t1);display:block;">Tambah NVMe Disk</b>
+          <span style="font-size:0.72rem;color:var(--t3);">Mulai Rp 500 / GB<br>Pilihan +2GB s/d +10GB</span>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:12px;text-align:center;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(234,179,8,0.15);color:#eab308;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <b style="font-size:0.82rem;color:var(--t1);display:block;">Tambah CPU Power</b>
+          <span style="font-size:0.72rem;color:var(--t3);">Mulai Rp 1.000 / 25%<br>Maksimal Server 250%</span>
+        </div>
+      </div>
+
+      <!-- Pricing Table per Tier -->
+      <div style="background:var(--surface);border:1px solid var(--b1);border-radius:14px;padding:14px;margin-bottom:16px;">
+        <div style="font-size:0.78rem;font-weight:800;color:var(--t1);margin-bottom:10px;display:flex;align-items:center;gap:7px;">
+          <i class="fa-solid fa-table-list" style="color:var(--a);"></i> Tarif Add-on per Kategori Panel
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;font-size:0.75rem;border-collapse:collapse;text-align:left;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--b1);color:var(--t3);">
+                <th style="padding:6px 8px;">Kategori Panel</th>
+                <th style="padding:6px 8px;">RAM / GB</th>
+                <th style="padding:6px 8px;">Disk / GB</th>
+                <th style="padding:6px 8px;">CPU / 25%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--b1);">
+                <td style="padding:8px 8px;font-weight:700;">Legal Publik</td>
+                <td style="padding:8px 8px;color:#0ea5e9;">+Rp 1.000</td>
+                <td style="padding:8px 8px;color:#a855f7;">+Rp 500</td>
+                <td style="padding:8px 8px;color:#eab308;">+Rp 1.000</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--b1);">
+                <td style="padding:8px 8px;font-weight:700;">Legal Private</td>
+                <td style="padding:8px 8px;color:#0ea5e9;">+Rp 1.500</td>
+                <td style="padding:8px 8px;color:#a855f7;">+Rp 750</td>
+                <td style="padding:8px 8px;color:#eab308;">+Rp 1.500</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--b1);">
+                <td style="padding:8px 8px;font-weight:700;">Legal Enterprise</td>
+                <td style="padding:8px 8px;color:#0ea5e9;">+Rp 2.000</td>
+                <td style="padding:8px 8px;color:#a855f7;">+Rp 1.000</td>
+                <td style="padding:8px 8px;color:#eab308;">+Rp 2.000</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 8px;font-weight:700;">Legal Premium</td>
+                <td style="padding:8px 8px;color:#0ea5e9;">+Rp 2.500</td>
+                <td style="padding:8px 8px;color:#a855f7;">+Rp 1.250</td>
+                <td style="padding:8px 8px;color:#eab308;">+Rp 2.500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Max CPU Rule Explanation -->
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:12px 14px;margin-bottom:18px;font-size:0.75rem;line-height:1.45;color:var(--t1);">
+        <i class="fa-solid fa-shield-halved" style="color:#f59e0b;margin-right:4px;"></i>
+        <b>Aturan Batas CPU 250%:</b> Sesuai kebijakan stabilitas node server ZyroStore, total batas CPU maksimal dibatasi pada <b>250%</b>. Jika paket panel yang dibeli sudah memiliki CPU 250% (seperti paket Unlimited / 10GB), penambahan CPU tidak lagi dapat dipilih agar server terhindar dari overload.
+      </div>
+
+      <!-- Action Button -->
+      <button class="btn-order" onclick="closeAddonInfoModal(); scrollToPanelCatalog();" style="width:100%;padding:14px;font-size:0.88rem;">
+        <i class="fa-solid fa-server"></i> Pilih Panel & Pasang Add-On Sekarang
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOP UP SALDO MODAL -->
+<div class="modal-ov" id="topupModal">
+  <div class="modal-sheet" style="max-width: 480px;">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-wallet" style="color:var(--a);"></i> <span>Isi Saldo Akun</span></div>
+        <div class="modal-head-sub">Top up via QRIS Otomatis (BCA, Mandiri, Dana, GoPay, OVO, dll)</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeTopupModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- BODY WRAPPER -->
+    <div style="padding: 18px 22px 24px;">
+
+      <!-- STEP 1: PILIH NOMINAL -->
+      <div id="topup-step-input">
+        <!-- CURRENT BALANCE INFO -->
+        <div class="topup-current-box">
+          <div style="font-size:0.75rem; color:var(--t3); display:flex; align-items:center; gap:6px;">
+            <i class="fa-solid fa-coins" style="color:#f59e0b;"></i> Saldo Anda Saat Ini
+          </div>
+          <div class="topup-current-val" id="topup-modal-current-bal">Rp 0</div>
+        </div>
+
+        <!-- QUICK NOMINAL CHIPS -->
+        <label style="font-size:0.82rem; font-weight:700; color:var(--t1); margin-bottom:8px; display:block;">
+          Pilih Nominal Instan:
+        </label>
+        <div class="topup-chips-grid">
+          <button type="button" class="topup-chip" data-nominal="5000" onclick="selectTopupChip(5000, this)">Rp 5.000</button>
+          <button type="button" class="topup-chip" data-nominal="10000" onclick="selectTopupChip(10000, this)">Rp 10.000</button>
+          <button type="button" class="topup-chip act" data-nominal="20000" onclick="selectTopupChip(20000, this)">Rp 20.000</button>
+          <button type="button" class="topup-chip" data-nominal="50000" onclick="selectTopupChip(50000, this)">Rp 50.000</button>
+          <button type="button" class="topup-chip" data-nominal="100000" onclick="selectTopupChip(100000, this)">Rp 100.000</button>
+          <button type="button" class="topup-chip" data-nominal="200000" onclick="selectTopupChip(200000, this)">Rp 200.000</button>
+        </div>
+
+        <!-- CUSTOM INPUT -->
+        <div style="margin-top:14px;">
+          <label style="font-size:0.82rem; font-weight:700; color:var(--t1); margin-bottom:6px; display:block;">
+            Atau Ketik Nominal Lain (Min. Rp 1.000):
+          </label>
+          <div class="topup-input-wrap">
+            <span class="topup-input-prefix">Rp</span>
+            <input type="number" id="topup-input-custom" placeholder="20.000" min="1000" step="1000" value="20000" oninput="onTopupCustomInput(this)">
+          </div>
+        </div>
+
+        <!-- SUMMARY CALCULATION -->
+        <div class="topup-summary-box">
+          <div class="topup-summary-row">
+            <span>Nominal Top Up</span>
+            <b id="topup-sum-amount">Rp 20.000</b>
+          </div>
+          <div class="topup-summary-row">
+            <span>Biaya Layanan / Admin</span>
+            <span style="color:#10b981; font-weight:700;"><i class="fa-solid fa-gift"></i> Rp 0 (GRATIS)</span>
+          </div>
+          <div class="topup-summary-row topup-summary-total">
+            <span>Total Pembayaran QRIS</span>
+            <b id="topup-sum-total" style="color:var(--a);">Rp 20.000</b>
+          </div>
+        </div>
+
+        <button type="button" class="btn-topup-action" id="btn-topup-generate" onclick="submitTopupOrder()">
+          <i class="fa-solid fa-qrcode"></i> Lanjut Bayar QRIS Otomatis
+        </button>
+
+        <!-- OWNER DIRECT SALDO INJECTION (KHUSUS DEVELOPER/FOUNDER) -->
+        <div id="topup-owner-direct-box" style="display:none; margin-top:16px; padding:12px 14px; border-radius:14px; background:var(--surface); border:1px dashed rgba(245, 158, 11, 0.4);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+            <div style="font-size:0.78rem; font-weight:800; color:#fbbf24; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-bolt"></i> Bypass Top Up (Khusus Owner / Developer)
+            </div>
+            <span style="font-size:0.65rem; background:rgba(245, 158, 11, 0.2); color:#f59e0b; padding:2px 8px; border-radius:999px; font-weight:700;">INSTAN</span>
+          </div>
+          <p style="font-size:0.73rem; color:var(--t2); margin:0 0 10px; line-height:1.4;">
+            Sebagai Owner / Developer, Anda dapat langsung menambahkan nominal di atas ke saldo akun Anda tanpa scan QRIS.
+          </p>
+          <button type="button" id="btn-owner-instant-topup" class="btn-owner-instant" onclick="submitOwnerSelfTopup()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Tambah Saldo Instan ke Akun Sendiri
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: QRIS PAYMENT SCREEN -->
+      <div id="topup-step-qris" style="display:none; text-align:center;">
+        <div class="topup-qris-status-badge">
+          <i class="fa-solid fa-clock fa-spin"></i> MENUNGGU PEMBAYARAN
+        </div>
+
+        <div class="topup-qris-total-box">
+          <div style="font-size:0.75rem; color:var(--t3);">Total yang Harus Dibayar:</div>
+          <div class="topup-qris-total-val" id="topup-qris-total-val">Rp 20.000</div>
+          <div style="font-size:0.72rem; color:var(--t2); margin-top:2px;">
+            ID Transaksi: <b id="topup-qris-id">-</b>
+          </div>
+        </div>
+
+        <div class="topup-qr-img-wrap">
+          <img id="topup-qr-img" src="" alt="QRIS Top Up">
+        </div>
+
+        <div class="topup-timer-text">
+          Selesaikan pembayaran dalam <b id="topup-timer-val" style="color:#ef4444;">15:00</b>
+        </div>
+
+        <div style="font-size:0.75rem; color:var(--t3); line-height:1.45; margin-bottom:14px;">
+          Buka aplikasi m-Banking atau E-Wallet (BCA, Mandiri, Dana, GoPay, OVO, ShopeePay, dll) lalu scan QRIS di atas. Saldo otomatis masuk setelah pembayaran sukses!
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="topup-btn-dl" onclick="downloadTopupQris()">
+            <i class="fa-solid fa-download"></i> Unduh QR
+          </button>
+          <button type="button" class="topup-btn-check" id="btn-topup-manual-check" onclick="manualCheckTopupStatus()">
+            <i class="fa-solid fa-rotate-right"></i> Cek Status
+          </button>
+        </div>
+
+        <button type="button" class="topup-btn-cancel" onclick="cancelTopupTransaction()">
+          <i class="fa-solid fa-xmark"></i> Batalkan Top Up
+        </button>
+      </div>
+
+      <!-- STEP 3: SUCCESS SCREEN -->
+      <div id="topup-step-success" style="display:none; text-align:center; padding:16px 0;">
+        <div class="topup-success-icon">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h4 style="font-weight:800; color:var(--t1); margin-bottom:6px; font-size:1.2rem;">Top Up Berhasil!</h4>
+        <p style="font-size:0.8rem; color:var(--t2); line-height:1.45; margin-bottom:16px;">
+          Pembayaran Anda telah terverifikasi. Saldo berhasil ditambahkan ke akun Anda secara instan.
+        </p>
+
+        <div class="topup-success-box">
+          <div class="topup-summary-row">
+            <span>Nominal Ditambahkan</span>
+            <b id="topup-success-amount" style="color:#10b981;">+Rp 20.000</b>
+          </div>
+          <div class="topup-summary-row topup-summary-total">
+            <span>Saldo Baru Anda</span>
+            <b id="topup-success-newbal" style="color:var(--a); font-size:1.15rem;">Rp 20.000</b>
+          </div>
+        </div>
+
+        <button type="button" class="btn-topup-action" onclick="finishTopupSuccess()">
+          <i class="fa-solid fa-check"></i> Selesai & Mulai Belanja
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- OWNER REWARD & ADD SALDO MODAL (EXCLUSIVE FOR FOUNDER / DEVELOPER) -->
+<div class="modal-ov" id="ownerRewardModal">
+  <div class="modal-sheet" style="max-width: 520px;">
+    <div class="mhandle"></div>
+    <div class="modal-head-bar">
+      <div>
+        <div class="modal-head-title"><i class="fa-solid fa-crown" style="color:#fbbf24;"></i> <span>Reward & Add Saldo</span></div>
+        <div class="modal-head-sub">Khusus Owner & Developer: Kirim reward saldo / role ke buyer</div>
+      </div>
+      <button class="modal-close-btn" onclick="closeOwnerRewardModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div style="padding: 18px 22px 24px; max-height: 80vh; overflow-y: auto;">
+      <!-- TARGET SELECTION TABS -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:16px;">
+        <button type="button" id="tab-home-tgt-buyer" class="topup-chip act" onclick="setHomeRewardTarget('buyer')" style="padding:10px; font-weight:700;">
+          <i class="fa-solid fa-gift"></i> Kirim ke Buyer
+        </button>
+        <button type="button" id="tab-home-tgt-self" class="topup-chip" onclick="setHomeRewardTarget('self')" style="padding:10px; font-weight:700;">
+          <i class="fa-solid fa-user-shield"></i> Saldo Sendiri
+        </button>
+      </div>
+
+      <!-- FORM FIELDS -->
+      <form id="homeRewardForm" onsubmit="submitHomeOwnerReward(event)">
+        <!-- TARGET BUYER SEARCH -->
+        <div id="home-reward-buyer-group" style="margin-bottom:14px; position:relative;">
+          <label style="font-size:0.8rem; font-weight:700; color:var(--t1); margin-bottom:6px; display:block;">
+            Cari User / Buyer Penerima:
+          </label>
+          <div class="topup-input-wrap">
+            <span class="topup-input-prefix"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text" id="home-reward-user-search" placeholder="Ketik Email, Username, atau ID User..." autocomplete="off" oninput="onHomeRewardSearch(this.value)">
+          </div>
+          <div id="home-reward-user-results" style="display:none; position:absolute; left:0; right:0; top:100%; background:var(--surface); border:1px solid var(--b1); border-radius:12px; max-height:190px; overflow-y:auto; z-index:1000; box-shadow:0 12px 30px rgba(0,0,0,0.45); margin-top:4px;"></div>
+          <div id="home-reward-selected-box" style="display:none; margin-top:8px; padding:10px 12px; border-radius:10px; background:rgba(14, 165, 233, 0.08); border:1px solid rgba(14, 165, 233, 0.3); align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-weight:700; font-size:0.83rem; color:var(--t1);" id="home-reward-sel-name">-</div>
+              <div style="font-size:0.73rem; color:var(--t2);" id="home-reward-sel-detail">-</div>
+            </div>
+            <button type="button" onclick="clearHomeRewardSelectedUser()" style="background:transparent; border:none; color:var(--t3); cursor:pointer; font-size:0.85rem;"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <input type="hidden" id="home-reward-target-id" value="">
+        </div>
+
+        <!-- NOMINAL REWARD -->
+        <div style="margin-bottom:14px;">
+          <label style="font-size:0.8rem; font-weight:700; color:var(--t1); margin-bottom:6px; display:block;">
+            Nominal Saldo (Rp):
+          </label>
+          <div class="topup-chips-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom:8px;">
+            <button type="button" class="topup-chip" onclick="setHomeRewardNominal(10000, this)">Rp 10.000</button>
+            <button type="button" class="topup-chip" onclick="setHomeRewardNominal(25000, this)">Rp 25.000</button>
+            <button type="button" class="topup-chip act" onclick="setHomeRewardNominal(50000, this)">Rp 50.000</button>
+            <button type="button" class="topup-chip" onclick="setHomeRewardNominal(100000, this)">Rp 100.000</button>
+            <button type="button" class="topup-chip" onclick="setHomeRewardNominal(250000, this)">Rp 250.000</button>
+            <button type="button" class="topup-chip" onclick="setHomeRewardNominal(500000, this)">Rp 500.000</button>
+          </div>
+          <div class="topup-input-wrap">
+            <span class="topup-input-prefix">Rp</span>
+            <input type="number" id="home-reward-amount" min="1000" step="1000" value="50000" required>
+          </div>
+        </div>
+
+        <!-- CATEGORY DROPDOWN -->
+        <div style="margin-bottom:14px;">
+          <label style="font-size:0.8rem; font-weight:700; color:var(--t1); margin-bottom:6px; display:block;">
+            Kategori Reward / Pemberian:
+          </label>
+          <select id="home-reward-category" style="width:100%; padding:10px 12px; border-radius:10px; background:var(--bg2); border:1px solid var(--b1); color:var(--t1); font-size:0.85rem; font-family:inherit;" onchange="onHomeRewardCategoryChange(this.value)">
+            <option value="bug">Bug Bounty / Penemu Bug Web</option>
+            <option value="leaderboard">Top Leaderboard / Top Transaksi</option>
+            <option value="kompensasi">Kompensasi Kendala Sistem</option>
+            <option value="event">Event / Giveaway Komunitas</option>
+            <option value="self">Top Up Saldo Sendiri (Owner Instan)</option>
+            <option value="lain-lain">Penyesuaian Saldo / Bonus Lain</option>
+          </select>
+        </div>
+
+        <!-- ATTACH ROLE OPTION -->
+        <div id="home-reward-role-group" style="margin-bottom:14px; padding:12px; background:var(--bg2); border:1px solid var(--b1); border-radius:10px;">
+          <label style="font-size:0.8rem; font-weight:700; color:var(--t1); margin-bottom:8px; display:block;">
+            <i class="fa-solid fa-id-badge" style="color:var(--a);"></i> Sematkan Gelar / Role Khusus:
+          </label>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--t2); cursor:pointer;">
+              <input type="radio" name="home_assign_role" value="" checked>
+              <span>Tidak mengubah role buyer</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--t2); cursor:pointer;">
+              <input type="radio" name="home_assign_role" value="bug_hunter" id="home-role-bughunter">
+              <span><b style="color:#10b981;"><i class="fa-solid fa-bug"></i> Bug Hunter</b> (Penemu bug keamanan / fitur)</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--t2); cursor:pointer;">
+              <input type="radio" name="home_assign_role" value="top_leaderboard" id="home-role-leaderboard">
+              <span><b style="color:#f59e0b;"><i class="fa-solid fa-trophy"></i> Top Leaderboard</b> (Juara transaksi terbanyak)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- NOTES -->
+        <div style="margin-bottom:18px;">
+          <label style="font-size:0.8rem; font-weight:700; color:var(--t1); margin-bottom:6px; display:block;">
+            Catatan / Alasan (Opsional):
+          </label>
+          <input type="text" id="home-reward-note" placeholder="Contoh: Hadiah pelaporan bug checkout cart" style="width:100%; padding:10px 12px; border-radius:10px; background:var(--bg2); border:1px solid var(--b1); color:var(--t1); font-size:0.83rem; box-sizing:border-box;">
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" id="btn-submit-home-reward" class="btn-owner-instant" style="font-size:0.9rem; padding:12px;">
+          <i class="fa-solid fa-paper-plane"></i> Proses & Kirim Saldo Reward
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-wrap">
+  <div id="page">
+
+    <!-- USER BALANCE & QUICK TOPUP BAR (ABOVE BANNER) -->
+    <div id="home-balance-section" class="home-balance-section">
+      <!-- LOGGED IN VIEW -->
+      <div id="home-balance-card" class="home-balance-card">
+        <div class="hbal-left">
+          <div class="hbal-avatar-wrap">
+            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+              document.write('<img id="hbal-avatar" src="' + (window.__EARLY_AVA__ || '/assets/logo.webp') + '" width="38" height="38" alt="Avatar" class="hbal-avatar">');
+            </script>
+            <span class="hbal-online-dot" title="Online"></span>
+          </div>
+          <div class="hbal-user-meta">
+            <div class="hbal-greeting">
+              <span>Halo, </span><b id="hbal-name"><script>document.write(window.__EARLY_NAME__ || 'Member');</script></b>
+              <span class="hbal-role-badge" id="hbal-role-badge"><script>document.write(window.__EARLY_ROLE__ || 'Member');</script></span>
+            </div>
+            <div class="hbal-email" id="hbal-email"><script>document.write(window.__EARLY_EMAIL__ || '');</script></div>
+          </div>
+        </div>
+
+        <div class="hbal-main-row">
+          <div class="hbal-mid">
+            <div class="hbal-label-row">
+              <span class="hbal-title"><i class="fa-solid fa-wallet" style="color:var(--a);"></i> Saldo Akun Zyro</span>
+              <button type="button" class="hbal-icon-btn" id="btn-toggle-balance" onclick="toggleBalanceVisibility()" title="Sembunyikan/Tampilkan Saldo">
+                <i class="fa-regular fa-eye" id="icon-toggle-balance"></i>
+              </button>
+              <button type="button" class="hbal-icon-btn" id="btn-refresh-balance" onclick="refreshUserBalance(true)" title="Perbarui Saldo">
+                <i class="fa-solid fa-rotate-right"></i>
+              </button>
+            </div>
+            <div class="hbal-amount-row">
+              <span class="hbal-amount" id="hbal-amount-val"><script>document.write(window.__EARLY_BAL_STR__ || 'Rp 0');</script></span>
+            </div>
+          </div>
+
+          <!-- LIVE STATS MINI WIDGET (USER / TRX COUNTER) -->
+          <div class="hbal-stats-box">
+            <div class="hbal-stat-item" title="Total Transaksi Sukses">
+              <div class="hbal-stat-val" id="total-sukses">
+                <span class="tx-pill tx-pill-green">
+                  <i class="fa-solid fa-arrow-up-right-dots"></i> <script>
+                    var tc = window.currentStoreTotalTrx || parseInt(localStorage.getItem('zyro_total_trx'), 10) || 1179;
+                    document.write(Number(tc).toLocaleString('id-ID'));
+                  </script>
+                </span>
+              </div>
+              <div class="hbal-stat-lbl">Transaksi</div>
+            </div>
+            <div class="hbal-stat-divider"></div>
+            <div class="hbal-stat-item" title="Total Member Terdaftar">
+              <div class="hbal-stat-val" id="total-users">
+                <span class="tx-pill tx-pill-blue">
+                  <i class="fa-solid fa-users"></i> <script>
+                    var uc = window.currentStoreTotalUsers || parseInt(localStorage.getItem('zyro_total_users'), 10) || 592;
+                    document.write(Number(uc).toLocaleString('id-ID'));
+                  </script>
+                </span>
+              </div>
+              <div class="hbal-stat-lbl">User</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hbal-right">
+          <button type="button" class="btn-hbal-owner-reward" id="btn-owner-reward" style="display:<script>document.write(window.__EARLY_IS_OWNER__ ? 'inline-flex' : 'none');</script>;" onclick="openOwnerRewardModal()" title="Kirim Reward Saldo & Role ke Buyer">
+            <i class="fa-solid fa-crown" style="color:#fbbf24;"></i> <span>Reward & Role</span>
+          </button>
+          <button type="button" class="btn-hbal-topup" onclick="openTopupModal()">
+            <i class="fa-solid fa-circle-plus"></i> <span>Isi Saldo (Top Up)</span>
+          </button>
+          <a href="/profile" class="btn-hbal-sub">
+            <i class="fa-solid fa-receipt"></i> <span>Riwayat / Akun</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- LOGGED OUT / GUEST VIEW -->
+      <div id="home-guest-balance-card" class="home-guest-balance-card">
+        <div class="hguest-left">
+          <div class="hguest-icon">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div class="hguest-text">
+            <div class="hguest-title">
+              <span>Saldo Akun &amp; Pembayaran Cepat</span>
+              <span class="hguest-tag"><i class="fa-solid fa-bolt"></i> Diskon 5% Member</span>
+            </div>
+            <div class="hguest-desc">
+              Masuk atau daftar sekarang untuk menikmati kemudahan bayar pakai Saldo Akun tanpa repot scan QRIS berkali-kali!
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW TRUST & BENEFIT PILLS FOR BALANCED DESKTOP VIEW -->
+        <div class="hguest-center-perks">
+          <div class="hguest-perk"><i class="fa-solid fa-bolt" style="color:#0ea5e9;"></i> <span>Proses Instan 24/7</span></div>
+          <div class="hguest-perk"><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> <span>Garansi Anti-Suspend</span></div>
+          <div class="hguest-perk"><i class="fa-solid fa-qrcode" style="color:#f59e0b;"></i> <span>QRIS 0% Biaya</span></div>
+        </div>
+
+        <div class="hguest-right">
+          <button type="button" class="btn-hguest-login" onclick="openAuthModal('login')">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Masuk</span>
+          </button>
+          <button type="button" class="btn-hguest-reg" onclick="openAuthModal('register')">
+            <i class="fa-solid fa-user-plus"></i> <span>Daftar Akun</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYNCHRONOUS EARLY AUTH HYDRATION (ZERO FOUS) -->
+    <script>
+      (function() {
+        try {
+          var u = window.__EARLY_USER__;
+          if (!u) return;
+          var nameEl = document.getElementById('hbal-name');
+          var emailEl = document.getElementById('hbal-email');
+          var badgeEl = document.getElementById('hbal-role-badge');
+          var balEl = document.getElementById('hbal-amount-val');
+          var avatarEl = document.getElementById('hbal-avatar');
+          var navName = document.getElementById('userNavName');
+          var navAvatar = document.getElementById('userNavAvatar');
+          var udName = document.getElementById('udName');
+          var udEmail = document.getElementById('udEmail');
+          var udAvatar = document.getElementById('udAvatar');
+          var btnOwner = document.getElementById('btn-owner-reward');
+
+          var fullName = u.name || u.fullName || (u.email ? u.email.split('@')[0] : 'Member');
+          var firstName = fullName.split(' ')[0] || 'Member';
+          var isOwner = Boolean(u && (
+            (u.email && ['gilangx288@gmail.com', 'zyrodevv@gmail.com', 'gilram336@gmail.com'].includes(u.email.toLowerCase())) ||
+            (u.isAdmin === true && u.cpanelRole?.category === 'owner')
+          ));
+
+          if (nameEl) nameEl.textContent = firstName;
+          if (emailEl) emailEl.textContent = u.email || '';
+          if (navName) navName.textContent = firstName;
+          if (udName) udName.textContent = fullName;
+          if (udEmail) udEmail.textContent = u.email || '';
+
+          if (badgeEl) {
+            var roleTitle = (u.cpanelRole?.name || u.role || 'Member').replace('Legal ', '');
+            if (Array.isArray(u.roles)) {
+              if (u.roles.includes('bug_hunter')) {
+                roleTitle = '<i class="fa-solid fa-bug"></i> Bug Hunter';
+              } else if (u.roles.includes('top_leaderboard')) {
+                roleTitle = '<i class="fa-solid fa-trophy"></i> Top Leaderboard';
+              } else if (isOwner || u.roles.includes('developer') || u.roles.includes('founder')) {
+                roleTitle = '<i class="fa-solid fa-crown"></i> Founder / Dev';
+              }
+            } else if (isOwner) {
+              roleTitle = '<i class="fa-solid fa-crown"></i> Owner / Dev';
+            }
+            badgeEl.innerHTML = roleTitle;
+          }
+
+          if (balEl && typeof u.balance !== 'undefined') {
+            var isHidden = localStorage.getItem('zyro_hide_balance') === 'true' || localStorage.getItem('zyro_balance_hidden') === 'true';
+            var strVal = isHidden ? 'Rp ••••••••' : ('Rp ' + Number(u.balance || 0).toLocaleString('id-ID'));
+            balEl.textContent = strVal;
+            balEl.classList.remove('hbal-amount-long', 'hbal-amount-huge');
+            if (!isHidden) {
+              if (strVal.length > 15) {
+                balEl.classList.add('hbal-amount-huge');
+                document.documentElement.classList.add('zyro-bal-huge');
+                document.documentElement.classList.remove('zyro-bal-long');
+              } else if (strVal.length > 12) {
+                balEl.classList.add('hbal-amount-long');
+                document.documentElement.classList.add('zyro-bal-long');
+                document.documentElement.classList.remove('zyro-bal-huge');
+              } else {
+                document.documentElement.classList.remove('zyro-bal-long', 'zyro-bal-huge');
+              }
+            } else {
+              document.documentElement.classList.remove('zyro-bal-long', 'zyro-bal-huge');
+            }
+            var iconEye = document.getElementById('icon-toggle-balance');
+            if (iconEye) {
+              iconEye.className = isHidden ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+            }
+          }
+
+          if (btnOwner && isOwner) {
+            btnOwner.style.display = 'inline-flex';
+          }
+
+          var sbAdmin = document.getElementById('sbAdminGroup');
+          var ftAdmin = document.getElementById('ftAdminLink');
+          var udAdmin = document.getElementById('udAdminLink');
+          if (sbAdmin && isOwner) sbAdmin.style.display = 'block';
+          if (ftAdmin && isOwner) ftAdmin.style.display = 'flex';
+          if (udAdmin && isOwner) udAdmin.style.display = 'flex';
+
+          var cachedAva = localStorage.getItem('zyro_cached_avatar_b64');
+          var effectiveAvatar = cachedAva || u.avatar || '/assets/logo.webp';
+          if (avatarEl) avatarEl.src = effectiveAvatar;
+          if (navAvatar) navAvatar.src = effectiveAvatar;
+          if (udAvatar) udAvatar.src = effectiveAvatar;
+        } catch(e) {}
+      })();
+    </script>
+
+    <!-- CATEGORY MENU -->
+    <div class="sec" id="s-cat">
+      <div class="cat-scroll" id="category-menu">
+        <div class="cat-pill act" onclick="filterCat('all', this)">Semua</div>
+        <div class="cat-pill" onclick="filterCat('Hosting_Panel_Pterodactyl', this)">Panel Pterodactyl</div>
+        <div class="cat-pill" onclick="filterCat('VPS_Indonesia', this)">VPS Indonesia</div>
+        <div class="cat-pill" onclick="filterCat('Role_Panel', this)">Role Panel</div>
+      </div>
+    </div>
+
+    <!-- PRODUCT CATALOG DISPLAY (Pre-allocated geometry for 0 layout shift / CLS = 0) -->
+    <div id="product-display" style="min-height:520px;">
+      <div class="shop-section" data-cat="Hosting_Panel_Pterodactyl">
+        <div class="shop-cat-hd">
+          <div class="shop-cat-icon">
+            <i class="fa-solid fa-server"></i>
+          </div>
+          <div class="shop-cat-name">Hosting Panel Pterodactyl</div>
+          <div class="cat-label-pill">4 Tier Pilihan</div>
+          <span class="panel-live-pill" id="panel-status-unified"><i class="fa-solid fa-circle-check"></i> Server Online</span>
+        </div>
+        <div class="prod-row prod-container">
+          <div class="prod-card" style="opacity:1;transform:none;">
+            <div class="prod-img-wrap ptero-card-header">
+              <div class="prod-badge pb-hot"><i class="fa-solid fa-fire"></i> BEST SELLER</div>
+              <div class="ptero-header-brand">
+                <div class="ptero-icon-circle legal_public"><i class="fa-solid fa-globe"></i></div>
+                <div class="ptero-brand-text">
+                  <span class="ptero-brand-title">PTERODACTYL</span>
+                  <span class="ptero-brand-sub legal_public">SHARED PUBLIC</span>
+                </div>
+              </div>
+            </div>
+            <div class="prod-body">
+              <div class="prod-name">Panel Publik Shared</div>
+              <div class="ptero-price-card">
+                <div class="ptero-price-head"><span class="ptero-price-eyebrow">Mulai dari</span><span class="ptero-price-rate-pill">Rp 1.000 / GB</span></div>
+                <div class="ptero-price-main"><span class="ptero-price-curr">Rp</span><span class="ptero-price-val">1.000</span><span class="ptero-price-unit">/bln</span></div>
+                <div class="ptero-price-range"><i class="fa-solid fa-layer-group"></i> 1 GB – Unli (10k)</div>
+              </div>
+              <div class="prod-stok"><i class="fa-solid fa-microchip"></i> RAM 1 - 10 GB + Unli • CPU 50-250%</div>
+              <div class="ptero-card-tagline">Cocok untuk Bot WA & Node.js</div>
+              <button type="button" class="btn-detail" onclick="if(window.PanelConfigModal){window.PanelConfigModal.open('legal_public');}else{alert('Memuat modul konfigurasi...');}"><i class="fa-solid fa-sliders"></i> Atur Spek & Beli</button>
+            </div>
+          </div>
+          <div class="prod-card" style="opacity:1;transform:none;">
+            <div class="prod-img-wrap ptero-card-header">
+              <div class="prod-badge pb-new"><i class="fa-solid fa-shield-halved"></i> DEDICATED</div>
+              <div class="ptero-header-brand">
+                <div class="ptero-icon-circle legal_private"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="ptero-brand-text">
+                  <span class="ptero-brand-title">PTERODACTYL</span>
+                  <span class="ptero-brand-sub legal_private">DEDICATED PRIVATE</span>
+                </div>
+              </div>
+            </div>
+            <div class="prod-body">
+              <div class="prod-name">Panel Private Dedicated</div>
+              <div class="ptero-price-card">
+                <div class="ptero-price-head"><span class="ptero-price-eyebrow">Mulai dari</span><span class="ptero-price-rate-pill">Dedicated Slice</span></div>
+                <div class="ptero-price-main"><span class="ptero-price-curr">Rp</span><span class="ptero-price-val">4.000</span><span class="ptero-price-unit">/bln</span></div>
+                <div class="ptero-price-range"><i class="fa-solid fa-layer-group"></i> 1 GB – Unli (25k)</div>
+              </div>
+              <div class="prod-stok"><i class="fa-solid fa-microchip"></i> RAM 1 - 10 GB + Unli • Dedicated Slice</div>
+              <div class="ptero-card-tagline">Domain @private.zyrostore.id</div>
+              <button type="button" class="btn-detail" onclick="if(window.PanelConfigModal){window.PanelConfigModal.open('legal_private');}else{alert('Memuat modul konfigurasi...');}"><i class="fa-solid fa-sliders"></i> Atur Spek & Beli</button>
+            </div>
+          </div>
+          <div class="prod-card" style="opacity:1;transform:none;">
+            <div class="prod-img-wrap ptero-card-header">
+              <div class="prod-badge pb-hot"><i class="fa-solid fa-crown"></i> ENTERPRISE</div>
+              <div class="ptero-header-brand">
+                <div class="ptero-icon-circle legal_enterprise"><i class="fa-solid fa-building"></i></div>
+                <div class="ptero-brand-text">
+                  <span class="ptero-brand-title">PTERODACTYL</span>
+                  <span class="ptero-brand-sub legal_enterprise">ENTERPRISE ULTRA</span>
+                </div>
+              </div>
+            </div>
+            <div class="prod-body">
+              <div class="prod-name">Panel Enterprise Ultra</div>
+              <div class="ptero-price-card">
+                <div class="ptero-price-head"><span class="ptero-price-eyebrow">Mulai dari</span><span class="ptero-price-rate-pill">3x NVMe Gen4</span></div>
+                <div class="ptero-price-main"><span class="ptero-price-curr">Rp</span><span class="ptero-price-val">5.000</span><span class="ptero-price-unit">/bln</span></div>
+                <div class="ptero-price-range"><i class="fa-solid fa-layer-group"></i> 1 GB – Unli (26k)</div>
+              </div>
+              <div class="prod-stok"><i class="fa-solid fa-microchip"></i> RAM 1 - 10 GB + Unli • 3x NVMe Storage</div>
+              <div class="ptero-card-tagline">Domain @zyrodevv.web.id</div>
+              <button type="button" class="btn-detail" onclick="if(window.PanelConfigModal){window.PanelConfigModal.open('legal_enterprise');}else{alert('Memuat modul konfigurasi...');}"><i class="fa-solid fa-sliders"></i> Atur Spek & Beli</button>
+            </div>
+          </div>
+          <div class="prod-card" style="opacity:1;transform:none;">
+            <div class="prod-img-wrap ptero-card-header">
+              <div class="prod-badge pb-new"><i class="fa-solid fa-bolt"></i> ULTIMATE</div>
+              <div class="ptero-header-brand">
+                <div class="ptero-icon-circle legal_premium"><i class="fa-solid fa-crown"></i></div>
+                <div class="ptero-brand-text">
+                  <span class="ptero-brand-title">PTERODACTYL</span>
+                  <span class="ptero-brand-sub legal_premium">HIGH-CORE PREMIUM</span>
+                </div>
+              </div>
+            </div>
+            <div class="prod-body">
+              <div class="prod-name">Panel Premium High-Core</div>
+              <div class="ptero-price-card">
+                <div class="ptero-price-head"><span class="ptero-price-eyebrow">Mulai dari</span><span class="ptero-price-rate-pill">Priority Host</span></div>
+                <div class="ptero-price-main"><span class="ptero-price-curr">Rp</span><span class="ptero-price-val">5.000</span><span class="ptero-price-unit">/bln</span></div>
+                <div class="ptero-price-range"><i class="fa-solid fa-layer-group"></i> 1 GB – Unli (30k)</div>
+              </div>
+              <div class="prod-stok"><i class="fa-solid fa-microchip"></i> RAM 1 - 10 GB + Unli • Priority Host</div>
+              <div class="ptero-card-tagline">Performa Skala Produksi</div>
+              <button type="button" class="btn-detail" onclick="if(window.PanelConfigModal){window.PanelConfigModal.open('legal_premium');}else{alert('Memuat modul konfigurasi...');}"><i class="fa-solid fa-sliders"></i> Atur Spek & Beli</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="ft-brand">
+        <img src="/assets/logo-animated-dark.webp" width="28" height="28" alt="ZyroDevv" class="zyro-logo-animated" data-logo-type="full" loading="lazy">
+        ZyroDevv Store
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <p class="ft-copy">&copy; 2026 ZyroStore.id</p>
+        <a href="/admin" id="ftAdminLink" style="font-size:0.75rem;color:var(--t3);text-decoration:none;font-weight:600;display:none;align-items:center;gap:5px;" title="Login Admin Panel">
+          <i class="fa-solid fa-crown" style="color:#f59e0b;"></i> Admin
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- FLOATING LIVE CHAT CS (AI FIRST + HUMAN ADMIN TAKEOVER) -->
+<button id="floating-chat-btn" onclick="toggleChatWidget()" title="Live Chat CS (AI 24 Jam)">
+  <i class="fa-solid fa-comments"></i>
+  <span class="chat-btn-pulse"></span>
+  <span class="chat-badge-dot"></span>
+</button>
+
+<div id="chat-widget-box">
+  <div class="chat-head">
+    <div class="chat-head-info">
+      <div class="chat-head-avatar"><i class="fa-solid fa-headset"></i></div>
+      <div>
+        <div class="chat-head-name">ZyroStore Support</div>
+        <div class="chat-head-sub">
+          <span class="chat-head-dot"></span> Online • CS 24 Jam Siap Membantu
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="chat-head-btn" id="btnRefreshChat" onclick="refreshChatMessages()" title="Segarkan Percakapan (Tanpa Hapus Riwayat)">
+        <i class="fa-solid fa-arrows-rotate" id="iconRefreshChat"></i>
+      </button>
+      <button class="chat-head-btn" onclick="toggleChatWidget()" title="Tutup Chat">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+  <div class="chat-body" id="chat-messages">
+    <div class="chat-bubble-wrap ai">
+      <span class="chat-sender-lbl"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--a);"></i> Zyro AI CS</span>
+      <div class="chat-bubble ai">
+        Halo! Selamat datang di <b>ZyroStore.id</b>.<br>
+        Ada yang bisa kami bantu? Tanyakan tentang stok panel, cara order, spek RAM/Disk add-on, atau klaim garansi.
+      </div>
+      <span class="chat-bubble-time">Sekarang</span>
+    </div>
+  </div>
+  <div class="chat-chips-wrap">
+    <button class="chat-chip" onclick="quickChat('Bisa tambah spek RAM dan CPU panel?')"><i class="fa-solid fa-bolt"></i> Add-on Spek Panel</button>
+    <button class="chat-chip" onclick="quickChat('Bagaimana cara klaim garansi panel?')"><i class="fa-solid fa-shield-halved"></i> Klaim Garansi</button>
+    <button class="chat-chip" onclick="quickChat('Metode pembayaran apa saja yang tersedia?')"><i class="fa-solid fa-credit-card"></i> Metode Bayar</button>
+    <button class="chat-chip" onclick="quickChat('Berapa lama proses pembuatan panel?')"><i class="fa-solid fa-stopwatch"></i> Waktu Proses</button>
+  </div>
+  <form class="chat-input-bar" onsubmit="handleSendChatMessage(event)">
+    <input type="text" id="chatInputText" class="chat-input" placeholder="Tulis pertanyaanmu..." autocomplete="off">
+    <button type="submit" class="chat-send-btn" id="chatSendBtn" title="Kirim">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </form>
+</div>
+
+<!-- PERSISTENT MOBILE BOTTOM NAVIGATION (Instant render on frame 1) -->
+<nav class="zyro-bottom-nav" aria-label="Navigasi Cepat Mobile">
+  <a href="/shop" draggable="false" class="zyro-bottom-nav-item active" title="Toko & Katalog">
+    <i class="fa-solid fa-store"></i>
+    <span>Toko</span>
+  </a>
+  <a href="/riwayat" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
+    <i class="fa-solid fa-receipt"></i>
+    <span>Transaksi</span>
+  </a>
+  <a href="/cpanel" draggable="false" class="zyro-bottom-nav-item" title="CPanel Server">
+    <i class="fa-solid fa-server"></i>
+    <span>CPanel</span>
+  </a>
+  <a href="/bansos" draggable="false" class="zyro-bottom-nav-item" title="Bansos Panel Free">
+    <i class="fa-solid fa-gift"></i>
+    <span>Bansos</span>
+  </a>
+  <a href="/profile" draggable="false" class="zyro-bottom-nav-item" title="Akun & Profil">
+    <i class="fa-solid fa-user"></i>
+    <span>Akun</span>
+  </a>
+</nav>
+
+<!-- ZYROSTORE MODULAR UI ARCHITECTURE -->
+<script src="/js/constants/roles.js?v=1.0" defer></script>
+<script src="/js/components/ui/dialog.js?v=1.0" defer></script>
+<script src="/js/components/ui/toast.js?v=1.0" defer></script>
+<script src="/js/components/ui/select.js?v=1.0" defer></script>
+<script src="/js/components/ui/badge.js?v=1.0" defer></script>
+<script src="/js/components/modules/product-grid.js?v=1.0" defer></script>
+<script src="/js/services/api.js?v=1.0" defer></script>
+<script src="/js/components/panel-config-modal.js?v=3.0" defer></script>
+<script src="/js/shop.js?v=6.0.0" defer></script>
+<script src="/js/components/ui/bottom-nav.js?v=6.5.0" defer></script>
+</body>
+</html>

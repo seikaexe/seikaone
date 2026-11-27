@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id" class="dark" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cek Status Pesanan – SeikaOne.id</title>
+  <meta name="description" content="Lacak dan cek status pesanan produk digital atau server Anda secara real-time di SeikaOne.id.">
+  <link rel="canonical" href="https://zyrostore.id/cek-pesanan">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('seika_theme') || 'cream';
+      if (saved === 'light') saved = 'cream';
+      document.documentElement.setAttribute('data-theme', saved);
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    })();
+  </script>
+  <style>
+    :root:not(.dark) {
+      color-scheme: light;
+      --bg: #FAF8F5;
+      --bg2: #F5EFE6;
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --t1: #1e293b;
+      --t2: #475569;
+      --t3: #64748b;
+      --b1: rgba(217, 119, 6, 0.15);
+      --b2: rgba(217, 119, 6, 0.25);
+    }
+    :root.dark, html.dark {
+      color-scheme: dark;
+      --bg: #070e1b;
+      --bg2: #0c1626;
+      --surface: #101e32;
+      --surface-card: #132238;
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --b1: rgba(255, 255, 255, 0.08);
+      --b2: rgba(255, 255, 255, 0.15);
+    }
+    html, body { background-color: var(--bg); color: var(--t1); }
+    .track-wrap { max-width: 860px; margin: 0 auto; width: 100%; }
+    .track-box {
+      background: var(--surface); border: 1px solid var(--b1);
+      border-radius: var(--rlg); padding: 28px 24px; margin-top: 24px;
+      box-shadow: var(--shadow);
+    }
+    .track-title { font-size: 1.15rem; font-weight: 800; color: var(--t1); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .track-title i { color: var(--a); }
+    .search-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    .search-in {
+      flex: 1; padding: 13px 20px; border-radius: 100px;
+      border: 1.5px solid var(--b2); background: var(--bg2); color: var(--t1);
+      font-size: 0.88rem; font-weight: 600; outline: none; transition: var(--ease);
+    }
+    .search-in:focus { border-color: var(--a); box-shadow: 0 0 0 3px rgba(14,165,233,.2); }
+    .btn-search {
+      padding: 13px 24px; border-radius: 100px; background: #0284c7;
+      color: #fff; border: 1px solid #0284c7; font-weight: 800; font-size: 0.88rem; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(2,132,199,0.25); white-space: nowrap;
+    }
+    .btn-search:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(2,132,199,0.35); }
+    .res-card {
+      background: var(--bg2); border: 1px solid var(--b1);
+      border-radius: var(--r); padding: 20px; margin-top: 18px; display: none;
+    }
+    .res-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.85rem; }
+    .res-row:last-child { margin-bottom: 0; }
+    .res-status-paid { color: var(--green); font-weight: 800; display: inline-flex; align-items: center; gap: 6px; }
+    .res-status-pending { color: var(--amber); font-weight: 800; display: inline-flex; align-items: center; gap: 6px; }
+
+    @media (max-width: 640px) {
+      .track-wrap { padding: 10px 12px 30px; }
+      .track-box { padding: 18px 16px; margin-top: 14px; border-radius: var(--r); }
+      .search-row { flex-direction: column; gap: 8px; }
+      .search-in { width: 100%; box-sizing: border-box; padding: 12px 18px; font-size: 0.82rem; }
+      .btn-search { width: 100%; justify-content: center; padding: 12px 20px; font-size: 0.84rem; }
+      .res-card { padding: 16px 14px; border-radius: var(--r); }
+      .res-row { flex-direction: column; align-items: flex-start; gap: 3px; padding: 6px 0; border-bottom: 1px dashed var(--b1); }
+      .res-row:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <header class="topbar">
+    <div class="tb-inner">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="tb-brand">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>Cek Status Pesanan</span>
+        </div>
+      </div>
+      <div class="tb-r">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div id="page">
+      <div class="track-wrap">
+        <div class="track-box">
+          <div class="track-title"><i class="fa-solid fa-magnifying-glass"></i> Lacak Status Pesanan</div>
+          <p style="font-size:0.82rem;color:var(--t3);margin-bottom:16px;">
+            Masukkan <b>Order ID</b> (contoh: <code>ZYRO-123456</code>) atau <b>Kode Garansi</b> Anda saat checkout:
+          </p>
+
+          <div class="search-row">
+            <input type="text" id="queryIn" class="search-in" placeholder="Ketik Order ID (ZYRO-XXXXXX) atau Kode Garansi..." onkeydown="if(event.key==='Enter') searchOrder()">
+            <button class="btn-search" onclick="searchOrder()">
+              <i class="fa-solid fa-magnifying-glass"></i> Cari
+            </button>
+          </div>
+
+          <div id="notFoundBox" style="display:none;padding:16px;background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.25);border-radius:var(--rsm);color:var(--rose);font-size:0.82rem;font-weight:600;text-align:center;">
+            <i class="fa-solid fa-circle-xmark"></i> Pesanan tidak ditemukan. Pastikan Order ID atau Kode Garansi sudah benar.
+          </div>
+
+          <div id="resBox" class="res-card">
+            <h4 style="font-size:0.92rem;font-weight:800;color:var(--t1);margin-bottom:14px;border-bottom:1px solid var(--b1);padding-bottom:8px;display:flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-receipt" style="color:var(--a);"></i> Detail Pesanan
+            </h4>
+            <div class="res-row">
+              <span style="color:var(--t3);">Order ID:</span>
+              <b id="resId" style="font-family:'JetBrains Mono',monospace;color:var(--a);">-</b>
+            </div>
+            <div class="res-row">
+              <span style="color:var(--t3);">Produk:</span>
+              <b id="resProd">-</b>
+            </div>
+            <div class="res-row">
+              <span style="color:var(--t3);">Total Pembayaran:</span>
+              <b id="resTotal">-</b>
+            </div>
+            <div class="res-row">
+              <span style="color:var(--t3);">Status:</span>
+              <span id="resStatus">-</span>
+            </div>
+            <div class="res-row">
+              <span style="color:var(--t3);">Waktu Pesanan:</span>
+              <span id="resTime">-</span>
+            </div>
+
+            <div id="resCredWrap" style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--b1);display:none;">
+              <div style="font-size:0.75rem;font-weight:800;color:var(--a);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                <i class="fa-solid fa-key"></i> Informasi Akses & Akun:
+              </div>
+              <pre id="resCred" style="background:var(--surface);padding:14px;border-radius:var(--rsm);border:1px solid var(--b1);font-family:'JetBrains Mono',monospace;font-size:0.78rem;white-space:pre-wrap;color:var(--t1);"></pre>
+              <div id="resCredActions" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+      const fn = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(fn);
+      } else {
+        fn();
+      }
+    }
+
+    async function searchOrder() {
+      const q = document.getElementById('queryIn').value.trim();
+      if (!q) return;
+
+      const resBox = document.getElementById('resBox');
+      const notFound = document.getElementById('notFoundBox');
+      resBox.style.display = 'none';
+      notFound.style.display = 'none';
+
+      try {
+        const token = localStorage.getItem('seika_user_token') || localStorage.getItem('user_token') || '';
+        const tokenQuery = token ? '&token=' + encodeURIComponent(token) : '';
+        const res = await fetch(`/api/order/track?q=${encodeURIComponent(q)}${tokenQuery}`);
+        const json = await res.json();
+        if (json.status && json.order) {
+          const o = json.order;
+          document.getElementById('resId').innerText = o.orderId;
+          document.getElementById('resProd').innerText = o.productName + (o.duration > 1 ? ` (${o.duration} Bulan${o.duration === 12 ? ' - Promo 1 Thn' : ''})` : '');
+          document.getElementById('resTotal').innerText = 'Rp ' + Number(o.amount || 0).toLocaleString('id-ID');
+          
+          const isDone = o.status === 'completed' || o.status === 'paid';
+          document.getElementById('resStatus').innerHTML = isDone
+            ? '<span class="res-status-paid"><i class="fa-solid fa-circle-check"></i> SUKSES / TERKIRIM</span>'
+            : '<span class="res-status-pending"><i class="fa-solid fa-clock"></i> ' + (o.status || 'MENUNGGU').toUpperCase() + '</span>';
+          document.getElementById('resTime').innerText = o.createdAt || '-';
+
+          if (isDone && o.accountDetails) {
+            document.getElementById('resCredWrap').style.display = 'block';
+            document.getElementById('resCred').innerText = o.accountDetails;
+
+            const actionsEl = document.getElementById('resCredActions');
+            if (actionsEl) {
+              let actionsHtml = `
+                <button type="button" class="btn-copy" onclick="copyCredText()" style="padding:7px 14px;background:var(--surface);border:1px solid var(--b1);border-radius:8px;font-size:0.75rem;font-weight:700;color:var(--t1);cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+                  <i class="fa-solid fa-copy"></i> Salin Kredensial
+                </button>
+              `;
+              const dlMatch = o.accountDetails.match(/https?:\/\/[^\s\n\r]+\.zip/);
+              if (dlMatch) {
+                actionsHtml += `
+                  <a href="${dlMatch[0]}" target="_blank" download style="padding:7px 14px;background:#10b981;color:#ffffff;border-radius:8px;font-size:0.75rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(16,185,129,0.25);">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Unduh File Script (.zip)
+                  </a>
+                `;
+              }
+              const licMatch = o.accountDetails.match(/License Key:\s*([^\s\n\r]+)/i) || (o.licenseKey ? [null, o.licenseKey] : null);
+              if (licMatch && licMatch[1]) {
+                actionsHtml += `
+                  <button type="button" class="btn-copy" onclick="ZyroUtils.copyToClipboard('${licMatch[1]}').then(() => ZyroToast.success('License Key berhasil disalin!'))" style="padding:7px 14px;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);border-radius:8px;font-size:0.75rem;font-weight:700;color:#0ea5e9;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+                    <i class="fa-solid fa-key"></i> Salin License Key
+                  </button>
+                `;
+              }
+              actionsEl.innerHTML = actionsHtml;
+            }
+          } else {
+            document.getElementById('resCredWrap').style.display = 'none';
+          }
+          resBox.style.display = 'block';
+        } else {
+          notFound.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${escapeHtml(json.message || 'Pesanan tidak ditemukan. Pastikan Order ID atau Kode Garansi sudah benar.')}`;
+          notFound.style.display = 'block';
+        }
+      } catch (e) {
+        notFound.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Terjadi kesalahan jaringan saat melacak pesanan.`;
+        notFound.style.display = 'block';
+      }
+    }
+
+    async function copyCredText() {
+      const txt = document.getElementById('resCred')?.innerText;
+      if (!txt) return;
+      const ok = await ZyroUtils.copyToClipboard(txt);
+      if (ok) {
+        ZyroToast.success('Kredensial / informasi akses berhasil disalin!');
+      } else {
+        await ZyroPrompt('Salin kredensial berikut:', txt, { title: 'Salin Kredensial' });
+      }
+    }
+  </script>
+
+  <!-- SEIKAONE MODULAR UI ARCHITECTURE -->
+  <script src="js/lib/utils.js?v=1.0"></script>
+  <script src="js/components/ui/dialog.js?v=1.0"></script>
+  <script src="js/components/ui/toast.js?v=1.0"></script>
+  <script src="js/components/ui/select.js?v=1.0"></script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>

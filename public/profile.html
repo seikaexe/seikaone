@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('seika_theme') || localStorage.getItem('seika_theme_engine') || 'cream';
+        if (saved === 'light') saved = 'cream';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', saved);
+        if (saved === 'dark' || saved === 'classic') {
+          d.classList.add('dark');
+          d.classList.remove('cream');
+          d.style.backgroundColor = '#070e1b';
+          d.style.colorScheme = 'dark';
+        } else {
+          d.classList.remove('dark');
+          d.classList.add('cream');
+          d.style.backgroundColor = '#FAF8F5';
+          d.style.colorScheme = 'light';
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <title>Pengaturan Akun & Profil – SeikaOne.id</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shop.css?v=11.2.0">
+  <link rel="stylesheet" href="css/zyro-ui.css?v=3.1.0">
+  <link rel="stylesheet" href="css/shop-cream.css?v=3.3">
+  <script src="js/lib/utils.js?v=1.1"></script>
+  <style>
+    :root[data-theme="dark"], html.dark {
+      color-scheme: dark;
+    }
+    :root[data-theme="light"], :root[data-theme="cream"], html:not(.dark) {
+      color-scheme: light;
+    }
+    html, body {
+      background-color: var(--bg, #FAF8F5);
+      color: var(--t1, #18181B);
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden !important;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .prof-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 10px 16px 50px;
+      box-sizing: border-box;
+    }
+
+    /* PROFILE HERO CARD */
+    /* PROFILE HERO CARD */
+    .prof-hero-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 22px 24px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .prof-hero-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 95px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--b1);
+    }
+    .prof-hero-main {
+      position: relative;
+      z-index: 2;
+      margin-top: 45px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .avatar-wrapper {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 3.5px solid var(--surface);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      flex-shrink: 0;
+    }
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background: var(--bg2);
+    }
+    .avatar-edit-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--a);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      border: 2px solid var(--surface);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      transition: var(--ease);
+    }
+    .avatar-edit-badge:hover {
+      transform: scale(1.1);
+      filter: brightness(1.15);
+    }
+
+    .prof-user-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .prof-user-name {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.25;
+    }
+    .prof-user-email {
+      font-size: 0.85rem;
+      color: var(--t3);
+      word-break: break-all;
+      line-height: 1.3;
+    }
+    .prof-badge-row {
+      display: flex;
+      gap: 7px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .prof-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .prof-tag.member {
+      background: rgba(34,197,94,0.12);
+      color: #22c55e;
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .prof-tag.discount {
+      background: rgba(245,158,11,0.12);
+      color: #f59e0b;
+      border: 1px solid rgba(245,158,11,0.25);
+    }
+
+    .prof-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .btn-prof-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg2);
+      color: var(--t1);
+      border: 1px solid var(--b1);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 9px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--ease);
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .btn-prof-action:hover {
+      border-color: var(--a);
+      color: var(--a);
+      background: var(--surface);
+      transform: translateY(-1px);
+    }
+
+    /* RESPONSIVE HERO RULES */
+    @media (min-width: 640px) {
+      .prof-hero-card {
+        padding: 26px 28px;
+      }
+      .prof-hero-bg {
+        height: 105px;
+      }
+      .prof-hero-main {
+        margin-top: 48px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      .avatar-wrapper {
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+      }
+      .prof-user-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .prof-hero-actions {
+        flex-shrink: 0;
+        margin-left: auto;
+      }
+      .prof-user-name {
+        font-size: 1.45rem;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .prof-hero-card {
+        padding: 18px 16px;
+      }
+      .prof-hero-bg {
+        height: 82px;
+      }
+      .prof-hero-main {
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+          "avatar actions"
+          "info   info";
+        gap: 14px 10px;
+        align-items: flex-end;
+      }
+      .avatar-wrapper {
+        grid-area: avatar;
+        width: 82px;
+        height: 82px;
+      }
+      .prof-user-info {
+        grid-area: info;
+      }
+      .prof-hero-actions {
+        grid-area: actions;
+        justify-self: end;
+        margin-left: 0;
+        margin-bottom: 2px;
+      }
+      .btn-prof-action {
+        font-size: 0.78rem;
+        padding: 8px 12px;
+      }
+      .prof-user-name {
+        font-size: 1.25rem;
+      }
+      .prof-badge-row {
+        margin-top: 6px;
+        gap: 6px;
+      }
+    }
+
+    /* STATS GRID */
+    .prof-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .prof-stat-box {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .prof-stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .prof-stat-val {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--t1);
+      line-height: 1.2;
+    }
+    .prof-stat-lbl {
+      font-size: 0.72rem;
+      color: var(--t3);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* CARD SECTIONS */
+    .prof-card {
+      background: var(--surface);
+      border: 1px solid var(--b1);
+      border-radius: var(--rlg);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.02);
+    }
+    .prof-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--b1);
+    }
+    .prof-card-head i {
+      font-size: 1.15rem;
+    }
+    .prof-card-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--t1);
+    }
+    .prof-card-sub {
+      font-size: 0.75rem;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    /* FORM ELEMENTS */
+    .prof-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .prof-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .prof-field label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--t2);
+    }
+    .prof-field input {
+      padding: 12px 14px;
+      border-radius: var(--rsm);
+      border: 1.5px solid var(--b2);
+      background: var(--bg);
+      color: var(--t1);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--ease);
+    }
+    .prof-field input:focus {
+      border-color: var(--a);
+      box-shadow: 0 0 0 3px var(--abg);
+    }
+    .prof-field input:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      background: var(--bg2);
+    }
+    .prof-field small {
+      font-size: 0.72rem;
+      color: var(--t3);
+      line-height: 1.4;
+    }
+
+    /* AVATAR PICKER MODAL / SHEET */
+    .avatar-presets-grid {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0 16px;
+    }
+    .preset-avatar-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid var(--b2);
+      padding: 2px;
+      background: var(--surface);
+      cursor: pointer;
+      transition: var(--ease);
+    }
+    .preset-avatar-btn img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .preset-avatar-btn:hover, .preset-avatar-btn.act {
+      border-color: var(--a);
+      transform: scale(1.1);
+    }
+
+    /* QUICK SHORTCUTS GRID */
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .shortcut-card {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 14px;
+      text-decoration: none;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--ease);
+    }
+    .shortcut-card:hover {
+      border-color: var(--a);
+      transform: translateY(-2px);
+      background: var(--abg);
+    }
+    .shortcut-card i {
+      font-size: 1.2rem;
+    }
+    .shortcut-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--t1);
+    }
+    .shortcut-desc {
+      font-size: 0.7rem;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    .btn-save-action {
+      padding: 12px 22px;
+      border-radius: var(--rsm);
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--ease);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .btn-save-action.primary { background: var(--a); color: #fff; }
+    .btn-save-action.sky { background: #0ea5e9; color: #fff; }
+    .btn-save-action.emerald { background: #10b981; color: #fff; }
+    .btn-save-action.rose { background: #ef4444; color: #fff; }
+    .btn-save-action:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    @media (max-width: 640px) {
+      .btn-top-auth-extra { display: none !important; }
+    }
+    @keyframes modalScaleUp {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+<body>
+
+  <!-- TOAST CONTAINER -->
+  <div id="vToast" style="position:fixed;top:-100px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 24px;border-radius:100px;font-size:0.85rem;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.25);z-index:999999;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:10px;pointer-events:none;">
+    <i class="fa-solid fa-circle-check" style="color:#10b981;"></i>
+    <span id="vToastMsg">Berhasil!</span>
+  </div>
+
+  <!-- MODAL VERIFIKASI EMAIL OTP TELEGRAM -->
+  <div id="modalTeleOtp" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:999999;align-items:center;justify-content:center;padding:16px;">
+    <div style="background:var(--surface);border:1.5px solid var(--b2);border-radius:22px;max-width:440px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.45);overflow:hidden;animation:modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
+      <div style="padding:20px 24px 16px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(14,165,233,0.15);color:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">
+            <i class="fa-brands fa-telegram"></i>
+          </div>
+          <div>
+            <h4 style="margin:0;font-size:1.05rem;font-weight:900;color:var(--t1);">Verifikasi ID Telegram</h4>
+            <span style="font-size:0.75rem;color:var(--t3);">Kode OTP 6-Digit via Email</span>
+          </div>
+        </div>
+        <button type="button" onclick="closeTeleOtpModal()" style="background:none;border:none;color:var(--t3);font-size:1.2rem;cursor:pointer;padding:4px 8px;border-radius:8px;transition:0.2s;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div style="padding:22px 24px;">
+        <div style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.22);border-radius:12px;padding:14px;margin-bottom:18px;font-size:0.8rem;color:var(--t2);line-height:1.5;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <i class="fa-solid fa-shield-halved" style="color:#0ea5e9;font-size:1.1rem;margin-top:2px;"></i>
+            <div>
+              Kode OTP telah dikirimkan ke email Anda: <b id="teleOtpMaskedEmail" style="color:var(--t1);font-family:monospace;">...</b> untuk verifikasi penautan ID Telegram: <code id="teleOtpTargetId" style="color:#0ea5e9;font-weight:800;font-family:'JetBrains Mono',monospace;">-</code>.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block;font-size:0.78rem;font-weight:800;color:var(--t2);margin-bottom:8px;text-align:center;">
+            Masukkan 6-Digit Kode OTP:
+          </label>
+          <input type="text" id="inputTeleOtpCode" maxlength="6" inputmode="numeric" placeholder="••••••" autocomplete="one-time-code" style="width:100%;text-align:center;font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:900;letter-spacing:10px;padding:12px;border-radius:12px;border:2px solid var(--b2);background:var(--bg);color:var(--t1);outline:none;transition:var(--ease);" onkeypress="if(event.key==='Enter') submitTeleOtp()">
+          <small style="display:block;text-align:center;margin-top:8px;font-size:0.72rem;color:var(--t3);">
+            Periksa kotak masuk (Inbox) atau folder Spam email Anda.
+          </small>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;font-size:0.78rem;">
+          <span style="color:var(--t3);">Belum terima email?</span>
+          <button type="button" id="btnResendTeleOtp" onclick="resendTeleOtp()" disabled style="background:none;border:none;color:#0ea5e9;font-weight:750;cursor:pointer;padding:4px 6px;border-radius:6px;transition:0.2s;opacity:0.6;">
+            Kirim Ulang (<span id="teleOtpCountdown">60</span>s)
+          </button>
+        </div>
+
+        <div style="display:flex;gap:10px;">
+          <button type="button" onclick="closeTeleOtpModal()" style="flex:1;padding:12px;border-radius:10px;border:1px solid var(--b2);background:var(--bg2);color:var(--t2);font-weight:700;font-size:0.85rem;cursor:pointer;">
+            Batal
+          </button>
+          <button type="button" id="btnSubmitTeleOtp" onclick="submitTeleOtp()" style="flex:2;padding:12px;border-radius:10px;border:none;background:#0ea5e9;color:#fff;font-weight:800;font-size:0.85rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(14,165,233,0.35);">
+            <i class="fa-solid fa-circle-check"></i> Verifikasi Sekarang
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-inner" style="overflow:visible;">
+      <div class="tb-l">
+        <a href="index.html" class="ib raw" style="text-decoration:none;" title="Kembali ke Beranda">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="tb-brand" style="text-decoration:none;">
+          <img src="assets/logo-animated-dark.webp" alt="SeikaOne" class="zyro-logo-animated" data-logo-type="full">
+          <span>SeikaOne <span class="brand-api">ID</span></span>
+        </a>
+      </div>
+      <div class="tb-r" style="overflow:visible;">
+        <button class="ib" onclick="toggleTheme()" id="themeBtn" title="Ganti Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="bansos.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(244,63,94,0.12);color:#f43f5e;border-color:rgba(244,63,94,0.3);">
+          <i class="fa-solid fa-gift"></i>
+          <span class="btn-top-auth-txt">Bansos 1GB</span>
+        </a>
+        <a href="mypanel.html" class="btn-top-auth btn-top-auth-extra" style="text-decoration:none;background:rgba(16,185,129,0.12);color:#10b981;border-color:rgba(16,185,129,0.3);">
+          <i class="fa-solid fa-server"></i>
+          <span class="btn-top-auth-txt">Panel Saya</span>
+        </a>
+        <a href="index.html" class="btn-top-auth" style="text-decoration:none;">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="btn-top-auth-txt">Belanja</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-wrap">
+    <div class="prof-wrap">
+
+      <!-- UNLOGGED NOTICE (IF VISITOR IS NOT LOGGED IN) -->
+      <div id="unloggedAlert" style="display:none;background:var(--surface);border:1.5px dashed var(--b2);border-radius:var(--rlg);padding:36px 20px;text-align:center;margin:20px 0;">
+        <div style="width:60px;height:60px;border-radius:50%;background:rgba(14,165,233,0.12);color:var(--a);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h3 style="font-size:1.25rem;font-weight:900;color:var(--t1);margin-bottom:8px;">Silakan Masuk ke Akun Anda</h3>
+        <p style="font-size:0.85rem;color:var(--t3);max-width:440px;margin:0 auto 20px;">
+          Halaman Pengaturan Akun membutuhkan sesi login aktif. Masuk sekarang untuk mengelola data profil, email, dan password Anda.
+        </p>
+        <a href="login.html" class="btn-save-action primary" style="text-decoration:none;">
+          <i class="fa-solid fa-circle-user"></i> Masuk Sekarang (Diskon 5%)
+        </a>
+      </div>
+
+      <!-- MAIN LOGGED IN PROFILE CONTENT -->
+      <div id="loggedContent" style="display:none;">
+
+        <!-- HERO / AVATAR CARD -->
+        <div class="prof-hero-card">
+          <div class="prof-hero-bg"></div>
+          <div class="prof-hero-main">
+            <div class="avatar-wrapper">
+              <img src="assets/logo.png" id="profileAvatarImg" class="avatar-img" alt="Avatar">
+              <div class="avatar-edit-badge" onclick="triggerAvatarUpload()" title="Ubah Foto Profil">
+                <i class="fa-solid fa-camera"></i>
+              </div>
+            </div>
+
+            <div class="prof-user-info">
+              <div class="prof-user-name">
+                <span id="profDisplayName">Member Zyro</span>
+                <i class="fa-solid fa-circle-check" style="color:#0ea5e9;font-size:1.05rem;" title="Akun Terverifikasi"></i>
+              </div>
+              <div class="prof-user-email" id="profDisplayEmail"><a href="#" class="__cf_email__" data-cfemail="5439313936312614312c35392438317a373b39">[email&#160;protected]</a></div>
+              <div class="prof-badge-row">
+                <span class="prof-tag member"><i class="fa-solid fa-shield-halved"></i> Member Resmi</span>
+                <span class="prof-tag discount"><i class="fa-solid fa-crown"></i> 5% Potongan Otomatis</span>
+                <span id="profSpecialBadges" style="display:contents;"></span>
+                <span class="prof-tag" id="profGoogleBadge" style="display:none;background:rgba(66,133,244,0.15);color:#38bdf8;border:1px solid rgba(66,133,244,0.3);"><i class="fa-brands fa-google"></i> Google Login</span>
+              </div>
+            </div>
+
+            <div class="prof-hero-actions">
+              <button type="button" class="btn-prof-action" onclick="triggerAvatarUpload()">
+                <i class="fa-solid fa-image"></i> Ganti Foto Profil
+              </button>
+            </div>
+          </div>
+
+          <!-- HIDDEN FILE INPUT FOR PHOTO PROFILE UPLOAD -->
+          <input type="file" id="avatarFileInput" accept="image/*,image/png,image/jpeg,image/webp,image/gif" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;opacity:0;" onchange="handleAvatarFileSelect(event)">
+        </div>
+
+        <!-- STATS ROW -->
+        <div class="prof-stats-grid">
+          <div class="prof-stat-box" style="border:1px solid rgba(16,185,129,0.3);background:var(--surface);">
+            <div class="prof-stat-icon" style="background:rgba(16,185,129,0.15);color:#10b981;">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+            <div>
+              <div class="prof-stat-val" id="statBalance" style="color:#10b981;">Rp 0</div>
+              <div class="prof-stat-lbl">Saldo Akun (Dompet)</div>
+            </div>
+          </div>
+          <div class="prof-stat-box" style="border:1px solid rgba(245,158,11,0.3);background:var(--surface);">
+            <div class="prof-stat-icon" style="background:rgba(245,158,11,0.15);color:#f59e0b;">
+              <i class="fa-solid fa-coins"></i>
+            </div>
+            <div>
+              <div class="prof-stat-val" id="statCommission" style="color:#f59e0b;">Rp 0</div>
+              <div class="prof-stat-lbl">Komisi Referral Didapat</div>
+            </div>
+          </div>
+          <div class="prof-stat-box">
+            <div class="prof-stat-icon" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <div>
+              <div class="prof-stat-val" id="statOrdersCount">0 Pesanan</div>
+              <div class="prof-stat-lbl">Total Transaksi</div>
+            </div>
+          </div>
+          <div class="prof-stat-box">
+            <div class="prof-stat-icon" style="background:rgba(168,85,247,0.12);color:#a855f7;">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div>
+              <div class="prof-stat-val" style="font-size:1rem;color:#10b981;">Aktif</div>
+              <div class="prof-stat-lbl">Status Akun</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 0: REFERRAL & KOMISI PEMBELIAN -->
+        <div class="prof-card" style="border:1px solid rgba(245,158,11,0.3);background:var(--surface);">
+          <div class="prof-card-head" style="justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <i class="fa-solid fa-sack-dollar" style="color:#f59e0b;font-size:1.3rem;"></i>
+              <div>
+                <div class="prof-card-title">Program Referral & Komisi Pembelian</div>
+                <div class="prof-card-sub">Bagikan kode referral Anda dan dapatkan komisi saldo dari setiap pembelian teman!</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button type="button" class="btn-save-action" onclick="withdrawSaldo()" style="font-size:0.78rem;padding:7px 12px;background:#10b981;color:#fff;">
+                <i class="fa-solid fa-money-bill-transfer"></i> Tarik Saldo
+              </button>
+              <a href="index.html" class="btn-save-action" style="font-size:0.78rem;padding:7px 12px;background:var(--bg2);color:var(--t1);border:1px solid var(--b1);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">
+                <i class="fa-solid fa-cart-shopping"></i> Belanja
+              </a>
+            </div>
+          </div>
+
+          <!-- REFERRAL LINK BOX -->
+          <div style="background:var(--bg2);padding:14px 16px;border-radius:12px;border:1px solid var(--b1);margin-bottom:16px;">
+            <label style="font-size:0.78rem;font-weight:800;color:var(--t1);display:block;margin-bottom:6px;">
+              <i class="fa-solid fa-link" style="color:var(--a);"></i> Link Referral Anda:
+            </label>
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="profRefLink" readonly style="flex:1;background:var(--bg);color:var(--t1);border:1px solid var(--b1);padding:10px 14px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;" value="Memuat link referral...">
+              <button type="button" class="btn-save-action sky" onclick="copyRefLink()" style="white-space:nowrap;padding:10px 16px;font-size:0.82rem;">
+                <i class="fa-solid fa-copy"></i> Salin
+              </button>
+            </div>
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:0.76rem;color:var(--t3);">
+              <span><i class="fa-solid fa-user-plus" style="color:#0ea5e9;"></i> Total Teman Terdaftar: <b id="profInvitedCount" style="color:var(--t1);">0 Orang</b></span>
+              <span><i class="fa-solid fa-percent" style="color:#f59e0b;"></i> Komisi Belanja: <b id="profCommissionRate" style="color:#f59e0b;">5%</b> dari harga produk</span>
+            </div>
+          </div>
+
+          <!-- RIWAYAT KOMISI -->
+          <div>
+            <div style="font-weight:800;font-size:0.88rem;color:var(--t1);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;">
+              <span><i class="fa-solid fa-clock-rotate-left" style="color:var(--a);"></i> Riwayat Komisi Diterima</span>
+              <button type="button" onclick="loadUserCommissions()" style="background:none;border:none;color:var(--a);cursor:pointer;font-size:0.75rem;font-weight:700;">
+                <i class="fa-solid fa-rotate-right"></i> Refresh
+              </button>
+            </div>
+            <div id="commissionsListContainer" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
+              <div style="text-align:center;padding:18px;color:var(--t3);font-size:0.82rem;">
+                Belum ada komisi masuk. Bagikan link referral Anda untuk mulai mendapatkan komisi!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 1: DATA PROFIL & KONTAK -->
+        <div class="prof-card">
+          <div class="prof-card-head">
+            <i class="fa-solid fa-id-card" style="color:var(--a);"></i>
+            <div>
+              <div class="prof-card-title">Data Profil & Informasi Kontak</div>
+              <div class="prof-card-sub">Nama lengkap, nomor WhatsApp, dan identitas Telegram Anda</div>
+            </div>
+          </div>
+
+          <form id="profileForm" onsubmit="saveProfileInfo(event)">
+            <div class="prof-form-grid">
+              <div class="prof-field">
+                <label>Nama Lengkap</label>
+                <input type="text" id="inputName" placeholder="Masukkan nama Anda" required>
+              </div>
+              <div class="prof-field">
+                <label>Nomor WhatsApp</label>
+                <input type="tel" id="inputPhone" placeholder="Contoh: 081234567890">
+              </div>
+              <div class="prof-field" style="grid-column: 1 / -1;background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                  <label style="margin:0;font-size:0.86rem;font-weight:800;color:var(--t1);display:flex;align-items:center;gap:8px;">
+                    <i class="fa-brands fa-telegram" style="color:#0ea5e9;font-size:1.1rem;"></i> Integrasi Akun Telegram
+                  </label>
+                  <span id="teleBadgeStatus" style="font-size:0.75rem;padding:3px 10px;border-radius:20px;font-weight:700;background:rgba(14,165,233,0.1);color:#0ea5e9;border:1px solid rgba(14,165,233,0.25);">
+                    <i class="fa-solid fa-circle-info"></i> Belum Terhubung
+                  </span>
+                </div>
+                <p style="font-size:0.76rem;color:var(--t3);margin:0 0 12px 0;line-height:1.45;">
+                  Hubungkan ID Telegram Anda untuk sinkronisasi otomatis role CPanel, notifikasi pembuatan panel/CADP, dan klaim garansi. Demi keamanan, setiap penautan/perubahan ID memerlukan verifikasi 6-digit OTP email.
+                </p>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;">
+                  <div>
+                    <label style="font-size:0.76rem;font-weight:700;color:var(--t2);margin-bottom:4px;display:block;">
+                      ID Telegram (Wajib OTP Email)
+                    </label>
+                    <div style="display:flex;gap:8px;">
+                      <input type="text" id="inputTeleId" placeholder="Contoh: 900163500" style="flex:1;font-family:'JetBrains Mono',monospace;" oninput="onTeleIdInputChange()">
+                      <button type="button" id="btnTeleAction" onclick="handleTelegramButtonAction()" style="white-space:nowrap;padding:0 14px;background:#0ea5e9;color:#fff;border:none;border-radius:var(--rsm);font-weight:750;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:0.2s;">
+                        <i class="fa-solid fa-shield-halved"></i> Verifikasi OTP
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style="font-size:0.76rem;font-weight:700;color:var(--t2);margin-bottom:4px;display:block;">Username Telegram (Live Bot)</label>
+                    <input type="text" id="inputTeleUser" placeholder="Belum tersinkron" style="width:100%;" readonly disabled>
+                  </div>
+                </div>
+
+                <div id="teleSyncNote" style="font-size:0.74rem;color:var(--t3);margin-top:10px;line-height:1.4;">
+                  <i class="fa-solid fa-lightbulb" style="color:#f59e0b;"></i> <i>Cek ID Telegram Anda via <b>@userinfobot</b> atau kirim <code>/start</code> ke bot resmi <b><a href="https://t.me/SeikaOnePanelWebBot" target="_blank" style="color:#0ea5e9;font-weight:700;">@SeikaOnePanelWebBot</a></b>. Username Telegram Anda otomatis terdeteksi setelah verifikasi OTP berhasil.</i>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" id="btnSaveProfile" class="btn-save-action emerald">
+              <i class="fa-solid fa-floppy-disk"></i> Simpan Data Profil
+            </button>
+          </form>
+        </div>
+
+        <!-- SECTION 2: GANTI EMAIL -->
+        <div class="prof-card">
+          <div class="prof-card-head">
+            <i class="fa-solid fa-envelope" style="color:#0ea5e9;"></i>
+            <div>
+              <div class="prof-card-title">Pengaturan Alamat Email</div>
+              <div class="prof-card-sub">Email digunakan untuk login dan menerima nota / invoice resmi</div>
+            </div>
+          </div>
+
+          <form id="emailForm" onsubmit="saveEmailChange(event)">
+            <div class="prof-form-grid">
+              <div class="prof-field">
+                <label>Email Saat Ini</label>
+                <input type="email" id="inputCurrentEmail" disabled readonly>
+              </div>
+              <div class="prof-field">
+                <label>Alamat Email Baru</label>
+                <input type="email" id="inputNewEmail" placeholder="emailbaru@contoh.com" required>
+              </div>
+              <div class="prof-field" id="emailPasswordWrap" style="grid-column: 1 / -1;">
+                <label>Kata Sandi Akun Saat Ini (Konfirmasi Keamanan)</label>
+                <input type="password" id="inputEmailConfirmPassword" placeholder="Masukkan password Anda saat ini">
+                <small>Untuk keamanan akun Anda, masukkan kata sandi yang sedang Anda gunakan.</small>
+              </div>
+              <div id="emailGoogleNote" style="grid-column: 1 / -1; display:none; background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 10px; padding: 12px 14px; font-size: 0.8rem; color: var(--sky);">
+                <i class="fa-brands fa-google"></i> <b>Akun Terdaftar via Google OAuth:</b> Anda masuk menggunakan autentikasi resmi Google (tanpa password). Penggantian email tidak memerlukan verifikasi password lama.
+              </div>
+            </div>
+
+            <button type="submit" id="btnSaveEmail" class="btn-save-action sky">
+              <i class="fa-solid fa-envelope-circle-check"></i> Perbarui Alamat Email
+            </button>
+          </form>
+        </div>
+
+        <!-- SECTION 3: GANTI PASSWORD -->
+        <div class="prof-card" id="cardSecurity">
+          <div class="prof-card-head">
+            <i class="fa-solid fa-lock" style="color:#a855f7;"></i>
+            <div>
+              <div class="prof-card-title">Keamanan & Kata Sandi</div>
+              <div class="prof-card-sub" id="secSubtitle">Ubah kata sandi akun secara berkala demi keamanan transaksi</div>
+            </div>
+          </div>
+
+          <!-- GOOGLE OAUTH SECURITY INFO BOX (Shown for Google Accounts) -->
+          <div id="googleSecurityCard" style="display:none; background: rgba(14, 165, 233, 0.06); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 18px; margin-bottom: 15px;">
+            <div style="display:flex;gap:14px;align-items:center;">
+              <div style="width:48px;height:48px;border-radius:12px;background:#ffffff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                <i class="fa-brands fa-google" style="color:#4285F4;"></i>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:0.95rem;color:var(--t1);">Akun Terhubung Resmi dengan Google</div>
+                <div style="font-size:0.8rem;color:var(--t2);margin-top:2px;line-height:1.4;">
+                  Akun Anda menggunakan autentikasi <b>Google OAuth</b> (Login 1-klik tanpa password). Anda tidak perlu membuat maupun mengingat kata sandi. Akses akun Anda terlindungi langsung oleh sistem keamanan resmi Google.
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+              <span style="font-size:0.75rem;color:#10b981;font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+                <i class="fa-solid fa-circle-check"></i> Status: Keamanan Google Aktif (Passwordless)
+              </span>
+              <button type="button" onclick="toggleSetManualPassword()" style="font-size:0.75rem;padding:6px 12px;background:rgba(255,255,255,0.06);border:1px solid var(--b1);color:var(--t2);border-radius:8px;cursor:pointer;">
+                <i class="fa-solid fa-key"></i> Buat Password Manual (Opsional)
+              </button>
+            </div>
+          </div>
+
+          <!-- PASSWORD FORM -->
+          <form id="passwordForm" onsubmit="savePasswordChange(event)">
+            <div class="prof-form-grid">
+              <div class="prof-field" id="oldPasswordWrap">
+                <label>Kata Sandi Lama</label>
+                <input type="password" id="inputOldPassword" placeholder="••••••••">
+              </div>
+              <div class="prof-field">
+                <label id="lblNewPassword">Kata Sandi Baru (Minimal 6 Karakter)</label>
+                <input type="password" id="inputNewPassword" placeholder="Password baru" minlength="6" required>
+              </div>
+              <div class="prof-field" style="grid-column: 1 / -1;">
+                <label>Konfirmasi Kata Sandi Baru</label>
+                <input type="password" id="inputConfirmPassword" placeholder="Ulangi kata sandi baru" minlength="6" required>
+              </div>
+            </div>
+
+            <button type="submit" id="btnSavePassword" class="btn-save-action primary">
+              <i class="fa-solid fa-key"></i> Perbarui Kata Sandi
+            </button>
+          </form>
+        </div>
+
+        <!-- SECTION 4: MENU LAYANAN & AKSES CEPAT -->
+        <div class="prof-card">
+          <div class="prof-card-head">
+            <i class="fa-solid fa-compass" style="color:#fbbf24;"></i>
+            <div>
+              <div class="prof-card-title">Akses Cepat & Layanan Terhubung</div>
+              <div class="prof-card-sub">Kelola server panel, add-on, riwayat pesanan, dan grup komunitas</div>
+            </div>
+          </div>
+
+          <div class="shortcuts-grid">
+            <a href="#" id="profOwnerAdminCard" class="shortcut-card" style="display:none;border:1px solid rgba(245,158,11,0.4);background:var(--surface);">
+              <i class="fa-solid fa-crown" style="color:#f59e0b;"></i>
+              <div>
+                <div class="shortcut-name" style="color:#f59e0b;font-weight:800;">Admin & Owner Panel</div>
+                <div class="shortcut-desc">Kelola Toko & Pengaturan Web</div>
+              </div>
+            </a>
+            <a href="bansos.html" class="shortcut-card">
+              <i class="fa-solid fa-gift" style="color:#f43f5e;"></i>
+              <div>
+                <div class="shortcut-name">Bansos Free 1GB</div>
+                <div class="shortcut-desc">Klaim Server Panel Gratis</div>
+              </div>
+            </a>
+            <a href="mypanel.html" class="shortcut-card">
+              <i class="fa-solid fa-server" style="color:#10b981;"></i>
+              <div>
+                <div class="shortcut-name">Panel Saya</div>
+                <div class="shortcut-desc">Server Pterodactyl Anda</div>
+              </div>
+            </a>
+            <a href="riwayat.html" class="shortcut-card">
+              <i class="fa-solid fa-receipt" style="color:var(--a);"></i>
+              <div>
+                <div class="shortcut-name">Riwayat Pesanan</div>
+                <div class="shortcut-desc">Semua transaksi Anda</div>
+              </div>
+            </a>
+            <a href="addon.html" class="shortcut-card">
+              <i class="fa-solid fa-microchip" style="color:#0ea5e9;"></i>
+              <div>
+                <div class="shortcut-name">Add-On Spek</div>
+                <div class="shortcut-desc">Tambah RAM, Disk, CPU</div>
+              </div>
+            </a>
+            <a href="garansi.html" class="shortcut-card">
+              <i class="fa-solid fa-shield-halved" style="color:#38bdf8;"></i>
+              <div>
+                <div class="shortcut-name">Klaim Garansi</div>
+                <div class="shortcut-desc">Reset pass / ganti server</div>
+              </div>
+            </a>
+            <a href="https://panel.zyrostore.id" target="_blank" rel="noopener" class="shortcut-card">
+              <i class="fa-solid fa-sliders" style="color:#06b6d4;"></i>
+              <div>
+                <div class="shortcut-name">Web CPanel</div>
+                <div class="shortcut-desc">panel.zyrostore.id</div>
+              </div>
+            </a>
+            <a href="https://t.me/SeikaOneOfficial" target="_blank" rel="noopener" class="shortcut-card">
+              <i class="fa-brands fa-telegram" style="color:#0ea5e9;"></i>
+              <div>
+                <div class="shortcut-name">Grup Telegram</div>
+                <div class="shortcut-desc">Komunitas resmi Zyro</div>
+              </div>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbDQWxq7tkjDQ9mVDY0M" target="_blank" rel="noopener" class="shortcut-card" style="border-color:rgba(34,197,94,0.35);">
+              <i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i>
+              <div>
+                <div class="shortcut-name" style="color:#22c55e;">Saluran WhatsApp</div>
+                <div class="shortcut-desc">Ikuti saluran zyrostore.id di WhatsApp</div>
+              </div>
+            </a>
+            <a href="https://t.me/SeikaOne" target="_blank" rel="noopener" class="shortcut-card">
+              <i class="fa-solid fa-headset" style="color:#a855f7;"></i>
+              <div>
+                <div class="shortcut-name">Customer Care</div>
+                <div class="shortcut-desc">Bantuan Telegram CS</div>
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="handleLogout()" class="shortcut-card" style="border-color:rgba(239,68,68,0.25);">
+              <i class="fa-solid fa-arrow-right-from-bracket" style="color:#ef4444;"></i>
+              <div>
+                <div class="shortcut-name" style="color:#ef4444;">Keluar (Logout)</div>
+                <div class="shortcut-desc">Akhiri sesi di perangkat ini</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="#"></script><script>
+    const authToken = localStorage.getItem('seika_user_token');
+    let currentUser = null;
+
+    // Theme logic
+    function applyThemeState(isDark) {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', isDark);
+      if (document.body) document.body.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      document.documentElement.style.removeProperty('background-color');
+      document.documentElement.style.removeProperty('color');
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        const isSpinning = icon && icon.classList.contains('cp-theme-spin');
+        if (icon) {
+          icon.className = (isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + (isSpinning ? ' cp-theme-spin' : '');
+        } else {
+          btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        }
+      }
+    }
+    const initIsDark = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+    applyThemeState(initIsDark);
+
+    function toggleTheme() {
+      const btn = document.getElementById('themeBtn');
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.classList.remove('cp-theme-spin');
+          void icon.offsetWidth;
+          icon.classList.add('cp-theme-spin');
+        }
+      }
+
+      const cur = (localStorage.getItem('seika_theme') || 'dark') === 'dark';
+      const next = !cur;
+
+      const executeTheme = () => {
+        localStorage.setItem('seika_theme', next ? 'dark' : 'light');
+        applyThemeState(next);
+      };
+
+      if (window.smoothThemeTransition) {
+        window.smoothThemeTransition(executeTheme);
+      } else if (document.startViewTransition) {
+        document.startViewTransition(executeTheme);
+      } else {
+        document.documentElement.classList.add('theme-transitioning');
+        if (document.body) document.body.classList.add('theme-transitioning');
+        void document.documentElement.offsetHeight;
+        executeTheme();
+        setTimeout(() => {
+          document.documentElement.classList.remove('theme-transitioning');
+          if (document.body) document.body.classList.remove('theme-transitioning');
+        }, 350);
+      }
+    }
+
+    function showToast(msg, icon = 'fa-circle-check', color = '#10b981') {
+      const toast = document.getElementById('vToast');
+      document.getElementById('vToastMsg').innerText = msg;
+      toast.querySelector('i').className = `fa-solid ${icon}`;
+      toast.querySelector('i').style.color = color;
+      toast.style.top = '24px';
+      setTimeout(() => { toast.style.top = '-100px'; }, 3200);
+    }
+
+    function triggerAvatarUpload() {
+      document.getElementById('avatarFileInput').click();
+    }
+
+    // Convert file to compressed base64 image data and update avatar
+    async function handleAvatarFileSelect(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        return showToast('Pilih file gambar valid (JPG, PNG, WebP)', 'fa-triangle-exclamation', '#f59e0b');
+      }
+
+      showToast('Memproses & mengunggah foto...', 'fa-spinner fa-spin', '#0ea5e9');
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = async function() {
+          try {
+            // Compress & center crop to 400x400 square
+            const canvas = document.createElement('canvas');
+            const targetDim = 400;
+            const sDim = Math.min(img.width, img.height);
+            const sx = (img.width - sDim) / 2;
+            const sy = (img.height - sDim) / 2;
+            canvas.width = Math.min(sDim, targetDim);
+            canvas.height = canvas.width;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, sx, sy, sDim, sDim, 0, 0, canvas.width, canvas.height);
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+
+            const res = await fetch('/api/auth/update-profile', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ token: authToken, avatar: compressedBase64 })
+            });
+            const data = await res.json();
+            if (data.status && data.user) {
+              currentUser = { ...currentUser, ...data.user };
+              localStorage.setItem('seika_user_data', JSON.stringify(currentUser));
+              const newAvatarUrl = data.user.avatar || compressedBase64;
+              document.getElementById('profileAvatarImg').src = newAvatarUrl;
+              showToast('Foto profil berhasil diubah & disimpan permanen!');
+            } else {
+              showToast(data.message || 'Gagal mengubah foto profil', 'fa-circle-xmark', '#ef4444');
+            }
+          } catch (err) {
+            showToast('Koneksi bermasalah saat upload avatar', 'fa-circle-xmark', '#ef4444');
+          }
+        };
+        img.onerror = function() {
+          showToast('File gambar tidak dapat dibaca', 'fa-circle-xmark', '#ef4444');
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function loadProfile() {
+      if (!authToken) {
+        document.getElementById('unloggedAlert').style.display = 'block';
+        document.getElementById('loggedContent').style.display = 'none';
+        return;
+      }
+
+      // 1. Instant synchronous render from cache to eliminate blank/flicker
+      const cached = localStorage.getItem('seika_user_data');
+      if (cached) {
+        try {
+          currentUser = JSON.parse(cached);
+          renderProfile(currentUser, {});
+        } catch (_) {}
+      }
+
+      try {
+        const res = await fetch(`/api/auth/me?token=${encodeURIComponent(authToken)}`);
+        const data = await res.json();
+        if (data.status && data.user) {
+          currentUser = data.user;
+          localStorage.setItem('seika_user_data', JSON.stringify(currentUser));
+          renderProfile(currentUser, data.stats || {});
+        } else {
+          localStorage.removeItem('seika_user_token');
+          localStorage.removeItem('seika_user_data');
+          document.getElementById('unloggedAlert').style.display = 'block';
+          document.getElementById('loggedContent').style.display = 'none';
+        }
+      } catch (err) {
+        const saved = localStorage.getItem('seika_user_data');
+        if (saved) {
+          try {
+            currentUser = JSON.parse(saved);
+            renderProfile(currentUser, {});
+          } catch(e){}
+        }
+      }
+    }
+
+    function renderProfile(user, stats = {}) {
+      document.getElementById('unloggedAlert').style.display = 'none';
+      document.getElementById('loggedContent').style.display = 'block';
+
+      const avatar = (typeof getSmartAvatar === 'function')
+        ? getSmartAvatar(user.avatar, user.name || user.email)
+        : (user.avatar || '/assets/logo.png');
+      const avImg = document.getElementById('profileAvatarImg');
+      if (avImg) {
+        avImg.src = avatar;
+        avImg.onerror = function() {
+          if (typeof getSmartAvatar === 'function') {
+            this.src = getSmartAvatar('', user.name || user.email);
+          } else {
+            this.src = '/assets/logo.png';
+          }
+        };
+      }
+      document.getElementById('profDisplayName').innerText = user.name || 'Member Zyro';
+      document.getElementById('profDisplayEmail').innerText = user.email || '';
+
+      document.getElementById('inputName').value = user.name || '';
+      document.getElementById('inputPhone').value = user.phone || '';
+      document.getElementById('inputTeleUser').value = user.telegramUsername ? ('@' + user.telegramUsername.replace(/^@+/, '')) : (user.telegram || '');
+      document.getElementById('inputTeleId').value = user.telegramId || '';
+      document.getElementById('inputCurrentEmail').value = user.email || '';
+
+      const teleBadge = document.getElementById('teleBadgeStatus');
+      if (teleBadge) {
+        if (user.telegramId) {
+          const rawTgU = user.telegramUsername || user.telegram || '';
+          if (rawTgU) {
+            teleBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Terhubung @${rawTgU.replace(/^@+/, '')}`;
+            teleBadge.style.background = 'rgba(16,185,129,0.15)';
+            teleBadge.style.color = '#10b981';
+            teleBadge.style.borderColor = 'rgba(16,185,129,0.35)';
+          } else {
+            teleBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> ID: ${user.telegramId}`;
+            teleBadge.style.background = 'rgba(14,165,233,0.15)';
+            teleBadge.style.color = '#0ea5e9';
+            teleBadge.style.borderColor = 'rgba(14,165,233,0.35)';
+          }
+        } else {
+          teleBadge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Belum Terhubung`;
+          teleBadge.style.background = 'rgba(239,68,68,0.1)';
+          teleBadge.style.color = '#ef4444';
+          teleBadge.style.borderColor = 'rgba(239,68,68,0.25)';
+        }
+      }
+      if (typeof onTeleIdInputChange === 'function') {
+        onTeleIdInputChange();
+      }
+
+      if (document.getElementById('statBalance')) {
+        document.getElementById('statBalance').innerText = 'Rp ' + Number(user.balance || 0).toLocaleString('id-ID');
+      }
+      if (document.getElementById('statCommission')) {
+        document.getElementById('statCommission').innerText = 'Rp ' + Number(user.totalCommission || 0).toLocaleString('id-ID');
+      }
+
+      if (stats.totalOrders !== undefined) {
+        document.getElementById('statOrdersCount').innerText = `${stats.totalOrders} Pesanan`;
+      }
+      if (stats.totalSpent !== undefined) {
+        document.getElementById('statTotalSpent').innerText = 'Rp ' + Number(stats.totalSpent || 0).toLocaleString('id-ID');
+      }
+
+      // Check Google OAuth status
+      const isGoogle = !!(user.googleId || user.isGoogle || user.authProvider === 'google');
+      const hasPass = Boolean(user.hasPassword);
+
+      if (document.getElementById('profGoogleBadge')) {
+        document.getElementById('profGoogleBadge').style.display = isGoogle ? 'inline-flex' : 'none';
+      }
+
+      // Render Special Badges (Bug Hunter, Top Leaderboard, Founder)
+      const specialBadgesContainer = document.getElementById('profSpecialBadges');
+      if (specialBadgesContainer) {
+        specialBadgesContainer.innerHTML = '';
+        const userRoles = Array.isArray(user.roles) ? user.roles : [];
+        if (userRoles.includes('bug_hunter')) {
+          specialBadgesContainer.innerHTML += `<span class="prof-tag" style="background:rgba(16,185,129,0.18);color:#10b981;border:1px solid rgba(16,185,129,0.35);font-weight:800;"><i class="fa-solid fa-bug"></i> Bug Hunter</span>`;
+        }
+        if (userRoles.includes('top_leaderboard')) {
+          specialBadgesContainer.innerHTML += `<span class="prof-tag" style="background:rgba(245,158,11,0.18);color:#f59e0b;border:1px solid rgba(245,158,11,0.35);font-weight:800;"><i class="fa-solid fa-trophy"></i> Top Leaderboard</span>`;
+        }
+        const isOwnerAcc = Boolean(user.email && ['gilangx288@gmail.com', 'zyrodevv@gmail.com', 'gilram336@gmail.com'].includes(user.email.toLowerCase()));
+        if (isOwnerAcc || userRoles.includes('developer') || userRoles.includes('founder')) {
+          specialBadgesContainer.innerHTML += `<span class="prof-tag" style="background:rgba(139,92,246,0.18);color:#a855f7;border:1px solid rgba(139,92,246,0.35);font-weight:800;"><i class="fa-solid fa-crown"></i> Founder / Developer</span>`;
+        }
+      }
+
+      // Section 2: Password requirement for email change
+      const passWrap = document.getElementById('emailPasswordWrap');
+      const passGoogleNote = document.getElementById('emailGoogleNote');
+      const passInput = document.getElementById('inputEmailConfirmPassword');
+      if (isGoogle || !hasPass) {
+        if (passWrap) passWrap.style.display = 'none';
+        if (passGoogleNote) passGoogleNote.style.display = 'block';
+        if (passInput) passInput.required = false;
+      } else {
+        if (passWrap) passWrap.style.display = 'block';
+        if (passGoogleNote) passGoogleNote.style.display = 'none';
+        if (passInput) passInput.required = true;
+      }
+
+      // Section 3: Security & Password card
+      const gCard = document.getElementById('googleSecurityCard');
+      const pForm = document.getElementById('passwordForm');
+      const oldPassWrap = document.getElementById('oldPasswordWrap');
+      const secSubtitle = document.getElementById('secSubtitle');
+
+      if (isGoogle && !hasPass) {
+        if (gCard) gCard.style.display = 'block';
+        if (pForm) pForm.style.display = 'none';
+        if (secSubtitle) secSubtitle.innerText = 'Akun terhubung melalui Google OAuth — Login 1-klik tanpa password';
+      } else if (isGoogle && hasPass) {
+        if (gCard) gCard.style.display = 'block';
+        if (pForm) pForm.style.display = 'block';
+        if (oldPassWrap) oldPassWrap.style.display = 'block';
+        if (secSubtitle) secSubtitle.innerText = 'Akun Google dengan kata sandi manual';
+      } else {
+        if (gCard) gCard.style.display = 'none';
+        if (pForm) pForm.style.display = 'block';
+        if (oldPassWrap) oldPassWrap.style.display = 'block';
+        if (secSubtitle) secSubtitle.innerText = 'Ubah kata sandi akun secara berkala demi keamanan transaksi';
+      }
+
+      const isOwner = Boolean(user && user.email && user.email.toLowerCase() === 'gilangx288@gmail.com');
+      const ownerCard = document.getElementById('profOwnerAdminCard');
+      if (ownerCard) ownerCard.style.display = isOwner ? 'flex' : 'none';
+
+      loadUserCommissions();
+    }
+
+    async function loadUserCommissions() {
+      if (!authToken) return;
+      try {
+        const res = await fetch(`/api/user/commissions?token=${encodeURIComponent(authToken)}`);
+        const data = await res.json();
+        if (data.status) {
+          if (document.getElementById('profRefLink')) {
+            document.getElementById('profRefLink').value = data.referralLink || '';
+          }
+          if (document.getElementById('profInvitedCount')) {
+            document.getElementById('profInvitedCount').innerText = `${data.invitedCount || 0} Orang`;
+          }
+          if (document.getElementById('profCommissionRate')) {
+            document.getElementById('profCommissionRate').innerText = `${data.commissionRate || 5}%`;
+          }
+          if (data.balance !== undefined && document.getElementById('statBalance')) {
+            document.getElementById('statBalance').innerText = 'Rp ' + Number(data.balance).toLocaleString('id-ID');
+          }
+          if (data.totalCommission !== undefined && document.getElementById('statCommission')) {
+            document.getElementById('statCommission').innerText = 'Rp ' + Number(data.totalCommission).toLocaleString('id-ID');
+          }
+
+          renderCommissionsList(data.commissions || []);
+        }
+      } catch (e) {
+        console.warn('Failed to load commissions:', e);
+      }
+    }
+
+    function renderCommissionsList(list) {
+      const container = document.getElementById('commissionsListContainer');
+      if (!container) return;
+      if (!list || list.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center;padding:18px;color:var(--t3);font-size:0.82rem;">
+            Belum ada komisi masuk. Bagikan link referral Anda untuk mulai mendapatkan komisi!
+          </div>
+        `;
+        return;
+      }
+      let html = '';
+      list.forEach(c => {
+        html += `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px;border:1px solid var(--b1);gap:10px;">
+            <div>
+              <div style="font-weight:800;font-size:0.85rem;color:var(--t1);">${c.productName || 'Pembelian Produk'}</div>
+              <div style="font-size:0.72rem;color:var(--t3);margin-top:2px;">
+                Dari: <b>${c.fromName || 'Teman'}</b> (${c.fromEmail || ''}) • ${new Date(c.createdAt).toLocaleDateString('id-ID')}
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:900;color:#10b981;font-size:0.95rem;">+Rp ${Number(c.commission || 0).toLocaleString('id-ID')}</div>
+              <div style="font-size:0.68rem;color:var(--t3);">Belanja: Rp ${Number(c.amount || 0).toLocaleString('id-ID')}</div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function copyRefLink() {
+      const inp = document.getElementById('profRefLink');
+      if (!inp || !inp.value) return;
+      navigator.clipboard.writeText(inp.value).then(() => {
+        showToast('Link referral berhasil disalin ke clipboard!', 'fa-circle-check', '#10b981');
+      }).catch(() => {
+        inp.select();
+        document.execCommand('copy');
+        showToast('Link referral disalin!', 'fa-circle-check', '#10b981');
+      });
+    }
+
+    function withdrawSaldo() {
+      const bal = Number(currentUser?.balance || 0);
+      const name = currentUser?.name || 'Member';
+      const email = currentUser?.email || '';
+      const text = `Halo Admin SeikaOne.id, saya ingin mengajukan penarikan saldo komisi referral:\n\n• Nama: ${name}\n• Email: ${email}\n• Jumlah Saldo: Rp ${bal.toLocaleString('id-ID')}\n\nMohon bantuannya untuk proses pencairan dana ya admin. Terima kasih!`;
+      const url = `https://t.me/SeikaOne?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    // ==========================================
+    // TELEGRAM ID EMAIL OTP VERIFICATION FLOW
+    // ==========================================
+    let teleOtpTargetId = '';
+    let teleOtpCooldownTimer = null;
+    let teleOtpRemainingSeconds = 0;
+
+    function onTeleIdInputChange() {
+      const inputId = document.getElementById('inputTeleId');
+      const curVal = inputId ? inputId.value.trim().replace(/\D/g, '') : '';
+      const userTg = String(currentUser?.telegramId || '').trim();
+      const btn = document.getElementById('btnTeleAction') || document.getElementById('btnSyncTelegram');
+      if (!btn) return;
+
+      if (userTg && curVal === userTg) {
+        btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Cek &amp; Sinkron';
+        btn.style.background = 'rgba(14,165,233,0.18)';
+        btn.style.color = '#0ea5e9';
+        btn.style.border = '1px solid rgba(14,165,233,0.35)';
+      } else {
+        btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Verifikasi OTP';
+        btn.style.background = '#0ea5e9';
+        btn.style.color = '#fff';
+        btn.style.border = 'none';
+      }
+    }
+
+    async function handleTelegramButtonAction() {
+      const inputId = document.getElementById('inputTeleId');
+      const cleanTg = inputId.value.trim().replace(/\D/g, '');
+      const currentTg = String(currentUser?.telegramId || '').trim();
+
+      if (!cleanTg) {
+        showToast('Masukkan ID Telegram Anda (hanya angka)!', 'fa-triangle-exclamation', '#f59e0b');
+        inputId.focus();
+        return;
+      }
+
+      if (cleanTg.length < 5 || cleanTg.length > 15) {
+        showToast('ID Telegram harus berupa 5 s/d 15 digit angka!', 'fa-triangle-exclamation', '#f59e0b');
+        inputId.focus();
+        return;
+      }
+
+      // If user is already bound with this exact ID, perform live bot check
+      if (currentTg && cleanTg === currentTg) {
+        return syncTelegramProfile();
+      }
+
+      // Otherwise, request 6-digit Email OTP
+      requestTelegramOtp(cleanTg);
+    }
+
+    async function requestTelegramOtp(targetId) {
+      const btn = document.getElementById('btnTeleAction') || document.getElementById('btnSyncTelegram');
+      const origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim OTP...';
+
+      try {
+        const res = await fetch('/api/user/telegram-otp/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: authToken,
+            telegramId: targetId
+          })
+        });
+
+        const data = await res.json();
+        if (data.status) {
+          teleOtpTargetId = data.targetTelegramId || targetId;
+          const maskEl = document.getElementById('teleOtpMaskedEmail');
+          const targetEl = document.getElementById('teleOtpTargetId');
+          const codeInp = document.getElementById('inputTeleOtpCode');
+
+          if (maskEl) maskEl.innerText = data.maskedEmail || currentUser?.email || 'email Anda';
+          if (targetEl) targetEl.innerText = teleOtpTargetId;
+          if (codeInp) codeInp.value = '';
+
+          openTeleOtpModal();
+          startTeleOtpCountdown(data.cooldown || 60);
+          showToast(data.message || 'Kode OTP telah dikirim ke email Anda!', 'fa-envelope-circle-check', '#10b981');
+        } else {
+          showToast(data.message || 'Gagal mengirim kode OTP email', 'fa-circle-xmark', '#ef4444');
+        }
+      } catch (err) {
+        showToast('Koneksi server bermasalah: ' + err.message, 'fa-circle-xmark', '#ef4444');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+      }
+    }
+
+    function openTeleOtpModal() {
+      const modal = document.getElementById('modalTeleOtp');
+      if (modal) {
+        modal.style.display = 'flex';
+        setTimeout(() => {
+          document.getElementById('inputTeleOtpCode')?.focus();
+        }, 150);
+      }
+    }
+
+    function closeTeleOtpModal() {
+      const modal = document.getElementById('modalTeleOtp');
+      if (modal) modal.style.display = 'none';
+      if (teleOtpCooldownTimer) {
+        clearInterval(teleOtpCooldownTimer);
+        teleOtpCooldownTimer = null;
+      }
+    }
+
+    function startTeleOtpCountdown(seconds) {
+      teleOtpRemainingSeconds = seconds;
+      const btnResend = document.getElementById('btnResendTeleOtp');
+      const countdownSpan = document.getElementById('teleOtpCountdown');
+
+      if (teleOtpCooldownTimer) clearInterval(teleOtpCooldownTimer);
+
+      if (btnResend) {
+        btnResend.disabled = true;
+        btnResend.style.opacity = '0.6';
+        btnResend.style.cursor = 'not-allowed';
+        btnResend.innerHTML = `Kirim Ulang (<span id="teleOtpCountdown">${teleOtpRemainingSeconds}</span>s)`;
+      }
+
+      teleOtpCooldownTimer = setInterval(() => {
+        teleOtpRemainingSeconds--;
+        const curSpan = document.getElementById('teleOtpCountdown');
+        if (curSpan) curSpan.innerText = teleOtpRemainingSeconds;
+
+        if (teleOtpRemainingSeconds <= 0) {
+          clearInterval(teleOtpCooldownTimer);
+          teleOtpCooldownTimer = null;
+          if (btnResend) {
+            btnResend.disabled = false;
+            btnResend.style.opacity = '1';
+            btnResend.style.cursor = 'pointer';
+            btnResend.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Kirim Ulang OTP';
+          }
+        }
+      }, 1000);
+    }
+
+    function resendTeleOtp() {
+      if (!teleOtpTargetId) return;
+      requestTelegramOtp(teleOtpTargetId);
+    }
+
+    async function submitTeleOtp() {
+      const inputCode = document.getElementById('inputTeleOtpCode');
+      const otp = inputCode.value.trim();
+      const btn = document.getElementById('btnSubmitTeleOtp');
+
+      if (!otp || otp.length < 6) {
+        showToast('Masukkan 6-digit kode OTP dengan lengkap!', 'fa-triangle-exclamation', '#f59e0b');
+        inputCode.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memverifikasi...';
+
+      try {
+        const res = await fetch('/api/user/telegram-otp/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: authToken,
+            otp,
+            telegramId: teleOtpTargetId
+          })
+        });
+
+        const data = await res.json();
+        if (data.status) {
+          currentUser = { ...currentUser, ...data.user };
+          localStorage.setItem('seika_user_data', JSON.stringify(currentUser));
+          localStorage.setItem('zyro_buyer_tele_id', teleOtpTargetId);
+
+          closeTeleOtpModal();
+          renderProfile(currentUser);
+
+          if (data.roleUpgraded) {
+            showToast('Berhasil! ID Telegram terhubung & Role otomatis aktif!', 'fa-crown', '#f59e0b');
+          } else {
+            showToast(data.message || 'ID Telegram berhasil diverifikasi & terhubung!', 'fa-circle-check', '#10b981');
+          }
+        } else {
+          showToast(data.message || 'Verifikasi kode OTP gagal', 'fa-circle-xmark', '#ef4444');
+        }
+      } catch (err) {
+        showToast('Terjadi kesalahan verifikasi: ' + err.message, 'fa-circle-xmark', '#ef4444');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Verifikasi Sekarang';
+      }
+    }
+
+    async function syncTelegramProfile() {
+      const btn = document.getElementById('btnTeleAction') || document.getElementById('btnSyncTelegram');
+      const inputId = document.getElementById('inputTeleId');
+      const inputUser = document.getElementById('inputTeleUser');
+      const teleId = inputId.value.trim().replace(/\D/g, '');
+
+      if (!teleId) {
+        showToast('Masukkan ID Telegram Anda (hanya angka)!', 'fa-triangle-exclamation', '#f59e0b');
+        inputId.focus();
+        return;
+      }
+
+      const origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cek Bot...';
+
+      try {
+        const res = await fetch('/api/user/sync-telegram', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: authToken,
+            telegramId: teleId
+          })
+        });
+        const data = await res.json();
+        if (data.status) {
+          currentUser = { ...currentUser, ...data.user };
+          localStorage.setItem('seika_user_data', JSON.stringify(currentUser));
+          localStorage.setItem('zyro_buyer_tele_id', teleId);
+          if (data.user.telegramUsername) {
+            inputUser.value = '@' + data.user.telegramUsername.replace(/^@+/, '');
+          }
+          renderProfile(currentUser);
+          showToast(data.message || 'Telegram berhasil disinkronkan!', 'fa-circle-check', '#10b981');
+        } else {
+          showToast(data.message || 'Gagal menyinkronkan Telegram', 'fa-circle-xmark', '#ef4444');
+        }
+      } catch (err) {
+        showToast('Koneksi server bermasalah', 'fa-circle-xmark', '#ef4444');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+      }
+    }
+
+    async function saveProfileInfo(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveProfile');
+      const name = document.getElementById('inputName').value.trim();
+      const phone = document.getElementById('inputPhone').value.trim();
+      const teleUser = document.getElementById('inputTeleUser').value.trim();
+      const teleId = document.getElementById('inputTeleId').value.trim().replace(/\D/g, '');
+
+      if (!name) return showToast('Nama lengkap wajib diisi!', 'fa-triangle-exclamation', '#f59e0b');
+
+      // Check if user changed telegramId without completing OTP verification
+      const existingTg = String(currentUser?.telegramId || '').trim();
+      if (teleId && teleId !== existingTg) {
+        showToast('Pergantian ID Telegram wajib melalui verifikasi OTP Email. Klik tombol "Verifikasi OTP"!', 'fa-shield-halved', '#0ea5e9');
+        document.getElementById('btnTeleAction')?.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+
+      try {
+        const res = await fetch('/api/auth/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: authToken,
+            name,
+            phone,
+            telegramUsername: teleUser,
+            telegramId: existingTg || undefined
+          })
+        });
+        const data = await res.json();
+        if (data.status) {
+          currentUser = { ...currentUser, ...data.user };
+          localStorage.setItem('seika_user_data', JSON.stringify(currentUser));
+          if (name) localStorage.setItem('zyro_buyer_name', name);
+          if (phone) localStorage.setItem('zyro_buyer_tele', phone);
+          if (currentUser.telegramId) localStorage.setItem('zyro_buyer_tele_id', currentUser.telegramId);
+          if (data.user.telegramUsername) {
+            document.getElementById('inputTeleUser').value = '@' + data.user.telegramUsername.replace(/^@+/, '');
+          }
+          renderProfile(currentUser);
+          showToast('Data profil berhasil disimpan!');
+        } else {
+          showToast(data.message || 'Gagal menyimpan profil', 'fa-circle-xmark', '#ef4444');
+        }
+      } catch (err) {
+        showToast('Koneksi server bermasalah', 'fa-circle-xmark', '#ef4444');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Simpan Data Profil';
+      }
+    }
+
+    function toggleSetManualPassword() {
+      const pForm = document.getElementById('passwordForm');
+      const oldPassWrap = document.getElementById('oldPasswordWrap');
+      const lblNewPassword = document.getElementById('lblNewPassword');
+      if (pForm) {
+        const isHidden = pForm.style.display === 'none';
+        pForm.style.display = isHidden ? 'block' : 'none';
+        if (oldPassWrap && (!currentUser.hasPassword || currentUser.googleId)) {
+          oldPassWrap.style.display = 'none';
+        }
+        if (lblNewPassword) {
+          lblNewPassword.innerText = (!currentUser.hasPassword || currentUser.googleId)
+            ? 'Buat Kata Sandi Baru (Minimal 6 Karakter)'
+            : 'Kata Sandi Baru (Minimal 6 Karakter)';
+        }
+      }
+    }
+
+    async function saveEmailChange(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveEmail');
+      const newEmail = document.getElementById('inputNewEmail').value.trim();
+      const pass = document.getElementById('inputEmailConfirmPassword').value;
+
+      if (!newEmail || !newEmail.includes('@')) {
+        return showToast('Masukkan format email yang valid!', 'fa-triangle-exclamation', '#f59e0b');
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+
+      try {
+        const payload = {
+          token: authToken,
+          newEmail
+        };
+        if (pass) {
+          payload.currentPassword = pass;
+        }
+
+        const res = await fetch('/api/auth/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status) {
+          currentUser = { ...currentUser, ...data.user };
+          localStorage.setItem('seika_user_data', JSON.stringify(currentUser));
+          localStorage.setItem('zyro_buyer_email', currentUser.email);
+          renderProfile(currentUser);
+          document.getElementById('inputNewEmail').value = '';
+          document.getElementById('inputEmailConfirmPassword').value = '';
+          showToast('Alamat email berhasil diganti!');
+        } else {
+          showToast(data.message || 'Gagal mengganti email', 'fa-circle-xmark', '#ef4444');
+        }
+      } catch (err) {
+        showToast('Koneksi server bermasalah', 'fa-circle-xmark', '#ef4444');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-envelope-circle-check"></i> Perbarui Alamat Email';
+      }
+    }
+
+    async function savePasswordChange(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSavePassword');
+      const oldPass = document.getElementById('inputOldPassword')?.value || '';
+      const newPass = document.getElementById('inputNewPassword').value;
+      const confirmPass = document.getElementById('inputConfirmPassword').value;
+
+      if (!newPass || newPass.length < 6) {
+        return showToast('Kata sandi baru minimal 6 karakter!', 'fa-triangle-exclamation', '#f59e0b');
+      }
+      if (newPass !== confirmPass) {
+        return showToast('Konfirmasi kata sandi tidak sesuai!', 'fa-triangle-exclamation', '#f59e0b');
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+
+      try {
+        const payload = {
+          token: authToken,
+          newPassword: newPass
+        };
+        if (oldPass) {
+          payload.currentPassword = oldPass;
+        }
+
+        const res = await fetch('/api/auth/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status) {
+          if (document.getElementById('inputOldPassword')) document.getElementById('inputOldPassword').value = '';
+          document.getElementById('inputNewPassword').value = '';
+          document.getElementById('inputConfirmPassword').value = '';
+          currentUser.hasPassword = true;
+          renderProfile(currentUser);
+          showToast('Kata sandi berhasil disimpan!');
+        } else {
+          showToast(data.message || 'Gagal mengganti kata sandi', 'fa-circle-xmark', '#ef4444');
+        }
+      } catch (err) {
+        showToast('Koneksi server bermasalah', 'fa-circle-xmark', '#ef4444');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-key"></i> Perbarui Kata Sandi';
+      }
+    }
+
+    async function handleLogout() {
+      const ok = await ZyroConfirm({
+        title: 'Keluar dari Akun',
+        tag: 'KONFIRMASI LOGOUT',
+        message: 'Apakah Anda yakin ingin keluar dari akun SeikaOne Anda?',
+        icon: 'fa-solid fa-arrow-right-from-bracket',
+        isDestructive: true,
+        confirmText: 'Ya, Keluar Akun',
+        cancelText: 'Batal'
+      });
+      if (ok) {
+        localStorage.removeItem('seika_user_token');
+        localStorage.removeItem('seika_user_data');
+        window.location.href = '/?loggedout=1';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadProfile);
+  </script>
+
+  <!-- PERSISTENT MOBILE BOTTOM NAVIGATION (Instant render on frame 1) -->
+  <nav class="zyro-bottom-nav" aria-label="Navigasi Cepat Mobile">
+    <a href="shop.html" draggable="false" class="zyro-bottom-nav-item" title="Toko & Katalog">
+      <i class="fa-solid fa-store"></i>
+      <span>Toko</span>
+    </a>
+    <a href="riwayat.html" draggable="false" class="zyro-bottom-nav-item" title="Riwayat Pesanan">
+      <i class="fa-solid fa-receipt"></i>
+      <span>Transaksi</span>
+    </a>
+    <a href="cpanel.html" draggable="false" class="zyro-bottom-nav-item" title="CPanel Server">
+      <i class="fa-solid fa-server"></i>
+      <span>CPanel</span>
+    </a>
+    <a href="bansos.html" draggable="false" class="zyro-bottom-nav-item" title="Bansos Panel Free">
+      <i class="fa-solid fa-gift"></i>
+      <span>Bansos</span>
+    </a>
+    <a href="profile.html" draggable="false" class="zyro-bottom-nav-item active" title="Akun & Profil">
+      <i class="fa-solid fa-user"></i>
+      <span>Akun</span>
+    </a>
+  </nav>
+
+  <!-- SEIKAONE MODULAR UI ARCHITECTURE -->
+  <script src="js/components/ui/dialog.js?v=1.0"></script>
+  <script src="js/components/ui/toast.js?v=1.0"></script>
+  <script src="js/components/ui/select.js?v=1.0"></script>
+  <script src="js/components/ui/bottom-nav.js?v=6.5.0"></script>
+</body>
+</html>
