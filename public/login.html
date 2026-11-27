@@ -505,6 +505,15 @@
         if (data.status && data.googleClientId) {
           _googleClientId = data.googleClientId;
           initGis();
+        } else {
+          console.warn('Google Client ID belum di-set di environment Vercel.');
+          const btn = document.getElementById('btnGoogleSignIn');
+          if (btn) {
+            btn.disabled = true;
+            btn.title = 'Google OAuth belum dikonfigurasi (set GOOGLE_CLIENT_ID di Vercel)';
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+          }
         }
       } catch (e) {
         console.warn('Config load failed:', e);

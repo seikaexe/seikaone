@@ -381,8 +381,6 @@ app.get('/api/eggs', (req, res) => ok(res, { eggs: [
   { id: 'egg-java', name: 'Java 17', description: 'Java 17 runtime' }
 ] }));
 
-// ---- Auth config etc ----
-app.get('/api/auth/config', (req, res) => ok(res, { googleClientId: process.env.GOOGLE_CLIENT_ID || 'mock-google-client-id', appName: 'SeikaOne' }));
 
 // ---- Profile update ----
 app.post('/api/v1/profile', authMiddleware, (req, res) => ok(res, { user: { ...req.user, password: undefined } }));

@@ -14,10 +14,10 @@ Open http://localhost:3000
 1. Google Cloud Console → APIs & Services → Credentials → Create OAuth client ID (Web application).
 2. Authorized JavaScript origins:
    - http://localhost:3000
-   - https://<your-project>.vercel.app
+   - https://seikaone.vercel.app
 3. Authorized redirect URIs:
    - http://localhost:3000/login
-   - https://<your-project>.vercel.app/login
+   - https://seikaone.vercel.app/login
 4. Vercel Dashboard → Project → Settings → Environment Variables → add:
    - `GOOGLE_CLIENT_ID` = <client id>
    - `GOOGLE_CLIENT_SECRET` = <client secret>
