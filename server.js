@@ -1,10 +1,12 @@
 const express = require('express');
+const compression = require('compression');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
+app.use(compression());
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({ origin: true, credentials: true }));
@@ -400,7 +402,7 @@ PAGES.forEach(p => {
   const file = p === 'index' ? 'index.html' : p + '.html';
   app.get('/' + (p === 'index' ? '' : p), (req, res) => res.sendFile(path.join(__dirname, 'public', file)));
 });
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d', etag: true, lastModified: true }));
 
 // ---- SPA fallback ----
 app.get('*', (req, res) => {
